@@ -22,6 +22,7 @@ class TestView(APIView):
 	def get(self,request):
 		return Response("Hello World",status=status.HTTP_200_OK)
 
+
 class WaitListView(APIView):
 	serializer_class = serializers.WaitListSerializer
 	permission_classes = [
