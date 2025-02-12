@@ -155,5 +155,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://career-nexus-lp-ogqq.vercel.app"
+    "https://project-delta-lilac.vercel.app"
 ]
