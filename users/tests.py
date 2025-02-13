@@ -1,5 +1,1 @@
-name = "Saliu Opeyemi Abdul Azeez"
-
-splitted = name.split(" ")
-
-print(splitted[0])
+from generator import referral_code_generator

@@ -1,12 +1,29 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from . import models
+from .generator.referral_code_generator import *
+
+ref_agent = generator()
 
 
 class WaitListSerializer(ModelSerializer):
 	class Meta:
 		model = models.WaitList
 		fields = ["name","email","industry"]
+
+	def create(self,validated_data):
+		name = self.validated_data.get("name")
+		email = self.validated_data.get("email")
+		industry = self.validated_data.get("industry","NA")
+		ref_code = ref_agent.generate()
+		user = models.WaitList.objects.create(
+		                                      name=name,
+		                                      email=email,
+		                                      industry=industry,
+		                                      referral_code=ref_code,
+		                                      )
+		return user
+
 
 class RegisterSerializer(ModelSerializer):
 	class Meta:

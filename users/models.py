@@ -5,6 +5,9 @@ class WaitList(models.Model):
 	name = models.CharField(max_length=5000)
 	email = models.EmailField(unique=True)
 	industry = models.CharField(max_length=5000)
+	referral_code = models.CharField(max_length=100)
+	invites = models.IntegerField(default=0)
+	sub_status = models.BooleanField(default=True)
 
 	def __str__(self):
 		return f"{self.name} with email {self.email} interested in {self.industry}"
