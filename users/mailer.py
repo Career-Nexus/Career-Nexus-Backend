@@ -22,7 +22,6 @@ class Mailer():
 		body = self.template
 		body = re.sub(self.name_pattern,name,body)
 		body = re.sub(self.r_patterns,ref_code,body)
-
 		try:
 			self.yag.send(to=recepient,contents=body,subject=head,attachments=self.logo)
 		except:

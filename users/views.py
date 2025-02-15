@@ -7,6 +7,7 @@ from rest_framework import status
 
 
 from . import serializers
+from . import models
 from .mailer import Mailer
 
 from django.contrib.auth import get_user_model
@@ -26,16 +27,44 @@ class WaitListView(APIView):
 		serializer = self.serializer_class(data=request.data)
 		if serializer.is_valid(raise_exception=True):
 			data = serializer.save()
-			first_name = data.name.split()[0]
-			email = data.email
-			ref_code = data.referral_code
+			first_name = data["name"].split()[0]
+			email = data["email"]
+			ref_code = data["ref_code"]
 			agent.send_waitlist_mail(recepient=email,name=first_name,ref_code=ref_code)
-			return Response({
-			                "name":data.name,
-			                "email":data.email,
-			                "industry":data.industry,
-			                "status":"CREATED"
-			                },status=status.HTTP_201_CREATED)
+			return Response(data,status=status.HTTP_201_CREATED)
+
+class NewsLetterSubscribeView(APIView):
+	serializer_class = serializers.NewsLetterSubscribeSerializer
+	permission_classes=[
+		AllowAny,
+	]
+
+	def post(self,request):
+		serializer = self.serializer_class(data=request.data)
+		if serializer.is_valid(raise_exception=True):
+			output = serializer.save()
+			return Response(output,status=status.HTTP_200_OK)
+
+class NewsLetterUnsubscribeView(APIView):
+	serializer_class = serializers.NewsLetterUnsubscribeSerializer
+	permission_classes = [
+		AllowAny,
+	]
+	def get_object(self,request):
+		email = request.data.get("email")
+		if models.WaitList.objects.filter(email=email).exists():
+			user = models.WaitList.objects.get(email=email)
+			return user
+		else:
+			return Response({"Error":"Unregistered Email"},status=status.HTTP_400_BAD_REQUEST)
+
+	def put(self,request):
+		user = self.get_object(request)
+		serializer = self.serializer_class(data=request.data, instance=user)
+		if serializer.is_valid(raise_exception=True):
+			serializer.save()
+			return Response({"Status":"Unsubscribed Successfully"},status=status.HTTP_200_OK)
+
 
 
 class RegisterView(APIView):
@@ -54,3 +83,17 @@ class RegisterView(APIView):
 				"status":"Created"
 			}
 			return Response(output,status=status.HTTP_201_CREATED)
+
+
+class DeleteWaitListView(APIView):
+	serializer_class = serializers.DeleteWaitListSerializer
+	permission_classes= [
+		AllowAny,
+	]
+
+	def delete(self,request):
+		serializer = self.serializer_class(data=request.data)
+		if serializer.is_valid(raise_exception=True):
+			email = serializer.validated_data.get("email")
+			models.WaitList.objects.get(email=email).delete()
+			return Response({"Deleted Successfully"},status=status.HTTP_204_NO_CONTENT)
