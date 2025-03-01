@@ -30,6 +30,12 @@ class generator():
                 json.dump(self.codes,file)
             return code
 
+    def generate_otp(self):
+        number1_list = [str(random.choice(self.number_char)) for i in range(0,7)]
+        return ''.join(number1_list)
+
+
+
     def clear_db(self):
         with open(self.file,"w") as file:
             json.dump([],file)
