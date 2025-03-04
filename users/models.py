@@ -22,3 +22,6 @@ class Otp(models.Model):
     otp = models.CharField(max_length=100)
     time_stamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.otp} created at {self.time_stamp}"
+
