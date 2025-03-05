@@ -6,7 +6,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 class Agent():
-    def __init__(self,client,email,password):
+    def __init__(self,client="smtp.mail.us-east-1.awsapps.com",email="no-reply@career-nexus.com",password="Hhlbbcnofns1$"):
         self.client = client
         self.email = email
         self.password = password
@@ -17,8 +17,8 @@ class Agent():
 
     def warmup(self):
         try:
-            self.server = smtplib.SMTP(self.client,587)
-            self.server.starttls()
+            self.server = smtplib.SMTP_SSL(self.client,465)
+            #self.server.starttls()
             self.server.login(self.email,self.password)
             #return self.server
         except smtplib.SMTPAuthenticationError:

@@ -16,7 +16,7 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-agent = Agent("smtp.zoho.com","info@career-nexus.com","ExcWFp4JeJKd")
+agent = Agent()
 
 
 #Defining Templates

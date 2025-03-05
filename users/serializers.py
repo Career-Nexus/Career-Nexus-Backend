@@ -10,7 +10,7 @@ from .mmail import Agent
 from datetime import datetime
 import os
 
-agent = Agent("smtp.zoho.com","info@career-nexus.com","ExcWFp4JeJKd")
+agent = Agent()
 
 ref_agent = generator()
 
