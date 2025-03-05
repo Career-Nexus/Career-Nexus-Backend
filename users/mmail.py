@@ -26,9 +26,14 @@ class Agent():
         except Exception:
             pass
 
+    def close_connection(self):
+        if self.server:
+            self.server.quit()
+
 
     def send_email(self,template,subject,container,recipient,attachment=None):
-        self.warmup()
+        if not self.server:
+            self.warmup()
         with open(template,"r") as file:
             template = file.read()
         self.message["To"] = recipient
@@ -41,8 +46,14 @@ class Agent():
         self.message.attach(MIMEText(template,"html"))
 
         if attachment == None:
-            self.server.sendmail(self.email,recipient,self.message.as_string())
-            return {"Status":"Email Sent"}
+            try:
+                self.server.sendmail(self.email,recipient,self.message.as_string())
+                return {"Status":"Email Sent"}
+            except:
+                print("Email sending Failed")
+            finally:
+                self.close_connection()
+                #print("Connection closed")
         else:
             with open(attachment,"rb") as file:
                 part = MIMEBase("application","octet-stream")
@@ -50,8 +61,14 @@ class Agent():
             encoders.encode_base64(part)
             part.add_header("Content-Disposition",f"attachment; filename=Attachment",)
             self.message.attach(part)
-            self.server.sendmail(self.email,recipient,self.message.as_string())
-            return {"Status":"Email Sent"}
+            try:
+                self.server.sendmail(self.email,recipient,self.message.as_string())
+                return {"Status":"Email Sent"}
+            except:
+                print("Email sending failed")
+            finally:
+                self.close_connection()
+
 
 
 
