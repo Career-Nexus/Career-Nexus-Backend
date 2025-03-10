@@ -1,8 +1,8 @@
-config/__pycache__/__init__.cpython-310.pyc
+config/__pycache__
 onfig/__pycache__/settings.cpython-310.pyc
 config/__pycache__/urls.cpython-310.pyc
 config/__pycache__/wsgi.cpython-310.pyc
-users/__pycache__/__init__.cpython-310.pyc
+users/__pycache__
 users/__pycache__/admin.cpython-310.pyc
 users/__pycache__/apps.cpython-310.pyc
 users/__pycache__/mailer.cpython-310.pyc

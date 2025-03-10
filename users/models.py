@@ -13,6 +13,7 @@ class WaitList(models.Model):
         return f"{self.name} with email {self.email} interested in {self.industry}"
 
 class Users(AbstractUser):
+    user_type = models.CharField(max_length=20)
     name = models.CharField(max_length=300)
     password2 = models.CharField(max_length=100)
     def __str__(self):

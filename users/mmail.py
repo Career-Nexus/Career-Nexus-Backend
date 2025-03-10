@@ -4,6 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
+import time
 
 class Agent():
     def __init__(self,client="smtp.mail.us-east-1.awsapps.com",email="no-reply@career-nexus.com",password="Hhlbbcnofns1$"):
@@ -18,22 +19,40 @@ class Agent():
     def warmup(self):
         try:
             self.server = smtplib.SMTP_SSL(self.client,465)
-            #self.server.starttls()
             self.server.login(self.email,self.password)
-            #return self.server
         except smtplib.SMTPAuthenticationError:
-            pass
+            print("Failed to authenticate")
         except Exception:
-            pass
+            print("Warmup failed")
 
     def close_connection(self):
         if self.server:
             self.server.quit()
+            self.server = None
+
+    def check_connection(self,max_retries=3):
+        retry = 0
+        while retry < max_retries:
+            if self.server is None:
+                self.warmup()
+            elif self.server.sock is None:
+                self.server.close()
+                self.server = None
+                self.warmup()
+
+            if self.server and self.server.sock:
+                return True
+            else:
+                retry += 1 
+                print("Trying to reconnect to server")
+                time.sleep(2)
+        print("Maximum Retries Reached")
+        return False
+
 
 
     def send_email(self,template,subject,container,recipient,attachment=None):
-        if not self.server:
-            self.warmup()
+        self.check_connection()
         with open(template,"r") as file:
             template = file.read()
         self.message["To"] = recipient
@@ -49,11 +68,16 @@ class Agent():
             try:
                 self.server.sendmail(self.email,recipient,self.message.as_string())
                 return {"Status":"Email Sent"}
+            except smtplib.SMTPServerDisconnected:
+                print("Server Disconnected. Attempting reconnection....")
+                self.check_connection()
+                self.server.sendmail(self.email,recipient,self.message.as_string())
+                return {"Status":"Email Sent"}
             except:
-                print("Email sending Failed")
+                print("Failed to send email...")
+                return {"Status":"Email sending failed"}
             finally:
                 self.close_connection()
-                #print("Connection closed")
         else:
             with open(attachment,"rb") as file:
                 part = MIMEBase("application","octet-stream")
@@ -64,8 +88,14 @@ class Agent():
             try:
                 self.server.sendmail(self.email,recipient,self.message.as_string())
                 return {"Status":"Email Sent"}
+            except smtplib.SMTPServerDisconnected:
+                print("Server Disconnected. Attempting reconnection....")
+                self.check_connection()
+                self.server.sendmail(self.email,recipient,self.message.as_string())
+                return {"Status":"Email Sent"}
             except:
-                print("Email sending failed")
+                print("Failed to send email...")
+                return {"Status":"Email sending failed"}
             finally:
                 self.close_connection()
 
