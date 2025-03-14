@@ -1,0 +1,48 @@
+CareerNexus API Documentation
+
+This document provides an overview and usage guide for the WaitList and Register API endpoints of the CareerNexus platform.
+
+Base Url:https://careernexus.pythonanywhere.com/
+
+Endpoints
+
+1. Join Waitlist
+
+URL: user/join/
+
+Method: POST
+
+Permission: Open to all (AllowAny)
+
+Description
+
+Allows users to join the CareerNexus waitlist. Upon successful registration, the user will receive a confirmation email.
+
+Request Payload
+{
+  "name": "John Doe",
+    "email": "john.doe@example.com",
+      "industry": "Technology"
+      }
+Success Response
+
+Status Code: 201 Created
+
+Response Body:
+{
+  "name": "John Doe",
+    "email": "john.doe@example.com",
+      "industry": "Technology",
+        "status": "Created"
+	}
+Confirmation Email
+
+The user will receive an HTML formatted email confirming their waitlist registration. The email will include:
+
+A personalized greeting using the user's first name.
+
+A congratulatory message.
+
+Information about CareerNexus platform launch.
+
+A link to the CareerNexus platform.
