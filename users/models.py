@@ -80,6 +80,5 @@ class certification(models.Model):
 
 
 
-
 class Test(models.Model):
-    file = models.FileField(upload_to="uploads/")
+    file = models.CharField(max_length=256)

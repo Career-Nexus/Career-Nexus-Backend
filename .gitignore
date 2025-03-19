@@ -18,3 +18,5 @@ users/migrations/__pycache__/__init__.cpython-310.pyc
 users/__pycache__/mmail.cpython-310.pyc
 users/test2.py
 .env
+users/migrations/0002_alter_personalprofile_intro_video_and_more.py
+users/migrations/

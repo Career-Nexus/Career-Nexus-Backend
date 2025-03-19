@@ -1,3 +1,6 @@
+from django.forms import fields
+from requests import request
+from requests.models import LocationParseError
 from typing_extensions import Required
 from django.utils.timezone import make_aware
 from django.contrib.auth import get_user_model
@@ -384,19 +387,97 @@ class UpdateExperienceSerializer(serializers.Serializer):
                 }
         
 
+class EducationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.education
+        fields = ["course", "school", "start_date","end_date","location","detail"]
 
-
-
-
-
-
-class TestSerializer(serializers.Serializer):
-    file = serializers.FileField()
+    def validate(self,data):
+        user = self.context["request"]
+        data["user"] = user
+        return data
 
     def create(self,validated_data):
-        file = validated_data.get("file")
-        file_name = f"testfolder/{file.name}"
-        file_path = default_storage.save(file_name,ContentFile(file.read()))
-        url = default_storage.url(file_path)
-        models.Test.objects.create(file=url)
-        return {"url":url}
+        education = models.education.objects.create(**validated_data)
+        output = {
+                    "course":education.course,
+                    "school":education.school,
+                    "start_date":education.start_date,
+                    "end_date": education.end_date,
+                    "location": education.location,
+                    "detail":education.detail
+                }
+        return output
+
+
+class UpdateEducationSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    course = serializers.CharField(max_length=200,required=False)
+    school = serializers.CharField(max_length=250,required=False)
+    start_date = serializers.CharField(max_length=20,required=False)
+    end_date = serializers.CharField(max_length=20,required=False)
+    location = serializers.CharField(max_length=200,required=False)
+    detail = serializers.CharField(max_length=2000,required=False)
+
+    def validate(self,data):
+        request = self.context["request"]
+        id = data["id"]
+        user = request.user
+        if models.education.objects.filter(user=user,id=id).exists():
+            return data
+        else:
+            raise serializers.ValidationError({"Error":"Education does not exist!"})
+
+
+    def update(self,instance,validated_data):
+        id = validated_data.get("id")
+        instance = models.education.objects.get(id=id)
+        instance.course = validated_data.get("course",instance.course)
+        instance.school = validated_data.get("school",instance.school)
+        instance.start_date = validated_data.get("start_date",instance.start_date)
+        instance.end_date = validated_data.get("end_date",instance.end_date)
+        instance.location = validated_data.get("location",instance.location)
+        instance.detail = validated_data.get("detail",instance.detail)
+
+        output= {
+                    "id":instance.id,
+                    "course":instance.course,
+                    "school":instance.school,
+                    "start_date":instance.start_date,
+                    "end_date":instance.end_date,
+                    "location":instance.location,
+                    "detail":instance.detail
+                }
+        return output
+
+
+class CertificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.certification
+        fields = ["title","school","issue_date","cert_id","skills"]
+
+    def validate(self,data):
+        request = self.context["request"]
+        data["user"] = request.user
+        return data
+
+    def create(self,validated_data):
+        certification = models.certification.objects.create(**validated_data)
+        output = {
+                    "title":certification.title,
+                    "school":certification.school,
+                    "issue_date":certification.issue_date,
+                    "cert_id":certification.cert_id,
+                    "skills":certification.skills
+                }
+        return output
+
+class DeleteCertificationSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+
+
+
+class TestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Test
+        fields = "__all__"

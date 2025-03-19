@@ -14,5 +14,18 @@ urlpatterns = [
     path('upload/',views.TestView.as_view(),name="Test-view"),
     path('profile-update/',views.PersonalProfileView.as_view(),name="Update-Personal-profile"),
     path('experience/',views.ExperienceView.as_view(),name="Add-and-view-experience"),
-    path('update-experience/',views.UpdateExperienceView.as_view(),name="update-experience")
+    path('update-experience/',views.UpdateExperienceView.as_view(),name="update-experience"),
+    path('education/', views.EducationView.as_view(), name="Add-view-update-delete-education"),
+    path("certification/", views.CertificationView.as_view(), name="Add-View-Delete-Certification"),
+
+
+
+
+
+
+
+
+
+    path('calltest/',views.CallTestView, name="call-test-view"),
+    path('test/',views.TestView.as_view(), name="test-view")
 ]

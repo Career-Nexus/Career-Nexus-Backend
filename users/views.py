@@ -1,6 +1,7 @@
-#from django.shortcuts import render
+from django.shortcuts import render
 #import email
 import os
+import requests
 
 from django.utils.ipv6 import is_valid_ipv6_address
 from rest_framework.response import Response
@@ -8,6 +9,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.exceptions import ValidationError
 
 
 from . import serializers
@@ -19,6 +22,20 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 agent = Agent()
+
+class ItemPagination(PageNumberPagination):
+    page_size = 10
+    def get_next_link(self):
+        if self.page.has_next():
+            return f"?page={self.page.next_page_number()}"
+        else:
+            return None
+
+    def get_previous_link(self):
+        if self.page.has_previous():
+            return f"?page={self.page.previous_page_number()}"
+        else:
+            return None
 
 
 #Defining Templates
@@ -206,7 +223,68 @@ class UpdateExperienceView(APIView):
         serializer = self.serializer_class(data=request.data,instance=request.user,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
-            return Response(output,status=status.HTTP_202_ACCEPTED)
+            return Response(output,status=status.HTTP_201_CREATED)
+
+
+
+class EducationView(APIView):
+    permission_classes= [
+                IsAuthenticated,
+            ]
+    serializer_class = serializers.EducationSerializer
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data,context={"request":request.user})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        detail = models.education.objects.filter(user_id=request.user.id).values("id","course","school","start_date","end_date","location","detail").order_by("-start_date")
+        return Response(detail,status=status.HTTP_200_OK)
+
+    def put(self,request):
+        serializer = serializers.UpdateEducationSerializer(data=request.data,instance=request.user,context={"request":request})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def delete(self,request):
+        serializer = serializers.UpdateEducationSerializer(data=request.data,context={"request":request})
+        if serializer.is_valid(raise_exception=True):
+            id = serializer.validated_data["id"]
+            models.education.objects.get(id=id).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CertificationView(APIView):
+    permission_classes = [
+                IsAuthenticated,
+            ]
+    serializer_class = serializers.CertificationSerializer
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data,context={"request":request})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        certifications = models.certification.objects.filter(user=request.user).values("id","title","school","issue_date","cert_id","skills").order_by("-issue_date")
+        return Response(certifications,status=status.HTTP_200_OK)
+
+    def delete(self,request):
+        serializer = serializers.DeleteCertificationSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            id = serializer.validated_data["id"]
+            if models.certification.objects.filter(user=request.user,id=id).exists():
+                models.certification.objects.get(user=request.user,id=id).delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                raise ValidationError({"Error":"Certificate does not exist!"})
+        
+
+
 
 
 
@@ -221,8 +299,52 @@ class TestView(APIView):
             ]
     serializer_class = serializers.TestSerializer
 
-    def post(self,request):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            data = serializer.save()
-            return Response(data,status=status.HTTP_201_CREATED)
+    def get(self,request):
+        items = models.Test.objects.all().values("id","file").order_by("id")
+        paginator = ItemPagination()
+        paginated_items = paginator.paginate_queryset(items,request)
+        serializer = self.serializer_class(paginated_items,many=True)
+
+        total_items = items.count()
+        floor = total_items//paginator.page_size
+        if total_items % paginator.page_size == 0:
+            total_pages = floor
+        else:
+            total_pages = floor + 1
+
+        response_data = paginator.get_paginated_response(serializer.data).data
+        response_data["last_page"] = f"?page={total_pages}"
+        return Response(response_data,status=status.HTTP_200_OK)
+
+
+def CallTestView(request):
+    url = "http://127.0.0.1:8000/user/test/"
+    #own_url = "http://127.0.0.1:8000/user/calltest/"
+    page = request.GET.get('page',1)
+
+    response = requests.get(f"{url}?page={page}")
+
+    if response.status_code == 200:
+        response_data = response.json()
+        items = response_data.get('results',[])
+        next_page = response_data.get('next',None)
+        previous_page = response_data.get('previous',None)
+        first_page = f"?page=1"
+        last_page = response_data.get("last_page")
+    else:
+        items = []
+        first_page = 1
+        next_page=None
+        previous_page=None
+        last_page=1
+
+    context = {
+                "items":items,
+                "next_page":next_page,
+                "previous_page":previous_page,
+                "first_page":first_page,
+                "last_page":last_page,
+                "current_page":page
+            }
+
+    return render(request,"data.html",context=context)
