@@ -1,7 +1,11 @@
-from mmail import Agent
+from openpyxl import Workbook
 
-agent = Agent()
+wb = Workbook()
+ws = wb.active
 
-output =agent.send_email("mail.html","Testing New Config",{"{NAME}":"Opeyemi","{REFERRAL LINK}":"12345","{EMAIL}":"info@career-nexus.com"},recipient="saliuoazeez@gmail.com",attachment="career-nexus_logo.png")
+for i in range(1,10):
+    ws.cell(row=i,column=1,value="first")
+    ws.cell(row=i,column=2,value="second")
+    ws.cell(row=i,column=3,value="third")
 
-print(output)
+wb.save("My_test.xlsx")

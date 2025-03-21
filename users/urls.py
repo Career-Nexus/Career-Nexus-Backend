@@ -17,6 +17,7 @@ urlpatterns = [
     path('update-experience/',views.UpdateExperienceView.as_view(),name="update-experience"),
     path('education/', views.EducationView.as_view(), name="Add-view-update-delete-education"),
     path("certification/", views.CertificationView.as_view(), name="Add-View-Delete-Certification"),
+    path("retrieve-profile/",views.RetreiveProfileView.as_view(), name="Retrieve-Profile"),
 
 
 

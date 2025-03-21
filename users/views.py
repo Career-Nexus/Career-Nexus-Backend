@@ -183,6 +183,37 @@ class PersonalProfileView(APIView):
             return Response(output,status=status.HTTP_201_CREATED)
 
 
+class RetreiveProfileView(APIView):
+    permission_classes = [
+                IsAuthenticated,
+            ]
+    serializer_class = serializers.RetrieveProfileSerializer
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            profile_id = serializer.data["profile_id"]
+            profile = models.PersonalProfile.objects.get(id=profile_id)
+            profile_owner = profile.user
+            owner_experience = models.experience.objects.filter(user=profile_owner).values("title","organization","start_date","end_date","location","employment_type","detail").order_by("-end_date")
+            owner_education = models.education.objects.filter(user=profile_owner).values("course","school","start_date","end_date","location","detail").order_by("-end_date")
+            owner_certification = models.certification.objects.filter(user=profile_owner).values("title","school","issue_date","cert_id","skills").order_by("-issue_date")
+            output = {
+                    "name":profile.name,
+                    "profile_photo":profile.profile_photo,
+                    "qualification":profile.qualification,
+                    "intro_video":profile.intro_video,
+                    "summary":profile.summary,
+                    "experience":owner_experience,
+                    "education":owner_education,
+                    "certification":owner_certification
+                }
+            return Response(output,status=status.HTTP_200_OK)
+
+
+
+
+
 
 
 class ExperienceView(APIView):

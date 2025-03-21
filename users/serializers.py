@@ -1,13 +1,13 @@
-from django.forms import fields
-from requests import request
-from requests.models import LocationParseError
-from typing_extensions import Required
+#from django.forms import fields
+#from requests import request
+#from requests.models import LocationParseError
+#from typing_extensions import Required
 from django.utils.timezone import make_aware
 from django.contrib.auth import get_user_model
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
-from rest_framework.serializers import ModelSerializer
+#from rest_framework.serializers import ModelSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
 from . import models
@@ -217,7 +217,7 @@ class RegisterSerializer(serializers.Serializer):
                             username = username,
                             password = password1
                             )
-                    models.PersonalProfile.objects.create(user=user_obj)
+                    models.PersonalProfile.objects.create(user=user_obj,name=name)
                     output = {
                             "email":user_obj.email,
                             "username":user_obj.username,
@@ -309,6 +309,17 @@ class PersonalProfileSerializer(serializers.Serializer):
                 "intro_video":instance.intro_video,
                 "summary":instance.summary
                 }
+
+class RetrieveProfileSerializer(serializers.Serializer):
+    profile_id = serializers.IntegerField()
+
+    def validate(self,data):
+        profile_id = data.get("profile_id")
+        if models.PersonalProfile.objects.filter(id=profile_id).exists():
+            return data
+        else:
+            raise serializers.ValidationError({"Error":"Profile does not exist"})
+
 
 class ExperienceSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=150)

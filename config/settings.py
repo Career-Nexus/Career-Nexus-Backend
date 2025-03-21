@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    #Essentials
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,8 +47,14 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'storages',
-    'users',
     'corsheaders',
+
+    #My personal apps
+    'users',
+    'posts',
+
+    #Extensions
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

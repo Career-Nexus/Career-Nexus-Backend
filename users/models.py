@@ -39,6 +39,7 @@ class Otp(models.Model):
 
 class PersonalProfile(models.Model):
     user = models.OneToOneField(Users,on_delete=models.CASCADE)
+    name = models.CharField(max_length=250)
     profile_photo = models.CharField(max_length=300,default='')
     qualification = models.CharField(max_length=3000,default='')
     intro_video = models.CharField(max_length=300,default='')
