@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 
 class PostPagination(PageNumberPagination):
-    page_size = 5
+    page_size = 3
 
 
 # Create your views here.
@@ -28,7 +28,23 @@ class PostView(APIView):
             return Response(output,status=status.HTTP_201_CREATED)
 
     def get(self,request):
-        posts = models.Posts.objects.all().order_by("-time_stamp")
-        serializer = serializers.RetrievePostSerializer(posts,many=True)
+        base_url = request.build_absolute_uri()
+        base_url = base_url.split("?")[0]
 
-        return Response(serializer.data,status=status.HTTP_200_OK)
+        posts = models.Posts.objects.all().order_by("-time_stamp")
+        paginator = PostPagination()
+        paginated_items = paginator.paginate_queryset(posts,request)
+
+        serializer = serializers.RetrievePostSerializer(paginated_items,many=True)
+
+        item_counts = posts.count()
+        floor = item_counts//paginator.page_size
+        if item_counts % paginator.page_size == 0:
+            last_page = floor
+        else:
+            last_page = floor + 1
+
+        response = paginator.get_paginated_response(serializer.data).data
+        response["last_page"] = f"{base_url}?page={last_page}"
+
+        return Response(response,status=status.HTTP_200_OK)

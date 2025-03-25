@@ -153,7 +153,7 @@ class NewsLetterUnsubscribeSerializer(serializers.Serializer):
 
 
 class RegisterSerializer(serializers.Serializer):
-    user_option = serializers.ChoiceField(choices=user_options)
+    #user_option = serializers.ChoiceField(choices=user_options)
     name = serializers.CharField(max_length=300)
     email = serializers.CharField(max_length=300)
     username = serializers.CharField(max_length=150)
@@ -183,7 +183,7 @@ class RegisterSerializer(serializers.Serializer):
             return data
 
     def create(self,validated_data):
-        user_type = validated_data.get("user_option")
+        #user_type = validated_data.get("user_option")
         name = validated_data.get("name")
         email = validated_data.get("email")
         username = validated_data.get("username")
@@ -194,7 +194,7 @@ class RegisterSerializer(serializers.Serializer):
         if otp == None:
             ref_code_generated = ref_agent.generate_otp()
             container = {"{OTP}":ref_code_generated}
-            print(email)
+            #print(email)
             agent.send_email(template=otp_template,subject="Verify your Email",container=container,recipient=email)
             models.Otp.objects.create(otp=ref_code_generated)
             output = {"status":"Otp sent"}
@@ -211,7 +211,7 @@ class RegisterSerializer(serializers.Serializer):
                 else:
                     otp_obj.delete()
                     user_obj = models.Users.objects.create_user(
-                            user_type = user_type,
+                            #user_type = user_type,
                             name = name,
                             email= email.lower(),
                             username = username,
@@ -226,6 +226,11 @@ class RegisterSerializer(serializers.Serializer):
                     return output
             else:
                 raise serializers.ValidationError({"OTP Error":"Invalid OTP"})
+
+class PostRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Users
+        fields=["user_type","industry"]
 
 
 class LoginSerializer(serializers.Serializer):

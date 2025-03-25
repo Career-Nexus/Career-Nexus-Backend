@@ -182,6 +182,20 @@ class PersonalProfileView(APIView):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
 
+    def patch(self,request):
+        user = models.Users.objects.filter(email=request.user.email).first()
+        serializer = serializers.PostRegistrationSerializer(data=request.data,instance=user,partial=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            user_type = serializer.data.get("user_type")
+            industry = serializer.data.get("industry")
+            output = {
+                        "user_type":user_type,
+                        "industry":industry,
+                        "email":user.email
+                    }
+            return Response(output,status=status.HTTP_206_PARTIAL_CONTENT)
+
 
 class RetreiveProfileView(APIView):
     permission_classes = [

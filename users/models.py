@@ -20,9 +20,10 @@ class WaitList(models.Model):
         return f"{self.name} with email {self.email} interested in {self.industry}"
 
 class Users(AbstractUser):
-    user_type = models.CharField(max_length=20)
+    user_type = models.CharField(max_length=20,default="")
     name = models.CharField(max_length=300)
-    password2 = models.CharField(max_length=100)
+    #password2 = models.CharField(max_length=100)
+    industry = models.CharField(max_length=100,default="")
 
     def __str__(self):
         return f"user with username:{self.username}and email:{self.email}"
