@@ -156,7 +156,7 @@ class RegisterSerializer(serializers.Serializer):
     #user_option = serializers.ChoiceField(choices=user_options)
     name = serializers.CharField(max_length=300)
     email = serializers.CharField(max_length=300)
-    username = serializers.CharField(max_length=150)
+    #username = serializers.CharField(max_length=150)
     password1 = serializers.CharField(max_length=200)
     password2 = serializers.CharField(max_length=200)
     otp = serializers.CharField(max_length=20,required=False)
@@ -186,9 +186,8 @@ class RegisterSerializer(serializers.Serializer):
         #user_type = validated_data.get("user_option")
         name = validated_data.get("name")
         email = validated_data.get("email")
-        username = validated_data.get("username")
+        username = uuid.uuid4()
         password1 = validated_data.get("password1")
-        password2 = validated_data.get("password2")
         otp = validated_data.get("otp",None)
 
         if otp == None:
@@ -220,7 +219,6 @@ class RegisterSerializer(serializers.Serializer):
                     models.PersonalProfile.objects.create(user=user_obj,name=name)
                     output = {
                             "email":user_obj.email,
-                            "username":user_obj.username,
                             "status":"Success"
                             }
                     return output

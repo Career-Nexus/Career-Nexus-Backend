@@ -1,9 +1,11 @@
 from django.shortcuts import render
 #import email
 import os
+from django.utils.html import strip_tags
 import requests
 
 from django.utils.ipv6 import is_valid_ipv6_address
+from requests.api import delete
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.views import APIView
@@ -112,6 +114,15 @@ class RegisterView(APIView):
         if serializer.is_valid(raise_exception=True):
             data = serializer.save()	
             return Response(data,status=status.HTTP_201_CREATED)
+
+    #REMOVE THIS IN PRODUCTION-------------------------
+    def delete(self,request):
+        email = request.query_params.get("email",None)
+        try:
+            models.Users.objects.get(email=email).delete()
+            return Response({"Deleted":email},status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response({"error":f"{email} not registered"},status=status.HTTP_404_NOT_FOUND)
 
 
 class LoginView(APIView):
@@ -328,6 +339,9 @@ class CertificationView(APIView):
             else:
                 raise ValidationError({"Error":"Certificate does not exist!"})
         
+
+
+
 
 
 
