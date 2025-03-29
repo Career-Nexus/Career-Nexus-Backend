@@ -23,3 +23,5 @@ users/migrations/
 users/My_test.xlsx
 **/*.pyc
 posts/__pycache__/views.cpython-310.pyc
+posts/migrations
+posts/__pycache__/

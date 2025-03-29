@@ -26,8 +26,8 @@ class Users(AbstractUser):
     industry = models.CharField(max_length=100,default="")
 
     def __str__(self):
-        return f"user with username:{self.username}and email:{self.email}"
-
+        return f"{self.name}|{self.personalprofile.profile_photo}"
+        
 class Otp(models.Model):
     otp = models.CharField(max_length=100)
     time_stamp = models.DateTimeField(auto_now_add=True)

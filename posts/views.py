@@ -1,4 +1,5 @@
 #from django.shortcuts import render
+from django.http import Http404
 from rest_framework.response import Response
 
 from . import serializers
@@ -48,3 +49,40 @@ class PostView(APIView):
         response["last_page"] = f"{base_url}?page={last_page}"
 
         return Response(response,status=status.HTTP_200_OK)
+
+class CreateCommentView(APIView):
+    permission_classes = [
+                IsAuthenticated,
+            ]
+    serializer_class = serializers.CreateCommentSerializer
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data,context={"request":request})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        post_id = request.query_params.get("post_id")
+        if post_id:
+            try:
+                post = models.Posts.objects.get(id=post_id)
+            except:
+                raise Http404({"error":"Invalid post_id"})
+            comments = models.Comment.objects.filter(post=post)
+            serializer = serializers.CommentSerializer(comments,many=True).data
+            output = [comment for comment in serializer if not comment["parent"]]
+            return Response(output,status=status.HTTP_200_OK)
+
+class CreateReplyView(APIView):
+    permission_classes = [
+                IsAuthenticated,
+            ]
+    serializer_class = serializers.CreateReplySerializer
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data,context={"request":request})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_201_CREATED)
+

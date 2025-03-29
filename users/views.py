@@ -349,9 +349,6 @@ class CertificationView(APIView):
 
 
 
-
-
-
 class TestView(APIView):
     permission_classes=[
                 AllowAny,
