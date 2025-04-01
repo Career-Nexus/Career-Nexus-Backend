@@ -1,14 +1,16 @@
-#from django.shortcuts import render
-from django.http import Http404
-from rest_framework.response import Response
+from drf_yasg.utils import swagger_auto_schema
 
 from . import serializers
 from . import models
 
+from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
+
+from django.http import Http404
+from django.db.models import Count
 
 class PostPagination(PageNumberPagination):
     page_size = 3
@@ -22,17 +24,20 @@ class PostView(APIView):
             ]
     serializer_class = serializers.PostSerializer
 
+    @swagger_auto_schema(request_body=serializer_class, operation_description="Allows the user to create a new feed post. N.B:This endpoint returns paginated responses.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(operation_description="Retrieves Post data and related data count for comments and likes")
     def get(self,request):
         base_url = request.build_absolute_uri()
         base_url = base_url.split("?")[0]
-
-        posts = models.Posts.objects.all().order_by("-time_stamp")
+        #posts = models.Posts.objects.all().order_by("-time_stamp")
+        posts = models.Posts.objects.annotate(comment_count=Count('comment'),like_count=Count("like"))
+        #print(test.values())
         paginator = PostPagination()
         paginated_items = paginator.paginate_queryset(posts,request)
 
@@ -50,18 +55,23 @@ class PostView(APIView):
 
         return Response(response,status=status.HTTP_200_OK)
 
+
+
+
 class CreateCommentView(APIView):
     permission_classes = [
                 IsAuthenticated,
             ]
     serializer_class = serializers.CreateCommentSerializer
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows user to create a comment to a Post.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
-
+    
+    @swagger_auto_schema(operation_description="Retrieves all comments for a particular post using the query parameter *post_id")
     def get(self,request):
         post_id = request.query_params.get("post_id")
         if post_id:
@@ -74,14 +84,32 @@ class CreateCommentView(APIView):
             output = [comment for comment in serializer if not comment["parent"]]
             return Response(output,status=status.HTTP_200_OK)
 
+
+
 class CreateReplyView(APIView):
     permission_classes = [
                 IsAuthenticated,
             ]
     serializer_class = serializers.CreateReplySerializer
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows user to create a reply to a Post comment.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data,context={"request":request})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_201_CREATED)
+
+
+
+class CreateLikeView(APIView):
+    permission_classes = [
+                IsAuthenticated,
+            ]
+    serializer_class = serializers.CreateLikeSerializer
+
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows user to like a Post once.")
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data,context={"user":request.user})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)

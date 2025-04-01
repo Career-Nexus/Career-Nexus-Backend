@@ -48,10 +48,12 @@ class PersonalProfileSerializer(serializers.ModelSerializer):
         fields = ["id","name","profile_photo","qualification"]
 
 class RetrievePostSerializer(serializers.ModelSerializer):
+    comment_count = serializers.IntegerField()
+    like_count = serializers.IntegerField()
     profile = PersonalProfileSerializer()
     class Meta:
         model = models.Posts
-        fields = ["profile","id","body","media","article","time_stamp"]
+        fields = ["profile","id","body","media","article","time_stamp","comment_count","like_count"]
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -98,6 +100,26 @@ class CreateReplySerializer(serializers.Serializer):
         output = {
                     "user":comment.user.name,
                     "body":comment.body
+                }
+        return output
+
+class CreateLikeSerializer(serializers.Serializer):
+    post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
+    #user = serializers.PrimaryKeyRelatedField(queryset=)
+
+    def validate(self,data):
+        user = self.context["user"]
+        if models.Like.objects.filter(user=user,post=data.get("post")).exists():
+            raise serializers.ValidationError({"error":"Post Already Liked"})
+        else:
+            data["user"] = user
+            return data
+    
+    def create(self,validated_data):
+        #validated_data["user"] = self.context["user"]
+        like = models.Like.objects.create(**validated_data)
+        output = {
+                    "post":like.post.id
                 }
         return output
 

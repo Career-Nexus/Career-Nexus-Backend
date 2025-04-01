@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 #import email
 import os
@@ -13,6 +14,7 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.exceptions import ValidationError
+from drf_yasg.utils import swagger_auto_schema
 
 
 from . import serializers
@@ -48,7 +50,9 @@ logo = os.path.join(resources_directory,"career-nexus_logo.png")
 
 
 
-#Functions
+
+
+
 
 
 class WaitListView(APIView):
@@ -56,6 +60,7 @@ class WaitListView(APIView):
     permission_classes = [
             AllowAny,
             ]
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows users to be added to the WaitList.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -69,17 +74,26 @@ class WaitListView(APIView):
             agent.send_email(welcome_template,subject,container,recipient=email,attachment=logo)
             return Response(data,status=status.HTTP_201_CREATED)
 
+
+
+
+
 class NewsLetterSubscribeView(APIView):
     serializer_class = serializers.NewsLetterSubscribeSerializer
     permission_classes=[
             AllowAny,
             ]
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows users to subscribe to NewsLetter.")
+
     def post(self,request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_200_OK)
+
+
+
 
 class NewsLetterUnsubscribeView(APIView):
     serializer_class = serializers.NewsLetterUnsubscribeSerializer
@@ -93,7 +107,7 @@ class NewsLetterUnsubscribeView(APIView):
             return user
         else:
             return Response({"Error":"Unregistered Email"},status=status.HTTP_400_BAD_REQUEST)
-
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows users to Unsubscribe from the NewsLetter.")
     def put(self,request):
         user = self.get_object(request)
         serializer = self.serializer_class(data=request.data, instance=user)
@@ -103,12 +117,16 @@ class NewsLetterUnsubscribeView(APIView):
 
 
 
+
+
+
 class RegisterView(APIView):
     serializer_class=serializers.RegisterSerializer
     permission_classes=[
             AllowAny,
             ]
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows users to register into the main platform with a valid email.")
     def post(self,request):
         serializer =self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -125,12 +143,16 @@ class RegisterView(APIView):
             return Response({"error":f"{email} not registered"},status=status.HTTP_404_NOT_FOUND)
 
 
+
+
+
 class LoginView(APIView):
     permission_classes = [
                 AllowAny,
             ]
     serializer_class = serializers.LoginSerializer
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Authenticates registered users within the platform and returns a Bearer token for subsequent requests. N.B:Token expires in 6 hours.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -145,12 +167,16 @@ class LoginView(APIView):
                 status=status.HTTP_200_OK
                 )
 
+
+
+
 class LogoutView(APIView):
     permission_classes = [
                 IsAuthenticated,
             ]
     serializer_class = serializers.LogoutSerializer
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Logs out signed in users and blacklists the Bearer Token.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -172,6 +198,10 @@ class DeleteWaitListView(APIView):
             models.WaitList.objects.get(email=email).delete()
             return Response({"Deleted Successfully"},status=status.HTTP_204_NO_CONTENT)
 
+
+
+
+
 #PROFILE VIEWS ------------------------------
 
 class PersonalProfileView(APIView):
@@ -186,6 +216,7 @@ class PersonalProfileView(APIView):
         return user_object
 
     #View method serving as update and retrieving user profile data.
+    @swagger_auto_schema(request_body=serializers.PersonalProfileSerializer, operation_description="Allows user to update the profile parameters qualification, summary, profile_photo and intro_video.")
     def put(self,request):
         user = self.get_object(request)
         serializer = self.serializer_class(instance=user,data=request.data)
@@ -193,6 +224,7 @@ class PersonalProfileView(APIView):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(request_body=serializers.PostRegistrationSerializer,operation_description="Allows users to update profile parameters User_type and Industry.")
     def patch(self,request):
         user = models.Users.objects.filter(email=request.user.email).first()
         serializer = serializers.PostRegistrationSerializer(data=request.data,instance=user,partial=True)
@@ -208,32 +240,42 @@ class PersonalProfileView(APIView):
             return Response(output,status=status.HTTP_206_PARTIAL_CONTENT)
 
 
+
+
+
 class RetreiveProfileView(APIView):
     permission_classes = [
                 IsAuthenticated,
             ]
-    serializer_class = serializers.RetrieveProfileSerializer
+    def get_user(self,request):
+        try:
+            user =models.Users.objects.get(email=request.user.email)
+            return user
+        except:
+            raise Http404({"error":"Inexistent User"})
 
-    def post(self,request):
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            profile_id = serializer.data["profile_id"]
-            profile = models.PersonalProfile.objects.get(id=profile_id)
-            profile_owner = profile.user
-            owner_experience = models.experience.objects.filter(user=profile_owner).values("title","organization","start_date","end_date","location","employment_type","detail").order_by("-end_date")
-            owner_education = models.education.objects.filter(user=profile_owner).values("course","school","start_date","end_date","location","detail").order_by("-end_date")
-            owner_certification = models.certification.objects.filter(user=profile_owner).values("title","school","issue_date","cert_id","skills").order_by("-issue_date")
-            output = {
-                    "name":profile.name,
-                    "profile_photo":profile.profile_photo,
-                    "qualification":profile.qualification,
-                    "intro_video":profile.intro_video,
-                    "summary":profile.summary,
-                    "experience":owner_experience,
-                    "education":owner_education,
-                    "certification":owner_certification
+    @swagger_auto_schema(operation_description="Retrieves User complete profile including their work experience, education and certification.")
+    def get(self,request):
+        #serializer = self.serializer_class(data=request.data)
+        #if serializer.is_valid(raise_exception=True):
+            #profile_id = serializer.data["profile_id"]
+        user = self.get_user(request)
+        profile = models.PersonalProfile.objects.get(user=user)
+        #profile_owner = profile.user
+        owner_experience = models.experience.objects.filter(user=user).values("title","organization","start_date","end_date","location","employment_type","detail").order_by("-end_date")
+        owner_education = models.education.objects.filter(user=user).values("course","school","start_date","end_date","location","detail").order_by("-end_date")
+        owner_certification = models.certification.objects.filter(user=user).values("title","school","issue_date","cert_id","skills").order_by("-issue_date")
+        output = {
+                "name":profile.name,
+                "profile_photo":profile.profile_photo,
+                "qualification":profile.qualification,
+                "intro_video":profile.intro_video,
+                "summary":profile.summary,
+                "experience":owner_experience,
+                "education":owner_education,
+                "certification":owner_certification
                 }
-            return Response(output,status=status.HTTP_200_OK)
+        return Response(output,status=status.HTTP_200_OK)
 
 
 
@@ -246,13 +288,14 @@ class ExperienceView(APIView):
                 IsAuthenticated,
             ]
     serializer_class= serializers.ExperienceSerializer
-
+    
+    @swagger_auto_schema(operation_description="Gets all the Experience data for the logged in user.")
     def get(self,request):
         user_id = request.user.id
         data = models.experience.objects.filter(user_id=user_id).values("id","title","organization","start_date","end_date","location","employment_type","detail").order_by("-start_date")
         return Response(data,status=status.HTTP_200_OK)
 
-
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Allows creation of new work experience.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data, context={"request":request})
         if serializer.is_valid(raise_exception=True):
@@ -269,17 +312,25 @@ class ExperienceView(APIView):
             return Response(output,status=status.HTTP_201_CREATED)
 
 
+
+
+
+
 class UpdateExperienceView(APIView):
     permission_classes= [
                 IsAuthenticated,
             ]
     serializer_class = serializers.UpdateExperienceSerializer
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Updates data in a user work experience.")
     def put(self,request):
         serializer = self.serializer_class(data=request.data,instance=request.user,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
+
+
+
 
 
 
@@ -289,22 +340,26 @@ class EducationView(APIView):
             ]
     serializer_class = serializers.EducationSerializer
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Creates a new Education data for the user.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data,context={"request":request.user})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(operation_description="Retrieves all Education data for the logged in user.")
     def get(self,request):
         detail = models.education.objects.filter(user_id=request.user.id).values("id","course","school","start_date","end_date","location","detail").order_by("-start_date")
         return Response(detail,status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Updates Education data of the user.")
     def put(self,request):
         serializer = serializers.UpdateEducationSerializer(data=request.data,instance=request.user,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(request_body=serializers.UpdateEducationSerializer,operation_description="Deletes an education entry of the user.")
     def delete(self,request):
         serializer = serializers.UpdateEducationSerializer(data=request.data,context={"request":request})
         if serializer.is_valid(raise_exception=True):
@@ -313,22 +368,28 @@ class EducationView(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+
+
+
 class CertificationView(APIView):
     permission_classes = [
                 IsAuthenticated,
             ]
     serializer_class = serializers.CertificationSerializer
 
+    @swagger_auto_schema(request_body=serializer_class,operation_description="Creates a new certification data for the user.")
     def post(self,request):
         serializer = self.serializer_class(data=request.data,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
 
+    @swagger_auto_schema(operation_description="Retrieves all certificates of the logged in user.")
     def get(self,request):
         certifications = models.certification.objects.filter(user=request.user).values("id","title","school","issue_date","cert_id","skills").order_by("-issue_date")
         return Response(certifications,status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(request_body=serializers.DeleteCertificationSerializer, operation_description="Allows for user to delete a certification data through certification id.")
     def delete(self,request):
         serializer = serializers.DeleteCertificationSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
