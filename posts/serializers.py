@@ -47,13 +47,27 @@ class PersonalProfileSerializer(serializers.ModelSerializer):
         model = PersonalProfile
         fields = ["id","name","profile_photo","qualification"]
 
-class RetrievePostSerializer(serializers.ModelSerializer):
-    comment_count = serializers.IntegerField()
-    like_count = serializers.IntegerField()
+class ParentPostSerializer(serializers.ModelSerializer):
     profile = PersonalProfileSerializer()
     class Meta:
         model = models.Posts
-        fields = ["profile","id","body","media","article","time_stamp","comment_count","like_count"]
+        fields = ["profile","body","media","article","time_stamp"]
+
+class RetrievePostSerializer(serializers.ModelSerializer):
+    comment_count = serializers.IntegerField()
+    like_count = serializers.IntegerField()
+    share_count = serializers.IntegerField()
+    profile = PersonalProfileSerializer()
+    parent = ParentPostSerializer()
+
+    class Meta:
+        model = models.Posts
+        fields = ["profile","id","body","media","article","time_stamp","comment_count","like_count","share_count","parent"]
+
+    #def get_mainpost(self,obj):
+        #parents = obj.mainpost.all()
+        #data = RetrievePostSerializer(parents,many=True).data
+        #return data
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -123,4 +137,52 @@ class CreateLikeSerializer(serializers.Serializer):
                 }
         return output
 
+class RepostSerializer(serializers.Serializer):
+    parent = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
+    body = serializers.CharField(max_length=2000,default="")
+
+    def create(self,validated_data):
+        user = self.context["user"]
+        validated_data["profile"] = PersonalProfile.objects.get(user=user)
+        #validated_data["body"] = ""
+        repost = models.Posts.objects.create(**validated_data)
+        output = ParentPostSerializer(repost)
+        return output.data
+
+class SavePostSerializer(serializers.ModelSerializer):
+    post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
+
+    class Meta:
+        model = models.PostSave
+        fields = ["post"]
+
+    def create(self,validated_data):
+        validated_data["user"] = self.context["user"]
+        save = models.PostSave.objects.create(**validated_data)
+        output = {
+                    "post_id":save.post.id 
+                }
+        return output
+
+class RetrieveSavePostSerializer(serializers.ModelSerializer):
+    post = ParentPostSerializer()
+    class Meta:
+        model = models.PostSave
+        fields = ["post"]
+
+class ShareSerializer(serializers.ModelSerializer):
+    post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
+
+    class Meta:
+        model = models.Share
+        fields = ["post","user"]
+
+        read_only_fields = ["user"]
+
+    def create(self,validated_data):
+        validated_data["user"] = self.context["user"]
+        models.Share.objects.create(**validated_data)
+        return {
+                "post_id":validated_data["post"].id
+                }
 

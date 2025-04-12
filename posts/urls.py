@@ -25,5 +25,8 @@ urlpatterns= [
             path("comment/",views.CreateCommentView.as_view(),name="Create-comment"),
             path("reply/",views.CreateReplyView.as_view(),name="Create-reply"),
             path("like/",views.CreateLikeView.as_view(),name="Create-like"),
-
+            path("repost/",views.RepostView.as_view(),name="Repost"),
+            path("save/",views.SavePostView.as_view(),name="Save-post"),
+            path("share/",views.ShareView.as_view(),name="Share-post"),
+            path("following/",views.FollowingPostView.as_view(), name="Following-posts"),
         ]

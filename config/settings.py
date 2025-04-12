@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     #My personal apps
     'users',
     'posts',
+    'follows',
+    'portfolios',
 
     #Extensions
     'django_extensions',

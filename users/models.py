@@ -26,7 +26,7 @@ class Users(AbstractUser):
     industry = models.CharField(max_length=100,default="")
 
     def __str__(self):
-        return f"{self.name}|{self.personalprofile.profile_photo}"
+        return f"{self.name}|{self.profile.profile_photo}"
         
 class Otp(models.Model):
     otp = models.CharField(max_length=100)
@@ -39,7 +39,7 @@ class Otp(models.Model):
 # USER PROFILE MODELS --------------------------------------------
 
 class PersonalProfile(models.Model):
-    user = models.OneToOneField(Users,on_delete=models.CASCADE)
+    user = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="profile")
     name = models.CharField(max_length=250)
     profile_photo = models.CharField(max_length=300,default='')
     qualification = models.CharField(max_length=3000,default='')

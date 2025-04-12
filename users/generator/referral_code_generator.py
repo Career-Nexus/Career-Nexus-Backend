@@ -31,7 +31,7 @@ class generator():
             return code
 
     def generate_otp(self):
-        number1_list = [str(random.choice(self.number_char)) for i in range(0,7)]
+        number1_list = [str(random.choice(self.number_char)) for i in range(0,6)]
         return ''.join(number1_list)
 
 
