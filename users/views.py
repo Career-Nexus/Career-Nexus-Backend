@@ -258,28 +258,16 @@ class RetreiveProfileView(APIView):
     def get(self,request):
         param = request.query_params.get("profile_id")
         if not param:
-            #serializer = self.serializer_class(data=request.data)
-            #if serializer.is_valid(raise_exception=True):
-                #profile_id = serializer.data["profile_id"]
             user = self.get_user(request)
             profile = models.PersonalProfile.objects.get(user=user)
-            #profile_owner = profile.user
-            owner_experience = models.experience.objects.filter(user=user).values("title","organization","start_date","end_date","location","employment_type","detail").order_by("-end_date")
-            owner_education = models.education.objects.filter(user=user).values("course","school","start_date","end_date","location","detail").order_by("-end_date")
-            owner_certification = models.certification.objects.filter(user=user).values("title","school","issue_date","cert_id","skills").order_by("-issue_date")
-            output = {
-                    "name":profile.name,
-                    "profile_photo":profile.profile_photo,
-                    "qualification":profile.qualification,
-                    "intro_video":profile.intro_video,
-                    "summary":profile.summary,
-                    "experience":owner_experience,
-                    "education":owner_education,
-                    "certification":owner_certification
-                    }
+            output = serializers.RetrieveAnotherProfileSerializer(profile).data
+
             return Response(output,status=status.HTTP_200_OK)
         else:
-            return Response("Retrieving another user")
+            user = models.Users.objects.get(id=param)
+            profile = models.PersonalProfile.objects.get(user=user)
+            profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
+            return Response(profile_data,status=status.HTTP_200_OK)
 
 
 

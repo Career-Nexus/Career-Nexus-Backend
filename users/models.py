@@ -43,6 +43,9 @@ class PersonalProfile(models.Model):
     name = models.CharField(max_length=250)
     profile_photo = models.CharField(max_length=300,default='')
     qualification = models.CharField(max_length=3000,default='')
+    position = models.CharField(max_length=1000,default='')
+    location = models.CharField(max_length=1000,default='')
+    bio = models.CharField(max_length=4000,default='')
     intro_video = models.CharField(max_length=300,default='')
     summary = models.CharField(max_length=5000,default='')
 

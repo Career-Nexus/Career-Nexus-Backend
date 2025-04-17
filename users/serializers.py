@@ -273,12 +273,19 @@ class PersonalProfileSerializer(serializers.Serializer):
     qualification = serializers.CharField(max_length=3000,required=False)
     intro_video = serializers.FileField(max_length=300,required=False)
     summary = serializers.CharField(max_length=5000,required=False)
+    position = serializers.CharField(max_length=1000,required=False)
+    location = serializers.CharField(max_length=1000,required=False)
+    bio = serializers.CharField(max_length=4000,required=False)
 
     def update(self,instance,validated_data):
         profile_photo = validated_data.get('profile_photo','')
         qualification = validated_data.get('qualification',instance.qualification)
         intro_video = validated_data.get('intro_video','')
         summary = validated_data.get('summary',instance.summary)
+
+        instance.position = validated_data.get("position",instance.position)
+        instance.location = validated_data.get("location",instance.location)
+        instance.bio = validated_data.get("bio",instance.bio)
 
         if profile_photo != '':
             #create auto-cleaning logic for profile photo
@@ -310,8 +317,48 @@ class PersonalProfileSerializer(serializers.Serializer):
                 "profile_photo":instance.profile_photo,
                 "qualification":instance.qualification,
                 "intro_video":instance.intro_video,
+                "location":instance.location,
+                "bio":instance.bio,
+                "position":instance.position,
                 "summary":instance.summary
                 }
+
+
+class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
+    experience = serializers.SerializerMethodField()
+    education = serializers.SerializerMethodField()
+    certification = serializers.SerializerMethodField()
+    followers = serializers.SerializerMethodField()
+    followings = serializers.SerializerMethodField()
+    class Meta:
+        model = models.PersonalProfile
+        fields = ["name","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
+
+    def get_followings(self,obj):
+        followings = len(obj.user.follower.all())
+        return followings
+
+    def get_followers(self,obj):
+        followers = len(obj.user.following.all())
+        return followers
+
+    def get_experience(self,obj):
+        experience = obj.user.experience_set.all().order_by("-start_date")
+        data = ExperienceSerializer(experience,many=True).data
+        return data
+
+    def get_education(self,obj):
+        education = obj.user.education_set.all().order_by("-start_date")
+        data = EducationSerializer(education,many=True).data
+        return data
+
+    def get_certification(self,obj):
+        certifications = obj.user.certification_set.all().order_by("-issue_date")
+        data = CertificationSerializer(certifications,many=True).data
+        return data
+
+
+
 
 class RetrieveProfileSerializer(serializers.Serializer):
     profile_id = serializers.IntegerField()
@@ -325,6 +372,9 @@ class RetrieveProfileSerializer(serializers.Serializer):
 
 
 class ExperienceSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+
+
     title = serializers.CharField(max_length=150)
     organization = serializers.CharField(max_length=500)
     start_date = serializers.DateField()
@@ -404,7 +454,8 @@ class UpdateExperienceSerializer(serializers.Serializer):
 class EducationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.education
-        fields = ["course", "school", "start_date","end_date","location","detail"]
+        fields = ["id","course", "school", "start_date","end_date","location","detail"]
+        read_only_fields = ["id"]
 
     def validate(self,data):
         user = self.context["request"]
@@ -468,7 +519,9 @@ class UpdateEducationSerializer(serializers.Serializer):
 class CertificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.certification
-        fields = ["title","school","issue_date","cert_id","skills"]
+        fields = ["id","title","school","issue_date","cert_id","skills"]
+
+        read_only_fields = ["id"]
 
     def validate(self,data):
         request = self.context["request"]
