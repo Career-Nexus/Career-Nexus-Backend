@@ -452,6 +452,7 @@ class UpdateExperienceSerializer(serializers.Serializer):
         
 
 class EducationSerializer(serializers.ModelSerializer):
+    end_date = serializers.DateField(required=False)
     class Meta:
         model = models.education
         fields = ["id","course", "school", "start_date","end_date","location","detail"]
@@ -463,6 +464,9 @@ class EducationSerializer(serializers.ModelSerializer):
         return data
 
     def create(self,validated_data):
+        end_date = validated_data.get("end_date",None)
+        if not end_date:
+            validated_data["end_date"] = "Present"
         education = models.education.objects.create(**validated_data)
         output = {
                     "course":education.course,
@@ -541,6 +545,20 @@ class CertificationSerializer(serializers.ModelSerializer):
 
 class DeleteCertificationSerializer(serializers.Serializer):
     id = serializers.IntegerField()
+
+class AnalyticsSerializer(serializers.ModelSerializer):
+    total_posts = serializers.SerializerMethodField()
+    total_views = serializers.SerializerMethodField()
+    class Meta:
+        model = models.PersonalProfile
+        fields = ["total_posts","total_views"]
+
+    def get_total_posts(self,obj):
+        total_posts = obj.posts_set.all().count()
+        return total_posts
+    def get_total_views(self,obj):
+        user_viewed = obj.user.viewed.all().count()
+        return user_viewed
 
 
 

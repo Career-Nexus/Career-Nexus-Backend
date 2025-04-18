@@ -54,15 +54,32 @@ class ParentPostSerializer(serializers.ModelSerializer):
         fields = ["profile","body","media","article","time_stamp"]
 
 class RetrievePostSerializer(serializers.ModelSerializer):
-    comment_count = serializers.IntegerField()
-    like_count = serializers.IntegerField()
-    share_count = serializers.IntegerField()
+    comment_count = serializers.SerializerMethodField()
+    #comment_count = serializers.IntegerField()
+    like_count = serializers.SerializerMethodField()
+    share_count = serializers.SerializerMethodField()
     profile = PersonalProfileSerializer()
     parent = ParentPostSerializer()
 
     class Meta:
         model = models.Posts
         fields = ["profile","id","body","media","article","time_stamp","comment_count","like_count","share_count","parent"]
+
+    def get_comment_count(self,obj):
+        #comments = obj.comment_set.all()
+        comments = models.Comment.objects.filter(post=obj,parent__isnull=True)
+        return len(comments)
+    def get_like_count(self,obj):
+        likes = obj.like_set.all()
+        return len(likes)
+    def get_share_count(self,obj):
+        shares = obj.share_set.all()
+        return len(shares)
+    def to_representation(self,instance):
+        representation = super().to_representation(instance)
+        representation["post_id"] = representation.pop("id")
+        #representation["poster"] = representation.pop("profile")
+        return representation
 
     #def get_mainpost(self,obj):
         #parents = obj.mainpost.all()
@@ -72,7 +89,8 @@ class RetrievePostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
-    user = serializers.StringRelatedField()
+    #user = serializers.StringRelatedField()
+    commenter = serializers.SerializerMethodField()
     body = serializers.CharField(max_length=5000)
     parent = serializers.PrimaryKeyRelatedField(queryset=models.Comment.objects.all())
     #replies = serializers.PrimaryKeyRelatedField(many=True,read_only=True)
@@ -80,12 +98,23 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Comment
-        fields = ["id","post","user","body","parent","replies","time_stamp"]
+        fields = ["id","post","commenter","body","parent","replies","time_stamp"]
 
     def get_replies(self,obj):
         replies = obj.replies.all()
         data = CommentSerializer(replies,many=True).data
         return data
+    def get_commenter(self,obj):
+        commenter_profile = obj.user.profile
+        output = {
+            "name":commenter_profile.name,
+            "profile_picture":commenter_profile.profile_photo
+        }
+        return output
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation["comment_id"] = representation.pop("id")
+        return representation
 
 
 

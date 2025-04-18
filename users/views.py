@@ -256,7 +256,7 @@ class RetreiveProfileView(APIView):
 
     @swagger_auto_schema(operation_description="Retrieves User complete profile including their work experience, education and certification.")
     def get(self,request):
-        param = request.query_params.get("profile_id")
+        param = request.query_params.get("user_id")
         if not param:
             user = self.get_user(request)
             profile = models.PersonalProfile.objects.get(user=user)
@@ -264,8 +264,15 @@ class RetreiveProfileView(APIView):
 
             return Response(output,status=status.HTTP_200_OK)
         else:
-            user = models.Users.objects.get(id=param)
+            try:
+                user = models.Users.objects.get(id=param)
+            except:
+                raise Http404({"error":"Invalid User Id"})
+
             profile = models.PersonalProfile.objects.get(user=user)
+
+            #Implementation profile viewing counter 
+            models.ProfileView.objects.create(viewer=request.user,viewed=user)
             profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
             return Response(profile_data,status=status.HTTP_200_OK)
 
@@ -394,8 +401,15 @@ class CertificationView(APIView):
         
 
 
-
-
+class AnalyticsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    serializer_class = serializers.AnalyticsSerializer
+    def get(self,request):
+        profile = request.user.profile
+        serializer = self.serializer_class(profile).data
+        return Response(serializer,status=status.HTTP_200_OK)
 
 
 

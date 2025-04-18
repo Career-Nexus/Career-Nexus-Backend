@@ -39,8 +39,9 @@ class PostView(APIView):
         if not param:
             base_url = request.build_absolute_uri()
             base_url = base_url.split("?")[0]
-            #posts = models.Posts.objects.all().order_by("-time_stamp")
-            posts = models.Posts.objects.annotate(comment_count=Count('comment'),like_count=Count("like"),share_count=Count("share")).order_by("-time_stamp")
+            posts = models.Posts.objects.prefetch_related("comment_set","like_set","share_set").all().order_by("-time_stamp")
+
+            #posts = models.Posts.objects.annotate(comment_count=Count('comment'),like_count=Count("like"),share_count=Count("share")).order_by("-time_stamp")
             #print(test.values())
             paginator = PostPagination()
             paginated_items = paginator.paginate_queryset(posts,request)
@@ -77,10 +78,12 @@ class FollowingPostView(APIView):
         user = request.user
         followings = user.follower.select_related("user_following__profile").all()
         profiles = [following.user_following.profile.id for following in followings]
-        #print(user_followings)
         #profiles = [profile.id for profile in user_followings]
         following_posts = models.Posts.objects.filter(profile__in=profiles)
-        following_posts = following_posts.annotate(comment_count=Count("comment"),like_count=Count("like"),share_count=Count("share"))
+
+        #TODO- Implement pagination for posts of followings
+
+        #following_posts = following_posts.annotate(comment_count=Count("comment"),like_count=Count("like"),share_count=Count("share"))
         posts = self.serializer_class(following_posts,many=True).data
         return Response(posts,status=status.HTTP_200_OK)
 

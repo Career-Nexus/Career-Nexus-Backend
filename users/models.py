@@ -49,6 +49,11 @@ class PersonalProfile(models.Model):
     intro_video = models.CharField(max_length=300,default='')
     summary = models.CharField(max_length=5000,default='')
 
+class ProfileView(models.Model):
+    viewer = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="viewer")
+    viewed = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="viewed")
+    date = models.DateField(auto_now_add=True)
+
 class experience(models.Model):
     user = models.ForeignKey(Users,on_delete=models.CASCADE)
     title = models.CharField(max_length=150)
