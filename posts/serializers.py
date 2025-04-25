@@ -7,6 +7,27 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
 import uuid
+import joblib
+import os
+
+directory = os.path.dirname(os.path.abspath(__file__))
+model_directory = os.path.join(directory,"models")
+model_file = os.path.join(model_directory,"industry_classifier_model.pkl")
+binarizer_file = os.path.join(model_directory,"industry_label_binarizer.pkl")
+
+model = joblib.load(model_file)
+binarizer = joblib.load(binarizer_file)
+
+def classify_content(text):
+    prediction = model.predict([text])
+    industries = binarizer.inverse_transform(prediction)
+    output = ",".join(industries[0])
+    if output == "":
+        return "others"
+    else:
+        return output
+
+
 
 class PostSerializer(serializers.Serializer):
     body = serializers.CharField(max_length=10000)
@@ -22,6 +43,7 @@ class PostSerializer(serializers.Serializer):
 
     def create(self,validated_data):
         media = validated_data.get("media","")
+        validated_data["industries"] = classify_content(validated_data["body"])
         #article = validated_data.get("article","")
 
         if media != "":
@@ -52,6 +74,7 @@ class ParentPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Posts
         fields = ["profile","body","media","article","time_stamp"]
+
 
 class RetrievePostSerializer(serializers.ModelSerializer):
     comment_count = serializers.SerializerMethodField()

@@ -13,6 +13,7 @@ from rest_framework.pagination import PageNumberPagination
 
 from django.http import Http404
 from django.db.models import Count
+from django.db.models import Prefetch
 
 class PostPagination(PageNumberPagination):
     page_size = 3
@@ -36,10 +37,16 @@ class PostView(APIView):
     @swagger_auto_schema(operation_description="Retrieves Post data and related data count for comments and likes")
     def get(self,request):
         param = request.query_params.get("post_id",None)
+        user_type = request.user.industry
+        if user_type == "":
+            user_type = "others"
+
         if not param:
             base_url = request.build_absolute_uri()
             base_url = base_url.split("?")[0]
-            posts = models.Posts.objects.prefetch_related("comment_set","like_set","share_set").all().order_by("-time_stamp")
+            posts = models.Posts.objects.filter(industries__icontains=user_type.lower()).order_by("-time_stamp")
+
+            #posts = models.Posts.objects.prefetch_related(Prefetch("comment_set","like_set","share_set",queryset=related_posts)).all().order_by("-time_stamp")
 
             #posts = models.Posts.objects.annotate(comment_count=Count('comment'),like_count=Count("like"),share_count=Count("share")).order_by("-time_stamp")
             #print(test.values())

@@ -15,13 +15,13 @@ from . import models
 
 from .generator.referral_code_generator import *
 from .Hasher import hasher
-from .mmail import Agent
+#from .mmail import Agent
+from .tasks import send_email
 from datetime import datetime
 import os
 import uuid
 import boto3
 
-agent = Agent()
 ref_agent = generator()
 hasher = hasher()
 
@@ -34,11 +34,33 @@ otp_template = os.path.join(resources_directory,"mail_otp.html")
 
 
 user_options = (("learner","learner"),("mentor","mentor"),("employer","employer"))
+
+industry_options = (
+    ("agriculture","agriculture"),
+    ("banking","banking"),
+    ("business","business"),
+    ("commerce","commerce"),
+    ("construction","construction"),
+    ("education","education"),
+    ("entertainment","entertainment"),
+    ("government","government"),
+    ("health","health"),
+    ("manufacturing","manufacturing"),
+    ("media","media"),
+    ("others","others"),
+    ("sports","sports"),
+    ("technology","technology"),
+    ("transportation","transportation")
+)
+
 employment_type_options = (
             ("Onsite","Onsite"),
             ("Remote","Remote"),
             ("Hybrid","Hybrid")
         )
+
+
+
 Users = get_user_model()
 
 
@@ -194,7 +216,7 @@ class RegisterSerializer(serializers.Serializer):
             ref_code_generated = ref_agent.generate_otp()
             container = {"{OTP}":ref_code_generated}
             #print(ref_code_generated)
-            agent.send_email(template=otp_template,subject="Verify your Email",container=container,recipient=email)
+            send_email.delay(template=otp_template,subject="Verify your Email",container=container,recipient=email)
             models.Otp.objects.create(otp=ref_code_generated)
             output = {"status":"Otp sent"}
             return output
@@ -226,6 +248,9 @@ class RegisterSerializer(serializers.Serializer):
                 raise serializers.ValidationError({"OTP Error":"Invalid OTP"})
 
 class PostRegistrationSerializer(serializers.ModelSerializer):
+    user_type = serializers.ChoiceField(choices=user_options)
+    industry = serializers.ChoiceField(choices=industry_options)
+
     class Meta:
         model = models.Users
         fields=["user_type","industry"]

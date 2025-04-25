@@ -10,6 +10,7 @@ class Posts(models.Model):
     article = models.CharField(max_length=500,default="N/A")
     time_stamp = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey("self",null=True,blank=True,on_delete=models.CASCADE,related_name="mainpost")
+    industries = models.TextField(null=True,blank=True)
 
 class Comment(models.Model):
     post = models.ForeignKey(Posts,on_delete=models.CASCADE)
