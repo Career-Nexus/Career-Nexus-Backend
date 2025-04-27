@@ -41,7 +41,8 @@ class Otp(models.Model):
 class PersonalProfile(models.Model):
     user = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="profile")
     name = models.CharField(max_length=250)
-    profile_photo = models.CharField(max_length=300,default='')
+    profile_photo = models.CharField(max_length=3000,default='https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png')
+    cover_photo = models.CharField(max_length=300,default='https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png')
     qualification = models.CharField(max_length=3000,default='')
     position = models.CharField(max_length=1000,default='')
     location = models.CharField(max_length=1000,default='')

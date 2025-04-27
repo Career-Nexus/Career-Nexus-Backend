@@ -295,6 +295,7 @@ class DeleteWaitListSerializer(serializers.Serializer):
 
 class PersonalProfileSerializer(serializers.Serializer):
     profile_photo = serializers.FileField(required=False)
+    cover_photo = serializers.FileField(required=False)
     qualification = serializers.CharField(max_length=3000,required=False)
     intro_video = serializers.FileField(max_length=300,required=False)
     summary = serializers.CharField(max_length=5000,required=False)
@@ -304,6 +305,7 @@ class PersonalProfileSerializer(serializers.Serializer):
 
     def update(self,instance,validated_data):
         profile_photo = validated_data.get('profile_photo','')
+        cover_photo = validated_data.get("cover_photo",'')
         qualification = validated_data.get('qualification',instance.qualification)
         intro_video = validated_data.get('intro_video','')
         summary = validated_data.get('summary',instance.summary)
@@ -323,6 +325,16 @@ class PersonalProfileSerializer(serializers.Serializer):
         else:
             profile_photo = instance.profile_photo
 
+
+        if cover_photo != '':
+            file_name = f"cover_photos/{uuid.uuid4()}{cover_photo.name}"
+            file_path = default_storage.save(file_name,ContentFile(cover_photo.read()))
+            url = default_storage.url(file_path)
+            cover_photo = url
+        else:
+            cover_photo = instance.cover_photo
+
+
         if intro_video != '':
             #Create auto-cleaning logic for intro-videos
 
@@ -334,12 +346,14 @@ class PersonalProfileSerializer(serializers.Serializer):
             intro_video = instance.intro_video
 
         instance.profile_photo = profile_photo
+        instance.cover_photo = cover_photo
         instance.qualification = qualification
         instance.intro_video = intro_video
         instance.summary = summary
         instance.save()
         return {
                 "profile_photo":instance.profile_photo,
+                "cover_photo":instance.cover_photo,
                 "qualification":instance.qualification,
                 "intro_video":instance.intro_video,
                 "location":instance.location,
@@ -357,7 +371,7 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
     followings = serializers.SerializerMethodField()
     class Meta:
         model = models.PersonalProfile
-        fields = ["name","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
+        fields = ["name","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
 
     def get_followings(self,obj):
         followings = len(obj.user.follower.all())
