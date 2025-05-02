@@ -215,7 +215,7 @@ class RegisterSerializer(serializers.Serializer):
         if otp == None:
             ref_code_generated = ref_agent.generate_otp()
             container = {"{OTP}":ref_code_generated}
-            #print(ref_code_generated)
+            print(ref_code_generated)
             send_email.delay(template=otp_template,subject="Verify your Email",container=container,recipient=email)
             models.Otp.objects.create(otp=ref_code_generated)
             output = {"status":"Otp sent"}

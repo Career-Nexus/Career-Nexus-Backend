@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>WebSocket Test</h2>
+  <ul id="messages"></ul>
+
+  <script>
+    const socket = new WebSocket("ws://localhost:8000/ws/notification/");
+
+    socket.onmessage = function(event) {
+      const data = JSON.parse(event.data);
+      const li = document.createElement("li");
+      li.innerText = data.message;
+      document.getElementById("messages").appendChild(li);
+    };
+
+    socket.onopen = function() {
+      console.log("WebSocket connection established.");
+    };
+  </script>
+</body>
+</html>
+

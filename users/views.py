@@ -20,6 +20,7 @@ from drf_yasg.utils import swagger_auto_schema
 from . import serializers
 from . import models
 from .mmail import Agent
+from notifications.utils import notify
 
 from django.contrib.auth import get_user_model
 
@@ -158,6 +159,7 @@ class LoginView(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
         refresh = RefreshToken.for_user(user)
+        notify()
         return Response(
                 {
                     "refresh":str(refresh),
@@ -309,6 +311,17 @@ class ExperienceView(APIView):
                         "detail":output.detail
                     }
             return Response(output,status=status.HTTP_201_CREATED)
+    def delete(self,request):
+        param = request.query_params.get("experience_id")
+        if not param:
+            raise Http404("No query parameter")
+        else:
+            try:
+                experience_instance = models.experience.objects.get(user=request.user,id=param)
+                experience_instance.delete()
+                return Response({"satus":"Deleted"},status=status.HTTP_204_NO_CONTENT)
+            except:
+                raise Http404("Inexistent experience")
 
 
 

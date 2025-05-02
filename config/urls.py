@@ -25,4 +25,5 @@ urlpatterns = [
     path("post/",include("posts.urls")),
     path("",include("follows.urls")),
     path("project/",include("portfolios.urls")),
+    path("connection/",include("networks.urls")),
 ]

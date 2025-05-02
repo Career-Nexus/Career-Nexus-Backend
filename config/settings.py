@@ -51,13 +51,18 @@ INSTALLED_APPS = [
     'drf_yasg',
 
     #My personal apps
+    'notifications',
+
     'users',
     'posts',
     'follows',
     'portfolios',
+    'networks',
+
 
     #Extensions
     'django_extensions',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +96,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi.application'
 
 
 # Database
@@ -224,3 +230,12 @@ CORS_ALLOWED_ORIGINS = [
 CELERY_BROKER_URL = "redis://localhost:6379/0"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
+
+CHANNEL_LAYERS = {
+    "default":{
+        "BACKEND":"channels_redis.core.RedisChannelLayer",
+        "CONFIG":{
+            "hosts": [("127.0.0.1",6379)],
+        }
+    }
+}
