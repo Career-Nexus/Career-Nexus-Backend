@@ -546,6 +546,7 @@ class UpdateEducationSerializer(serializers.Serializer):
         instance.end_date = validated_data.get("end_date",instance.end_date)
         instance.location = validated_data.get("location",instance.location)
         instance.detail = validated_data.get("detail",instance.detail)
+        instance.save()
 
         output= {
                     "id":instance.id,

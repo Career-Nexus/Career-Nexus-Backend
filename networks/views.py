@@ -12,7 +12,8 @@ from django.db.models import Q
 
 from . import serializers
 from . import models
-from users.models import Users,PersonalProfile
+from users.models import Users
+
 
 
 
@@ -74,6 +75,7 @@ class ConnectionRecommendationView(APIView):
         IsAuthenticated,
     ]
     serializer_class = serializers.RetrieveRecommendationDetailSerializer
+
 #TODO Setup db_indexing for locations and industry fields in users models for optimization.
     def get(self,request):
         user = request.user
@@ -81,20 +83,37 @@ class ConnectionRecommendationView(APIView):
 
         criteria = request.query_params.get("criteria",None)
 
+        base_url = request.build_absolute_uri()
+        base_url = base_url.split("?")[0]
+
         if not criteria:
             return Response({"error":"Recommendation criteria not provided"},status=status.HTTP_400_BAD_REQUEST)
 
         else:  
             if criteria.lower() == "industry":
                 industry_recommendations = Users.objects.filter(industry=user_industry).exclude(id=user.id)
-                recommendations = industry_recommendations.exclude(Q(connection_user__connection=user) | Q(connect__user=user))
+                recommendations = industry_recommendations.exclude(Q(connection_user__connection=user) | Q(connect__user=user)).order_by("id")
 
 
             elif criteria.lower() == "location":
                 location_recommendations = Users.objects.select_related("profile").filter(profile__location__icontains=user.profile.location).exclude(id=user.id)
-                recommendations = location_recommendations.exclude(Q(connection_user__connection = user) | Q(connect__user = user))
+                recommendations = location_recommendations.exclude(Q(connection_user__connection = user) | Q(connect__user = user)).order_by("id")
             else:
                 return Response({"criteria error":"Unrecognized recommendation criteria."},status=status.HTTP_400_BAD_REQUEST)
 
-            serialized_data = self.serializer_class(recommendations,many=True).data
-            return Response(serialized_data,status=status.HTTP_200_OK)
+            paginator = RecommendationPaginator()
+            paginated_items = paginator.paginate_queryset(recommendations,request)
+
+            serializer = self.serializer_class(paginated_items,many=True)
+
+            item_count = recommendations.count()
+            page_full = item_count//paginator.page_size
+            if item_count % paginator.page_size == 0:
+                pages = page_full
+            else:
+                pages = page_full + 1 
+
+            response = paginator.get_paginated_response(serializer.data).data
+            response["last_page"] = f"{base_url}?page={pages}"
+            #serialized_data = self.serializer_class(recommendations,many=True).data
+            return Response(response,status=status.HTTP_200_OK)

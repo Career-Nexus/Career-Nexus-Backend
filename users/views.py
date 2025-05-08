@@ -319,7 +319,7 @@ class ExperienceView(APIView):
             try:
                 experience_instance = models.experience.objects.get(user=request.user,id=param)
                 experience_instance.delete()
-                return Response({"satus":"Deleted"},status=status.HTTP_204_NO_CONTENT)
+                return Response(status=status.HTTP_204_NO_CONTENT)
             except:
                 raise Http404("Inexistent experience")
 
