@@ -314,7 +314,7 @@ class ExperienceView(APIView):
     def delete(self,request):
         param = request.query_params.get("experience_id")
         if not param:
-            raise Http404("No query parameter")
+            return Response({"error":"No query parameter"},status=status.HTTP_400_BAD_REQUEST)
         else:
             try:
                 experience_instance = models.experience.objects.get(user=request.user,id=param)
@@ -372,14 +372,20 @@ class EducationView(APIView):
             return Response(output,status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(request_body=serializers.UpdateEducationSerializer,operation_description="Deletes an education entry of the user.")
+    #TODO Resolve delete to use query parameter rather than request body.
+
     def delete(self,request):
-        serializer = serializers.UpdateEducationSerializer(data=request.data,context={"request":request})
-        if serializer.is_valid(raise_exception=True):
-            id = serializer.validated_data["id"]
-            models.education.objects.get(id=id).delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
-
-
+        user = request.user
+        param = request.query_params.get("education_id",None)
+        if not param:
+            return Response({"error":"No query parameter specified"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            try:
+                education_instance = models.education.objects.get(user=user,id=param)
+                education_instance.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            except:
+                raise Http404("Inexistent education")
 
 
 
@@ -402,16 +408,19 @@ class CertificationView(APIView):
         return Response(certifications,status=status.HTTP_200_OK)
 
     @swagger_auto_schema(request_body=serializers.DeleteCertificationSerializer, operation_description="Allows for user to delete a certification data through certification id.")
+    #TODO Resolve delete to use query parameter rather than sending the request in body.
     def delete(self,request):
-        serializer = serializers.DeleteCertificationSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            id = serializer.validated_data["id"]
-            if models.certification.objects.filter(user=request.user,id=id).exists():
-                models.certification.objects.get(user=request.user,id=id).delete()
+        param = request.query_params.get("certification_id")
+        user = request.user
+        if not param:
+            return Response({"error":"No query parameter specified"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            try:
+                certification_instance = models.certification.objects.get(user=user,id=param)
+                certification_instance.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-            else:
-                raise ValidationError({"Error":"Certificate does not exist!"})
-        
+            except:
+                raise Http404("Inexistent certification")
 
 
 class AnalyticsView(APIView):
