@@ -67,7 +67,7 @@ class PostSerializer(serializers.Serializer):
 class PersonalProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = PersonalProfile
-        fields = ["id","name","profile_photo","qualification"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","qualification"]
 
 class ParentPostSerializer(serializers.ModelSerializer):
     profile = PersonalProfileSerializer()
@@ -130,7 +130,9 @@ class CommentSerializer(serializers.ModelSerializer):
     def get_commenter(self,obj):
         commenter_profile = obj.user.profile
         output = {
-            "name":commenter_profile.name,
+            "first_name":commenter_profile.first_name,
+            "last_name":commenter_profile.last_name,
+            "middle_name":commenter_profile.middle_name,
             "profile_picture":commenter_profile.profile_photo
         }
         return output
@@ -149,7 +151,7 @@ class CreateCommentSerializer(serializers.Serializer):
         validated_data["user"] = self.context["request"].user
         comment = models.Comment.objects.create(**validated_data)
         output = {
-                    "user":comment.user.name,
+                    "user":PersonalProfileSerializer(comment.user.profile,many=False).data,
                     "body":comment.body,
                     "time_stamp":comment.time_stamp
                 }
@@ -164,14 +166,13 @@ class CreateReplySerializer(serializers.Serializer):
         validated_data["post"] = validated_data["parent"].post
         comment = models.Comment.objects.create(**validated_data)
         output = {
-                    "user":comment.user.name,
+                    "user":PersonalProfileSerializer(comment.user.profile,many=False).data,
                     "body":comment.body
                 }
         return output
 
 class CreateLikeSerializer(serializers.Serializer):
     post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
-    #user = serializers.PrimaryKeyRelatedField(queryset=)
 
     def validate(self,data):
         user = self.context["user"]

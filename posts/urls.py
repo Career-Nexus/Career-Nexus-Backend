@@ -18,7 +18,6 @@ schema_view = get_schema_view(
 )
 
 
-
 urlpatterns= [
             #path("doc/",schema_view.with_ui("swagger",cache_timeout=0), name="Post-App-Documentation"),
             path("",views.PostView.as_view(),name="Add-View-Posts"),

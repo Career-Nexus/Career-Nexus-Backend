@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 
 from django.http import Http404
+from django.db.models import Q
 from django.db.models import Count
 from django.db.models import Prefetch
 
@@ -44,7 +45,7 @@ class PostView(APIView):
         if not param:
             base_url = request.build_absolute_uri()
             base_url = base_url.split("?")[0]
-            posts = models.Posts.objects.filter(industries__icontains=user_type.lower()).order_by("-time_stamp")
+            posts = models.Posts.objects.filter(Q(industries__icontains=user_type.lower()) | Q(profile__user__user_type="mentor")).order_by("-time_stamp")
 
             #posts = models.Posts.objects.prefetch_related(Prefetch("comment_set","like_set","share_set",queryset=related_posts)).all().order_by("-time_stamp")
 
@@ -67,13 +68,14 @@ class PostView(APIView):
 
             return Response(response,status=status.HTTP_200_OK)
         else:
-            #try:
-            post = models.Posts.objects.get(id=param)
-            #print(post.media)
-            output = serializers.ParentPostSerializer(post,many=False).data
-            return Response(output,status=status.HTTP_200_OK)
-            #except:
-                #raise Http404({"error":"Inexistent post ID"})
+            try:
+                post = models.Posts.objects.get(id=param)
+                #print(post.media)
+                #output = serializers.ParentPostSerializer(post,many=False).data
+                output = serializers.RetrievePostSerializer(post,many=False).data
+                return Response(output,status=status.HTTP_200_OK)
+            except:
+                return Response({"error":"Inexistent Post"},status=status.HTTP_404_NOT_FOUND)
 
 
 class FollowingPostView(APIView):
@@ -88,11 +90,15 @@ class FollowingPostView(APIView):
         #profiles = [profile.id for profile in user_followings]
         following_posts = models.Posts.objects.filter(profile__in=profiles)
 
-        #TODO- Implement pagination for posts of followings
+        paginator = PostPagination()
+        paginated_items = paginator.paginate_queryset(following_posts,request)
+
+        serializer = self.serializer_class(paginated_items,many=True).data
+        response = paginator.get_paginated_response(serializer).data
 
         #following_posts = following_posts.annotate(comment_count=Count("comment"),like_count=Count("like"),share_count=Count("share"))
-        posts = self.serializer_class(following_posts,many=True).data
-        return Response(posts,status=status.HTTP_200_OK)
+        #posts = self.serializer_class(following_posts,many=True).data
+        return Response(response,status=status.HTTP_200_OK)
 
 
 
@@ -121,12 +127,15 @@ class CreateCommentView(APIView):
         if post_id:
             try:
                 post = models.Posts.objects.get(id=post_id)
+                comments = models.Comment.objects.filter(post=post)
+                serializer = serializers.CommentSerializer(comments,many=True).data
+                output = [comment for comment in serializer if not comment["parent"]]
+                return Response(output,status=status.HTTP_200_OK)
+
             except:
-                raise Http404({"error":"Invalid post_id"})
-            comments = models.Comment.objects.filter(post=post)
-            serializer = serializers.CommentSerializer(comments,many=True).data
-            output = [comment for comment in serializer if not comment["parent"]]
-            return Response(output,status=status.HTTP_200_OK)
+                return Response({"error":"Inexistent post"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error":"No query parameter"},status=status.HTTP_400_BAD_REQUEST)
 
 
 

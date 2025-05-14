@@ -28,6 +28,7 @@ hasher = hasher()
 #Defining Templates
 c_directory = os.path.dirname(os.path.abspath(__file__))
 resources_directory = os.path.join(c_directory,"resources")
+
 otp_template = os.path.join(resources_directory,"mail_otp.html")
 
 
@@ -175,10 +176,7 @@ class NewsLetterUnsubscribeSerializer(serializers.Serializer):
 
 
 class RegisterSerializer(serializers.Serializer):
-    #user_option = serializers.ChoiceField(choices=user_options)
-    name = serializers.CharField(max_length=300)
     email = serializers.CharField(max_length=300)
-    #username = serializers.CharField(max_length=150)
     password1 = serializers.CharField(max_length=200)
     password2 = serializers.CharField(max_length=200)
     otp = serializers.CharField(max_length=20,required=False)
@@ -205,8 +203,6 @@ class RegisterSerializer(serializers.Serializer):
             return data
 
     def create(self,validated_data):
-        #user_type = validated_data.get("user_option")
-        name = validated_data.get("name")
         email = validated_data.get("email")
         username = uuid.uuid4()
         password1 = validated_data.get("password1")
@@ -232,28 +228,23 @@ class RegisterSerializer(serializers.Serializer):
                 else:
                     otp_obj.delete()
                     user_obj = models.Users.objects.create_user(
-                            #user_type = user_type,
-                            name = name,
                             email= email.lower(),
                             username = username,
                             password = password1
                             )
-                    models.PersonalProfile.objects.create(user=user_obj,name=name)
-                    output = {
-                            "email":user_obj.email,
-                            "status":"Success"
-                            }
+                    models.PersonalProfile.objects.create(user=user_obj)
+                    output = user_obj
                     return output
             else:
                 raise serializers.ValidationError({"OTP Error":"Invalid OTP"})
 
 class PostRegistrationSerializer(serializers.ModelSerializer):
-    user_type = serializers.ChoiceField(choices=user_options)
+    #user_type = serializers.ChoiceField(choices=user_options)
     industry = serializers.ChoiceField(choices=industry_options)
 
     class Meta:
         model = models.Users
-        fields=["user_type","industry"]
+        fields=["industry"]
 
 
 class LoginSerializer(serializers.Serializer):
@@ -294,6 +285,9 @@ class DeleteWaitListSerializer(serializers.Serializer):
 #PROFILE SERIALIZERS ------------------------------------
 
 class PersonalProfileSerializer(serializers.Serializer):
+    first_name = serializers.CharField(max_length=200,required=False)
+    last_name = serializers.CharField(max_length=200,required=False)
+    middle_name = serializers.CharField(max_length=200,required=False)
     profile_photo = serializers.FileField(required=False)
     cover_photo = serializers.FileField(required=False)
     qualification = serializers.CharField(max_length=3000,required=False)
@@ -313,9 +307,12 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.position = validated_data.get("position",instance.position)
         instance.location = validated_data.get("location",instance.location)
         instance.bio = validated_data.get("bio",instance.bio)
+        instance.first_name = validated_data.get("first_name",instance.first_name)
+        instance.last_name = validated_data.get("last_name",instance.last_name)
+        instance.middle_name = validated_data.get("middle_name",instance.middle_name)
 
         if profile_photo != '':
-            #create auto-cleaning logic for profile photo
+            #TODO create auto-cleaning logic for profile photo that has been changed
 
             file_name = f"profile_pictures/{uuid.uuid4()}{profile_photo.name}"
             file_path = default_storage.save(file_name,ContentFile(profile_photo.read()))
@@ -336,7 +333,7 @@ class PersonalProfileSerializer(serializers.Serializer):
 
 
         if intro_video != '':
-            #Create auto-cleaning logic for intro-videos
+            #TODO Create auto-cleaning logic for intro-videos that has been changed
 
             file_name = f"intro_videos/{uuid.uuid4()}{intro_video.name}"
             file_path = default_storage.save(file_name,ContentFile(intro_video.read()))
@@ -352,6 +349,9 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.summary = summary
         instance.save()
         return {
+                "first_name":instance.first_name,
+                "last_name":instance.last_name,
+                "middle_name":instance.middle_name,
                 "profile_photo":instance.profile_photo,
                 "cover_photo":instance.cover_photo,
                 "qualification":instance.qualification,
@@ -371,7 +371,7 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
     followings = serializers.SerializerMethodField()
     class Meta:
         model = models.PersonalProfile
-        fields = ["name","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
+        fields = ["first_name","last_name","middle_name","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
 
     def get_followings(self,obj):
         followings = len(obj.user.follower.all())

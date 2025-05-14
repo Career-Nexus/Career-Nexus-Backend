@@ -20,13 +20,11 @@ class WaitList(models.Model):
         return f"{self.name} with email {self.email} interested in {self.industry}"
 
 class Users(AbstractUser):
-    user_type = models.CharField(max_length=20,default="")
-    name = models.CharField(max_length=300)
-    #password2 = models.CharField(max_length=100)
+    user_type = models.CharField(max_length=20,default="learner")
     industry = models.CharField(max_length=100,default="")
 
     def __str__(self):
-        return f"{self.name}|{self.profile.profile_photo}"
+        return f"{self.email}|{self.profile.profile_photo}"
         
 class Otp(models.Model):
     otp = models.CharField(max_length=100)
@@ -40,7 +38,10 @@ class Otp(models.Model):
 
 class PersonalProfile(models.Model):
     user = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="profile")
-    name = models.CharField(max_length=250)
+    #name = models.CharField(max_length=250,default="Unregistered")
+    first_name = models.CharField(max_length=200,default="N/A")
+    last_name = models.CharField(max_length=200,default="N/A")
+    middle_name = models.CharField(max_length=200,default="N/A")
     profile_photo = models.CharField(max_length=3000,default='https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png')
     cover_photo = models.CharField(max_length=300,default='https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png')
     qualification = models.CharField(max_length=3000,default='')

@@ -131,10 +131,21 @@ class RegisterView(APIView):
     def post(self,request):
         serializer =self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            data = serializer.save()	
-            return Response(data,status=status.HTTP_201_CREATED)
+            data = serializer.save()
+            if data != {"status":"Otp sent"}:
+                refresh = RefreshToken.for_user(data)
+                response = {
+                    "refresh":str(refresh),
+                    "access":str(refresh.access_token),
+                    "user":data.email,
+                    "status":"Success"
+                }
 
-    #REMOVE THIS IN PRODUCTION-------------------------
+                return Response(response,status=status.HTTP_201_CREATED)
+            else:
+                return Response(data,status=status.HTTP_201_CREATED)
+
+    #TODO REMOVE THIS IN PRODUCTION-------------------------
     def delete(self,request):
         email = request.query_params.get("email",None)
         try:
@@ -232,10 +243,8 @@ class PersonalProfileView(APIView):
         serializer = serializers.PostRegistrationSerializer(data=request.data,instance=user,partial=True)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            user_type = serializer.data.get("user_type")
             industry = serializer.data.get("industry")
             output = {
-                        "user_type":user_type,
                         "industry":industry,
                         "email":user.email
                     }
