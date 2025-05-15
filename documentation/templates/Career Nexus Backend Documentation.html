@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+  @font-face {
+  font-family: octicons-link;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+
+.markdown-body .octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+.markdown-body .anchor {
+  float: left;
+  line-height: 1;
+  margin-left: -20px;
+  padding-right: 4px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  color: #1b1f23;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #24292e;
+  line-height: 1.5;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.markdown-body .pl-c {
+  color: #6a737d;
+}
+
+.markdown-body .pl-c1,
+.markdown-body .pl-s .pl-v {
+  color: #005cc5;
+}
+
+.markdown-body .pl-e,
+.markdown-body .pl-en {
+  color: #6f42c1;
+}
+
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi {
+  color: #24292e;
+}
+
+.markdown-body .pl-ent {
+  color: #22863a;
+}
+
+.markdown-body .pl-k {
+  color: #d73a49;
+}
+
+.markdown-body .pl-pds,
+.markdown-body .pl-s,
+.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sra,
+.markdown-body .pl-sr .pl-sre {
+  color: #032f62;
+}
+
+.markdown-body .pl-smw,
+.markdown-body .pl-v {
+  color: #e36209;
+}
+
+.markdown-body .pl-bu {
+  color: #b31d28;
+}
+
+.markdown-body .pl-ii {
+  background-color: #b31d28;
+  color: #fafbfc;
+}
+
+.markdown-body .pl-c2 {
+  background-color: #d73a49;
+  color: #fafbfc;
+}
+
+.markdown-body .pl-c2:before {
+  content: "^M";
+}
+
+.markdown-body .pl-sr .pl-cce {
+  color: #22863a;
+  font-weight: 700;
+}
+
+.markdown-body .pl-ml {
+  color: #735c0f;
+}
+
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-ms {
+  color: #005cc5;
+  font-weight: 700;
+}
+
+.markdown-body .pl-mi {
+  color: #24292e;
+  font-style: italic;
+}
+
+.markdown-body .pl-mb {
+  color: #24292e;
+  font-weight: 700;
+}
+
+.markdown-body .pl-md {
+  background-color: #ffeef0;
+  color: #b31d28;
+}
+
+.markdown-body .pl-mi1 {
+  background-color: #f0fff4;
+  color: #22863a;
+}
+
+.markdown-body .pl-mc {
+  background-color: #ffebda;
+  color: #e36209;
+}
+
+.markdown-body .pl-mi2 {
+  background-color: #005cc5;
+  color: #f6f8fa;
+}
+
+.markdown-body .pl-mdr {
+  color: #6f42c1;
+  font-weight: 700;
+}
+
+.markdown-body .pl-ba {
+  color: #586069;
+}
+
+.markdown-body .pl-sg {
+  color: #959da5;
+}
+
+.markdown-body .pl-corl {
+  color: #032f62;
+  text-decoration: underline;
+}
+
+.markdown-body details {
+  display: block;
+}
+
+.markdown-body summary {
+  display: list-item;
+}
+
+.markdown-body a {
+  background-color: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline-width: 0;
+}
+
+.markdown-body strong {
+  font-weight: inherit;
+  font-weight: bolder;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: .67em 0;
+}
+
+.markdown-body img {
+  border-style: none;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.markdown-body hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+.markdown-body input {
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body input {
+  overflow: visible;
+}
+
+.markdown-body [type=checkbox] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body * {
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.markdown-body a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.markdown-body strong {
+  font-weight: 600;
+}
+
+.markdown-body hr {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+.markdown-body hr:before {
+  content: "";
+  display: table;
+}
+
+.markdown-body hr:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body details summary {
+  cursor: pointer;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.markdown-body h1 {
+  font-size: 32px;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  font-weight: 600;
+}
+
+.markdown-body h2 {
+  font-size: 24px;
+}
+
+.markdown-body h3 {
+  font-size: 20px;
+}
+
+.markdown-body h3,
+.markdown-body h4 {
+  font-weight: 600;
+}
+
+.markdown-body h4 {
+  font-size: 16px;
+}
+
+.markdown-body h5 {
+  font-size: 14px;
+}
+
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+}
+
+.markdown-body h6 {
+  font-size: 12px;
+}
+
+.markdown-body p {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre {
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.markdown-body input::-webkit-inner-spin-button,
+.markdown-body input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.markdown-body .border {
+  border: 1px solid #e1e4e8!important;
+}
+
+.markdown-body .border-0 {
+  border: 0!important;
+}
+
+.markdown-body .border-bottom {
+  border-bottom: 1px solid #e1e4e8!important;
+}
+
+.markdown-body .rounded-1 {
+  border-radius: 3px!important;
+}
+
+.markdown-body .bg-white {
+  background-color: #fff!important;
+}
+
+.markdown-body .bg-gray-light {
+  background-color: #fafbfc!important;
+}
+
+.markdown-body .text-gray-light {
+  color: #6a737d!important;
+}
+
+.markdown-body .mb-0 {
+  margin-bottom: 0!important;
+}
+
+.markdown-body .my-2 {
+  margin-bottom: 8px!important;
+  margin-top: 8px!important;
+}
+
+.markdown-body .pl-0 {
+  padding-left: 0!important;
+}
+
+.markdown-body .py-0 {
+  padding-bottom: 0!important;
+  padding-top: 0!important;
+}
+
+.markdown-body .pl-1 {
+  padding-left: 4px!important;
+}
+
+.markdown-body .pl-2 {
+  padding-left: 8px!important;
+}
+
+.markdown-body .py-2 {
+  padding-bottom: 8px!important;
+  padding-top: 8px!important;
+}
+
+.markdown-body .pl-3,
+.markdown-body .px-3 {
+  padding-left: 16px!important;
+}
+
+.markdown-body .px-3 {
+  padding-right: 16px!important;
+}
+
+.markdown-body .pl-4 {
+  padding-left: 24px!important;
+}
+
+.markdown-body .pl-5 {
+  padding-left: 32px!important;
+}
+
+.markdown-body .pl-6 {
+  padding-left: 40px!important;
+}
+
+.markdown-body .f6 {
+  font-size: 12px!important;
+}
+
+.markdown-body .lh-condensed {
+  line-height: 1.25!important;
+}
+
+.markdown-body .text-bold {
+  font-weight: 600!important;
+}
+
+.markdown-body:before {
+  content: "";
+  display: table;
+}
+
+.markdown-body:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.markdown-body>:first-child {
+  margin-top: 0!important;
+}
+
+.markdown-body>:last-child {
+  margin-bottom: 0!important;
+}
+
+.markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-body blockquote,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.markdown-body hr {
+  background-color: #e1e4e8;
+  border: 0;
+  height: .25em;
+  margin: 24px 0;
+  padding: 0;
+}
+
+.markdown-body blockquote {
+  border-left: .25em solid #dfe2e5;
+  color: #6a737d;
+  padding: 0 1em;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body kbd {
+  background-color: #fafbfc;
+  border: 1px solid #c6cbd1;
+  border-bottom-color: #959da5;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+  color: #444d56;
+  display: inline-block;
+  font-size: 11px;
+  line-height: 10px;
+  padding: 3px 5px;
+  vertical-align: middle;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  margin-top: 24px;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: .3em;
+}
+
+.markdown-body h2 {
+  font-size: 1.5em;
+}
+
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+}
+
+.markdown-body h5 {
+  font-size: .875em;
+}
+
+.markdown-body h6 {
+  color: #6a737d;
+  font-size: .85em;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 2em;
+}
+
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+.markdown-body li {
+  word-wrap: break-all;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body li+li {
+  margin-top: .25em;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+  margin-top: 16px;
+  padding: 0;
+}
+
+.markdown-body dl dd {
+  margin-bottom: 16px;
+  padding: 0 16px;
+}
+
+.markdown-body table {
+  display: block;
+  overflow: auto;
+  width: 100%;
+}
+
+.markdown-body table th {
+  font-weight: 600;
+}
+
+.markdown-body table td,
+.markdown-body table th {
+  border: 1px solid #dfe2e5;
+  padding: 6px 13px;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.markdown-body img {
+  background-color: #fff;
+  box-sizing: content-box;
+  max-width: 100%;
+}
+
+.markdown-body img[align=right] {
+  padding-left: 20px;
+}
+
+.markdown-body img[align=left] {
+  padding-right: 20px;
+}
+
+.markdown-body code {
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+  font-size: 85%;
+  margin: 0;
+  padding: .2em .4em;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre>code {
+  background: transparent;
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  word-break: normal;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  background-color: #f6f8fa;
+  border-radius: 3px;
+  font-size: 85%;
+  line-height: 1.45;
+  overflow: auto;
+  padding: 16px;
+}
+
+.markdown-body pre code {
+  background-color: transparent;
+  border: 0;
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  max-width: auto;
+  overflow: visible;
+  padding: 0;
+  word-wrap: normal;
+}
+
+.markdown-body .commit-tease-sha {
+  color: #444d56;
+  display: inline-block;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  font-size: 90%;
+}
+
+.markdown-body .blob-wrapper {
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markdown-body .blob-wrapper-embedded {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.markdown-body .blob-num {
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  color: rgba(27,31,35,.3);
+  cursor: pointer;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  font-size: 12px;
+  line-height: 20px;
+  min-width: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+  user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
+  width: 1%;
+}
+
+.markdown-body .blob-num:hover {
+  color: rgba(27,31,35,.6);
+}
+
+.markdown-body .blob-num:before {
+  content: attr(data-line-number);
+}
+
+.markdown-body .blob-code {
+  line-height: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  vertical-align: top;
+}
+
+.markdown-body .blob-code-inner {
+  color: #24292e;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  font-size: 12px;
+  overflow: visible;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.markdown-body .pl-token.active,
+.markdown-body .pl-token:hover {
+  background: #ffea7f;
+  cursor: pointer;
+}
+
+.markdown-body kbd {
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-bottom-color: #c6cbd1;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #c6cbd1;
+  color: #444d56;
+  display: inline-block;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  line-height: 10px;
+  padding: 3px 5px;
+  vertical-align: middle;
+}
+
+.markdown-body :checked+.radio-label {
+  border-color: #0366d6;
+  position: relative;
+  z-index: 1;
+}
+
+.markdown-body .tab-size[data-tab-size="1"] {
+  -moz-tab-size: 1;
+  tab-size: 1;
+}
+
+.markdown-body .tab-size[data-tab-size="2"] {
+  -moz-tab-size: 2;
+  tab-size: 2;
+}
+
+.markdown-body .tab-size[data-tab-size="3"] {
+  -moz-tab-size: 3;
+  tab-size: 3;
+}
+
+.markdown-body .tab-size[data-tab-size="4"] {
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+.markdown-body .tab-size[data-tab-size="5"] {
+  -moz-tab-size: 5;
+  tab-size: 5;
+}
+
+.markdown-body .tab-size[data-tab-size="6"] {
+  -moz-tab-size: 6;
+  tab-size: 6;
+}
+
+.markdown-body .tab-size[data-tab-size="7"] {
+  -moz-tab-size: 7;
+  tab-size: 7;
+}
+
+.markdown-body .tab-size[data-tab-size="8"] {
+  -moz-tab-size: 8;
+  tab-size: 8;
+}
+
+.markdown-body .tab-size[data-tab-size="9"] {
+  -moz-tab-size: 9;
+  tab-size: 9;
+}
+
+.markdown-body .tab-size[data-tab-size="10"] {
+  -moz-tab-size: 10;
+  tab-size: 10;
+}
+
+.markdown-body .tab-size[data-tab-size="11"] {
+  -moz-tab-size: 11;
+  tab-size: 11;
+}
+
+.markdown-body .tab-size[data-tab-size="12"] {
+  -moz-tab-size: 12;
+  tab-size: 12;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 .2em .25em -1.6em;
+  vertical-align: middle;
+}
+
+.markdown-body hr {
+  border-bottom-color: #eee;
+}
+
+.markdown-body .pl-0 {
+  padding-left: 0!important;
+}
+
+.markdown-body .pl-1 {
+  padding-left: 4px!important;
+}
+
+.markdown-body .pl-2 {
+  padding-left: 8px!important;
+}
+
+.markdown-body .pl-3 {
+  padding-left: 16px!important;
+}
+
+.markdown-body .pl-4 {
+  padding-left: 24px!important;
+}
+
+.markdown-body .pl-5 {
+  padding-left: 32px!important;
+}
+
+.markdown-body .pl-6 {
+  padding-left: 40px!important;
+}
+
+.markdown-body .pl-7 {
+  padding-left: 48px!important;
+}
+
+.markdown-body .pl-8 {
+  padding-left: 64px!important;
+}
+
+.markdown-body .pl-9 {
+  padding-left: 80px!important;
+}
+
+.markdown-body .pl-10 {
+  padding-left: 96px!important;
+}
+
+.markdown-body .pl-11 {
+  padding-left: 112px!important;
+}
+
+.markdown-body .pl-12 {
+  padding-left: 128px!important;
+}
+
+/*# sourceURL=webpack://./node_modules/github-markdown-css/github-markdown.css */
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL25vZGVfbW9kdWxlcy9naXRodWItbWFya2Rvd24tY3NzL2dpdGh1Yi1tYXJrZG93bi5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSwwQkFBMEI7RUFDMUIsMkRBQXF0RTtBQUN2dEU7O0FBRUE7RUFDRSxxQkFBcUI7RUFDckIsa0JBQWtCO0VBQ2xCLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxjQUFjO0VBQ2Qsa0JBQWtCO0VBQ2xCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGFBQWE7QUFDZjs7QUFFQTs7Ozs7O0VBTUUsY0FBYztFQUNkLHNCQUFzQjtFQUN0QixrQkFBa0I7QUFDcEI7O0FBRUE7Ozs7OztFQU1FLHFCQUFxQjtBQUN2Qjs7QUFFQTs7Ozs7O0VBTUUsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsMEJBQTBCO0VBQzFCLDhCQUE4QjtFQUM5QixjQUFjO0VBQ2QsZ0JBQWdCO0VBQ2hCLGtJQUFrSTtFQUNsSSxlQUFlO0VBQ2YsZ0JBQWdCO0VBQ2hCLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLGNBQWM7QUFDaEI7O0FBRUE7O0VBRUUsY0FBYztBQUNoQjs7QUFFQTs7RUFFRSxjQUFjO0FBQ2hCOztBQUVBOztFQUVFLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQTs7Ozs7OztFQU9FLGNBQWM7QUFDaEI7O0FBRUE7O0VBRUUsY0FBYztBQUNoQjs7QUFFQTtFQUNFLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSx5QkFBeUI7RUFDekIsY0FBYztBQUNoQjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsYUFBYTtBQUNmOztBQUVBO0VBQ0UsY0FBYztFQUNkLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGNBQWM7QUFDaEI7O0FBRUE7OztFQUdFLGNBQWM7RUFDZCxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxjQUFjO0VBQ2Qsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsY0FBYztFQUNkLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UseUJBQXlCO0VBQ3pCLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSx5QkFBeUI7RUFDekIsY0FBYztBQUNoQjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsY0FBYztFQUNkLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsY0FBYztFQUNkLDBCQUEwQjtBQUM1Qjs7QUFFQTtFQUNFLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSw2QkFBNkI7QUFDL0I7O0FBRUE7O0VBRUUsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0Usb0JBQW9CO0VBQ3BCLG1CQUFtQjtBQUNyQjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxlQUFlO0FBQ2pCOztBQUVBO0VBQ0Usa0JBQWtCO0FBQ3BCOztBQUVBOzs7RUFHRSxnQ0FBZ0M7RUFDaEMsY0FBYztBQUNoQjs7QUFFQTtFQUNFLHVCQUF1QjtFQUN2QixTQUFTO0VBQ1QsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsYUFBYTtFQUNiLFNBQVM7QUFDWDs7QUFFQTtFQUNFLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0QixVQUFVO0FBQ1o7O0FBRUE7RUFDRSxzQkFBc0I7QUFDeEI7O0FBRUE7RUFDRSxvQkFBb0I7RUFDcEIsa0JBQWtCO0VBQ2xCLG9CQUFvQjtBQUN0Qjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxxQkFBcUI7QUFDdkI7O0FBRUE7RUFDRSwwQkFBMEI7QUFDNUI7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSx1QkFBdUI7RUFDdkIsU0FBUztFQUNULGdDQUFnQztFQUNoQyxTQUFTO0VBQ1QsY0FBYztFQUNkLGdCQUFnQjtBQUNsQjs7QUFFQTtFQUNFLFdBQVc7RUFDWCxjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsV0FBVztFQUNYLFdBQVc7RUFDWCxjQUFjO0FBQ2hCOztBQUVBO0VBQ0UseUJBQXlCO0VBQ3pCLGlCQUFpQjtBQUNuQjs7QUFFQTs7RUFFRSxVQUFVO0FBQ1o7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBOzs7Ozs7RUFNRSxnQkFBZ0I7RUFDaEIsYUFBYTtBQUNmOztBQUVBO0VBQ0UsZUFBZTtBQUNqQjs7QUFFQTs7RUFFRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsZUFBZTtBQUNqQjs7QUFFQTs7RUFFRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsZUFBZTtBQUNqQjs7QUFFQTs7RUFFRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsbUJBQW1CO0VBQ25CLGFBQWE7QUFDZjs7QUFFQTtFQUNFLFNBQVM7QUFDWDs7QUFFQTs7RUFFRSxnQkFBZ0I7RUFDaEIsYUFBYTtFQUNiLGVBQWU7QUFDakI7O0FBRUE7O0VBRUUsNEJBQTRCO0FBQzlCOztBQUVBOzs7O0VBSUUsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQTs7RUFFRSw0RUFBNEU7RUFDNUUsZUFBZTtBQUNqQjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixhQUFhO0FBQ2Y7O0FBRUE7O0VBRUUsd0JBQXdCO0VBQ3hCLGdCQUFnQjtFQUNoQixTQUFTO0FBQ1g7O0FBRUE7RUFDRSxtQ0FBbUM7QUFDckM7O0FBRUE7RUFDRSxtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSwwQ0FBMEM7QUFDNUM7O0FBRUE7RUFDRSw0QkFBNEI7QUFDOUI7O0FBRUE7RUFDRSxnQ0FBZ0M7QUFDbEM7O0FBRUE7RUFDRSxtQ0FBbUM7QUFDckM7O0FBRUE7RUFDRSx3QkFBd0I7QUFDMUI7O0FBRUE7RUFDRSwwQkFBMEI7QUFDNUI7O0FBRUE7RUFDRSw0QkFBNEI7RUFDNUIseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsMkJBQTJCO0VBQzNCLHdCQUF3QjtBQUMxQjs7QUFFQTtFQUNFLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLDZCQUE2QjtFQUM3QiwwQkFBMEI7QUFDNUI7O0FBRUE7O0VBRUUsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0UsNkJBQTZCO0FBQy9COztBQUVBO0VBQ0UsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0UsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0UsNEJBQTRCO0FBQzlCOztBQUVBO0VBQ0UseUJBQXlCO0FBQzNCOztBQUVBO0VBQ0UsMkJBQTJCO0FBQzdCOztBQUVBO0VBQ0UsMEJBQTBCO0FBQzVCOztBQUVBO0VBQ0UsV0FBVztFQUNYLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxXQUFXO0VBQ1gsV0FBVztFQUNYLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSx1QkFBdUI7QUFDekI7O0FBRUE7RUFDRSwwQkFBMEI7QUFDNUI7O0FBRUE7RUFDRSxjQUFjO0VBQ2QscUJBQXFCO0FBQ3ZCOztBQUVBOzs7Ozs7O0VBT0UsbUJBQW1CO0VBQ25CLGFBQWE7QUFDZjs7QUFFQTtFQUNFLHlCQUF5QjtFQUN6QixTQUFTO0VBQ1QsYUFBYTtFQUNiLGNBQWM7RUFDZCxVQUFVO0FBQ1o7O0FBRUE7RUFDRSxnQ0FBZ0M7RUFDaEMsY0FBYztFQUNkLGNBQWM7QUFDaEI7O0FBRUE7RUFDRSxhQUFhO0FBQ2Y7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSx5QkFBeUI7RUFDekIseUJBQXlCO0VBQ3pCLDRCQUE0QjtFQUM1QixrQkFBa0I7RUFDbEIsa0NBQWtDO0VBQ2xDLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsc0JBQXNCO0FBQ3hCOztBQUVBOzs7Ozs7RUFNRSxnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLG1CQUFtQjtFQUNuQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxjQUFjO0FBQ2hCOztBQUVBOztFQUVFLGdDQUFnQztFQUNoQyxvQkFBb0I7QUFDdEI7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxpQkFBaUI7QUFDbkI7O0FBRUE7RUFDRSxjQUFjO0FBQ2hCOztBQUVBO0VBQ0UsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsY0FBYztFQUNkLGdCQUFnQjtBQUNsQjs7QUFFQTs7RUFFRSxpQkFBaUI7QUFDbkI7O0FBRUE7Ozs7RUFJRSxnQkFBZ0I7RUFDaEIsYUFBYTtBQUNmOztBQUVBO0VBQ0Usb0JBQW9CO0FBQ3RCOztBQUVBO0VBQ0UsZ0JBQWdCO0FBQ2xCOztBQUVBO0VBQ0UsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsVUFBVTtBQUNaOztBQUVBO0VBQ0UsY0FBYztFQUNkLGtCQUFrQjtFQUNsQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0VBQ2hCLFVBQVU7QUFDWjs7QUFFQTtFQUNFLG1CQUFtQjtFQUNuQixlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsY0FBYztFQUNkLGNBQWM7RUFDZCxXQUFXO0FBQ2I7O0FBRUE7RUFDRSxnQkFBZ0I7QUFDbEI7O0FBRUE7O0VBRUUseUJBQXlCO0VBQ3pCLGlCQUFpQjtBQUNuQjs7QUFFQTtFQUNFLHNCQUFzQjtFQUN0Qiw2QkFBNkI7QUFDL0I7O0FBRUE7RUFDRSx5QkFBeUI7QUFDM0I7O0FBRUE7RUFDRSxzQkFBc0I7RUFDdEIsdUJBQXVCO0VBQ3ZCLGVBQWU7QUFDakI7O0FBRUE7RUFDRSxrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSxvQ0FBb0M7RUFDcEMsa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxTQUFTO0VBQ1Qsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsdUJBQXVCO0VBQ3ZCLFNBQVM7RUFDVCxlQUFlO0VBQ2YsU0FBUztFQUNULFVBQVU7RUFDVixnQkFBZ0I7RUFDaEIsa0JBQWtCO0FBQ3BCOztBQUVBO0VBQ0UsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTs7RUFFRSx5QkFBeUI7RUFDekIsa0JBQWtCO0VBQ2xCLGNBQWM7RUFDZCxpQkFBaUI7RUFDakIsY0FBYztFQUNkLGFBQWE7QUFDZjs7QUFFQTtFQUNFLDZCQUE2QjtFQUM3QixTQUFTO0VBQ1QsZUFBZTtFQUNmLG9CQUFvQjtFQUNwQixTQUFTO0VBQ1QsZUFBZTtFQUNmLGlCQUFpQjtFQUNqQixVQUFVO0VBQ1YsaUJBQWlCO0FBQ25COztBQUVBO0VBQ0UsY0FBYztFQUNkLHFCQUFxQjtFQUNyQiw0RUFBNEU7RUFDNUUsY0FBYztBQUNoQjs7QUFFQTtFQUNFLDhCQUE4QjtFQUM5QiwrQkFBK0I7RUFDL0IsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtBQUNwQjs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixnQkFBZ0I7QUFDbEI7O0FBRUE7RUFDRSxzQkFBc0I7RUFDdEIscUJBQXFCO0VBQ3JCLHlCQUF5QjtFQUN6Qix3QkFBd0I7RUFDeEIsZUFBZTtFQUNmLDRFQUE0RTtFQUM1RSxlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLGVBQWU7RUFDZixrQkFBa0I7RUFDbEIsbUJBQW1CO0VBQ25CLGlCQUFpQjtFQUNqQixpQkFBaUI7RUFDakIsbUJBQW1CO0VBQ25CLG1CQUFtQjtFQUNuQixTQUFTO0FBQ1g7O0FBRUE7RUFDRSx3QkFBd0I7QUFDMUI7O0FBRUE7RUFDRSwrQkFBK0I7QUFDakM7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsa0JBQWtCO0VBQ2xCLG1CQUFtQjtFQUNuQixrQkFBa0I7RUFDbEIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0UsY0FBYztFQUNkLDRFQUE0RTtFQUM1RSxlQUFlO0VBQ2YsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixpQkFBaUI7QUFDbkI7O0FBRUE7O0VBRUUsbUJBQW1CO0VBQ25CLGVBQWU7QUFDakI7O0FBRUE7RUFDRSx5QkFBeUI7RUFDekIseUJBQXlCO0VBQ3pCLDRCQUE0QjtFQUM1QixrQkFBa0I7RUFDbEIsa0NBQWtDO0VBQ2xDLGNBQWM7RUFDZCxxQkFBcUI7RUFDckIsMEVBQTBFO0VBQzFFLGlCQUFpQjtFQUNqQixnQkFBZ0I7RUFDaEIsc0JBQXNCO0FBQ3hCOztBQUVBO0VBQ0UscUJBQXFCO0VBQ3JCLGtCQUFrQjtFQUNsQixVQUFVO0FBQ1o7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsV0FBVztBQUNiOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsV0FBVztBQUNiOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxnQkFBZ0I7RUFDaEIsV0FBVztBQUNiOztBQUVBO0VBQ0UsZ0JBQWdCO0VBQ2hCLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxpQkFBaUI7RUFDakIsWUFBWTtBQUNkOztBQUVBO0VBQ0UsaUJBQWlCO0VBQ2pCLFlBQVk7QUFDZDs7QUFFQTtFQUNFLGlCQUFpQjtFQUNqQixZQUFZO0FBQ2Q7O0FBRUE7RUFDRSxxQkFBcUI7QUFDdkI7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsMkJBQTJCO0VBQzNCLHNCQUFzQjtBQUN4Qjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLDJCQUEyQjtBQUM3Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDRCQUE0QjtBQUM5Qjs7QUFFQTtFQUNFLDZCQUE2QjtBQUMvQjs7QUFFQTtFQUNFLDZCQUE2QjtBQUMvQiIsInNvdXJjZVJvb3QiOiIifQ== */
+  </style>
+  <style>
+  /**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.token.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #9a6e3a;
+	/* This background color was intended by the author of this theme. */
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function,
+.token.class-name {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+/*# sourceURL=webpack://./node_modules/prismjs/themes/prism.css */
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL25vZGVfbW9kdWxlcy9wcmlzbWpzL3RoZW1lcy9wcmlzbS5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7Ozs7RUFJRTs7QUFFRjs7Q0FFQyxZQUFZO0NBQ1osZ0JBQWdCO0NBQ2hCLHdCQUF3QjtDQUN4QixzRUFBc0U7Q0FDdEUsY0FBYztDQUNkLGdCQUFnQjtDQUNoQixnQkFBZ0I7Q0FDaEIsb0JBQW9CO0NBQ3BCLGtCQUFrQjtDQUNsQixpQkFBaUI7Q0FDakIsZ0JBQWdCOztDQUVoQixnQkFBZ0I7Q0FDaEIsY0FBYztDQUNkLFdBQVc7O0NBRVgscUJBQXFCO0NBQ3JCLGtCQUFrQjtDQUNsQixpQkFBaUI7Q0FDakIsYUFBYTtBQUNkOztBQUVBOztDQUVDLGlCQUFpQjtDQUNqQixtQkFBbUI7QUFDcEI7O0FBRUE7O0NBRUMsaUJBQWlCO0NBQ2pCLG1CQUFtQjtBQUNwQjs7QUFFQTtDQUNDOztFQUVDLGlCQUFpQjtDQUNsQjtBQUNEOztBQUVBLGdCQUFnQjtBQUNoQjtDQUNDLFlBQVk7Q0FDWixjQUFjO0NBQ2QsY0FBYztBQUNmOztBQUVBOztDQUVDLG1CQUFtQjtBQUNwQjs7QUFFQSxnQkFBZ0I7QUFDaEI7Q0FDQyxhQUFhO0NBQ2IsbUJBQW1CO0NBQ25CLG1CQUFtQjtBQUNwQjs7QUFFQTs7OztDQUlDLGdCQUFnQjtBQUNqQjs7QUFFQTtDQUNDLFdBQVc7QUFDWjs7QUFFQTtDQUNDLFdBQVc7QUFDWjs7QUFFQTs7Ozs7OztDQU9DLFdBQVc7QUFDWjs7QUFFQTs7Ozs7O0NBTUMsV0FBVztBQUNaOztBQUVBOzs7OztDQUtDLGNBQWM7Q0FDZCxvRUFBb0U7Q0FDcEUsaUNBQWlDO0FBQ2xDOztBQUVBOzs7Q0FHQyxXQUFXO0FBQ1o7O0FBRUE7O0NBRUMsY0FBYztBQUNmOztBQUVBOzs7Q0FHQyxXQUFXO0FBQ1o7O0FBRUE7O0NBRUMsaUJBQWlCO0FBQ2xCO0FBQ0E7Q0FDQyxrQkFBa0I7QUFDbkI7O0FBRUE7Q0FDQyxZQUFZO0FBQ2IiLCJzb3VyY2VSb290IjoiIn0= */
+  </style>
+  <style>
+  
+  </style>
+  <style>
+    .markdown-body {
+      font-family: -apple-system,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media not print {
+      .markdown-body {
+        padding: 45px;
+      }
+
+      @media (max-width: 767px) {
+        .markdown-body {
+          padding: 15px;
+        }
+      }
+    }
+
+    .hf-container {
+      color: #24292e;
+      line-height: 1.3;
+    }
+
+    .markdown-body .highlight pre,
+    .markdown-body pre {
+      white-space: pre-wrap;
+    }
+    .markdown-body table {
+      display: table;
+    }
+    .markdown-body img[data-align="center"] {
+      display: block;
+      margin: 0 auto;
+    }
+    .markdown-body img[data-align="right"] {
+      display: block;
+      margin: 0 0 0 auto;
+    }
+    .markdown-body li.task-list-item {
+      list-style-type: none;
+    }
+    .markdown-body li > [type=checkbox] {
+      margin: 0 0 0 -1.3em;
+    }
+    .markdown-body input[type="checkbox"] ~ p {
+      margin-top: 0;
+      display: inline-block;
+    }
+    .markdown-body ol ol,
+    .markdown-body ul ol {
+      list-style-type: decimal;
+    }
+    .markdown-body ol ol ol,
+    .markdown-body ol ul ol,
+    .markdown-body ul ol ol,
+    .markdown-body ul ul ol {
+      list-style-type: decimal;
+    }
+  </style>
+  <style>.markdown-body a.footnote-ref {
+  text-decoration: none;
+}
+
+.footnotes {
+  font-size: .85em;
+  opacity: .8;
+}
+
+.footnotes li[role="doc-endnote"] {
+  position: relative;
+}
+
+.footnotes .footnote-back {
+  position: absolute;
+  font-family: initial;
+  top: .2em;
+  right: 1em;
+  text-decoration: none;
+}
+
+.inline-math.invalid,
+.multiple-math.invalid {
+  color: rgb(255, 105, 105);
+}
+
+.toc-container {
+  width: 100%;
+}
+
+.toc-container .toc-title {
+  font-weight: 700;
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+
+.toc-container li,
+.toc-container ul,
+.toc-container ul li {
+  list-style: none !important;
+}
+
+.toc-container > ul {
+  padding-left: 0;
+}
+
+.toc-container ul li span {
+  display : flex;
+}
+
+.toc-container ul li span a {
+  color: inherit;
+  text-decoration: none;
+}
+.toc-container ul li span a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.toc-container ul li span span.dots {
+  flex: 1;
+  height: 0.65em;
+  margin: 0 10px;
+  border-bottom: 2px dotted black;
+}
+
+/*# sourceURL=webpack://./src/muya/lib/assets/styles/exportStyle.css */
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3NyYy9tdXlhL2xpYi9hc3NldHMvc3R5bGVzL2V4cG9ydFN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLHFCQUFxQjtBQUN2Qjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixXQUFXO0FBQ2I7O0FBRUE7RUFDRSxrQkFBa0I7QUFDcEI7O0FBRUE7RUFDRSxrQkFBa0I7RUFDbEIsb0JBQW9CO0VBQ3BCLFNBQVM7RUFDVCxVQUFVO0VBQ1YscUJBQXFCO0FBQ3ZCOztBQUVBOztFQUVFLHlCQUF5QjtBQUMzQjs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLGdCQUFnQjtFQUNoQixnQkFBZ0I7RUFDaEIsZ0JBQWdCO0FBQ2xCOztBQUVBOzs7RUFHRSwyQkFBMkI7QUFDN0I7O0FBRUE7RUFDRSxlQUFlO0FBQ2pCOztBQUVBO0VBQ0UsY0FBYztBQUNoQjs7QUFFQTtFQUNFLGNBQWM7RUFDZCxxQkFBcUI7QUFDdkI7QUFDQTtFQUNFLGNBQWM7RUFDZCxxQkFBcUI7QUFDdkI7O0FBRUE7RUFDRSxPQUFPO0VBQ1AsY0FBYztFQUNkLGNBQWM7RUFDZCwrQkFBK0I7QUFDakMiLCJzb3VyY2VSb290IjoiIn0= */</style>
+  <style>.markdown-body{}pre.front-matter{display:none!important;}</style>
+</head>
+<body>
+  <article class="markdown-body"><h1 class="atx" id="career-nexus-backend-documentation">Career Nexus Backend Documentation</h1>
+<h1 class="atx" id="user-registeration">User Registeration</h1>
+<p>This API registers user on the platform. N.B: Email confirmation is enforced using OTP.</p>
+<p><strong>Endpoint:</strong><code>user/signup/</code></p>
+<h2 class="atx" id="payload">Payload</h2>
+<pre><code class="fenced-code-block language-json">email<span class="token operator">:</span>*****
+
+password1<span class="token operator">:</span>*****
+
+password2<span class="token operator">:</span>*****
+
+otp **for confirmation<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="response-body">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token property">"status"</span><span class="token operator">:</span><span class="token string">"OTP sent"</span>
+  <span class="token punctuation">}</span> success without sending OTP payload
+
+<span class="token punctuation">{</span>
+<span class="token property">"refresh"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NzI5MTM4MCwiaWF0IjoxNzQ3MjA0OTgwLCJqdGkiOiI5MjRlMWY3NTNjM2I0NzFjYmNjYmM4YTc0MTJhZTQ4ZSIsInVzZXJfaWQiOjF9.3XAZo7Y5ylKUt5pQRFJEgT-pcY7h48XZ17L0WPrLePQ"</span><span class="token punctuation">,</span>
+  <span class="token property">"access"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3MjI2NTgwLCJpYXQiOjE3NDcyMDQ5ODAsImp0aSI6IjkzYWMxZWQ4MjMyMzRjYWFiYzdmM2ZiZmZmMzVkMGRjIiwidXNlcl9pZCI6MX0.ho7_rOofWa_bSyL88Wa1cf7kr-9C_-7uDRtMbkq14GA"</span>
+<span class="token property">"email"</span><span class="token operator">:</span><span class="token string">"example@gmail.com"</span>
+<span class="token property">"status"</span><span class="token operator">:</span><span class="token string">"Success"</span>
+<span class="token punctuation">}</span> success with sending OTP payload</code></pre>
+<h1 class="atx" id="login-api">Login API</h1>
+<p>This endpoint authenticates a user using email and password.</p>
+<p><strong>Method:</strong> <code>POST</code><br><strong>Endpoint:</strong> <code>/user/signin</code></p>
+<h2 class="atx" id="request-body">Request Body</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"email"</span><span class="token operator">:</span> <span class="token string">"user@example.com"</span><span class="token punctuation">,</span>
+  <span class="token property">"password"</span><span class="token operator">:</span> <span class="token string">"securepassword"</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response">Response</h2>
+<p> <strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+ <span class="token property">"refresh"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NjA5MDgxNCwiaWF0IjoxNzQ2MDA0NDE0LCJqdGkiOiI3NjkyOGY4OTZhYmY0ZmEwODJmYTc3NmUzYWZkZmRiMyIsInVzZXJfaWQiOjF9.BWuP8ogqd8DngeZQTgdzrEPW8c3dKi9_tYdTHLyEmhw"</span><span class="token punctuation">,</span>
+ <span class="token property">"access"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MDI2MDE0LCJpYXQiOjE3NDYwMDQ0MTQsImp0aSI6IjJkNzRlNDI1N2E1YzQ1ZTQ5NGQ1OTQ2MTU3Njc5NzNhIiwidXNlcl9pZCI6MX0.TkC5-SF7KQI993gQFMme9juUVzlF4IJqN4GmLAx8o8I"</span><span class="token punctuation">,</span>
+ <span class="token property">"user"</span><span class="token operator">:</span> <span class="token string">"saliuoazeez@gmail.com"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="logout">LogOut</h1>
+<p>Logsout the user and blacklists the access token.</p>
+<p><strong>Endpoint:</strong><code>/user/signout/</code></p>
+<h2 class="atx" id="payload-1">Payload</h2>
+<pre><code class="fenced-code-block language-json">refresh<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="response-body-1">Response body</h2>
+<p><strong>status code:202</strong></p>
+<pre><code class="fenced-code-block language-json">    <span class="token property">"status"</span><span class="token operator">:</span><span class="token string">"Logged out"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="profile-retrieve-api">Profile Retrieve API</h1>
+<p>This endpoint retrieve a logged in user or retrieves a third party's profile data if a query parameter of user_id is passed to the url.</p>
+<p><strong>NB:user must be authenticated via Bearer token</strong></p>
+<p><strong>Method:</strong> <code>GET</code><br><strong>Endpoint:</strong> <code>user/retrieve-profile/</code></p>
+<h2 class="atx" id="response-body-2">Response Body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+  <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+  <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+  <span class="token property">"cover_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"</span><span class="token punctuation">,</span>
+  <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+  <span class="token property">"location"</span><span class="token operator">:</span> <span class="token string">"Alabama, USA"</span><span class="token punctuation">,</span>
+  <span class="token property">"position"</span><span class="token operator">:</span> <span class="token string">"Aquaculturist and Graduate assistant"</span><span class="token punctuation">,</span>
+  <span class="token property">"bio"</span><span class="token operator">:</span> <span class="token string">"Aquaculturist | UI/UX | Graduate Assistant"</span><span class="token punctuation">,</span>
+  <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span><span class="token punctuation">,</span>
+  <span class="token property">"intro_video"</span><span class="token operator">:</span> <span class="token string">""</span><span class="token punctuation">,</span>
+  <span class="token property">"summary"</span><span class="token operator">:</span> <span class="token string">"An aquaculturist with over 5 years of working expeience."</span><span class="token punctuation">,</span>
+  <span class="token property">"experience"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+      <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Extension Officer"</span><span class="token punctuation">,</span>
+      <span class="token property">"organization"</span><span class="token operator">:</span> <span class="token string">"Aller Aqua"</span><span class="token punctuation">,</span>
+      <span class="token property">"start_date"</span><span class="token operator">:</span> <span class="token string">"2022-12-21"</span><span class="token punctuation">,</span>
+      <span class="token property">"end_date"</span><span class="token operator">:</span> <span class="token string">"2024-12-20"</span><span class="token punctuation">,</span>
+      <span class="token property">"location"</span><span class="token operator">:</span> <span class="token string">"Lagos"</span><span class="token punctuation">,</span>
+      <span class="token property">"employment_type"</span><span class="token operator">:</span> <span class="token string">"Onsite"</span><span class="token punctuation">,</span>
+      <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"Managed the sales department of the company."</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+      <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Aquaculturist"</span><span class="token punctuation">,</span>
+      <span class="token property">"organization"</span><span class="token operator">:</span> <span class="token string">"Atlantic shrimpers"</span><span class="token punctuation">,</span>
+      <span class="token property">"start_date"</span><span class="token operator">:</span> <span class="token string">"2020-01-19"</span><span class="token punctuation">,</span>
+      <span class="token property">"end_date"</span><span class="token operator">:</span> <span class="token string">"2022-11-29"</span><span class="token punctuation">,</span>
+      <span class="token property">"location"</span><span class="token operator">:</span> <span class="token string">"Lagos"</span><span class="token punctuation">,</span>
+      <span class="token property">"employment_type"</span><span class="token operator">:</span> <span class="token string">"Onsite"</span><span class="token punctuation">,</span>
+      <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"Managed the culturing of shrimps and prawns."</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"education"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">,</span>
+      <span class="token property">"course"</span><span class="token operator">:</span> <span class="token string">"Aquaculture (MsC)"</span><span class="token punctuation">,</span>
+      <span class="token property">"school"</span><span class="token operator">:</span> <span class="token string">"Auburn University Alabama,"</span><span class="token punctuation">,</span>
+      <span class="token property">"start_date"</span><span class="token operator">:</span> <span class="token string">"2025-01-03"</span><span class="token punctuation">,</span>
+      <span class="token property">"end_date"</span><span class="token operator">:</span> <span class="token string">"Present"</span><span class="token punctuation">,</span>
+      <span class="token property">"location"</span><span class="token operator">:</span> <span class="token string">"USA"</span><span class="token punctuation">,</span>
+      <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"Began studying for a masters degree in Aquaculture."</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span>
+      <span class="token property">"course"</span><span class="token operator">:</span> <span class="token string">"Aquaculture and Fisheries Management"</span><span class="token punctuation">,</span>
+      <span class="token property">"school"</span><span class="token operator">:</span> <span class="token string">"Federal University of Agriculture Abeokuta"</span><span class="token punctuation">,</span>
+      <span class="token property">"start_date"</span><span class="token operator">:</span> <span class="token string">"2011-02-12"</span><span class="token punctuation">,</span>
+      <span class="token property">"end_date"</span><span class="token operator">:</span> <span class="token string">"2016-07-23"</span><span class="token punctuation">,</span>
+      <span class="token property">"location"</span><span class="token operator">:</span> <span class="token string">"Abeokuta"</span><span class="token punctuation">,</span>
+      <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"Graduated with a Second class upper honors"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"certification"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+      <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Introduction to frontend development"</span><span class="token punctuation">,</span>
+      <span class="token property">"school"</span><span class="token operator">:</span> <span class="token string">"Coursera"</span><span class="token punctuation">,</span>
+      <span class="token property">"issue_date"</span><span class="token operator">:</span> <span class="token string">"2023-07-04"</span><span class="token punctuation">,</span>
+      <span class="token property">"cert_id"</span><span class="token operator">:</span> <span class="token string">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MzIzMTE1LCJpYXQiOjE3NDUzMDE1MTUsImp0aSI6IjU2ZGY1YTVhMGQ2NTRjMGI4MDMwMTcxY2MwZjUxMzE1IiwidXNlcl9pZCI6Mn0.y-c-FZ9U-130hlP0B4cIK8Vl21c72xnJHJWGZBWiiaU"</span><span class="token punctuation">,</span>
+      <span class="token property">"skills"</span><span class="token operator">:</span> <span class="token string">"Html,CSS"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"followers"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+  <span class="token property">"followings"</span><span class="token operator">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="update-profile">Update Profile</h1>
+<p>Updates profile data.</p>
+<p><strong>Endpoint:</strong><code>/user/profile-update/</code></p>
+<h2 class="atx" id="payload-2">Payload</h2>
+<pre><code class="fenced-code-block language-json">qualification<span class="token operator">:</span>*****
+
+summary<span class="token operator">:</span>*****
+
+location<span class="token operator">:</span>*****
+
+position<span class="token operator">:</span>*****
+
+bio<span class="token operator">:</span>*****
+
+profile_photo<span class="token operator">:</span>*****
+
+cover_photo<span class="token operator">:</span>*****
+
+intro_video<span class="token operator">:</span>*****
+
+first_name<span class="token operator">:</span>*****
+
+last_name<span class="token operator">:</span>*****
+
+middle_name<span class="token operator">:</span>*****
+<span class="token punctuation">}</span></code></pre>
+<p><strong>Method:</strong> <code>PUT</code></p>
+<h2 class="atx" id="response-body-3">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json">  <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+  <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+  <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul Azeez"</span><span class="token punctuation">,</span>
+  <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span><span class="token punctuation">,</span>
+  <span class="token property">"cover_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/cover_photos/6a687725-56b1-4f1e-ad55-ae814dce20febg_image1.jpeg"</span><span class="token punctuation">,</span>
+  <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Engineering (Civil Engineering)"</span><span class="token punctuation">,</span>
+  <span class="token property">"intro_video"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/intro_videos/6e34ee76-ac17-4146-b7e6-f645f46ce886test_video.mp4"</span><span class="token punctuation">,</span>
+  <span class="token property">"location"</span><span class="token operator">:</span> <span class="token string">"Ogun"</span><span class="token punctuation">,</span>
+  <span class="token property">"bio"</span><span class="token operator">:</span> <span class="token string">"Developer|Programmer|Innovation Specialist"</span><span class="token punctuation">,</span>
+  <span class="token property">"position"</span><span class="token operator">:</span> <span class="token string">"Backend Developer at CareerNexus"</span><span class="token punctuation">,</span>
+  <span class="token property">"summary"</span><span class="token operator">:</span> <span class="token string">"I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture."</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="user-industry-update">User-industry Update</h1>
+<p>Updates the user type and industry of the user</p>
+<p><strong>Endpoint:</strong><code>/user/profile-update/</code></p>
+<h2 class="atx" id="payload-3">Payload</h2>
+<pre><code class="fenced-code-block language-json">industry<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<p><strong>Method:</strong> <code>PATCH</code></p>
+<h2 class="atx" id="response-body-4">Response body</h2>
+<p><strong>status code:206</strong></p>
+<pre><code class="fenced-code-block language-json">  <span class="token property">"industry"</span><span class="token operator">:</span> <span class="token string">"technology"</span><span class="token punctuation">,</span>
+  <span class="token property">"email"</span><span class="token operator">:</span> <span class="token string">"saliuoazeez@gmail.com"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="view-experience">View Experience</h1>
+<p>Retrieves all the experience profile of the user</p>
+<p><strong>Endpoint:</strong><code>user/experience/</code></p>
+<h2 class="atx" id="payload-4">Payload</h2>
+<pre><code class="fenced-code-block"></code></pre>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="response-body-5">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block">[
+  {
+    "id": 2,
+    "title": "Research Methodologist",
+    "organization": "Delta Logistics",
+    "start_date": "2022-10-29",
+    "end_date": "2024-11-29",
+    "location": "Lagos",
+    "employment_type": "Remote",
+    "detail": "Worked as a Research Methodologist, Innovation specialist and Python developer."
+  },
+  {
+    "id": 1,
+    "title": "Branch Service Associate",
+    "organization": "Wema Bank PLC",
+    "start_date": "2021-02-15",
+    "end_date": "2022-10-18",
+    "location": "Ogun",
+    "employment_type": "Onsite",
+    "detail": "Managed the cashpoint in various branches within the location."
+  }
+]</code></pre>
+<h1 class="atx" id="add-experience">Add Experience</h1>
+<p>Adds a user experience data to user's profile</p>
+<p><strong>Endpoint:</strong><code>/user/experience/</code></p>
+<h2 class="atx" id="payload-5">Payload</h2>
+<pre><code class="fenced-code-block language-{">title:*****
+
+organization:*****
+
+start_date:*****
+
+end_date:*****
+
+location:*****
+
+employment_type:*****
+
+detail:*****
+
+}</code></pre>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="response-body-6">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-{">  "title": "Extension Officer",
+  "organization": "Aller Aqua",
+  "start_date": "2022-12-21",
+  "end_date": "2024-12-20",
+  "location": "Lagos",
+  "employment_type": "Onsite",
+  "detail": "Managed the sales department of the company."
+}</code></pre>
+<pre><code class="fenced-code-block"></code></pre>
+<h1 class="atx" id="delete-experience">Delete Experience</h1>
+<p>Deletes an experience data associated with the user</p>
+<p><strong>Endpoint:</strong><code>user/experience/?experience_id=5</code></p>
+<h2 class="atx" id="payload-6">Payload</h2>
+<pre><code class="fenced-code-block"></code></pre>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2 class="atx" id="response-body-7">Response body</h2>
+<p><strong>status code:204</strong></p>
+<pre><code class="fenced-code-block language-{&quot;status&quot;:&quot;Deleted&quot;}"></code></pre>
+<h1 class="atx" id="updating-user-eperience">Updating User Eperience</h1>
+<p>This endpoints updates data of a user's experience. It takes any of the allowed parameter as a payload and updates it accordingly.</p>
+<p><strong>Endpoint:</strong><code>user/update-experience/</code></p>
+<h2 class="atx" id="payload-7">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+id<span class="token operator">:</span>*****
+
+title<span class="token operator">:</span>*****
+
+organization<span class="token operator">:</span>*****
+
+start_date<span class="token operator">:</span>*****
+
+end_date<span class="token operator">:</span>*****
+
+location<span class="token operator">:</span>*****
+
+employment_type<span class="token operator">:</span>*****
+
+detail<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<p><strong>Method:</strong> <code>PUT</code></p>
+<h2 class="atx" id="response-body-8">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+  <span class="token property">"title"</span><span class="token operator">:</span> <span class="token string">"Research Methodologist/Programmer"</span><span class="token punctuation">,</span>
+  <span class="token property">"organization"</span><span class="token operator">:</span> <span class="token string">"Delta Logistics"</span><span class="token punctuation">,</span>
+  <span class="token property">"start_date"</span><span class="token operator">:</span> <span class="token string">"2022-10-29"</span><span class="token punctuation">,</span>
+  <span class="token property">"end_date"</span><span class="token operator">:</span> <span class="token string">"2024-11-29"</span><span class="token punctuation">,</span>
+  <span class="token property">"location"</span><span class="token operator">:</span> <span class="token string">"Lagos"</span><span class="token punctuation">,</span>
+  <span class="token property">"employment_type"</span><span class="token operator">:</span> <span class="token string">"Remote"</span><span class="token punctuation">,</span>
+  <span class="token property">"detail"</span><span class="token operator">:</span> <span class="token string">"Worked as a Research Methodologist, Innovation specialist and Python developer."</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="retrieve-education-api">Retrieve Education API</h1>
+<p>Retrieves all education data of the user profile</p>
+<p><strong>Endpoint:</strong><code>user/education/</code></p>
+<h2 class="atx" id="payload-8">Payload</h2>
+<pre><code class="fenced-code-block"></code></pre>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="response-body-9">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-[">  {
+    "id": 4,
+    "course": "Backend Development",
+    "school": "Meta through Coursera",
+    "start_date": "2023-04-21",
+    "end_date": "2023-05-18",
+    "location": "Online",
+    "detail": "Completed Online course"
+  },
+  {
+    "id": 2,
+    "course": "Civil Engineering",
+    "school": "Federal University of Agriculture Abeokuta",
+    "start_date": "2021-04-21",
+    "end_date": "2022-06-05",
+    "location": "Online",
+    "detail": "Completed the online course"
+  },
+  {
+    "id": 3,
+    "course": "Civil Engineering",
+    "school": "Federal University of Agriculture Abeokuta",
+    "start_date": "2013-01-13",
+    "end_date": "2018-11-15",
+    "location": "Abeokuta",
+    "detail": "Awarded Bachelor of Engineering honours Graduated with a Second Class Upper honors."
+  }
+]</code></pre>
+<h1 class="atx" id="add-education-api">Add Education API</h1>
+<p>Add education data to the user profile.</p>
+<p><strong>Endpoint:</strong><code>user/education/</code></p>
+<h2 class="atx" id="payload-9">Payload</h2>
+<pre><code class="fenced-code-block language-{">course:*****
+
+school:*****
+
+start_date:*****
+
+end_date:*****
+
+location:*****
+
+detail:*****
+
+}</code></pre>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="response-body-10">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-{">    "id": 4,
+    "course": "Backend Development",
+    "school": "Meta through Coursera",
+    "start_date": "2023-04-21",
+    "end_date": "2023-05-18",
+    "location": "Online",
+    "detail": "Completed Online course"
+  },</code></pre>
+<h1 class="atx" id="delete-education">Delete Education</h1>
+<p>Deletes a profile education data.</p>
+<p><strong>Endpoint:</strong><code>user/education/?education_id=7</code></p>
+<h2 class="atx" id="payload-10">Payload</h2>
+<pre><code class="fenced-code-block"></code></pre>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2 class="atx" id="response-body-11">Response body</h2>
+<p><strong>status code:204</strong></p>
+<h1 class="atx" id="view-certification">View Certification</h1>
+<p>Views all certifications added to the user profile</p>
+<p><strong>Endpoint:</strong><code>user/certification/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="response-body-12">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-[">  {
+    "id": 3,
+    "title": "Introduction to frontend development",
+    "school": "Coursera",
+    "issue_date": "2023-07-04",
+    "cert_id": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MzIzMTE1LCJpYXQiOjE3NDUzMDE1MTUsImp0aSI6IjU2ZGY1YTVhMGQ2NTRjMGI4MDMwMTcxY2MwZjUxMzE1IiwidXNlcl9pZCI6Mn0.y-c-FZ9U-130hlP0B4cIK8Vl21c72xnJHJWGZBWiiaU",
+    "skills": "Html,CSS"
+  }
+]</code></pre>
+<h1 class="atx" id="add-certification">Add Certification</h1>
+<p>Adds certification data to user profile</p>
+<p><strong>Endpoint:</strong><code>user/certification/</code></p>
+<pre><code class="fenced-code-block language-{">title:*****
+
+school:*****
+
+issue_date:*****
+
+cert_id:*****
+
+skills:*****
+
+}</code></pre>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="response-body-13">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-{">    "id": 3,
+    "title": "Introduction to frontend development",
+    "school": "Coursera",
+    "issue_date": "2023-07-04",
+    "cert_id": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MzIzMTE1LCJpYXQiOjE3NDUzMDE1MTUsImp0aSI6IjU2ZGY1YTVhMGQ2NTRjMGI4MDMwMTcxY2MwZjUxMzE1IiwidXNlcl9pZCI6Mn0.y-c-FZ9U-130hlP0B4cIK8Vl21c72xnJHJWGZBWiiaU",
+    "skills": "Html,CSS"
+  }</code></pre>
+<h1 class="atx" id="delete-certification">Delete Certification</h1>
+<p>Endpoint deletes a profile certification data.</p>
+<p><strong>Endpoint:</strong><code>user/certification/?certification_id=4</code></p>
+<h2 class="atx" id="payload-11">Payload</h2>
+<pre><code class="fenced-code-block"></code></pre>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2 class="atx" id="response-body-14">Response body</h2>
+<p><strong>status code:204</strong></p>
+<pre><code class="fenced-code-block"></code></pre>
+<h1 class="atx" id="user-analytics">User Analytics</h1>
+<p>This endpoints retrieves details pertaining to the user profile and interaction of other users's with it.</p>
+<p><strong>Endpoint:</strong><code>user/analytics/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="payload-12">Payload</h2>
+<pre><code class="fenced-code-block language-json"></code></pre>
+<h2 class="atx" id="response-body-15">Response body</h2>
+<p><strong>status code:{</strong></p>
+<pre><code class="fenced-code-block language-json">  <span class="token property">"total_posts"</span><span class="token operator">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+  <span class="token property">"total_views"</span><span class="token operator">:</span> <span class="token number">1</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="profile-completion">Profile Completion</h1>
+<p>This endpoint retrieves profile completion data.</p>
+<p><strong>Endpoint:</strong><code>/user/completion/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="payload-13">Payload</h2>
+<pre><code class="fenced-code-block language-json"></code></pre>
+<h2 class="atx" id="response-body-16">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"completion"</span><span class="token operator">:</span> <span class="token string">"66%"</span><span class="token punctuation">,</span>
+  <span class="token property">"incomplete_items"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"mentors"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"complete_items"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"profile_photo"</span><span class="token punctuation">,</span>
+    <span class="token string">"intro_video"</span><span class="token punctuation">,</span>
+    <span class="token string">"experience"</span><span class="token punctuation">,</span>
+    <span class="token string">"certification"</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="get-posts">Get Posts</h1>
+<p>This endpoints retrieves posts associated with the user's selected industry and also posts by mentors on the platform.</p>
+<p><strong>Endpoint:</strong><code>/post/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="payload-14">Payload</h2>
+<pre><code class="fenced-code-block language-json"></code></pre>
+<h2 class="atx" id="response-body-17">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json">  <span class="token property">"count"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token property">"next"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">"previous"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">"results"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+        <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming"</span><span class="token punctuation">,</span>
+      <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-17T14:31:33.731704Z"</span><span class="token punctuation">,</span>
+      <span class="token property">"comment_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"like_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"share_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+      <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+        <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife"</span><span class="token punctuation">,</span>
+      <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-17T14:30:44.280807Z"</span><span class="token punctuation">,</span>
+      <span class="token property">"comment_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"like_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"share_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+      <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+        <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming"</span><span class="token punctuation">,</span>
+      <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg"</span><span class="token punctuation">,</span>
+      <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-17T14:30:11.005024Z"</span><span class="token punctuation">,</span>
+      <span class="token property">"comment_count"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">"like_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"share_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+      <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token property">"last_page"</span><span class="token operator">:</span> <span class="token string">"http://127.0.0.1:8000/post/?page=1"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="retrieve-a-particular-post">Retrieve a Particular Post</h1>
+<p>This endpoint retrieves a particular post through the post_id query passed in the url endpoint.</p>
+<p><strong>Endpoint:</strong><code>/post/?post_id=6</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="payload-15">Payload</h2>
+<pre><code class="fenced-code-block language-json"></code></pre>
+<h2 class="atx" id="response-body-18">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+    <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+    <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+    <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+    <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+    <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife"</span><span class="token punctuation">,</span>
+  <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+  <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+  <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-17T14:30:44.280807Z"</span><span class="token punctuation">,</span>
+  <span class="token property">"comment_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"like_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"share_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+  <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">2</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="failure">Failure</h2>
+<p><strong>status code:404</strong></p>
+<pre><code class="fenced-code-block language-{">"error":"Inexistent Post"
+}</code></pre>
+<h1 class="atx" id="create-post">Create Post</h1>
+<p>This endpoint publishes a post by the logged in user.</p>
+<p><strong>Endpoint:</strong><code>/post/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="payload-16">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+body<span class="token operator">:</span>*****type&lt;str&gt;
+
+media<span class="token operator">:</span>*****type&lt;file<span class="token punctuation">,</span>photo/video&gt;
+
+article<span class="token operator">:</span>*****&lt;formatted text&gt;
+
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response-body-19">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Why Do So Many Finance Apps Look the Same? Ever noticed how most fintech apps follow the same blue-and-white theme.."</span><span class="token punctuation">,</span>
+  <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+  <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+  <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-05-14T11:37:10.041600Z"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="create-comment">Create comment</h1>
+<p>This endpoint creates a comment to a post.</p>
+<p><strong>Endpoint:</strong><code>/post/comment/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="payload-17">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+post<span class="token operator">:</span>*****
+
+body<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response-body-20">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+    <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+    <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+    <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span><span class="token punctuation">,</span>
+    <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Engineering (Civil Engineering)"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Lol, I think it has become somewhat like a custom."</span><span class="token punctuation">,</span>
+  <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-05-14T11:46:12.094543Z"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="get-comment">Get comment</h1>
+<p>This endpoint retrieves all the comments and sub-comment/replies relating to a post.</p>
+<p><strong>Endpoint:</strong><code>/post/comment/?post_id=7</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="payload-18">Payload</h2>
+<pre><code class="fenced-code-block language-json"></code></pre>
+<h2 class="atx" id="response-body-21">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json">  <span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"post"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+    <span class="token property">"commenter"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"profile_picture"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Great content and really worth reading. Thank you Saliu."</span><span class="token punctuation">,</span>
+    <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+    <span class="token property">"replies"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-24T14:30:29.567863Z"</span><span class="token punctuation">,</span>
+    <span class="token property">"comment_id"</span><span class="token operator">:</span> <span class="token number">6</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"post"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+    <span class="token property">"commenter"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+      <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+      <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+      <span class="token property">"profile_picture"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"You really need to see this guys!! Don't forget to leave a comment."</span><span class="token punctuation">,</span>
+    <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+    <span class="token property">"replies"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-05-13T16:35:39.864129Z"</span><span class="token punctuation">,</span>
+    <span class="token property">"comment_id"</span><span class="token operator">:</span> <span class="token number">7</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"post"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+    <span class="token property">"commenter"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+      <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+      <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+      <span class="token property">"profile_picture"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"You really need to see this guys!! Don't forget to leave a comment."</span><span class="token punctuation">,</span>
+    <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+    <span class="token property">"replies"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        <span class="token property">"post"</span><span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">,</span>
+        <span class="token property">"commenter"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+          <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+          <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+          <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+          <span class="token property">"profile_picture"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Don't forget to leave a comment guys."</span><span class="token punctuation">,</span>
+        <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token number">8</span><span class="token punctuation">,</span>
+        <span class="token property">"replies"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-05-13T16:45:58.617940Z"</span><span class="token punctuation">,</span>
+        <span class="token property">"comment_id"</span><span class="token operator">:</span> <span class="token number">9</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-05-13T16:36:28.468871Z"</span><span class="token punctuation">,</span>
+    <span class="token property">"comment_id"</span><span class="token operator">:</span> <span class="token number">8</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span></code></pre>
+<h2 class="atx" id="failure-1">Failure</h2>
+<p><strong>status code:400</strong></p>
+<pre><code class="fenced-code-block language-{">  "error": "Inexistent post"
+}</code></pre>
+<h1 class="atx" id="reply-comment">Reply Comment</h1>
+<p>This endpoint creates a reply to the comment of a post. These replies are also retrieved through the get comment API.</p>
+<p><strong>Endpoint:</strong><code>/post/reply/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="payload-19">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+parent<span class="token operator">:</span>*****
+
+body<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response-body-22">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"user"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+    <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+    <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+    <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span><span class="token punctuation">,</span>
+    <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Engineering (Civil Engineering)"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Thank you for your time"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="post-like">Post Like</h1>
+<p>This endpoint likes a post.</p>
+<p><strong>Endpoint:</strong><code>/post/like/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="payload-20">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+post<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response-body-23">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"post"</span><span class="token operator">:</span> <span class="token number">6</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="reposting">Reposting</h1>
+<p>This endpoint reposts an already existing post along with an optional body of text. This is also treated as apost of it's own and is suggested and retrieved along with the get post API" </p>
+<p><strong>Endpoint:</strong><code>/post/repost/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="payload-21">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+parent<span class="token operator">:</span>*****
+
+body<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response-body-24">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+    <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+    <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+    <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+    <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span><span class="token punctuation">,</span>
+    <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Engineering (Civil Engineering)"</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Great content"</span><span class="token punctuation">,</span>
+  <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+  <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+  <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-05-14T12:01:50.373904Z"</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="post-save">Post Save</h1>
+<p>This endpoint archives a post which could be retrieved by the logged in user.</p>
+<p><strong>Endpoint:</strong><code>/post/save/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="payload-22">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+post<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response-body-25">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">7</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="get-saved-post">Get Saved Post</h1>
+<p>This endpoint retrieves all the saved posts by the logged in user.</p>
+<p><strong>Endpoint:</strong><code>/post/save/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="payload-23">Payload</h2>
+<pre><code class="fenced-code-block language-json"></code></pre>
+<h2 class="atx" id="response-body-26">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">[</span>
+  <span class="token punctuation">{</span>
+    <span class="token property">"post"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+        <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"Opeyemi"</span><span class="token punctuation">,</span>
+        <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"Saliu"</span><span class="token punctuation">,</span>
+        <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"Abdul-Azeez"</span><span class="token punctuation">,</span>
+        <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"</span><span class="token punctuation">,</span>
+        <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Engineering (Civil Engineering)"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Driving the Future: How Technology is Transforming Transportation\nTransportation has always been the engine of progress—moving people, goods, and ideas across cities, countries, and continents. But in the 21st century, it’s not just about getting from point A to point B. It’s about how we get there: faster, safer, cleaner, and smarter. And at the heart of this transformation? Technology.\n\n1. Autonomous Vehicles: From Sci-Fi to Street Legal\nWhat was once a futuristic dream is now cruising through city streets. Autonomous vehicles (AVs) use AI, sensors, and real-time data to navigate without human input. Companies like Waymo, Tesla, and Cruise are already testing and deploying self-driving cars, while autonomous trucks promise to revolutionize logistics and supply chains. The potential benefits are huge: fewer accidents, reduced congestion, and more accessible transportation for the elderly and disabled.\n\n2. Electrification: Powering a Sustainable Tomorrow\nThe shift from fossil fuels to electric power is reshaping the automotive industry. Electric vehicles (EVs) are no longer niche—they're mainstream. Governments are offering incentives, automakers are committing to electric-only futures, and battery tech is advancing rapidly. Beyond cars, electric buses, bikes, and even airplanes are emerging, helping reduce emissions and create a cleaner planet.\n\n3. Smart Infrastructure: Cities That Talk Back\nRoads, traffic lights, and parking lots are getting an upgrade. Smart infrastructure uses IoT (Internet of Things) sensors and connectivity to manage traffic flow, detect maintenance needs, and even communicate with autonomous vehicles. Imagine a traffic signal that adapts in real time to reduce congestion or a parking lot that directs you to an open spot. These innovations aren't just cool—they improve safety, reduce fuel use, and enhance urban life.\n\n4. Mobility-as-a-Service (MaaS): The End of Car Ownership?\nWith apps like Uber, Lyft, Bird, and Lime, personal car ownership is becoming less necessary in urban environments. MaaS platforms integrate various transport options—bikes, scooters, rideshares, public transit—into a single, seamless service. Add in AI-powered route planning, and getting around becomes effortless, personalized, and more eco-friendly.\n\n5. Hyperloop &amp; High-Speed Rail: Redefining Long-Distance Travel\nWhile still in early stages, hyperloop technology—propelling pods through low-pressure tubes at airplane speeds—could dramatically shorten travel times between major cities. Meanwhile, countries like Japan and France continue to lead the way with efficient high-speed rail, showing the world what’s possible with investment in advanced public transport.\n\n6. Data-Driven Decisions: Analytics Behind the Wheel\nEvery vehicle on the road today is a rolling data center. From GPS tracking to engine diagnostics, real-time data helps optimize routes, predict maintenance issues, and improve safety. Municipalities and logistics companies alike are leveraging this data to make smarter transportation decisions, reduce emissions, and cut costs.\n\nThe Road Ahead\nTechnology isn’t just changing how we move—it’s changing what’s possible. The intersection of AI, data, automation, and sustainability is creating a transportation revolution. But as we accelerate toward the future, we must ensure equity, safety, and accessibility for all. The journey has just begun."</span><span class="token punctuation">,</span>
+      <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-24T14:06:45.666911Z"</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">]</span></code></pre>
+<h1 class="atx" id="post-share">Post Share</h1>
+<p>This endpoint is designed to create a link particular to a post which could be called to retrieve the details of the post from external sources. Currently, it saves the post and associates it with the user and adds to the share count data which can be retrieved from the get posts API.</p>
+<p><strong>Endpoint:</strong><code>/post/share/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2 class="atx" id="payload-24">Payload</h2>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+
+post<span class="token operator">:</span>*****
+
+<span class="token punctuation">}</span></code></pre>
+<h2 class="atx" id="response-body-27">Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">7</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 class="atx" id="followings-posts">Followings Posts</h1>
+<p>This endpoint retrieves the posts of users the logged in user is currently following.</p>
+<p><strong>Endpoint:</strong><code>/post/following/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2 class="atx" id="payload-25">Payload</h2>
+<pre><code class="fenced-code-block language-json"></code></pre>
+<h2 class="atx" id="response-body-28">Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="fenced-code-block language-json"><span class="token punctuation">{</span>
+  <span class="token property">"count"</span><span class="token operator">:</span> <span class="token number">3</span><span class="token punctuation">,</span>
+  <span class="token property">"next"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">"previous"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+  <span class="token property">"results"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+        <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming"</span><span class="token punctuation">,</span>
+      <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg"</span><span class="token punctuation">,</span>
+      <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-17T14:30:11.005024Z"</span><span class="token punctuation">,</span>
+      <span class="token property">"comment_count"</span><span class="token operator">:</span> <span class="token number">1</span><span class="token punctuation">,</span>
+      <span class="token property">"like_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"share_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+      <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">1</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+        <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife"</span><span class="token punctuation">,</span>
+      <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-17T14:30:44.280807Z"</span><span class="token punctuation">,</span>
+      <span class="token property">"comment_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"like_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"share_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+      <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+      <span class="token property">"profile"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">"id"</span><span class="token operator">:</span> <span class="token number">2</span><span class="token punctuation">,</span>
+        <span class="token property">"first_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"last_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"middle_name"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+        <span class="token property">"profile_photo"</span><span class="token operator">:</span> <span class="token string">"https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"</span><span class="token punctuation">,</span>
+        <span class="token property">"qualification"</span><span class="token operator">:</span> <span class="token string">"Bachelor of Science"</span>
+      <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token property">"body"</span><span class="token operator">:</span> <span class="token string">"Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming"</span><span class="token punctuation">,</span>
+      <span class="token property">"media"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"article"</span><span class="token operator">:</span> <span class="token string">"N/A"</span><span class="token punctuation">,</span>
+      <span class="token property">"time_stamp"</span><span class="token operator">:</span> <span class="token string">"2025-04-17T14:31:33.731704Z"</span><span class="token punctuation">,</span>
+      <span class="token property">"comment_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"like_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"share_count"</span><span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+      <span class="token property">"parent"</span><span class="token operator">:</span> <span class="token null keyword">null</span><span class="token punctuation">,</span>
+      <span class="token property">"post_id"</span><span class="token operator">:</span> <span class="token number">3</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span>
+<span class="token punctuation">}</span></code></pre>
+</article>
+</body>
+</html>

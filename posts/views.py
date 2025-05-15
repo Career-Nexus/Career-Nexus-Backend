@@ -46,11 +46,6 @@ class PostView(APIView):
             base_url = request.build_absolute_uri()
             base_url = base_url.split("?")[0]
             posts = models.Posts.objects.filter(Q(industries__icontains=user_type.lower()) | Q(profile__user__user_type="mentor")).order_by("-time_stamp")
-
-            #posts = models.Posts.objects.prefetch_related(Prefetch("comment_set","like_set","share_set",queryset=related_posts)).all().order_by("-time_stamp")
-
-            #posts = models.Posts.objects.annotate(comment_count=Count('comment'),like_count=Count("like"),share_count=Count("share")).order_by("-time_stamp")
-            #print(test.values())
             paginator = PostPagination()
             paginated_items = paginator.paginate_queryset(posts,request)
 
@@ -88,7 +83,7 @@ class FollowingPostView(APIView):
         followings = user.follower.select_related("user_following__profile").all()
         profiles = [following.user_following.profile.id for following in followings]
         #profiles = [profile.id for profile in user_followings]
-        following_posts = models.Posts.objects.filter(profile__in=profiles)
+        following_posts = models.Posts.objects.filter(profile__in=profiles).order_by("-time_stamp")
 
         paginator = PostPagination()
         paginated_items = paginator.paginate_queryset(following_posts,request)
@@ -96,8 +91,6 @@ class FollowingPostView(APIView):
         serializer = self.serializer_class(paginated_items,many=True).data
         response = paginator.get_paginated_response(serializer).data
 
-        #following_posts = following_posts.annotate(comment_count=Count("comment"),like_count=Count("like"),share_count=Count("share"))
-        #posts = self.serializer_class(following_posts,many=True).data
         return Response(response,status=status.HTTP_200_OK)
 
 
@@ -218,3 +211,4 @@ class ShareView(APIView):
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             return Response(output,status=status.HTTP_201_CREATED)
+

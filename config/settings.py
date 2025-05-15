@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     #My personal apps
     'notifications',
+    'documentation',
 
     'users',
     'posts',
@@ -83,7 +84,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["documentation/templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

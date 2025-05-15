@@ -37,6 +37,7 @@ urlpatterns = [
     path("certification/", views.CertificationView.as_view(), name="Add-View-Delete-Certification"),
     path("retrieve-profile/",views.RetreiveProfileView.as_view(), name="Retrieve-Profile"),
     path("analytics/",views.AnalyticsView.as_view(),name="User-Analytics"),
+    path("completion/",views.WizardView.as_view(),name="wizard-view"),
 
 
 

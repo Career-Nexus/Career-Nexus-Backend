@@ -28,6 +28,12 @@ User = get_user_model()
 
 agent = Agent()
 
+default_profile_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
+default_cover_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
+default_intro_video = ''
+
+
+
 class ItemPagination(PageNumberPagination):
     page_size = 10
     def get_next_link(self):
@@ -502,3 +508,57 @@ def CallTestView(request):
             }
 
     return render(request,"data.html",context=context)
+
+class WizardView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    def get(self,request):
+        user = request.user
+        user_profile = user.profile
+        completion = 0
+        complete = []
+        incomplete = []
+        if user_profile.profile_photo == default_profile_photo:
+            incomplete.append("profile_photo")
+        else:
+            completion += 10
+            complete.append("profile_photo")
+
+        if user_profile.intro_video == default_intro_video:
+            incomplete.append("intro_video")
+        else:
+            completion += 10
+            complete.append("intro_video")
+
+        work_experience_count = user.experience_set.count()
+        if work_experience_count == 0:
+            incomplete.append("experience")
+        else:
+            completion += 10
+            complete.append("experience")
+
+        certification_count = user.certification_set.count()
+        if certification_count == 0:
+            incomplete.append("certification")
+        else:
+            completion += 10
+            complete.append("certification")
+
+        mentors = user.follower.filter(user_following__user_type="mentor").count()
+        if mentors == 0:
+            incomplete.append("mentors")
+        else:
+            completion += 10
+            complete.append("mentors")
+
+        percentage_completion = int((completion/60)*100)
+        output = {
+            "completion":f"{percentage_completion}%",
+            "incomplete_items":incomplete,
+            "complete_items":complete
+        }
+
+        return Response(output,status=status.HTTP_200_OK)
+
+        
