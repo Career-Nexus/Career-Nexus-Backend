@@ -184,6 +184,7 @@ class RegisterSerializer(serializers.Serializer):
     def validate_email(self,value):
         if models.Users.objects.filter(email=value.lower()).exists():
             raise serializers.ValidationError("Existing Email!")
+            #return value
         else:
             return value
 

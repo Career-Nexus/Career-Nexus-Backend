@@ -24,3 +24,4 @@ posts/__pycache__/views.cpython-310.pyc
 posts/__pycache__/
 commit.txt
 posts/migrations/__pycache__/*
+users/resources/mail_otp.html.bak
