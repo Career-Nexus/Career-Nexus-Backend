@@ -211,10 +211,11 @@ class RegisterSerializer(serializers.Serializer):
 
         if otp == None:
             ref_code_generated = ref_agent.generate_otp()
-            container = {"{OTP}":ref_code_generated}
-            print(ref_code_generated)
+            ref_code_hash = str(uuid.uuid4())
+            container = {"{OTP}":ref_code_generated,"{HASH}":ref_code_hash}
+            #print(ref_code_generated)
             send_email.delay(template=otp_template,subject="Verify your Email",container=container,recipient=email)
-            models.Otp.objects.create(otp=ref_code_generated)
+            models.Otp.objects.create(otp=ref_code_generated,hash=ref_code_hash,username=username,email=email,password=password1)
             output = {"status":"Otp sent"}
             return output
         else:
@@ -230,7 +231,7 @@ class RegisterSerializer(serializers.Serializer):
                     otp_obj.delete()
                     user_obj = models.Users.objects.create_user(
                             email= email.lower(),
-                            username = username,
+                            username = str(username),
                             password = password1
                             )
                     models.PersonalProfile.objects.create(user=user_obj)
@@ -246,6 +247,36 @@ class PostRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Users
         fields=["industry"]
+
+class VerifyHashSerializer(serializers.Serializer):
+    hash = serializers.CharField(max_length=300)
+
+    def validate(self,data):
+        hash_str = data.get("hash")
+        hash = models.Otp.objects.filter(hash=hash_str)
+        if hash.exists():
+            current_time = make_aware(datetime.now())
+            hash_created_at = hash.first().time_stamp
+            time_diff = (current_time - hash_created_at).total_seconds()/60
+            if time_diff < 5:
+                data["email"] = hash.first().email
+                data["password"] = hash.first().password
+                data["username"] = hash.first().username
+                hash.delete()
+                return data
+            else:
+                hash.delete()
+                raise serializers.ValidationError("Link Expired")
+        else:
+            raise serializers.ValidationError("Invalid Link")
+    
+    def create(self,validated_data):
+        email = validated_data.get("email")
+        password = validated_data.get("password")
+        username = validated_data.get("username")
+        user = models.Users.objects.create_user(email=email.lower(),password=password,username=username)
+        models.PersonalProfile.objects.create(user=user)
+        return user
 
 
 class LoginSerializer(serializers.Serializer):

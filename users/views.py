@@ -161,6 +161,27 @@ class RegisterView(APIView):
             return Response({"error":f"{email} not registered"},status=status.HTTP_404_NOT_FOUND)
 
 
+class VerifyHashView(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+    serializer_class = serializers.VerifyHashSerializer
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.save()
+            refresh = RefreshToken.for_user(user)
+            output = {
+                "refresh":str(refresh),
+                "access":str(refresh.access_token),
+                "email":str(user.email),
+                "status":"Success"
+            }
+            return Response(output,status=status.HTTP_201_CREATED)
+
+
+
 
 
 

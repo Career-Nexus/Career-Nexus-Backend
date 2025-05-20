@@ -21,13 +21,17 @@ class WaitList(models.Model):
 
 class Users(AbstractUser):
     user_type = models.CharField(max_length=20,default="learner")
-    industry = models.CharField(max_length=100,default="")
+    industry = models.CharField(max_length=100,default="others")
 
     def __str__(self):
         return f"{self.email}|{self.profile.profile_photo}"
         
 class Otp(models.Model):
     otp = models.CharField(max_length=100)
+    hash = models.CharField(max_length=300)
+    email = models.CharField(max_length=150,null=True)
+    username = models.CharField(max_length=200,null=True)
+    password = models.CharField(max_length=150,null=True)
     time_stamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

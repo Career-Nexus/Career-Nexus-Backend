@@ -24,6 +24,7 @@ urlpatterns = [
 	# path("",views.TestView.as_view(),name="Test-view"),
 	path("join/",views.WaitListView.as_view(),name="Add-waitlist"),
 	path("signup/",views.RegisterView.as_view(),name="User_Register"),
+    path("hash/verify/",views.VerifyHashView.as_view(),name="Verify-hash"),
     path("signin/",views.LoginView.as_view(),name="User Login"),
     path("signout/",views.LogoutView.as_view(), name="User Logout"),
 	path("subscribe/",views.NewsLetterSubscribeView.as_view(), name="News-Letter-Subscribe"),
