@@ -10,16 +10,14 @@
 [add education api](#add_education_api)
 [add experience](#add_experience)
 [career nexus backend documentation](#career_nexus_backend_documentation)
-[content management](#content_management)
 [create comment](#create_comment)
 [create post](#create_post)
 [delete certification](#delete_certification)
-[delete content](#delete_content)
 [delete education](#delete_education)
 [delete experience](#delete_experience)
 [followings posts](#followings_posts)
+[forget password](#forget_password)
 [get comment](#get_comment)
-[get content](#get_content)
 [get posts](#get_posts)
 [get saved post](#get_saved_post)
 [login api](#login_api)
@@ -33,7 +31,6 @@
 [reposting](#reposting)
 [retrieve a particular post](#retrieve_a_particular_post)
 [retrieve education api](#retrieve_education_api)
-[update content](#update_content)
 [update profile](#update_profile)
 [updating user eperience](#updating_user_eperience)
 [user analytics](#user_analytics)
@@ -297,6 +294,10 @@ first_name:*****
 last_name:*****
 
 middle_name:*****
+
+country_code:****
+
+phone_number:****
 }
 ```
 
@@ -310,6 +311,8 @@ middle_name:*****
   "first_name": "Opeyemi",
   "last_name": "Saliu",
   "middle_name": "Abdul Azeez",
+  "country_code": "+234",
+  "phone_number": "9069102522",
   "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg",
   "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/6a687725-56b1-4f1e-ad55-ae814dce20febg_image1.jpeg",
   "qualification": "Bachelor of Engineering (Civil Engineering)",
@@ -1396,11 +1399,11 @@ This endpoint retrieves the posts of users the logged in user is currently follo
 # <a name=''></a>
 
 
-# Content Management<a name='content_management'></a>
+# Forget Password<a name='forget_password'></a>
 
-This endpoint creates a new content to be displayed on the frontend page.
+This endpoint is a state API that manages password change by users. It manages the three stages of password change which it infers based on payload. Three stages are 1. OTP generation and sending 2. OTP/Hash verification 3. Password Change. Sending only email as payload discards any existing OTP and generates a new one which it sends to the email data. Sending only Hash or OTP verifies the hash and marks the user eligible for a password change. N.B: This eligibility is time constrained. 3. Sending email,password1 and password2 checks the eligibilty of the user and if eligible, changes the password accoridingly. Also note that there is only a single eligibility per password request and any immediate change must again be routed through the entire flow.
 
-**Endpoint:**`/info/`
+**Endpoint:**`/user/forget-password/`
 
 **Method:** `POST`
 
@@ -1409,84 +1412,15 @@ This endpoint creates a new content to be displayed on the frontend page.
 ``` json
 {
 
-title:*****
+email:*****
 
-content:*****
+password1:*****
 
-items:*****
+password2:*****
 
-}
+otp:*****
 
-```
-## Response body
-
-**status code:201**
-
-``` json
-"title": "about_us",
-    "content": "We are career nexus",
-    "items": null,
-    "updated": "2025-05-22"
-```
-
-[Table of contents](#toc)
-
-
-# Get content<a name='get_content'></a>
-
-This endpoint gets a content information through a title.
-
-**Endpoint:**`/info/?title=about_us`
-
-**Method:** `GET`
-
-## Payload
-
-``` json
-
-
-```
-## Response body
-
-**status code:200**
-
-``` json
-{
-  "status": "Success",
-  "content": {
-    "title": "about_us",
-    "content": "We are career nexus",
-    "items": null,
-    "updated": "2025-05-22"
-  },
-  "Available_titles": [
-    "tos",
-    "about_us"
-  ]
-}
-```
-
-[Table of contents](#toc)
-
-
-# Update Content<a name='update_content'></a>
-
-This endpoint updates the information of the content supplied to the frontend pages.
-
-**Endpoint:**`/info/?title=about_us`
-
-**Method:** `PUT`
-
-## Payload
-
-``` json
-{
-
-title:*****
-
-content:*****
-
-items:*****
+hash:*****
 
 }
 
@@ -1497,33 +1431,9 @@ items:*****
 
 ``` json
 {
-  "status": "Updated",
-  "title": "about_us",
-  "content": "We are career nexus",
-  "items": null,
-  "updated": "2025-05-22"
+	"status":"Password Changes"
+	"email":"saliuoazeez@gmail.com"
 }
 ```
-
-[Table of contents](#toc)
-
-
-# Delete Content<a name='delete_content'></a>
-
-This API deletes a content information by title query.
-
-**Endpoint:**`/info/?title=contact_us`
-
-**Method:** `DELETE`
-
-## Payload
-
-``` json
-
-
-```
-## Response body
-
-**status code:204**
 
 [Table of contents](#toc)

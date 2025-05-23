@@ -26,16 +26,14 @@
 <a href="#add_education_api">add education api</a>
 <a href="#add_experience">add experience</a>
 <a href="#career_nexus_backend_documentation">career nexus backend documentation</a>
-<a href="#content_management">content management</a>
 <a href="#create_comment">create comment</a>
 <a href="#create_post">create post</a>
 <a href="#delete_certification">delete certification</a>
-<a href="#delete_content">delete content</a>
 <a href="#delete_education">delete education</a>
 <a href="#delete_experience">delete experience</a>
 <a href="#followings_posts">followings posts</a>
+<a href="#forget_password">forget password</a>
 <a href="#get_comment">get comment</a>
-<a href="#get_content">get content</a>
 <a href="#get_posts">get posts</a>
 <a href="#get_saved_post">get saved post</a>
 <a href="#login_api">login api</a>
@@ -49,7 +47,6 @@
 <a href="#reposting">reposting</a>
 <a href="#retrieve_a_particular_post">retrieve a particular post</a>
 <a href="#retrieve_education_api">retrieve education api</a>
-<a href="#update_content">update content</a>
 <a href="#update_profile">update profile</a>
 <a href="#updating_user_eperience">updating user eperience</a>
 <a href="#user_analytics">user analytics</a>
@@ -250,6 +247,10 @@ first_name:*****
 last_name:*****
 
 middle_name:*****
+
+country_code:****
+
+phone_number:****
 }
 </code></pre>
 <p><strong>Method:</strong> <code>PUT</code></p>
@@ -258,6 +259,8 @@ middle_name:*****
 <pre><code class="language-json">  &quot;first_name&quot;: &quot;Opeyemi&quot;,
   &quot;last_name&quot;: &quot;Saliu&quot;,
   &quot;middle_name&quot;: &quot;Abdul Azeez&quot;,
+  &quot;country_code&quot;: &quot;+234&quot;,
+  &quot;phone_number&quot;: &quot;9069102522&quot;,
   &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg&quot;,
   &quot;cover_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/cover_photos/6a687725-56b1-4f1e-ad55-ae814dce20febg_image1.jpeg&quot;,
   &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;,
@@ -1035,67 +1038,22 @@ post:*****
 <p><a href="#toc">Table of contents</a></p>
 <h1><a name=''></a></h1>
 <h1><a name=''></a></h1>
-<h1>Content Management<a name='content_management'></a></h1>
-<p>This endpoint creates a new content to be displayed on the frontend page.</p>
-<p><strong>Endpoint:</strong><code>/info/</code></p>
+<h1>Forget Password<a name='forget_password'></a></h1>
+<p>This endpoint is a state API that manages password change by users. It manages the three stages of password change which it infers based on payload. Three stages are 1. OTP generation and sending 2. OTP/Hash verification 3. Password Change. Sending only email as payload discards any existing OTP and generates a new one which it sends to the email data. Sending only Hash or OTP verifies the hash and marks the user eligible for a password change. N.B: This eligibility is time constrained. 3. Sending email,password1 and password2 checks the eligibilty of the user and if eligible, changes the password accoridingly. Also note that there is only a single eligibility per password request and any immediate change must again be routed through the entire flow.</p>
+<p><strong>Endpoint:</strong><code>/user/forget-password/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">{
 
-title:*****
+email:*****
 
-content:*****
+password1:*****
 
-items:*****
+password2:*****
 
-}
+otp:*****
 
-</code></pre>
-<h2>Response body</h2>
-<p><strong>status code:201</strong></p>
-<pre><code class="language-json">&quot;title&quot;: &quot;about_us&quot;,
-    &quot;content&quot;: &quot;We are career nexus&quot;,
-    &quot;items&quot;: null,
-    &quot;updated&quot;: &quot;2025-05-22&quot;
-</code></pre>
-<p><a href="#toc">Table of contents</a></p>
-<h1>Get content<a name='get_content'></a></h1>
-<p>This endpoint gets a content information through a title.</p>
-<p><strong>Endpoint:</strong><code>/info/?title=about_us</code></p>
-<p><strong>Method:</strong> <code>GET</code></p>
-<h2>Payload</h2>
-<pre><code class="language-json">
-
-</code></pre>
-<h2>Response body</h2>
-<p><strong>status code:200</strong></p>
-<pre><code class="language-json">{
-  &quot;status&quot;: &quot;Success&quot;,
-  &quot;content&quot;: {
-    &quot;title&quot;: &quot;about_us&quot;,
-    &quot;content&quot;: &quot;We are career nexus&quot;,
-    &quot;items&quot;: null,
-    &quot;updated&quot;: &quot;2025-05-22&quot;
-  },
-  &quot;Available_titles&quot;: [
-    &quot;tos&quot;,
-    &quot;about_us&quot;
-  ]
-}
-</code></pre>
-<p><a href="#toc">Table of contents</a></p>
-<h1>Update Content<a name='update_content'></a></h1>
-<p>This endpoint updates the information of the content supplied to the frontend pages.</p>
-<p><strong>Endpoint:</strong><code>/info/?title=about_us</code></p>
-<p><strong>Method:</strong> <code>PUT</code></p>
-<h2>Payload</h2>
-<pre><code class="language-json">{
-
-title:*****
-
-content:*****
-
-items:*****
+hash:*****
 
 }
 
@@ -1103,24 +1061,10 @@ items:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;status&quot;: &quot;Updated&quot;,
-  &quot;title&quot;: &quot;about_us&quot;,
-  &quot;content&quot;: &quot;We are career nexus&quot;,
-  &quot;items&quot;: null,
-  &quot;updated&quot;: &quot;2025-05-22&quot;
+	&quot;status&quot;:&quot;Password Changes&quot;
+	&quot;email&quot;:&quot;saliuoazeez@gmail.com&quot;
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
-<h1>Delete Content<a name='delete_content'></a></h1>
-<p>This API deletes a content information by title query.</p>
-<p><strong>Endpoint:</strong><code>/info/?title=contact_us</code></p>
-<p><strong>Method:</strong> <code>DELETE</code></p>
-<h2>Payload</h2>
-<pre><code class="language-json">
-
-</code></pre>
-<h2>Response body</h2>
-<p><strong>status code:204</strong></p>
 <p><a href="#toc">Table of contents</a></p>
 
 </body>
