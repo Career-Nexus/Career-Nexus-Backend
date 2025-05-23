@@ -27,6 +27,8 @@ urlpatterns = [
     path("hash/verify/",views.VerifyHashView.as_view(),name="Verify-hash"),
     path("signin/",views.LoginView.as_view(),name="User Login"),
     path("signout/",views.LogoutView.as_view(), name="User Logout"),
+    path("forget-password/",views.ForgetPasswordView.as_view(),name="Forget Password"),
+
 	path("subscribe/",views.NewsLetterSubscribeView.as_view(), name="News-Letter-Subscribe"),
 	path("unsubscribe/",views.NewsLetterUnsubscribeView.as_view(), name="News-Letter-Unsubscribe"),
 	path("delete/",views.DeleteWaitListView.as_view(),name="Delete-Waitlist"),

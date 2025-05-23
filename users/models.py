@@ -22,6 +22,9 @@ class WaitList(models.Model):
 class Users(AbstractUser):
     user_type = models.CharField(max_length=20,default="learner")
     industry = models.CharField(max_length=100,default="others")
+    change_password = models.BooleanField(default=False)
+    request_time = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return f"{self.email}|{self.profile.profile_photo}"
@@ -50,6 +53,8 @@ class PersonalProfile(models.Model):
     cover_photo = models.CharField(max_length=300,default='https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png')
     qualification = models.CharField(max_length=3000,default='')
     position = models.CharField(max_length=1000,default='')
+    country_code = models.CharField(max_length=20,default="+000")
+    phone_number = models.CharField(max_length=30,default="00000000000")
     location = models.CharField(max_length=1000,default='')
     bio = models.CharField(max_length=4000,default='')
     intro_video = models.CharField(max_length=300,default='')

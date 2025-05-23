@@ -25,15 +25,17 @@ import boto3
 ref_agent = generator()
 hasher = hasher()
 
-#Defining Templates
+
+#Defining Email Templates
 c_directory = os.path.dirname(os.path.abspath(__file__))
 resources_directory = os.path.join(c_directory,"resources")
 
 otp_template = os.path.join(resources_directory,"mail_otp.html")
+password_reset_template = os.path.join(resources_directory,"forgetpassword_otp.html")
 
 
 
-
+#Defining Choice Fields
 user_options = (("learner","learner"),("mentor","mentor"),("employer","employer"))
 
 industry_options = (
@@ -279,6 +281,131 @@ class VerifyHashSerializer(serializers.Serializer):
         return user
 
 
+
+    #email only --> sends otp
+    #otp/hash only --> verifies request validity and sets database parameters accordingly.
+    #email and password1 and password2 --> Attempts to change password while carrying out time and status verification
+
+class ForgetPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=False)
+    hash = serializers.CharField(max_length=200,required=False)
+    otp = serializers.CharField(max_length=20,required=False)
+    password1 = serializers.CharField(max_length=200,required=False)
+    password2 = serializers.CharField(max_length=200,required=False)
+
+    def validate(self,data):
+        if data.get("email") and not data.get("password1") and not data.get("password2"):
+            #Ensuring the email has been registered.
+            if Users.objects.filter(email=data["email"]).exists():
+                data["email"] = data["email"].strip().lower()
+                return data
+            else:
+                raise serializers.ValidationError("Unregistered Email")
+        elif data.get("otp"):
+            otp = data.get("otp")
+            otp_obj = models.Otp.objects.filter(otp=otp)
+            if not otp_obj.exists():
+                raise serializers.ValidationError("Invalid OTP")
+            else:
+                current_time = make_aware(datetime.now())
+                otp_created = otp_obj.first().time_stamp
+                if (current_time - otp_created).total_seconds()/60 > 5:
+                    #Ensure cleanup
+                    otp_obj.delete()
+                    raise serializers.ValidationError("Expired OTP")
+                else:
+                    data["validated_email"] = otp_obj.first().email
+                    otp_obj.delete()
+                    return data
+        elif data.get("hash"):
+            hash = data.get("hash")
+            hash_obj = models.Otp.objects.filter(hash=hash)
+            if not hash_obj.exists():
+                raise serializers.ValidationError("Invalid OTP")
+            else:
+                current_time = make_aware(datetime.now())
+                hash_created = hash_obj.first().time_stamp
+                if (current_time - hash_created).total_seconds()/60 >5:
+                    #Ensure cleanup
+                    hash_obj.delete()
+                    raise serializers.ValidationError("Expired OTP")
+                else:
+                    data["validated_email"] = hash_obj.first().email
+                    hash_obj.delete()
+                    return data
+            
+        elif data.get("password1") and data.get("password2") and data.get("email"):
+            password1 = data.get("password1")
+            password2 = data.get("password2")
+            email = data.get("email")
+            user = Users.objects.filter(email=email).first()
+            if user.change_password == False:
+                raise serializers.ValidationError("Cannot change password. Request new otp.")
+            current_time = make_aware(datetime.now())
+            if (current_time-user.request_time).total_seconds()/60 > 5:
+                user.change_password = False
+                user.save()
+                raise serializers.ValidationError("Expired Request")
+            else:
+                if password1 != password2:
+                    raise serializers.ValidationError("Unmatched passwords")
+                else:
+                    validity = hasher.password_validity(password1)
+                    if validity != True:
+                        raise serializers.ValidationError(validity)
+                    else:
+                        return data
+        else:
+            raise serializers.ValidationError("Invalid Request!")
+
+
+    def create(self,validated_data):
+        email = validated_data.get("email")
+        otp = validated_data.get("otp")
+        hash = validated_data.get("hash")
+        password1 = validated_data.get("password1")
+        password2 = validated_data.get("password2")
+
+        if email and not password1 and not password2:
+            #Ensure email instance cleanup 
+            models.Otp.objects.filter(email=email.lower()).delete()
+
+            otp = ref_agent.generate_otp()
+            hash = str(uuid.uuid4())
+            otp_obj = models.Otp.objects.create(otp=otp,hash=hash,email=email)
+            container = {"{OTP}":otp,"{HASH}":hash}
+            send_email.delay(template=password_reset_template,subject="Password Reset Request",container=container,recipient=email)
+            output = {
+                "status":"Reset Password OTP sent.",
+                "email":email
+            }
+            return output
+        elif otp or hash:
+            user = Users.objects.get(email=validated_data["validated_email"])
+            user.change_password = True
+            user.request_time = make_aware(datetime.now())
+            user.save()
+            output = {
+                "status":"Verified",
+                "email":validated_data["validated_email"]
+            }
+            return output
+        elif email and password1 and password2:
+            user = Users.objects.filter(email=email).first()
+            user.set_password(password1)
+            user.change_password = False
+            user.save()
+            output = {
+                "status":"Password Changed",
+                "email":email
+            }
+            return output
+
+
+
+
+
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=250)
     password = serializers.CharField(max_length=200)
@@ -320,6 +447,8 @@ class PersonalProfileSerializer(serializers.Serializer):
     first_name = serializers.CharField(max_length=200,required=False)
     last_name = serializers.CharField(max_length=200,required=False)
     middle_name = serializers.CharField(max_length=200,required=False)
+    country_code = serializers.CharField(max_length=20,required=False)
+    phone_number = serializers.CharField(max_length=30,required=False)
     profile_photo = serializers.FileField(required=False)
     cover_photo = serializers.FileField(required=False)
     qualification = serializers.CharField(max_length=3000,required=False)
@@ -342,6 +471,8 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.first_name = validated_data.get("first_name",instance.first_name)
         instance.last_name = validated_data.get("last_name",instance.last_name)
         instance.middle_name = validated_data.get("middle_name",instance.middle_name)
+        instance.country_code = validated_data.get("country_code",instance.country_code)
+        instance.phone_number = validated_data.get("phone_number",instance.phone_number)
 
         if profile_photo != '':
             #TODO create auto-cleaning logic for profile photo that has been changed
@@ -384,6 +515,8 @@ class PersonalProfileSerializer(serializers.Serializer):
                 "first_name":instance.first_name,
                 "last_name":instance.last_name,
                 "middle_name":instance.middle_name,
+                "country_code":instance.country_code,
+                "phone_number":instance.phone_number,
                 "profile_photo":instance.profile_photo,
                 "cover_photo":instance.cover_photo,
                 "qualification":instance.qualification,
@@ -403,7 +536,7 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
     followings = serializers.SerializerMethodField()
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
 
     def get_followings(self,obj):
         followings = len(obj.user.follower.all())

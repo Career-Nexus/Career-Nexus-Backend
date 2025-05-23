@@ -181,6 +181,18 @@ class VerifyHashView(APIView):
             return Response(output,status=status.HTTP_201_CREATED)
 
 
+class ForgetPasswordView(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+    serializer_class = serializers.ForgetPasswordSerializer
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_200_OK)
+
 
 
 class LoginView(APIView):
