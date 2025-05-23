@@ -1,0 +1,97 @@
+#from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework.permissions import IsAdminUser, IsAuthenticated,AllowAny
+from rest_framework import status
+from rest_framework.views import APIView
+
+from . import serializers, models
+
+
+class InformationView(APIView):
+
+    def get_permissions(self):
+        if self.request.method == "POST":
+            #TODO Change permission to IsAdminUser
+            return [AllowAny()]
+        elif self.request.method == "GET":
+            return [AllowAny()]
+        elif self.request.method == "PUT":
+            #TODO Change permission to IsAdminUser
+            return [AllowAny()]
+        return super().get_permissions()
+
+    serializer_class = serializers.InformationSerializer
+    
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        params = request.query_params.get("title")
+        available_titles = list(models.Information.objects.values_list("title",flat=True))
+        if not params:
+            output = {
+                "Status":"Failed",
+                "Message":"No query parameter provided.",
+                "Available_titles":available_titles
+            }
+            return Response(output,status=status.HTTP_400_BAD_REQUEST)
+        else:
+            title = models.Information.objects.filter(title=params)
+            if len(title) == 0:
+                output = {
+                    "Status":"Failed",
+                    "Message":"Invalid information Title",
+                    "Available_titles":available_titles
+                }
+                return Response(output,status=status.HTTP_404_NOT_FOUND)
+            else:
+                item = title.first()
+                info = {
+                    "title":item.title,
+                    "content":item.content,
+                    "items":item.items,
+                    "updated":item.updated_at
+                }
+                output ={
+                    "status":"Success",
+                    "content":info,
+                    "Available_titles":available_titles
+                }
+                return Response(output,status=status.HTTP_200_OK)
+
+        
+    def put(self,request):
+        params = request.query_params.get("title")
+        if not params:
+            return Response({"error":"No query parameter provided!"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            instances = models.Information.objects.filter(title=params)
+            if len(instances) == 0:
+                return Response({"error":"Inexistent content"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                instance = instances.first()
+                serializer = self.serializer_class(data=request.data,instance=instance)
+                if serializer.is_valid(raise_exception=True):
+                    instance = serializer.save()
+                    output = {
+                        "status":"Updated",
+                        "title":instance.title,
+                        "content":instance.content,
+                        "items":instance.items,
+                        "updated":instance.updated_at
+                    }
+                    return Response(output,status=status.HTTP_200_OK)
+
+    def delete(self,request):
+        params = request.query_params.get("title")
+        if not params:
+            return Response({"error":"No query parameter provided"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            try:
+                models.Information.objects.get(title=params).delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
+            except:
+                return Response({"error":"Inexistent content"},status=status.HTTP_400_BAD_REQUEST)

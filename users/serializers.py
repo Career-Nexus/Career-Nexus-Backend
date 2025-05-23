@@ -204,7 +204,7 @@ class RegisterSerializer(serializers.Serializer):
             return data
 
     def create(self,validated_data):
-        email = validated_data.get("email")
+        email = validated_data.get("email").lower()
         username = uuid.uuid4()
         password1 = validated_data.get("password1")
         otp = validated_data.get("otp",None)
@@ -225,10 +225,10 @@ class RegisterSerializer(serializers.Serializer):
                 current_time = make_aware(datetime.now())
                 time_diff = (current_time - otp_time).total_seconds()/60
                 if time_diff > 5:
-                    otp_obj.delete()
+                    models.Otp.objects.filter(email=email).delete()
                     raise serializers.ValidationError({"OTP Error":"Expired OTP"})
                 else:
-                    otp_obj.delete()
+                    models.Otp.objects.filter(email=email).delete()
                     user_obj = models.Users.objects.create_user(
                             email= email.lower(),
                             username = str(username),
@@ -262,10 +262,10 @@ class VerifyHashSerializer(serializers.Serializer):
                 data["email"] = hash.first().email
                 data["password"] = hash.first().password
                 data["username"] = hash.first().username
-                hash.delete()
+                models.Otp.objects.filter(email=hash.first().email).delete()
                 return data
             else:
-                hash.delete()
+                models.Otp.objects.filter(email=hash.first().email).delete()
                 raise serializers.ValidationError("Link Expired")
         else:
             raise serializers.ValidationError("Invalid Link")

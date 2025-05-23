@@ -1,5 +1,11 @@
 # Career Nexus Backend Documentation
 
+---
+
+## Index<a name='toc'></a>
+
+## {{TOC}}
+
 # User Registeration
 
 This API registers user on the platform. N.B: Email confirmation is enforced using OTP.
@@ -38,6 +44,50 @@ otp **for confirmation:*****
 } success with sending OTP payload
 ```
 
+[Table of contents](#toc)
+
+## 
+
+# Verify Otp Hash
+
+This endpoint verifies the validity of a hash used in alternate verification me  
+thod during user registration.  
+
+**Endpoint:**`user/hash/verify/`  
+
+**Method:** `POST`  
+
+## Payload
+
+```json
+{  
+
+hash:*****  
+
+}  
+```
+
+## Response body
+
+**status code:201**  
+
+```json
+{  
+"refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaC  
+IsImV4cCI6MTc0NzI5MTM4MCwiaWF0IjoxNzQ3MjA0OTgwLCJqdGkiOiI5MjRlMWY3NTNjM2I0NzFjY  
+mNjYmM4YTc0MTJhZTQ4ZSIsInVzZXJfaWQiOjF9.3XAZo7Y5ylKUt5pQRFJEgT-pcY7h48XZ17L0WPr  
+LePQ",  
+ "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzI  
+iwiZXhwIjoxNzQ3MjI2NTgwLCJpYXQiOjE3NDcyMDQ5ODAsImp0aSI6IjkzYWMxZWQ4MjMyMzRjYWFi  
+YzdmM2ZiZmZmMzVkMGRjIiwidXNlcl9pZCI6MX0.ho7_rOofWa_bSyL88Wa1cf7kr-9C_-7uDRtMbkq  
+14GA"  
+"email":"example@gmail.com"  
+"status":"Success"  
+}   
+```
+
+[Table of contents](#toc) 
+
 # Login API
 
 This endpoint authenticates a user using email and password.
@@ -66,6 +116,8 @@ This endpoint authenticates a user using email and password.
 }
 ```
 
+[Table of contents](#toc) 
+
 # LogOut
 
 Logsout the user and blacklists the access token.
@@ -90,6 +142,8 @@ refresh:*****
     "status":"Logged out"
 }
 ```
+
+[Table of contents](#toc)
 
 # Profile Retrieve API
 
@@ -174,6 +228,8 @@ This endpoint retrieve a logged in user or retrieves a third party's profile dat
 }
 ```
 
+[Table of contents](#toc) 
+
 # Update Profile
 
 Updates profile data.
@@ -228,6 +284,8 @@ middle_name:*****
 }
 ```
 
+[Table of contents](#toc) 
+
 # User-industry Update
 
 Updates the user type and industry of the user
@@ -253,6 +311,8 @@ industry:*****
   "email": "saliuoazeez@gmail.com"
 }
 ```
+
+[Table of contents](#toc)
 
 # View Experience
 
@@ -296,6 +356,8 @@ Retrieves all the experience profile of the user
   }
 ]
 ```
+
+[Table of contents](#toc) 
 
 # Add Experience
 
@@ -344,6 +406,8 @@ detail:*****
 
 ```
 
+[Table of contents](#toc) 
+
 # Delete Experience
 
 Deletes an experience data associated with the user
@@ -365,6 +429,8 @@ Deletes an experience data associated with the user
 ```{"status":"Deleted"}
 
 ```
+
+[Table of contents](#toc) 
 
 # Updating User Eperience
 
@@ -415,6 +481,8 @@ detail:*****
 }
 ```
 
+[Table of contents](#toc)
+
 # Retrieve Education API
 
 Retrieves all education data of the user profile
@@ -464,6 +532,8 @@ Retrieves all education data of the user profile
 ]
 ```
 
+[Table of contents](#toc) 
+
 # Add Education API
 
 Add education data to the user profile.
@@ -505,6 +575,8 @@ detail:*****
   },
 ```
 
+[Table of contents](#toc) 
+
 # Delete Education
 
 Deletes a profile education data.
@@ -522,6 +594,8 @@ Deletes a profile education data.
 ## Response body
 
 **status code:204**
+
+[Table of contents](#toc) 
 
 # View Certification
 
@@ -546,6 +620,8 @@ Views all certifications added to the user profile
   }
 ]
 ```
+
+[Table of contents](#toc) 
 
 # Add Certification
 
@@ -583,6 +659,8 @@ skills:*****
   }
 ```
 
+[Table of contents](#toc) 
+
 # Delete Certification
 
 Endpoint deletes a profile certification data.
@@ -604,6 +682,8 @@ Endpoint deletes a profile certification data.
 ```
 
 ```
+
+[Table of contents](#toc) 
 
 # User Analytics
 
@@ -628,6 +708,8 @@ This endpoints retrieves details pertaining to the user profile and interaction 
   "total_views": 1
 }
 ```
+
+[Table of contents](#toc) 
 
 # Profile Completion
 
@@ -661,6 +743,8 @@ This endpoint retrieves profile completion data.
   ]
 }
 ```
+
+[Table of contents](#toc) 
 
 # Get Posts
 
@@ -747,6 +831,8 @@ This endpoints retrieves posts associated with the user's selected industry and 
 }
 ```
 
+[Table of contents](#toc) 
+
 # Retrieve a Particular Post
 
 This endpoint retrieves a particular post through the post_id query passed in the url endpoint.
@@ -796,6 +882,8 @@ This endpoint retrieves a particular post through the post_id query passed in th
 }
 ```
 
+[Table of contents](#toc) 
+
 # Create Post
 
 This endpoint publishes a post by the logged in user.
@@ -830,6 +918,8 @@ article:*****<formatted text>
   "time_stamp": "2025-05-14T11:37:10.041600Z"
 }
 ```
+
+[Table of contents](#toc) 
 
 # Create comment
 
@@ -869,6 +959,8 @@ body:*****
   "time_stamp": "2025-05-14T11:46:12.094543Z"
 }
 ```
+
+[Table of contents](#toc) 
 
 # Get comment
 
@@ -959,6 +1051,8 @@ This endpoint retrieves all the comments and sub-comment/replies relating to a p
 }
 ```
 
+[Table of contents](#toc)
+
 # Reply Comment
 
 This endpoint creates a reply to the comment of a post. These replies are also retrieved through the get comment API.
@@ -997,6 +1091,8 @@ body:*****
 }
 ```
 
+[Table of contents](#toc) 
+
 # Post Like
 
 This endpoint likes a post.
@@ -1024,6 +1120,8 @@ post:*****
   "post": 6
 }
 ```
+
+[Table of contents](#toc) 
 
 # Reposting
 
@@ -1066,6 +1164,8 @@ body:*****
 }
 ```
 
+[Table of contents](#toc) 
+
 # Post Save
 
 This endpoint archives a post which could be retrieved by the logged in user.
@@ -1093,6 +1193,8 @@ post:*****
   "post_id": 7
 }
 ```
+
+[Table of contents](#toc) 
 
 # Get Saved Post
 
@@ -1133,6 +1235,8 @@ This endpoint retrieves all the saved posts by the logged in user.
 ]
 ```
 
+[Table of contents](#toc) 
+
 # Post Share
 
 This endpoint is designed to create a link particular to a post which could be called to retrieve the details of the post from external sources. Currently, it saves the post and associates it with the user and adds to the share count data which can be retrieved from the get posts API.
@@ -1160,6 +1264,8 @@ post:*****
   "post_id": 7
 }
 ```
+
+[Table of contents](#toc) 
 
 # Followings Posts
 
@@ -1245,3 +1351,142 @@ This endpoint retrieves the posts of users the logged in user is currently follo
   ]
 }
 ```
+
+[Table of contents](#toc)
+
+# 
+
+# 
+
+
+# Content Management
+
+This endpoint creates a new content to be displayed on the frontend page.
+
+**Endpoint:**`/info/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+content:*****
+
+items:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+"title": "about_us",
+    "content": "We are career nexus",
+    "items": null,
+    "updated": "2025-05-22"
+```
+
+[Table of contents](#toc)
+
+
+# Get content
+
+This endpoint gets a content information through a title.
+
+**Endpoint:**`/info/?title=about_us`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Success",
+  "content": {
+    "title": "about_us",
+    "content": "We are career nexus",
+    "items": null,
+    "updated": "2025-05-22"
+  },
+  "Available_titles": [
+    "tos",
+    "about_us"
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Update Content
+
+This endpoint updates the information of the content supplied to the frontend pages.
+
+**Endpoint:**`/info/?title=about_us`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+content:*****
+
+items:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Updated",
+  "title": "about_us",
+  "content": "We are career nexus",
+  "items": null,
+  "updated": "2025-05-22"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Delete Content
+
+This API deletes a content information by title query.
+
+**Endpoint:**`/info/?title=contact_us`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[Table of contents](#toc)

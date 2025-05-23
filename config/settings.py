@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     #My personal apps
     'notifications',
     'documentation',
+    'info',
 
     'users',
     'posts',

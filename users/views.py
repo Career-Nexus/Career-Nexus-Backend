@@ -183,8 +183,6 @@ class VerifyHashView(APIView):
 
 
 
-
-
 class LoginView(APIView):
     permission_classes = [
                 AllowAny,
