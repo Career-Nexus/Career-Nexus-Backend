@@ -184,7 +184,7 @@ class RegisterSerializer(serializers.Serializer):
     otp = serializers.CharField(max_length=20,required=False)
 
     def validate_email(self,value):
-        if models.Users.objects.filter(email=value.lower()).exists():
+        if models.Users.objects.filter(email=value.strip().lower()).exists():
             raise serializers.ValidationError("Existing Email!")
             #return value
         else:
@@ -206,7 +206,7 @@ class RegisterSerializer(serializers.Serializer):
             return data
 
     def create(self,validated_data):
-        email = validated_data.get("email").lower()
+        email = validated_data.get("email").strip().lower()
         username = uuid.uuid4()
         password1 = validated_data.get("password1")
         otp = validated_data.get("otp",None)

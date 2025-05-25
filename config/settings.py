@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 import os
 from dotenv import load_dotenv
+from corsheaders.defaults import default_headers
 
 load_dotenv()
 
@@ -237,6 +238,13 @@ CORS_ALLOWED_ORIGINS = [
     "https://career-nexus.com",
     "http://localhost:3000",
 ]
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'X-temp-token',
+]
+
+
+
 
 CELERY_BROKER_URL = "redis://localhost:6379/0"
 CELERY_ACCEPT_CONTENT = ['json']
