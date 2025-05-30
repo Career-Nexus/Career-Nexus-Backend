@@ -25,7 +25,9 @@
 <a href="#add_certification">add certification</a>
 <a href="#add_education_api">add education api</a>
 <a href="#add_experience">add experience</a>
+<a href="#alter_country_permissions">alter country permissions</a>
 <a href="#career_nexus_backend_documentation">career nexus backend documentation</a>
+<a href="#content_management">content management</a>
 <a href="#create_comment">create comment</a>
 <a href="#create_post">create post</a>
 <a href="#delete_certification">delete certification</a>
@@ -34,6 +36,7 @@
 <a href="#followings_posts">followings posts</a>
 <a href="#forget_password">forget password</a>
 <a href="#get_comment">get comment</a>
+<a href="#get_country_phone_codes">get country phone codes</a>
 <a href="#get_posts">get posts</a>
 <a href="#get_saved_post">get saved post</a>
 <a href="#login_api">login api</a>
@@ -1063,6 +1066,71 @@ hash:*****
 <pre><code class="language-json">{
 	&quot;status&quot;:&quot;Password Changes&quot;
 	&quot;email&quot;:&quot;saliuoazeez@gmail.com&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Get Country Phone Codes<a name='get_country_phone_codes'></a></h1>
+<p>This API retrieves countries and their phone codes. It optionally uses a query flag status to filter based on the countries current permissions on the platform. status could be either enable/disable and if status is exempted, it pulls the entire country lists on the platform irrespective of their status</p>
+<p><strong>Endpoint:</strong><code>/info/country-permit/?status=disable</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 155,
+    &quot;country&quot;: &quot;Nigeria &quot;,
+    &quot;code&quot;: &quot;+234&quot;
+  }
+]
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Alter Country Permissions<a name='alter_country_permissions'></a></h1>
+<p>This endpoint permits or unpermits country phone number codes from being allowed on the platform. N.B:status can either be enable or disable</p>
+<p><strong>Endpoint:</strong><code>info/country-permit/</code></p>
+<p><strong>Method:</strong> <code>PUT</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+country:*****
+
+status:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;country&quot;: &quot;Nigeria &quot;,
+  &quot;permitted&quot;: true
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Content Management<a name='content_management'></a></h1>
+<p>This endpoint retrieves contents and meta data based on the query string title.</p>
+<p><strong>Endpoint:</strong><code>/info/?title=tos</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;Success&quot;,
+  &quot;content&quot;: {
+    &quot;title&quot;: &quot;tos&quot;,
+    &quot;content&quot;: &quot;By accessing or using Career Nexus, you agree to be bound by these Terms and Conditions. Please read them carefully.\n1. Use of Platform You agree to use Career Nexus only for lawful purposes and in a way that does not infringe the rights of others.\n2. Account Responsibility You are responsible for maintaining the confidentiality of your account and password, and for all activities under your account.\n3. Data &amp; Privacy Your data is handled in accordance with our Privacy Policy. We do not share your information without consent.\n4. Changes to Terms We reserve the right to update these terms at any time. Continued use of the platform means you accept any changes.\n5. Contact For questions or support, contact us at: support@career-nexus.com&quot;,
+    &quot;items&quot;: null,
+    &quot;updated&quot;: &quot;2025-05-23&quot;
+  },
+  &quot;Available_titles&quot;: [
+    &quot;tos&quot;
+  ]
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>

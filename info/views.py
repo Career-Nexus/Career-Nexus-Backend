@@ -95,3 +95,39 @@ class InformationView(APIView):
                 return Response(status=status.HTTP_204_NO_CONTENT)
             except:
                 return Response({"error":"Inexistent content"},status=status.HTTP_400_BAD_REQUEST)
+
+class CountryPermitView(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+    serializer_class =serializers.CountryPermitSerializer
+
+    def get(self,request):
+        allowed_params = ["enable","disable"]
+        params = request.query_params.get("status")
+        if not params:
+            permitted_countries = models.Countrycodes.objects.all()
+            serialized_data = self.serializer_class(permitted_countries,many=True).data
+            return Response(serialized_data,status=status.HTTP_200_OK)
+        else:
+            if params.strip().lower() not in allowed_params:
+                return Response({"error":"Invalid Query Parameter"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                if params == "enable":
+                    params = True
+                else:
+                    params=False
+                countries = models.Countrycodes.objects.filter(permitted=params)
+                serialized_data = self.serializer_class(countries,many=True).data
+                return Response(serialized_data,status=status.HTTP_200_OK)
+
+
+    def put(self,request):
+        serializer = serializers.AlterCountryPermitSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            instance = serializer.save()
+            output = {
+                "country":instance.country,
+                "permitted":instance.permitted
+            }
+            return Response(output,status=status.HTTP_200_OK)

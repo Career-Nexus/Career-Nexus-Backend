@@ -1403,3 +1403,104 @@ hash:*****
 ```
 
 [Table of contents](#toc)
+
+
+# Get Country Phone Codes
+
+This API retrieves countries and their phone codes. It optionally uses a query flag status to filter based on the countries current permissions on the platform. status could be either enable/disable and if status is exempted, it pulls the entire country lists on the platform irrespective of their status
+
+**Endpoint:**`/info/country-permit/?status=disable`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 155,
+    "country": "Nigeria ",
+    "code": "+234"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Alter Country Permissions
+
+This endpoint permits or unpermits country phone number codes from being allowed on the platform. N.B:status can either be enable or disable
+
+**Endpoint:**`info/country-permit/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+country:*****
+
+status:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "country": "Nigeria ",
+  "permitted": true
+}
+```
+
+[Table of contents](#toc)
+
+
+# Content Management
+
+This endpoint retrieves contents and meta data based on the query string title.
+
+**Endpoint:**`/info/?title=tos`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Success",
+  "content": {
+    "title": "tos",
+    "content": "By accessing or using Career Nexus, you agree to be bound by these Terms and Conditions. Please read them carefully.\n1. Use of Platform You agree to use Career Nexus only for lawful purposes and in a way that does not infringe the rights of others.\n2. Account Responsibility You are responsible for maintaining the confidentiality of your account and password, and for all activities under your account.\n3. Data & Privacy Your data is handled in accordance with our Privacy Policy. We do not share your information without consent.\n4. Changes to Terms We reserve the right to update these terms at any time. Continued use of the platform means you accept any changes.\n5. Contact For questions or support, contact us at: support@career-nexus.com",
+    "items": null,
+    "updated": "2025-05-23"
+  },
+  "Available_titles": [
+    "tos"
+  ]
+}
+```
+
+[Table of contents](#toc)

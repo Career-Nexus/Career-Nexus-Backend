@@ -32,3 +32,44 @@ class InformationSerializer(serializers.ModelSerializer):
         instance.items = validated_data.get("items",instance.items)
         instance.save()
         return instance
+
+
+class CountryPermitSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Countrycodes
+        fields = ["id","country","code"]
+
+
+
+
+class AlterCountryPermitSerializer(serializers.Serializer):
+    country = serializers.PrimaryKeyRelatedField(queryset=models.Countrycodes.objects.all())
+    status = serializers.ChoiceField(
+        choices=(
+            ("enable","enable"),
+            ("disable","disable")
+        )
+    )
+
+    def validate(self,data):
+        #print(data["country"])
+        country_obj = data["country"]
+        status = data["status"]
+        if country_obj.permitted == True and status == "enable":
+            raise serializers.ValidationError("Country already permitted.")
+        elif country_obj.permitted == False and status == "disable":
+            raise serializers.ValidationError("Country already unpermitted.")
+        else:
+            if data["status"] == "enable":
+                data["status"] = True
+            else:
+                data["status"] = False
+            return data
+
+    def create(self,validated_data):
+        #Treat create as an update since we're modifying an existing object
+        country_obj = validated_data.get("country")
+        country_obj.permitted = validated_data.get("status")
+        country_obj.save()
+        return country_obj

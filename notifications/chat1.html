@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebSocket Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      max-width: 600px;
+    }
+    #chat-box {
+      border: 1px solid #ccc;
+      padding: 10px;
+      height: 300px;
+      overflow-y: scroll;
+      background: #f9f9f9;
+      margin-bottom: 10px;
+    }
+    .message {
+      margin: 5px 0;
+    }
+    .me {
+      text-align: right;
+      color: blue;
+    }
+    .other {
+      text-align: left;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+<h2>WebSocket Chat Room</h2>
+
+<div id="chat-box"></div>
+
+<form id="chat-form">
+  <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" required>
+  <button type="submit">Send</button>
+</form>
+
+<script>
+  const myUserId = 1;
+
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4NjE3ODU4LCJpYXQiOjE3NDg1OTYyNTgsImp0aSI6IjdhZWE1NjlhMjU4ZDRkZmJiMTllYWMyOTNmNWMxMmMwIiwidXNlcl9pZCI6MX0.hZS-qRYTIhweufZKkouJMvqA_bfrZ2HwZA5OevdCtb4"; 
+  const otherUserId = 2;
+  const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${otherUserId}/?token=${token}`);
+
+
+  const chatBox = document.getElementById('chat-box');
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input');
+
+  socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("message");
+    messageElement.classList.add(data.user_id === myUserId ? "me" : "other");
+    messageElement.innerText = `${data.email}: ${data.message}`;
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  };
+
+  socket.onopen = function(e) {
+    console.log("WebSocket connected.");
+    // socket.send(JSON.stringify({ message: "Hi there!" })); // Optional default message
+  };
+
+  socket.onclose = function(e) {
+    console.log("WebSocket closed.");
+  };
+
+  chatForm.onsubmit = function(e) {
+    e.preventDefault();
+    const message = chatInput.value;
+    if (message.trim() === "") return;
+    socket.send(JSON.stringify({ message }));
+    chatInput.value = "";
+  };
+</script>
+
+</body>
+</html>
+

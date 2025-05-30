@@ -96,10 +96,10 @@ class RetrieveRecommendationDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Users
-        fields = ["name","qualification"]
+        fields = ["id","name","qualification"]
 
     def get_name(self,obj):
-        return obj.name
+        return f"{obj.profile.first_name} {obj.profile.last_name}"
 
     def get_qualification(self,obj):
         qualification = obj.profile.qualification

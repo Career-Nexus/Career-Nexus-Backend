@@ -207,7 +207,6 @@ class LoginView(APIView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data
         refresh = RefreshToken.for_user(user)
-        notify()
         return Response(
                 {
                     "refresh":str(refresh),
@@ -309,7 +308,7 @@ class RetreiveProfileView(APIView):
             user = self.get_user(request)
             profile = models.PersonalProfile.objects.get(user=user)
             output = serializers.RetrieveAnotherProfileSerializer(profile).data
-
+            notify(user.id,f"profile for {user.email} was successfully retrieved")
             return Response(output,status=status.HTTP_200_OK)
         else:
             try:
