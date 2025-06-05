@@ -73,7 +73,7 @@ class InformationView(APIView):
                 return Response({"error":"Inexistent content"},status=status.HTTP_400_BAD_REQUEST)
             else:
                 instance = instances.first()
-                serializer = self.serializer_class(data=request.data,instance=instance)
+                serializer = serializers.AlterInformationSerializer(data=request.data,instance=instance)
                 if serializer.is_valid(raise_exception=True):
                     instance = serializer.save()
                     output = {

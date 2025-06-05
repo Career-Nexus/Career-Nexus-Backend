@@ -15,6 +15,9 @@ from django.http import Http404
 from django.db.models import Q
 from django.db.models import Count
 from django.db.models import Prefetch
+from django.core.cache import cache
+
+from users.views import delete_cache
 
 class PostPagination(PageNumberPagination):
     page_size = 3
@@ -45,23 +48,29 @@ class PostView(APIView):
         if not param:
             base_url = request.build_absolute_uri()
             base_url = base_url.split("?")[0]
-            posts = models.Posts.objects.filter(Q(industries__icontains=user_type.lower()) | Q(profile__user__user_type="mentor")).order_by("-time_stamp")
-            paginator = PostPagination()
-            paginated_items = paginator.paginate_queryset(posts,request)
+            page_request = request.query_params.get("page","1")
+            cache_key = f"{user_type}_post_{page_request}"
+            cached_data = cache.get(cache_key)
+            if not cached_data:
+                posts = models.Posts.objects.filter(Q(industries__icontains=user_type.lower()) | Q(profile__user__user_type="mentor")).order_by("-time_stamp")
+                paginator = PostPagination()
+                paginated_items = paginator.paginate_queryset(posts,request)
 
-            serializer = serializers.RetrievePostSerializer(paginated_items,many=True)
+                serializer = serializers.RetrievePostSerializer(paginated_items,many=True)
 
-            item_counts = posts.count()
-            floor = item_counts//paginator.page_size
-            if item_counts % paginator.page_size == 0:
-                last_page = floor
+                item_counts = posts.count()
+                floor = item_counts//paginator.page_size
+                if item_counts % paginator.page_size == 0:
+                    last_page = floor
+                else:
+                    last_page = floor + 1
+
+                response = paginator.get_paginated_response(serializer.data).data
+                response["last_page"] = f"{base_url}?page={last_page}"
+                cache.set(cache_key,response,timeout=300)
+                return Response(response,status=status.HTTP_200_OK)
             else:
-                last_page = floor + 1
-
-            response = paginator.get_paginated_response(serializer.data).data
-            response["last_page"] = f"{base_url}?page={last_page}"
-
-            return Response(response,status=status.HTTP_200_OK)
+                return Response(cached_data,status=status.HTTP_200_OK)
         else:
             try:
                 post = models.Posts.objects.get(id=param)

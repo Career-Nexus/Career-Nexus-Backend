@@ -5,6 +5,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from django.contrib.auth import get_user_model
 
 
+
 class NotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         user = self.scope["user"]
@@ -27,11 +28,20 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        #Late imports to ensure apps are loaded at runtime
+        from django.db.models import Q
+        from . import models
+
+
         self.user = self.scope["user"]
         self.other_id = self.scope["url_route"]["kwargs"]["other_user"]
         User = get_user_model()
         try:
             self.other_user = await sync_to_async(User.objects.get)(id=self.other_id)
+            try:
+                self.room_obj = await sync_to_async(models.Chatroom.objects.get)(Q(initiator=self.user,contributor=self.other_user) | Q(initiator=self.other_user,contributor=self.user))
+            except models.Chatroom.DoesNotExist:
+                self.room_obj = await sync_to_async(models.Chatroom.objects.create)(initiator=self.user,contributor=self.other_user)
         except User.DoesNotExist:
             #print("Inexistent user")
             await self.close()
@@ -49,8 +59,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.channel_layer.group_discard(self.room_group_name,self.channel_name)
 
     async def receive(self, text_data):
+        #Late imports to ensure apps are loaded at runtime
+        from django.db.models import Q
+        from . import models
+
+
         data = json.loads(text_data)
         message = data.get("message")
+        await sync_to_async(models.Message.objects.create)(room=self.room_obj,person=self.user,message=message)
 
         await self.channel_layer.group_send(
             self.room_group_name,

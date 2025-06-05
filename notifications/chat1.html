@@ -44,8 +44,8 @@
 <script>
   const myUserId = 1;
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4NjE3ODU4LCJpYXQiOjE3NDg1OTYyNTgsImp0aSI6IjdhZWE1NjlhMjU4ZDRkZmJiMTllYWMyOTNmNWMxMmMwIiwidXNlcl9pZCI6MX0.hZS-qRYTIhweufZKkouJMvqA_bfrZ2HwZA5OevdCtb4"; 
-  const otherUserId = 2;
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4OTgyMjExLCJpYXQiOjE3NDg5NjA2MTEsImp0aSI6IjgyMjA1MmJjNTFjMTRkNzU4ZjMxNWM4OGM5YTA4MDkzIiwidXNlcl9pZCI6MX0.Us12PPTVWSNoWftwW4wpVC6Dg1gv8EHZrFmtUvlis6Y"; 
+  const otherUserId = 3;
   const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${otherUserId}/?token=${token}`);
 
 

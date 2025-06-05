@@ -29,4 +29,5 @@ urlpatterns = [
     path("job/",include("jobs.urls")),
     path("documentation/",include("documentation.urls")),
     path("info/",include("info.urls")),
+    path("chats/",include("notifications.urls")),
 ]

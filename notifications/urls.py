@@ -1,7 +1,7 @@
 from django.urls import path,re_path
-from . import consumers
+from . import views
 
 urlpatterns = [
-    path("ws/notification/",consumers.NotificationConsumer.as_asgi()),
-    re_path("ws/chat/(?P<other_user>\d+)/$",consumers.ChatConsumer.as_asgi()),
+    path("",views.ChatView.as_view(),name="Chats"),
+    path("messages/",views.ChatMessageView.as_view(),name="Chat-Messages"),
 ]

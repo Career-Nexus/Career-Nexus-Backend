@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render
+from django.core.cache import cache
 #import email
 import os
 from django.utils.html import strip_tags
@@ -31,6 +32,14 @@ agent = Agent()
 default_profile_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
 default_cover_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
 default_intro_video = ''
+
+
+def delete_cache(key):
+    #print("Tried")
+    if cache.get(key):
+        cache.delete(key)
+        #print(f"LOG:DELETED CACHE FOR {key}")
+
 
 
 
@@ -271,6 +280,8 @@ class PersonalProfileView(APIView):
         serializer = self.serializer_class(instance=user,data=request.data)
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
             return Response(output,status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(request_body=serializers.PostRegistrationSerializer,operation_description="Allows users to update profile parameters User_type and Industry.")
@@ -284,6 +295,8 @@ class PersonalProfileView(APIView):
                         "industry":industry,
                         "email":user.email
                     }
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
             return Response(output,status=status.HTTP_206_PARTIAL_CONTENT)
 
 
@@ -305,23 +318,36 @@ class RetreiveProfileView(APIView):
     def get(self,request):
         param = request.query_params.get("user_id")
         if not param:
-            user = self.get_user(request)
-            profile = models.PersonalProfile.objects.get(user=user)
-            output = serializers.RetrieveAnotherProfileSerializer(profile).data
-            notify(user.id,f"profile for {user.email} was successfully retrieved")
-            return Response(output,status=status.HTTP_200_OK)
+            cache_key = f"{request.user.id}_profile"
+            cached_data = cache.get(cache_key)
+            if not cached_data:
+                user = self.get_user(request)
+                profile = models.PersonalProfile.objects.get(user=user)
+                output = serializers.RetrieveAnotherProfileSerializer(profile).data
+                cache.set(cache_key,output,timeout=7200)
+                #notify(user.id,f"profile for {user.email} was successfully retrieved")
+                return Response(output,status=status.HTTP_200_OK)
+            else:
+                #print(cache_key)
+                return Response(cached_data,status=status.HTTP_200_OK)
         else:
             try:
                 user = models.Users.objects.get(id=param)
             except:
                 raise Http404({"error":"Invalid User Id"})
 
-            profile = models.PersonalProfile.objects.get(user=user)
+            cache_key = f"{user.id}_profile"
+            cached_data = cache.get(cache_key)
+            if not cached_data:
+                profile = models.PersonalProfile.objects.get(user=user)
 
-            #Implementation profile viewing counter 
-            models.ProfileView.objects.create(viewer=request.user,viewed=user)
-            profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
-            return Response(profile_data,status=status.HTTP_200_OK)
+                #Implementation profile viewing counter 
+                models.ProfileView.objects.create(viewer=request.user,viewed=user)
+                profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
+                cache.set(cache_key,profile_data,timeout=7200)
+                return Response(profile_data,status=status.HTTP_200_OK)
+            else:
+                return Response(cached_data,status=status.HTTP_200_OK)
 
 
 
@@ -355,6 +381,8 @@ class ExperienceView(APIView):
                         "employment_type":output.employment_type,
                         "detail":output.detail
                     }
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
             return Response(output,status=status.HTTP_201_CREATED)
     def delete(self,request):
         param = request.query_params.get("experience_id")
@@ -364,6 +392,8 @@ class ExperienceView(APIView):
             try:
                 experience_instance = models.experience.objects.get(user=request.user,id=param)
                 experience_instance.delete()
+                cache_key = f"{request.user.id}_profile"
+                delete_cache(cache_key)
                 return Response(status=status.HTTP_204_NO_CONTENT)
             except:
                 raise Http404("Inexistent experience")
@@ -384,6 +414,8 @@ class UpdateExperienceView(APIView):
         serializer = self.serializer_class(data=request.data,instance=request.user,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
             return Response(output,status=status.HTTP_201_CREATED)
 
 
@@ -402,6 +434,8 @@ class EducationView(APIView):
         serializer = self.serializer_class(data=request.data,context={"request":request.user})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
             return Response(output,status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(operation_description="Retrieves all Education data for the logged in user.")
@@ -414,6 +448,8 @@ class EducationView(APIView):
         serializer = serializers.UpdateEducationSerializer(data=request.data,instance=request.user,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
             return Response(output,status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(request_body=serializers.UpdateEducationSerializer,operation_description="Deletes an education entry of the user.")
@@ -428,6 +464,9 @@ class EducationView(APIView):
             try:
                 education_instance = models.education.objects.get(user=user,id=param)
                 education_instance.delete()
+                cache_key = f"{request.user.id}_profile"
+                delete_cache(cache_key)
+
                 return Response(status=status.HTTP_204_NO_CONTENT)
             except:
                 raise Http404("Inexistent education")
@@ -445,6 +484,8 @@ class CertificationView(APIView):
         serializer = self.serializer_class(data=request.data,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
             return Response(output,status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(operation_description="Retrieves all certificates of the logged in user.")
@@ -463,6 +504,8 @@ class CertificationView(APIView):
             try:
                 certification_instance = models.certification.objects.get(user=user,id=param)
                 certification_instance.delete()
+                cache_key = f"{request.user.id}_profile"
+                delete_cache(cache_key)
                 return Response(status=status.HTTP_204_NO_CONTENT)
             except:
                 raise Http404("Inexistent certification")

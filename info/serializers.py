@@ -26,6 +26,13 @@ class InformationSerializer(serializers.ModelSerializer):
         }
         return output
 
+
+
+class AlterInformationSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=200,required=False)
+    content = serializers.CharField(required=False)
+    items = serializers.CharField(required=False)
+
     def update(self,instance,validated_data):
         instance.title = validated_data.get("title",instance.title)
         instance.content = validated_data.get("content",instance.content)
