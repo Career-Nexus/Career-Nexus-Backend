@@ -104,3 +104,25 @@ class JobPreferenceView(APIView):
                 "experience_level":instance.experience_level
             }
             return Response(output,status=status.HTTP_200_OK)
+
+    def get(self,request):
+        user = request.user
+        try:
+            preference = models.JobPreference.objects.get(user=user)
+            output = {
+                "title":preference.title,
+                "employment_type":preference.employment_type,
+                "work_type":preference.work_type,
+                "industry":preference.industry,
+                "experience_level":preference.experience_level
+            }
+            return Response(output,status=status.HTTP_200_OK)
+        except models.JobPreference.DoesNotExist:
+            output = {
+                "title":"N/A",
+                "employment_type":"N/A",
+                "work_type":"N/A",
+                "industry":"N/A",
+                "experience_level":"N/A"
+            }
+            return Response(output,status=status.HTTP_200_OK)

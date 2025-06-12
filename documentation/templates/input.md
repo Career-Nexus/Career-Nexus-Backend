@@ -1841,3 +1841,34 @@ NONE
 ```
 
 [Table of contents](#toc)
+
+
+# Get Job Preferences
+
+This endpoint retrieves the job preferences set by the user or N/A if no preference has been set.
+
+**Endpoint:**`/job/preference/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "title": "Backend Developer",
+  "employment_type": "full_time",
+  "work_type": "hybrid",
+  "industry": "technology",
+  "experience_level": "senior"
+}
+```
+
+[Table of contents](#toc)

@@ -41,6 +41,7 @@
 <a href="#get_comment">get comment</a>
 <a href="#get_country_phone_codes">get country phone codes</a>
 <a href="#get_job_posts">get job posts</a>
+<a href="#get_job_preferences">get job preferences</a>
 <a href="#get_posts">get posts</a>
 <a href="#get_saved_post">get saved post</a>
 <a href="#job_notifications">job notifications</a>
@@ -1392,6 +1393,25 @@ experience_level:*****
 <h2>Response body</h2>
 <p><strong>status code:NONE</strong></p>
 <pre><code class="language-json">NONE
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Get Job Preferences<a name='get_job_preferences'></a></h1>
+<p>This endpoint retrieves the job preferences set by the user or N/A if no preference has been set.</p>
+<p><strong>Endpoint:</strong><code>/job/preference/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Backend Developer&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;work_type&quot;: &quot;hybrid&quot;,
+  &quot;industry&quot;: &quot;technology&quot;,
+  &quot;experience_level&quot;: &quot;senior&quot;
+}
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 

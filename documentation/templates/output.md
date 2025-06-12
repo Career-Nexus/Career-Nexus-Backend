@@ -25,6 +25,7 @@
 [get comment](#get_comment)
 [get country phone codes](#get_country_phone_codes)
 [get job posts](#get_job_posts)
+[get job preferences](#get_job_preferences)
 [get posts](#get_posts)
 [get saved post](#get_saved_post)
 [job notifications](#job_notifications)
@@ -1882,6 +1883,37 @@ This endpoint enables a logged in user to connect to a Job post notification web
 
 ``` json
 NONE
+```
+
+[Table of contents](#toc)
+
+
+# Get Job Preferences<a name='get_job_preferences'></a>
+
+This endpoint retrieves the job preferences set by the user or N/A if no preference has been set.
+
+**Endpoint:**`/job/preference/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "title": "Backend Developer",
+  "employment_type": "full_time",
+  "work_type": "hybrid",
+  "industry": "technology",
+  "experience_level": "senior"
+}
 ```
 
 [Table of contents](#toc)
