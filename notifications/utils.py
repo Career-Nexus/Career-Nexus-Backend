@@ -10,3 +10,13 @@ def notify(user_id,text="default"):
             "message":text
         }
     )
+
+def jobnotify(suffix,text):
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        f"job_{suffix}",
+        {
+            "type":"notify",
+            "message":text
+        }
+    )

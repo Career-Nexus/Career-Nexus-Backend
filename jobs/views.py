@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
+from notifications.utils import jobnotify
 
 from . import serializers
 from . import models
@@ -27,6 +28,19 @@ class JobsView(APIView):
             serializer = self.serializer_class(data=request.data,context={"user":request.user})
             if serializer.is_valid(raise_exception=True):
                 output = serializer.save()
+
+                title = output.get("title").lower()
+                title = title.replace(" ","_")
+                employment_type = output.get("employment_type").lower()
+                work_type = output.get("work_type").lower()
+                industries = output.get("industry").split(",")
+
+                for industry in industries:
+                    suffix = f"{title}_{employment_type}_{work_type}_{industry}"
+                    text = f"A new job matching your preference. {output['title']} at {output['organization']}. Apply now!"
+
+                    jobnotify(suffix=suffix,text=text)
+
                 return Response(output,status=status.HTTP_200_OK)
         else:
             return Response({"Unauthorized":f"User of type {user_type} cannot post jobs"},status=status.HTTP_401_UNAUTHORIZED)
@@ -67,3 +81,26 @@ class RecommendJobView(APIView):
         serialized_data = self.serializer_class(paginated_items,many=True).data
         output = paginator.get_paginated_response(serialized_data).data
         return Response(output,status=status.HTTP_200_OK)
+
+
+
+class JobPreferenceView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    serializer_class = serializers.JobPreferenceSerializer
+
+    def put(self,request):
+        user = request.user
+        preference_obj, created = models.JobPreference.objects.get_or_create(user=user)
+        serializer = self.serializer_class(data=request.data,instance=preference_obj)
+        if serializer.is_valid(raise_exception=True):
+            instance = serializer.save()
+            output = {
+                "title":instance.title,
+                "employment_type":instance.employment_type,
+                "work_type":instance.work_type,
+                "industry":instance.industry,
+                "experience_level":instance.experience_level
+            }
+            return Response(output,status=status.HTTP_200_OK)

@@ -27,18 +27,24 @@
 <a href="#add_experience">add experience</a>
 <a href="#alter_country_permissions">alter country permissions</a>
 <a href="#career_nexus_backend_documentation">career nexus backend documentation</a>
+<a href="#chat_history">chat history</a>
 <a href="#content_management">content management</a>
 <a href="#create_comment">create comment</a>
+<a href="#create_job">create job</a>
 <a href="#create_post">create post</a>
 <a href="#delete_certification">delete certification</a>
 <a href="#delete_education">delete education</a>
 <a href="#delete_experience">delete experience</a>
 <a href="#followings_posts">followings posts</a>
 <a href="#forget_password">forget password</a>
+<a href="#get_chat_sessions">get chat sessions</a>
 <a href="#get_comment">get comment</a>
 <a href="#get_country_phone_codes">get country phone codes</a>
+<a href="#get_job_posts">get job posts</a>
 <a href="#get_posts">get posts</a>
 <a href="#get_saved_post">get saved post</a>
+<a href="#job_notifications">job notifications</a>
+<a href="#job_preference">job preference</a>
 <a href="#login_api">login api</a>
 <a href="#logout">logout</a>
 <a href="#post_like">post like</a>
@@ -46,6 +52,7 @@
 <a href="#post_share">post share</a>
 <a href="#profile_completion">profile completion</a>
 <a href="#profile_retrieve_api">profile retrieve api</a>
+<a href="#recommended_job_posts.">recommended job posts.</a>
 <a href="#reply_comment">reply comment</a>
 <a href="#reposting">reposting</a>
 <a href="#retrieve_a_particular_post">retrieve a particular post</a>
@@ -1132,6 +1139,259 @@ status:*****
     &quot;tos&quot;
   ]
 }
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Get Chat Sessions<a name='get_chat_sessions'></a></h1>
+<p>This endpoint gets all chat sessions that had been initiated by or with the user.</p>
+<p><strong>Endpoint:</strong><code>/chats/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;initiator&quot;: {
+      &quot;id&quot;: 3,
+      &quot;first_name&quot;: &quot;N/A&quot;,
+      &quot;last_name&quot;: &quot;N/A&quot;,
+      &quot;middle_name&quot;: &quot;N/A&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Education (English)&quot;
+    },
+    &quot;contributor&quot;: {
+      &quot;id&quot;: 1,
+      &quot;first_name&quot;: &quot;Opeyemi&quot;,
+      &quot;last_name&quot;: &quot;Saliu&quot;,
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+    },
+    &quot;chat_id&quot;: 2
+  },
+  {
+    &quot;initiator&quot;: {
+      &quot;id&quot;: 1,
+      &quot;first_name&quot;: &quot;Opeyemi&quot;,
+      &quot;last_name&quot;: &quot;Saliu&quot;,
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+    },
+    &quot;contributor&quot;: {
+      &quot;id&quot;: 2,
+      &quot;first_name&quot;: &quot;N/A&quot;,
+      &quot;last_name&quot;: &quot;N/A&quot;,
+      &quot;middle_name&quot;: &quot;N/A&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Science&quot;
+    },
+    &quot;chat_id&quot;: 1
+  }
+]
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Chat History<a name='chat_history'></a></h1>
+<p>This endpoint gets all the previous chat messages of a particular chat session.</p>
+<p><strong>Endpoint:</strong><code>/chats/messages/?chat_id=2</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;person&quot;: {
+      &quot;id&quot;: 3,
+      &quot;first_name&quot;: &quot;N/A&quot;,
+      &quot;last_name&quot;: &quot;N/A&quot;,
+      &quot;middle_name&quot;: &quot;N/A&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Education (English)&quot;
+    },
+    &quot;message&quot;: &quot;What's good&quot;,
+    &quot;timestamp&quot;: &quot;2025-06-03T14:40:27.272781Z&quot;
+  },
+  {
+    &quot;person&quot;: {
+      &quot;id&quot;: 1,
+      &quot;first_name&quot;: &quot;Opeyemi&quot;,
+      &quot;last_name&quot;: &quot;Saliu&quot;,
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+    },
+    &quot;message&quot;: &quot;Hello friend&quot;,
+    &quot;timestamp&quot;: &quot;2025-06-03T14:40:21.375709Z&quot;
+  }
+]
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Create Job<a name='create_job'></a></h1>
+<p>This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid).</p>
+<p><strong>Endpoint:</strong><code>/job/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+title:*****
+
+organization:*****
+
+employment_type:*****
+
+work_type:*****
+
+country:*****
+
+salary:*****
+
+overview:*****
+
+description:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Backend Developer&quot;,
+  &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;work_type&quot;: &quot;hybrid&quot;,
+  &quot;country&quot;: &quot;Nigeria&quot;,
+  &quot;salary&quot;: &quot;350,000NGN&quot;,
+  &quot;overview&quot;: &quot;We are looking&quot;,
+  &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
+  &quot;industry&quot;: &quot;technology&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Get Job Posts<a name='get_job_posts'></a></h1>
+<p>This endpoint retrieves all the jobs posted by a user.</p>
+<p><strong>Endpoint:</strong><code>/job/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 2,
+  &quot;next&quot;: null,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;hybrid&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are looking&quot;,
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;hybrid&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are looking&quot;,
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+    }
+  ]
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Recommended Job Posts.<a name='recommended_job_posts.'></a></h1>
+<p>This endpoint retrieves job posts related to the user based on their selected industry.</p>
+<p><strong>Endpoint:</strong><code>/job/recommend/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 2,
+  &quot;next&quot;: null,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;hybrid&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are looking&quot;,
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+    },
+    {
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;hybrid&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are looking&quot;,
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+    }
+  ]
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Job Preference<a name='job_preference'></a></h1>
+<p>This endpoint sets a job preference for the user to let them get notifications when a job matching their set preferences has been posted. VALID PAYLOAD OPTIONS:employment_type(full_time,part_time,internship,contract,freelance), work_type(remote,onsite,hybrid), industry(agriculture,banking,business,commerce,construction,education,entertainment,government,health,manufacturing,media,others,sports,technology,transportation), experience_level(entry,mid,senior,executive).</p>
+<p><strong>Endpoint:</strong><code>/job/preference/</code></p>
+<p><strong>Method:</strong> <code>PUT</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+title:*****
+
+employment_type:*****
+
+work_type:*****
+
+industry:*****
+
+experience_level:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;title&quot;: &quot;Backend Developer&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;work_type&quot;: &quot;hybrid&quot;,
+  &quot;industry&quot;: &quot;technology&quot;,
+  &quot;experience_level&quot;: &quot;senior&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Job Notifications<a name='job_notifications'></a></h1>
+<p>This endpoint enables a logged in user to connect to a Job post notification websocket. N.B: A valid token must be attached as a query string to the endpoint url.</p>
+<p><strong>Endpoint:</strong><code>/ws/notification/jobs/?token=******</code></p>
+<p><strong>Method:</strong> <code>NONE</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:NONE</strong></p>
+<pre><code class="language-json">NONE
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 

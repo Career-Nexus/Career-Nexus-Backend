@@ -11,18 +11,24 @@
 [add experience](#add_experience)
 [alter country permissions](#alter_country_permissions)
 [career nexus backend documentation](#career_nexus_backend_documentation)
+[chat history](#chat_history)
 [content management](#content_management)
 [create comment](#create_comment)
+[create job](#create_job)
 [create post](#create_post)
 [delete certification](#delete_certification)
 [delete education](#delete_education)
 [delete experience](#delete_experience)
 [followings posts](#followings_posts)
 [forget password](#forget_password)
+[get chat sessions](#get_chat_sessions)
 [get comment](#get_comment)
 [get country phone codes](#get_country_phone_codes)
+[get job posts](#get_job_posts)
 [get posts](#get_posts)
 [get saved post](#get_saved_post)
+[job notifications](#job_notifications)
+[job preference](#job_preference)
 [login api](#login_api)
 [logout](#logout)
 [post like](#post_like)
@@ -30,6 +36,7 @@
 [post share](#post_share)
 [profile completion](#profile_completion)
 [profile retrieve api](#profile_retrieve_api)
+[recommended job posts.](#recommended_job_posts.)
 [reply comment](#reply_comment)
 [reposting](#reposting)
 [retrieve a particular post](#retrieve_a_particular_post)
@@ -1538,6 +1545,343 @@ This endpoint retrieves contents and meta data based on the query string title.
     "tos"
   ]
 }
+```
+
+[Table of contents](#toc)
+
+
+# Get Chat Sessions<a name='get_chat_sessions'></a>
+
+This endpoint gets all chat sessions that had been initiated by or with the user.
+
+**Endpoint:**`/chats/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "initiator": {
+      "id": 3,
+      "first_name": "N/A",
+      "last_name": "N/A",
+      "middle_name": "N/A",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "qualification": "Bachelor of Education (English)"
+    },
+    "contributor": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "chat_id": 2
+  },
+  {
+    "initiator": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "contributor": {
+      "id": 2,
+      "first_name": "N/A",
+      "last_name": "N/A",
+      "middle_name": "N/A",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+      "qualification": "Bachelor of Science"
+    },
+    "chat_id": 1
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Chat History<a name='chat_history'></a>
+
+This endpoint gets all the previous chat messages of a particular chat session.
+
+**Endpoint:**`/chats/messages/?chat_id=2`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "person": {
+      "id": 3,
+      "first_name": "N/A",
+      "last_name": "N/A",
+      "middle_name": "N/A",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "qualification": "Bachelor of Education (English)"
+    },
+    "message": "What's good",
+    "timestamp": "2025-06-03T14:40:27.272781Z"
+  },
+  {
+    "person": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "message": "Hello friend",
+    "timestamp": "2025-06-03T14:40:21.375709Z"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Create Job<a name='create_job'></a>
+
+This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid).
+
+**Endpoint:**`/job/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+organization:*****
+
+employment_type:*****
+
+work_type:*****
+
+country:*****
+
+salary:*****
+
+overview:*****
+
+description:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "title": "Backend Developer",
+  "organization": "Career Nexus Ltd",
+  "employment_type": "full_time",
+  "work_type": "hybrid",
+  "country": "Nigeria",
+  "salary": "350,000NGN",
+  "overview": "We are looking",
+  "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+  "industry": "technology"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Get Job Posts<a name='get_job_posts'></a>
+
+This endpoint retrieves all the jobs posted by a user.
+
+**Endpoint:**`/job/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "title": "Backend Developer",
+      "organization": "Career Nexus Ltd",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are looking",
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+    },
+    {
+      "title": "Backend Developer",
+      "organization": "Career Nexus Ltd",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are looking",
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Recommended Job Posts.<a name='recommended_job_posts.'></a>
+
+This endpoint retrieves job posts related to the user based on their selected industry.
+
+**Endpoint:**`/job/recommend/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "title": "Backend Developer",
+      "organization": "Career Nexus Ltd",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are looking",
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+    },
+    {
+      "title": "Backend Developer",
+      "organization": "Career Nexus Ltd",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are looking",
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Job Preference<a name='job_preference'></a>
+
+This endpoint sets a job preference for the user to let them get notifications when a job matching their set preferences has been posted. VALID PAYLOAD OPTIONS:employment_type(full_time,part_time,internship,contract,freelance), work_type(remote,onsite,hybrid), industry(agriculture,banking,business,commerce,construction,education,entertainment,government,health,manufacturing,media,others,sports,technology,transportation), experience_level(entry,mid,senior,executive).
+
+**Endpoint:**`/job/preference/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+employment_type:*****
+
+work_type:*****
+
+industry:*****
+
+experience_level:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "title": "Backend Developer",
+  "employment_type": "full_time",
+  "work_type": "hybrid",
+  "industry": "technology",
+  "experience_level": "senior"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Job Notifications<a name='job_notifications'></a>
+
+This endpoint enables a logged in user to connect to a Job post notification websocket. N.B: A valid token must be attached as a query string to the endpoint url.
+
+**Endpoint:**`/ws/notification/jobs/?token=******`
+
+**Method:** `NONE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:NONE**
+
+``` json
+NONE
 ```
 
 [Table of contents](#toc)

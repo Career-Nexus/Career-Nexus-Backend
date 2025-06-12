@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notification Listener</title>
+  <style>
+    #notifications {
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-width: 400px;
+      height: 200px;
+      overflow-y: auto;
+      font-family: Arial, sans-serif;
+    }
+    #notifications p {
+      margin: 5px 0;
+      padding: 4px;
+      background: #f0f0f0;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Job Notifications</h1>
+  <div id="notifications">
+    <!-- notifications will appear here -->
+  </div>
+
+  <script>
+    (function () {
+      // Your JWT token here
+      const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NjY0MTUxLCJpYXQiOjE3NDk2NDI1NTEsImp0aSI6ImUzNzdkMmIzMTFiNTQyNWViM2RjNGFhNzhkYWM4MmE1IiwidXNlcl9pZCI6MX0._T23PQKu4tzxmR4_ZqLwAJItVoB3VQCY4hMmKEj_wSY";
+
+
+      const wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
+      const wsHost = window.location.host;  // e.g. "localhost:8000" or "yourdomain.com"
+      const wsPath = `${wsScheme}://localhost:8000/ws/notification/jobs/?token=${jwtToken}`;
+
+    const socket = new WebSocket(wsPath);
+
+      socket.onopen = function () {
+        console.log("WebSocket connected");
+      };
+
+      socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        console.log("Notification received:", data.message);
+
+        const notificationsDiv = document.getElementById("notifications");
+        const p = document.createElement("p");
+        p.textContent = data.message;
+        notificationsDiv.appendChild(p);
+
+        // Auto-scroll to bottom for new messages
+        notificationsDiv.scrollTop = notificationsDiv.scrollHeight;
+      };
+
+      socket.onclose = function (event) {
+        console.log("WebSocket closed:", event);
+      };
+
+      socket.onerror = function (error) {
+        console.error("WebSocket error:", error);
+      };
+    })();
+  </script>
+</body>
+</html>
+
+

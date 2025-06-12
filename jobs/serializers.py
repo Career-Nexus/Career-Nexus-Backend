@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.conf import settings
 
 from . import models
+from users.serializers import industry_options
 
 import os
 import joblib
@@ -23,11 +24,34 @@ def classify_jobs(text):
         return "others"
     else:
         return output
+#Valid Options
+employment_type = (
+    ("full_time","full_time"),
+    ("part_time","part_time"),
+    ("internship","internship"),
+    ("freelance","freelance"),
+    ("contract","contract")
+)
+
+work_type = (
+    ("remote","remote"),
+    ("onsite","onsite"),
+    ("hybrid","hybrid")
+)
+
+experience_level = (
+    ("entry","entry"),
+    ("mid","mid"),
+    ("senior","senior"),
+    ("executive","executive")
+)
 
 
 
 
 class JobsSerializer(serializers.ModelSerializer):
+    employment_type = serializers.ChoiceField(choices=employment_type)
+    work_type = serializers.ChoiceField(choices=work_type)
 
     class Meta:
         model = models.Jobs
@@ -42,7 +66,7 @@ class JobsSerializer(serializers.ModelSerializer):
         output = {
             "title":job.title,
             "organization":job.organization,
-            "employement_type":job.employment_type,
+            "employment_type":job.employment_type,
             "work_type":job.work_type,
             "country":job.country,
             "salary":job.salary,
@@ -51,3 +75,21 @@ class JobsSerializer(serializers.ModelSerializer):
             "industry":job.industry
         }
         return output
+
+class JobPreferenceSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=250)
+    employment_type = serializers.ChoiceField(choices=employment_type)
+    work_type = serializers.ChoiceField(choices=work_type)
+    industry = serializers.ChoiceField(choices=industry_options)
+    experience_level = serializers.ChoiceField(choices=experience_level)
+
+    def update(self,instance,validated_data):
+        instance.title = validated_data.get("title",instance.title)
+        instance.employment_type = validated_data.get("employment_type",instance.employment_type)
+        instance.work_type = validated_data.get("work_type",instance.work_type)
+        instance.industry = validated_data.get("industry",instance.industry)
+        instance.experience_level = validated_data.get("experience_level",instance.experience_level)
+        instance.save()
+        return instance
+
+

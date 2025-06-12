@@ -42,10 +42,10 @@
 </form>
 
 <script>
-  const myUserId = 3;
+  const myUserId = 1;
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4OTgzMDUxLCJpYXQiOjE3NDg5NjE0NTEsImp0aSI6IjRjMDQzNzA3MjhkNzQyNjg5NTYxNzA4NThjOWIwNzIxIiwidXNlcl9pZCI6M30.9tFZu2RtkrFqNNg5ni1BUZ9sL4343dBa6kwUBi2k2eI"; 
-  const otherUserId = 1;
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5MjkzNzkwLCJpYXQiOjE3NDkyNzIxOTAsImp0aSI6IjVlMDFhOTYyN2UzODRkNWVhMGE2YTJlY2U4NzhhN2NhIiwidXNlcl9pZCI6MX0.BKuFVMQ6CVbakIj6nMoxg3ZodnFczPqtYLp83-oVtOM"; 
+  const otherUserId = 2;
   const socket = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${otherUserId}/?token=${token}`);
 
 

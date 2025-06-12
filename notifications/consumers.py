@@ -25,13 +25,53 @@ class NotificationConsumer(AsyncWebsocketConsumer):
         )
 
 
+class JobNotificationConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        #Late imports to ensure apps are loaded at runtime
+        from jobs.models import JobPreference
+
+
+        user = self.scope["user"]
+        try:
+            user_preferences = await sync_to_async(JobPreference.objects.get)(user=user)
+            title = user_preferences.title
+            #Fill title Spaces to ensure valid group name
+            title = title.replace(" ","_")
+
+            employment_type = user_preferences.employment_type
+            work_type = user_preferences.work_type
+            industry = user_preferences.industry
+            experience_level = user_preferences.experience_level
+            #TODO Include experience_level in group suffix after being included in the post job fields.
+            group_suffix = f"{title.lower()}_{employment_type.lower()}_{work_type.lower()}_{industry.lower()}"
+        except:
+            group_suffix = "none_none_none_none"
+        self.group_name = f"job_{group_suffix}"
+        print(self.group_name)
+        await self.channel_layer.group_add(self.group_name,self.channel_name)
+        await self.accept()
+
+    async def disconnect(self,code):
+        await self.channel_layer.group_discard(self.group_name,self.channel_name)
+
+    async def notify(self,event):
+        await self.send(
+            text_data=json.dumps({"message":event["message"]})
+        )
+
+
+
+
+
+
+
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         #Late imports to ensure apps are loaded at runtime
         from django.db.models import Q
         from . import models
-
 
         self.user = self.scope["user"]
         self.other_id = self.scope["url_route"]["kwargs"]["other_user"]

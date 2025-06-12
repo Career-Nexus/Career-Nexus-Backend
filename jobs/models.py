@@ -14,3 +14,11 @@ class Jobs(models.Model):
     description = models.TextField()
     industry = models.TextField()
     time_stamp = models.DateField(auto_now_add=True)
+
+class JobPreference(models.Model):
+    user = models.OneToOneField(Users,on_delete=models.CASCADE)
+    title = models.CharField(max_length=250,null=True)
+    employment_type = models.CharField(max_length=20,null=True)
+    work_type = models.CharField(max_length=10,null=True)
+    industry = models.CharField(max_length=150,null=True)
+    experience_level = models.CharField(max_length=15,null=True)
