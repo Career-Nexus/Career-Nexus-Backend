@@ -28,7 +28,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 class JobNotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         #Late imports to ensure apps are loaded at runtime
-        from jobs.models import JobPreference
+        from jobs.models import JobPreference,JobPreferenceSuffix
 
 
         user = self.scope["user"]
@@ -36,14 +36,16 @@ class JobNotificationConsumer(AsyncWebsocketConsumer):
             user_preferences = await sync_to_async(JobPreference.objects.get)(user=user)
             title = user_preferences.title
             #Fill title Spaces to ensure valid group name
-            title = title.replace(" ","_")
+            title = title.lower().replace(" ","_")
+            employment_type = user_preferences.employment_type.lower()
+            work_type = user_preferences.work_type.lower()
+            industry = user_preferences.industry.lower()
+            experience_level = user_preferences.experience_level.lower()
 
-            employment_type = user_preferences.employment_type
-            work_type = user_preferences.work_type
-            industry = user_preferences.industry
-            experience_level = user_preferences.experience_level
-            #TODO Include experience_level in group suffix after being included in the post job fields.
-            group_suffix = f"{title.lower()}_{employment_type.lower()}_{work_type.lower()}_{industry.lower()}"
+            combination = f"{title}_{employment_type}_{work_type}_{industry}_{experience_level}"
+            suffix_instance = await sync_to_async(JobPreferenceSuffix.objects.get)(preference_combination=combination)
+            group_suffix = str(suffix_instance.ref_no)
+
         except:
             group_suffix = "none_none_none_none"
         self.group_name = f"job_{group_suffix}"

@@ -5,51 +5,52 @@
 ## Index<a name='toc'></a>
 
 ## 
-[](#)
-[add certification](#add_certification)
-[add education api](#add_education_api)
-[add experience](#add_experience)
-[alter country permissions](#alter_country_permissions)
-[career nexus backend documentation](#career_nexus_backend_documentation)
-[chat history](#chat_history)
-[content management](#content_management)
-[create comment](#create_comment)
-[create job](#create_job)
-[create post](#create_post)
-[delete certification](#delete_certification)
-[delete education](#delete_education)
-[delete experience](#delete_experience)
-[followings posts](#followings_posts)
-[forget password](#forget_password)
-[get chat sessions](#get_chat_sessions)
-[get comment](#get_comment)
-[get country phone codes](#get_country_phone_codes)
-[get job posts](#get_job_posts)
-[get job preferences](#get_job_preferences)
-[get posts](#get_posts)
-[get saved post](#get_saved_post)
-[job notifications](#job_notifications)
-[job preference](#job_preference)
-[login api](#login_api)
-[logout](#logout)
-[post like](#post_like)
-[post save](#post_save)
-[post share](#post_share)
-[profile completion](#profile_completion)
-[profile retrieve api](#profile_retrieve_api)
-[recommended job posts.](#recommended_job_posts.)
-[reply comment](#reply_comment)
-[reposting](#reposting)
-[retrieve a particular post](#retrieve_a_particular_post)
-[retrieve education api](#retrieve_education_api)
-[update profile](#update_profile)
-[updating user eperience](#updating_user_eperience)
-[user analytics](#user_analytics)
-[user registeration](#user_registeration)
-[user-industry update](#user-industry_update)
-[verify otp hash](#verify_otp_hash)
-[view certification](#view_certification)
-[view experience](#view_experience)
+1. [](#)  
+2. [add certification](#add_certification)  
+3. [add education api](#add_education_api)  
+4. [add experience](#add_experience)  
+5. [alter country permissions](#alter_country_permissions)  
+6. [career nexus backend documentation](#career_nexus_backend_documentation)  
+7. [chat history](#chat_history)  
+8. [content management](#content_management)  
+9. [create comment](#create_comment)  
+10. [delete certification](#delete_certification)  
+11. [delete education](#delete_education)  
+12. [delete experience](#delete_experience)  
+13. [followings posts](#followings_posts)  
+14. [forget password](#forget_password)  
+15. [get chat sessions](#get_chat_sessions)  
+16. [get comment](#get_comment)  
+17. [get country phone codes](#get_country_phone_codes)  
+18. [get job posts](#get_job_posts)  
+19. [get job preferences](#get_job_preferences)  
+20. [get saved post](#get_saved_post)  
+21. [job create](#job_create)  
+22. [job notifications](#job_notifications)  
+23. [job preference](#job_preference)  
+24. [login api](#login_api)  
+25. [logout](#logout)  
+26. [post create](#post_create)  
+27. [post get](#post_get)  
+28. [post like](#post_like)  
+29. [post retrieve](#post_retrieve)  
+30. [post save](#post_save)  
+31. [post share](#post_share)  
+32. [profile completion](#profile_completion)  
+33. [profile retrieve api](#profile_retrieve_api)  
+34. [recommended job posts.](#recommended_job_posts.)  
+35. [reply comment](#reply_comment)  
+36. [reposting](#reposting)  
+37. [retrieve education api](#retrieve_education_api)  
+38. [update profile](#update_profile)  
+39. [updating user eperience](#updating_user_eperience)  
+40. [user analytics](#user_analytics)  
+41. [user registeration](#user_registeration)  
+42. [user-industry update](#user-industry_update)  
+43. [valid choice](#valid_choice)  
+44. [verify otp hash](#verify_otp_hash)  
+45. [view certification](#view_certification)  
+46. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -797,7 +798,7 @@ This endpoint retrieves profile completion data.
 
 [Table of contents](#toc) 
 
-# Get Posts<a name='get_posts'></a>
+# Post Get<a name='post_get'></a>
 
 This endpoints retrieves posts associated with the user's selected industry and also posts by mentors on the platform.
 
@@ -807,75 +808,41 @@ This endpoints retrieves posts associated with the user's selected industry and 
 
 ## Payload
 
-```json
+``` json
+
 
 ```
-
 ## Response body
 
 **status code:200**
 
-```json
-  "count": 3,
+``` json
+{
+  "count": 1,
   "next": null,
   "previous": null,
   "results": [
     {
       "profile": {
-        "id": 2,
-        "first_name": "N/A",
-        "last_name": "N/A",
-        "middle_name": "N/A",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-        "qualification": "Bachelor of Science"
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
-      "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
-      "media": "N/A",
+      "body": "Fadman Montessori. School building leaders and table shakers.",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/pic/d0642e69-2ff3-4179-9b6b-b745ec637088fadman_thumbnail.png",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-04-17T14:31:33.731704Z",
+      "time_stamp": "2025-06-18T19:25:29.242254Z",
       "comment_count": 0,
       "like_count": 0,
       "share_count": 0,
       "parent": null,
-      "post_id": 3
-    },
-    {
-      "profile": {
-        "id": 2,
-        "first_name": "N/A",
-        "last_name": "N/A",
-        "middle_name": "N/A",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-        "qualification": "Bachelor of Science"
-      },
-      "body": "Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife",
-      "media": "N/A",
-      "article": "N/A",
-      "time_stamp": "2025-04-17T14:30:44.280807Z",
-      "comment_count": 0,
-      "like_count": 0,
-      "share_count": 0,
-      "parent": null,
-      "post_id": 2
-    },
-    {
-      "profile": {
-        "id": 2,
-        "first_name": "N/A",
-        "last_name": "N/A",
-        "middle_name": "N/A",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-        "qualification": "Bachelor of Science"
-      },
-      "body": "Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming",
-      "media": "https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg",
-      "article": "N/A",
-      "time_stamp": "2025-04-17T14:30:11.005024Z",
-      "comment_count": 1,
-      "like_count": 0,
-      "share_count": 0,
-      "parent": null,
-      "post_id": 1
+      "post_id": 12
     }
   ],
   "last_page": "http://127.0.0.1:8000/post/?page=1"
@@ -884,58 +851,52 @@ This endpoints retrieves posts associated with the user's selected industry and 
 
 [Table of contents](#toc) 
 
-# Retrieve a Particular Post<a name='retrieve_a_particular_post'></a>
+# Post Retrieve<a name='post_retrieve'></a>
 
-This endpoint retrieves a particular post through the post_id query passed in the url endpoint.
+This endpoint retrieves a particular post through a post_id query parameter passed in the url.
 
-**Endpoint:**`/post/?post_id=6`
+**Endpoint:**`/post/?post_id=12`
 
 **Method:** `GET`
 
 ## Payload
 
-```json
+``` json
+
 
 ```
-
 ## Response body
 
 **status code:200**
 
-```json
+``` json
 {
   "profile": {
-    "id": 2,
-    "first_name": "N/A",
-    "last_name": "N/A",
-    "middle_name": "N/A",
-    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-    "qualification": "Bachelor of Science"
+    "id": 1,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "qualification": "Bachelor of Engineering (Civil Engineering)"
   },
-  "body": "Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife",
-  "media": "N/A",
+  "body": "Fadman Montessori. School building leaders and table shakers.",
+  "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/pic/d0642e69-2ff3-4179-9b6b-b745ec637088fadman_thumbnail.png",
+  "pic2": "N/A",
+  "pic3": "N/A",
+  "video": "N/A",
   "article": "N/A",
-  "time_stamp": "2025-04-17T14:30:44.280807Z",
+  "time_stamp": "2025-06-18T19:25:29.242254Z",
   "comment_count": 0,
   "like_count": 0,
   "share_count": 0,
   "parent": null,
-  "post_id": 2
-}
-```
-
-## Failure
-
-**status code:404**
-
-```{
-"error":"Inexistent Post"
+  "post_id": 12
 }
 ```
 
 [Table of contents](#toc) 
 
-# Create Post<a name='create_post'></a>
+# Post Create<a name='post_create'></a>
 
 This endpoint publishes a post by the logged in user.
 
@@ -945,28 +906,43 @@ This endpoint publishes a post by the logged in user.
 
 ## Payload
 
-```json
+``` json
 {
 
-body:*****type<str>
+body:*****
 
-media:*****type<file,photo/video>
+pic1:*****
 
-article:*****<formatted text>
+pic2:*****
+
+pic3:*****
+
+video:*****
+
+article:*****
 
 }
-```
 
+```
 ## Response body
 
 **status code:201**
 
-```json
+``` json
 {
-  "body": "Why Do So Many Finance Apps Look the Same? Ever noticed how most fintech apps follow the same blue-and-white theme..",
-  "media": "N/A",
+  "body": "Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
+
+At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
+
+Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
+
+Anyone else feeling that urge to slow down while everything else speeds up?",
+  "pic1": "N/A",
+  "pic2": "N/A",
+  "pic3": "N/A",
+  "video": "N/A",
   "article": "N/A",
-  "time_stamp": "2025-05-14T11:37:10.041600Z"
+  "time_stamp": "2025-06-18T21:46:34.030565Z"
 }
 ```
 
@@ -1665,7 +1641,7 @@ This endpoint gets all the previous chat messages of a particular chat session.
 [Table of contents](#toc)
 
 
-# Create Job<a name='create_job'></a>
+# job Create<a name='job_create'></a>
 
 This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid).
 
@@ -1694,6 +1670,8 @@ overview:*****
 
 description:*****
 
+experience_level:*****
+
 }
 
 ```
@@ -1704,14 +1682,15 @@ description:*****
 ``` json
 {
   "title": "Backend Developer",
-  "organization": "Career Nexus Ltd",
+  "organization": "Mitiget Assurance Limited",
   "employment_type": "full_time",
   "work_type": "hybrid",
   "country": "Nigeria",
   "salary": "350,000NGN",
-  "overview": "We are looking",
-  "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
-  "industry": "technology"
+  "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+  "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+  "industry": "technology",
+  "experience_level": "senior"
 }
 ```
 
@@ -1913,6 +1892,52 @@ This endpoint retrieves the job preferences set by the user or N/A if no prefere
   "work_type": "hybrid",
   "industry": "technology",
   "experience_level": "senior"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Valid Choice<a name='valid_choice'></a>
+
+This endpoint retrieves valid request parameters for API fields. Running this endpoint without a request parameter retrieves all choice field names required in some request payloadss. Running this endpoint with a query parameter field_name=**** retrieves all the valid options for that choice field.
+
+**Endpoint:**`/info/choice-data/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "field_names": [
+    "industry",
+    "employment_type",
+    "user",
+    "employment_category",
+    "experience_level",
+    "work_type"
+  ]
+}
+
+OR
+
+{
+  "field_name": "experience_level",
+  "Valid options": [
+    "entry",
+    "mid",
+    "senior",
+    "executive"
+  ]
 }
 ```
 

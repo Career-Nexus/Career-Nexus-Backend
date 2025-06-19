@@ -80,3 +80,7 @@ class AlterCountryPermitSerializer(serializers.Serializer):
         country_obj.permitted = validated_data.get("status")
         country_obj.save()
         return country_obj
+
+class ChoiceFieldSerializer(serializers.Serializer):
+    field_name = serializers.CharField(max_length=200,required=True)
+    value = serializers.CharField(max_length=255,required=True)

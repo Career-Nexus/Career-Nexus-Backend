@@ -17,10 +17,12 @@ from .generator.referral_code_generator import *
 from .Hasher import hasher
 #from .mmail import Agent
 from .tasks import send_email
+from .options import get_choices
 from datetime import datetime
 import os
 import uuid
 import boto3
+
 
 ref_agent = generator()
 hasher = hasher()
@@ -33,34 +35,16 @@ resources_directory = os.path.join(c_directory,"resources")
 otp_template = os.path.join(resources_directory,"mail_otp.html")
 password_reset_template = os.path.join(resources_directory,"forgetpassword_otp.html")
 
-
+CHOICES = get_choices()
 
 #Defining Choice Fields
-user_options = (("learner","learner"),("mentor","mentor"),("employer","employer"))
 
-industry_options = (
-    ("agriculture","agriculture"),
-    ("banking","banking"),
-    ("business","business"),
-    ("commerce","commerce"),
-    ("construction","construction"),
-    ("education","education"),
-    ("entertainment","entertainment"),
-    ("government","government"),
-    ("health","health"),
-    ("manufacturing","manufacturing"),
-    ("media","media"),
-    ("others","others"),
-    ("sports","sports"),
-    ("technology","technology"),
-    ("transportation","transportation")
-)
+user_options = CHOICES["user"]
 
-employment_type_options = (
-            ("Onsite","Onsite"),
-            ("Remote","Remote"),
-            ("Hybrid","Hybrid")
-        )
+
+industry_options = CHOICES["industry"]
+
+employment_type_options = CHOICES["employment_type"]
 
 
 

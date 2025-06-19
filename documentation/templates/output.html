@@ -1,71 +1,74 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
-<p><a href="#"></a>
-<a href="#add_certification">add certification</a>
-<a href="#add_education_api">add education api</a>
-<a href="#add_experience">add experience</a>
-<a href="#alter_country_permissions">alter country permissions</a>
-<a href="#career_nexus_backend_documentation">career nexus backend documentation</a>
-<a href="#chat_history">chat history</a>
-<a href="#content_management">content management</a>
-<a href="#create_comment">create comment</a>
-<a href="#create_job">create job</a>
-<a href="#create_post">create post</a>
-<a href="#delete_certification">delete certification</a>
-<a href="#delete_education">delete education</a>
-<a href="#delete_experience">delete experience</a>
-<a href="#followings_posts">followings posts</a>
-<a href="#forget_password">forget password</a>
-<a href="#get_chat_sessions">get chat sessions</a>
-<a href="#get_comment">get comment</a>
-<a href="#get_country_phone_codes">get country phone codes</a>
-<a href="#get_job_posts">get job posts</a>
-<a href="#get_job_preferences">get job preferences</a>
-<a href="#get_posts">get posts</a>
-<a href="#get_saved_post">get saved post</a>
-<a href="#job_notifications">job notifications</a>
-<a href="#job_preference">job preference</a>
-<a href="#login_api">login api</a>
-<a href="#logout">logout</a>
-<a href="#post_like">post like</a>
-<a href="#post_save">post save</a>
-<a href="#post_share">post share</a>
-<a href="#profile_completion">profile completion</a>
-<a href="#profile_retrieve_api">profile retrieve api</a>
-<a href="#recommended_job_posts.">recommended job posts.</a>
-<a href="#reply_comment">reply comment</a>
-<a href="#reposting">reposting</a>
-<a href="#retrieve_a_particular_post">retrieve a particular post</a>
-<a href="#retrieve_education_api">retrieve education api</a>
-<a href="#update_profile">update profile</a>
-<a href="#updating_user_eperience">updating user eperience</a>
-<a href="#user_analytics">user analytics</a>
-<a href="#user_registeration">user registeration</a>
-<a href="#user-industry_update">user-industry update</a>
-<a href="#verify_otp_hash">verify otp hash</a>
-<a href="#view_certification">view certification</a>
-<a href="#view_experience">view experience</a></p>
+<ol>
+<li><a href="#"></a></li>
+<li><a href="#add_certification">add certification</a></li>
+<li><a href="#add_education_api">add education api</a></li>
+<li><a href="#add_experience">add experience</a></li>
+<li><a href="#alter_country_permissions">alter country permissions</a></li>
+<li><a href="#career_nexus_backend_documentation">career nexus backend documentation</a></li>
+<li><a href="#chat_history">chat history</a></li>
+<li><a href="#content_management">content management</a></li>
+<li><a href="#create_comment">create comment</a></li>
+<li><a href="#delete_certification">delete certification</a></li>
+<li><a href="#delete_education">delete education</a></li>
+<li><a href="#delete_experience">delete experience</a></li>
+<li><a href="#followings_posts">followings posts</a></li>
+<li><a href="#forget_password">forget password</a></li>
+<li><a href="#get_chat_sessions">get chat sessions</a></li>
+<li><a href="#get_comment">get comment</a></li>
+<li><a href="#get_country_phone_codes">get country phone codes</a></li>
+<li><a href="#get_job_posts">get job posts</a></li>
+<li><a href="#get_job_preferences">get job preferences</a></li>
+<li><a href="#get_saved_post">get saved post</a></li>
+<li><a href="#job_create">job create</a></li>
+<li><a href="#job_notifications">job notifications</a></li>
+<li><a href="#job_preference">job preference</a></li>
+<li><a href="#login_api">login api</a></li>
+<li><a href="#logout">logout</a></li>
+<li><a href="#post_create">post create</a></li>
+<li><a href="#post_get">post get</a></li>
+<li><a href="#post_like">post like</a></li>
+<li><a href="#post_retrieve">post retrieve</a></li>
+<li><a href="#post_save">post save</a></li>
+<li><a href="#post_share">post share</a></li>
+<li><a href="#profile_completion">profile completion</a></li>
+<li><a href="#profile_retrieve_api">profile retrieve api</a></li>
+<li><a href="#recommended_job_posts.">recommended job posts.</a></li>
+<li><a href="#reply_comment">reply comment</a></li>
+<li><a href="#reposting">reposting</a></li>
+<li><a href="#retrieve_education_api">retrieve education api</a></li>
+<li><a href="#update_profile">update profile</a></li>
+<li><a href="#updating_user_eperience">updating user eperience</a></li>
+<li><a href="#user_analytics">user analytics</a></li>
+<li><a href="#user_registeration">user registeration</a></li>
+<li><a href="#user-industry_update">user-industry update</a></li>
+<li><a href="#valid_choice">valid choice</a></li>
+<li><a href="#verify_otp_hash">verify otp hash</a></li>
+<li><a href="#view_certification">view certification</a></li>
+<li><a href="#view_experience">view experience</a></li>
+</ol>
 <h1>User Registeration<a name='user_registeration'></a></h1>
 <p>This API registers user on the platform. N.B: Email confirmation is enforced using OTP.</p>
 <p><strong>Endpoint:</strong><code>user/signup/</code></p>
@@ -591,138 +594,120 @@ skills:*****
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Get Posts<a name='get_posts'></a></h1>
+<h1>Post Get<a name='post_get'></a></h1>
 <p>This endpoints retrieves posts associated with the user's selected industry and also posts by mentors on the platform.</p>
 <p><strong>Endpoint:</strong><code>/post/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">
+
 </code></pre>
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
-<pre><code class="language-json">  &quot;count&quot;: 3,
+<pre><code class="language-json">{
+  &quot;count&quot;: 1,
   &quot;next&quot;: null,
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
       &quot;profile&quot;: {
-        &quot;id&quot;: 2,
-        &quot;first_name&quot;: &quot;N/A&quot;,
-        &quot;last_name&quot;: &quot;N/A&quot;,
-        &quot;middle_name&quot;: &quot;N/A&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming&quot;,
-      &quot;media&quot;: &quot;N/A&quot;,
+      &quot;body&quot;: &quot;Fadman Montessori. School building leaders and table shakers.&quot;,
+      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/pic/d0642e69-2ff3-4179-9b6b-b745ec637088fadman_thumbnail.png&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:31:33.731704Z&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-18T19:25:29.242254Z&quot;,
       &quot;comment_count&quot;: 0,
       &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
-      &quot;post_id&quot;: 3
-    },
-    {
-      &quot;profile&quot;: {
-        &quot;id&quot;: 2,
-        &quot;first_name&quot;: &quot;N/A&quot;,
-        &quot;last_name&quot;: &quot;N/A&quot;,
-        &quot;middle_name&quot;: &quot;N/A&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
-      },
-      &quot;body&quot;: &quot;Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife&quot;,
-      &quot;media&quot;: &quot;N/A&quot;,
-      &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:30:44.280807Z&quot;,
-      &quot;comment_count&quot;: 0,
-      &quot;like_count&quot;: 0,
-      &quot;share_count&quot;: 0,
-      &quot;parent&quot;: null,
-      &quot;post_id&quot;: 2
-    },
-    {
-      &quot;profile&quot;: {
-        &quot;id&quot;: 2,
-        &quot;first_name&quot;: &quot;N/A&quot;,
-        &quot;last_name&quot;: &quot;N/A&quot;,
-        &quot;middle_name&quot;: &quot;N/A&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
-      },
-      &quot;body&quot;: &quot;Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming&quot;,
-      &quot;media&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg&quot;,
-      &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:30:11.005024Z&quot;,
-      &quot;comment_count&quot;: 1,
-      &quot;like_count&quot;: 0,
-      &quot;share_count&quot;: 0,
-      &quot;parent&quot;: null,
-      &quot;post_id&quot;: 1
+      &quot;post_id&quot;: 12
     }
   ],
   &quot;last_page&quot;: &quot;http://127.0.0.1:8000/post/?page=1&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Retrieve a Particular Post<a name='retrieve_a_particular_post'></a></h1>
-<p>This endpoint retrieves a particular post through the post_id query passed in the url endpoint.</p>
-<p><strong>Endpoint:</strong><code>/post/?post_id=6</code></p>
+<h1>Post Retrieve<a name='post_retrieve'></a></h1>
+<p>This endpoint retrieves a particular post through a post_id query parameter passed in the url.</p>
+<p><strong>Endpoint:</strong><code>/post/?post_id=12</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">
+
 </code></pre>
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
   &quot;profile&quot;: {
-    &quot;id&quot;: 2,
-    &quot;first_name&quot;: &quot;N/A&quot;,
-    &quot;last_name&quot;: &quot;N/A&quot;,
-    &quot;middle_name&quot;: &quot;N/A&quot;,
-    &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-    &quot;qualification&quot;: &quot;Bachelor of Science&quot;
+    &quot;id&quot;: 1,
+    &quot;first_name&quot;: &quot;Opeyemi&quot;,
+    &quot;last_name&quot;: &quot;Saliu&quot;,
+    &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+    &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+    &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
   },
-  &quot;body&quot;: &quot;Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife&quot;,
-  &quot;media&quot;: &quot;N/A&quot;,
+  &quot;body&quot;: &quot;Fadman Montessori. School building leaders and table shakers.&quot;,
+  &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/pic/d0642e69-2ff3-4179-9b6b-b745ec637088fadman_thumbnail.png&quot;,
+  &quot;pic2&quot;: &quot;N/A&quot;,
+  &quot;pic3&quot;: &quot;N/A&quot;,
+  &quot;video&quot;: &quot;N/A&quot;,
   &quot;article&quot;: &quot;N/A&quot;,
-  &quot;time_stamp&quot;: &quot;2025-04-17T14:30:44.280807Z&quot;,
+  &quot;time_stamp&quot;: &quot;2025-06-18T19:25:29.242254Z&quot;,
   &quot;comment_count&quot;: 0,
   &quot;like_count&quot;: 0,
   &quot;share_count&quot;: 0,
   &quot;parent&quot;: null,
-  &quot;post_id&quot;: 2
-}
-</code></pre>
-<h2>Failure</h2>
-<p><strong>status code:404</strong></p>
-<pre><code class="language-{">&quot;error&quot;:&quot;Inexistent Post&quot;
+  &quot;post_id&quot;: 12
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Create Post<a name='create_post'></a></h1>
+<h1>Post Create<a name='post_create'></a></h1>
 <p>This endpoint publishes a post by the logged in user.</p>
 <p><strong>Endpoint:</strong><code>/post/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">{
 
-body:*****type&lt;str&gt;
+body:*****
 
-media:*****type&lt;file,photo/video&gt;
+pic1:*****
 
-article:*****&lt;formatted text&gt;
+pic2:*****
+
+pic3:*****
+
+video:*****
+
+article:*****
 
 }
+
 </code></pre>
 <h2>Response body</h2>
 <p><strong>status code:201</strong></p>
 <pre><code class="language-json">{
-  &quot;body&quot;: &quot;Why Do So Many Finance Apps Look the Same? Ever noticed how most fintech apps follow the same blue-and-white theme..&quot;,
-  &quot;media&quot;: &quot;N/A&quot;,
+  &quot;body&quot;: &quot;Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
+
+At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
+
+Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
+
+Anyone else feeling that urge to slow down while everything else speeds up?&quot;,
+  &quot;pic1&quot;: &quot;N/A&quot;,
+  &quot;pic2&quot;: &quot;N/A&quot;,
+  &quot;pic3&quot;: &quot;N/A&quot;,
+  &quot;video&quot;: &quot;N/A&quot;,
   &quot;article&quot;: &quot;N/A&quot;,
-  &quot;time_stamp&quot;: &quot;2025-05-14T11:37:10.041600Z&quot;
+  &quot;time_stamp&quot;: &quot;2025-06-18T21:46:34.030565Z&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
@@ -1232,7 +1217,7 @@ status:*****
 ]
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Create Job<a name='create_job'></a></h1>
+<h1>job Create<a name='job_create'></a></h1>
 <p>This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid).</p>
 <p><strong>Endpoint:</strong><code>/job/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
@@ -1255,6 +1240,8 @@ overview:*****
 
 description:*****
 
+experience_level:*****
+
 }
 
 </code></pre>
@@ -1262,14 +1249,15 @@ description:*****
 <p><strong>status code:201</strong></p>
 <pre><code class="language-json">{
   &quot;title&quot;: &quot;Backend Developer&quot;,
-  &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+  &quot;organization&quot;: &quot;Mitiget Assurance Limited&quot;,
   &quot;employment_type&quot;: &quot;full_time&quot;,
   &quot;work_type&quot;: &quot;hybrid&quot;,
   &quot;country&quot;: &quot;Nigeria&quot;,
   &quot;salary&quot;: &quot;350,000NGN&quot;,
-  &quot;overview&quot;: &quot;We are looking&quot;,
-  &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
-  &quot;industry&quot;: &quot;technology&quot;
+  &quot;overview&quot;: &quot;We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.&quot;,
+  &quot;description&quot;: &quot;As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.&quot;,
+  &quot;industry&quot;: &quot;technology&quot;,
+  &quot;experience_level&quot;: &quot;senior&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
@@ -1414,6 +1402,41 @@ experience_level:*****
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
+<h1>Valid Choice<a name='valid_choice'></a></h1>
+<p>This endpoint retrieves valid request parameters for API fields. Running this endpoint without a request parameter retrieves all choice field names required in some request payloadss. Running this endpoint with a query parameter field_name=**** retrieves all the valid options for that choice field.</p>
+<p><strong>Endpoint:</strong><code>/info/choice-data/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
 
-</body>
-</html>
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;field_names&quot;: [
+    &quot;industry&quot;,
+    &quot;employment_type&quot;,
+    &quot;user&quot;,
+    &quot;employment_category&quot;,
+    &quot;experience_level&quot;,
+    &quot;work_type&quot;
+  ]
+}
+
+OR
+
+{
+  &quot;field_name&quot;: &quot;experience_level&quot;,
+  &quot;Valid options&quot;: [
+    &quot;entry&quot;,
+    &quot;mid&quot;,
+    &quot;senior&quot;,
+    &quot;executive&quot;
+  ]
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+
+        </body>
+        </html>
+        

@@ -1,0 +1,9 @@
+{
+    "industry":["ariculture","banking","business","commerce","construction","education","entertainment","government","health","manufacturing","media","others","sports","technology","transportation"],
+    "user":["learner","mentor","employer"],
+    "employment_type":["Remote","Hybrid","Onsite"],
+    "employment_category":["full_time","part_time","contract","internship","freelance"],
+    "work_type":["remote","hybrid","onsite"],
+    "experience_level":["senior","mid","entry","executive"]
+
+}

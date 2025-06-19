@@ -23,18 +23,20 @@
 <body>
   <h1>Job Notifications</h1>
   <div id="notifications">
-    <!-- notifications will appear here -->
+                                           
   </div>
 
   <script>
     (function () {
-      // Your JWT token here
-      const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ5NzM1OTU1LCJpYXQiOjE3NDk3MTQzNTUsImp0aSI6ImMxYjZmOGI5NzNlYTQyMzI4M2RhMzliOTI1YWE2ZTc3IiwidXNlcl9pZCI6MX0.abrOP92W8bHOcuEWH1ty_PeoM4RFpEUqhnkPU0PQQDM";
+
+      const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwMzYzNjcwLCJpYXQiOjE3NTAzNDIwNzAsImp0aSI6ImNkNTI1MDE3ZjIwNDQ1Yzk5NTIyYmE4ZTQ3Y2IwZjM0IiwidXNlcl9pZCI6MX0.yd-wILCR16KWGYg_RWs1jSlYvaET-LqXvEUuPg9nIqA";
 
 
       const wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
       const wsHost = window.location.host;  // e.g. "localhost:8000" or "yourdomain.com"
-      const wsPath = `wss://btest.career-nexus.com//ws/notification/jobs/?token=${jwtToken}`;
+//      const wsPath = `wss://btest.career-nexus.com//ws/notification/jobs/?token=${jwtToken}`;
+        const wsPath = `ws://127.0.0.1:8000//ws/notification/jobs/?token=${jwtToken}`;
+
 
     const socket = new WebSocket(wsPath);
 

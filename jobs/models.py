@@ -13,6 +13,7 @@ class Jobs(models.Model):
     overview = models.TextField()
     description = models.TextField()
     industry = models.TextField()
+    experience_level = models.CharField(max_length=20)
     time_stamp = models.DateField(auto_now_add=True)
 
 class JobPreference(models.Model):
@@ -22,3 +23,7 @@ class JobPreference(models.Model):
     work_type = models.CharField(max_length=10,null=True)
     industry = models.CharField(max_length=150,null=True)
     experience_level = models.CharField(max_length=15,null=True)
+
+class JobPreferenceSuffix(models.Model):
+    ref_no = models.CharField(max_length=99)
+    preference_combination = models.CharField(max_length=500)

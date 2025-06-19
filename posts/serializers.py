@@ -5,6 +5,7 @@ from users.models import PersonalProfile
 
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.utils.text import get_valid_filename
 
 import uuid
 import joblib
@@ -31,34 +32,89 @@ def classify_content(text):
 
 class PostSerializer(serializers.Serializer):
     body = serializers.CharField(max_length=10000)
-    media = serializers.FileField(required=False)
-    article = serializers.CharField(required=False)
+    pic1 = serializers.FileField(required=False,allow_null=False)
+    pic2 = serializers.FileField(required=False,allow_null=False)
+    pic3 = serializers.FileField(required=False,allow_null=False)
+    video = serializers.FileField(required=False,allow_null=False)
+    article = serializers.CharField(required=False,allow_null=False)
+
+    def validate_format(self,filename,allowed_formats):
+        if filename.lower().endswith(allowed_formats):
+            return filename
+        else:
+            raise serializers.ValidationError("Invalid file format")
+
+    def validate_size(self,file_size,permitted_size_in_bytes):
+        if file_size/1000000 > permitted_size_in_bytes:
+            raise serializers.ValidationError("File too large")
+        else:
+            return file_size
 
     def validate(self,data):
         request = self.context["request"]
         profile_instance = PersonalProfile.objects.get(user=request.user)
         data["profile"] = profile_instance
         return data
+    
+    def validate_pic1(self,file):
+        self.validate_format(file.name,(".png",".jpg",".jpeg"))
+        self.validate_size(file.size,1)
+        return file
+
+    def validate_pic2(self,file):
+        self.validate_format(file.name,(".png",".jpg",".jpeg"))
+        self.validate_size(file.size,1)
+        return file
+
+    def validate_pic3(self,file):
+        self.validate_format(file.name,(".png",".jpg",".jpeg"))
+        self.validate_size(file.size,1)
+        return file
+
+    def validate_video(self,file):
+        self.validate_format(file.name,(".mp4",".webm"))
+        self.validate_size(file.size,5)
+        return file
+
 
 
     def create(self,validated_data):
-        media = validated_data.get("media","")
+        pic1 = validated_data.get("pic1","N/A")
+        pic2 = validated_data.get("pic2","N/A")
+        pic3 = validated_data.get("pic3","N/A")
+        video = validated_data.get("video","N/A")
         validated_data["industries"] = classify_content(validated_data["body"])
-        #article = validated_data.get("article","")
+        #TODO Allow article uploads
 
-        if media != "":
-            file_name = f"posts/media/{uuid.uuid4()}{media.name}"
-            file_path = default_storage.save(file_name,ContentFile(media.read()))
-            validated_data["media"] = default_storage.url(file_path)
-        #if article != "":
-            #file_name = f"posts/article/{uuid.uuid4()}{article.name}"
-            #file_path = default_storage.save(file_name,ContentFile(article.read()))
-            #validated_data["article"] = default_storage.url(file_path)
+        if pic1 and hasattr(pic1,"read"):
+            #Preventing malicious directory transversal with get_valid_filename
+            file_name = f"posts/pic/{uuid.uuid4()}{get_valid_filename(pic1.name)}"
+            file_path = default_storage.save(file_name,ContentFile(pic1.read()))
+            validated_data["pic1"] = default_storage.url(file_path)
+
+        if pic2 != "N/A":
+            file_name = f"posts/pic/{uuid.uuid4()}{get_valid_filename(pic2.name)}"
+            file_path = default_storage.save(file_name,ContentFile(pic2.read()))
+            validated_data["pic2"] = default_storage.url(file_path)
+
+        if pic3 != "N/A":
+            file_name = f"posts/pic/{uuid.uuid4()}{get_valid_filename(pic3.name)}"
+            file_path = default_storage.save(file_name,ContentFile(pic3.read()))
+            validated_data["pic3"] = default_storage.url(file_path)
+
+        if video != "N/A":
+            file_name = f"posts/video/{uuid.uuid4()}{get_valid_filename(video.name)}"
+            file_path = default_storage.save(file_name,ContentFile(video.read()))
+            validated_data["video"] = default_storage.url(file_path)
+
 
         post = models.Posts.objects.create(**validated_data)
         output = {
                     "body":post.body,
-                    "media":post.media,
+                    "pic1":post.pic1,
+                    "pic2":post.pic2,
+                    "pic3":post.pic3,
+                    "video":post.video,
                     "article":post.article,
                     "time_stamp":post.time_stamp
                 }
@@ -73,7 +129,7 @@ class ParentPostSerializer(serializers.ModelSerializer):
     profile = PersonalProfileSerializer()
     class Meta:
         model = models.Posts
-        fields = ["profile","body","media","article","time_stamp"]
+        fields = ["profile","body","pic1","pic2","pic3","video","article","time_stamp"]
 
 
 class RetrievePostSerializer(serializers.ModelSerializer):
@@ -86,7 +142,7 @@ class RetrievePostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Posts
-        fields = ["profile","id","body","media","article","time_stamp","comment_count","like_count","share_count","parent"]
+        fields = ["profile","id","body","pic1","pic2","pic3","video","article","time_stamp","comment_count","like_count","share_count","parent"]
 
     def get_comment_count(self,obj):
         #comments = obj.comment_set.all()
@@ -112,11 +168,9 @@ class RetrievePostSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
-    #user = serializers.StringRelatedField()
     commenter = serializers.SerializerMethodField()
     body = serializers.CharField(max_length=5000)
     parent = serializers.PrimaryKeyRelatedField(queryset=models.Comment.objects.all())
-    #replies = serializers.PrimaryKeyRelatedField(many=True,read_only=True)
     replies = serializers.SerializerMethodField()
 
     class Meta:

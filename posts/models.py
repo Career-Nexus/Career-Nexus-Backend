@@ -6,7 +6,11 @@ from users.models import PersonalProfile,Users
 class Posts(models.Model):
     profile = models.ForeignKey(PersonalProfile,on_delete=models.CASCADE)
     body = models.CharField(max_length=10000,blank=True)
-    media = models.CharField(max_length=500,default="N/A")
+    pic1 = models.CharField(max_length=500,default="N/A")
+    pic2 = models.CharField(max_length=500,default="N/A")
+    pic3 = models.CharField(max_length=500,default="N/A")
+    video = models.CharField(max_length=500,default="N/A")
+    #media = models.CharField(max_length=500,default="N/A")
     article = models.CharField(max_length=500,default="N/A")
     time_stamp = models.DateTimeField(auto_now_add=True)
     parent = models.ForeignKey("self",null=True,blank=True,on_delete=models.CASCADE,related_name="mainpost")

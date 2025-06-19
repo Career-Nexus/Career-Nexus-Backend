@@ -10,6 +10,8 @@ from notifications.utils import jobnotify
 from . import serializers
 from . import models
 
+import uuid
+
 
 class JobPagination(PageNumberPagination):
     page_size = 5
@@ -29,14 +31,22 @@ class JobsView(APIView):
             if serializer.is_valid(raise_exception=True):
                 output = serializer.save()
 
-                title = output.get("title").lower()
-                title = title.replace(" ","_")
+                title = output.get("title").lower().replace(" ","_")
                 employment_type = output.get("employment_type").lower()
                 work_type = output.get("work_type").lower()
-                industries = output.get("industry").split(",")
+                industries = output.get("industry").lower().split(",")
+                experience_level = output.get("experience_level").lower()
 
                 for industry in industries:
-                    suffix = f"{title}_{employment_type}_{work_type}_{industry}"
+                    combination = f"{title}_{employment_type}_{work_type}_{industry}_{experience_level}"
+                    #Retrieving or creating a ref no associated with the job post combination which is to be used in the construction of group name for JobNotificationConsumer
+                    try:
+                        suffix_obj = models.JobPreferenceSuffix.objects.get(preference_combination=combination)
+                    except:
+                        suffix_obj = models.JobPreferenceSuffix.objects.create(ref_no=str(uuid.uuid4()),preference_combination=combination)
+
+                    suffix = suffix_obj.ref_no
+
                     text = f"A new job matching your preference. {output['title']} at {output['organization']}. Apply now!"
 
                     jobnotify(suffix=suffix,text=text)

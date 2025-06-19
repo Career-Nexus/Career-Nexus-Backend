@@ -1,10 +1,15 @@
 #from django.shortcuts import render
-from rest_framework.response import Response
+from django.conf import settings
+
+from django.http import Http404
+from rest_framework.response import Response, Serializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated,AllowAny
 from rest_framework import status
 from rest_framework.views import APIView
 
 from . import serializers, models
+
+import json
 
 
 class InformationView(APIView):
@@ -131,3 +136,66 @@ class CountryPermitView(APIView):
                 "permitted":instance.permitted
             }
             return Response(output,status=status.HTTP_200_OK)
+
+
+class ChoiceFieldView(APIView):
+    permission_classes = [
+        IsAuthenticated,#TODO Add IsAdminUser to permission classes
+    ]
+    serializer_class = serializers.ChoiceFieldSerializer
+    
+    CHOICE_DIR = settings.CHOICE_FIELD_DB
+
+    with open(CHOICE_DIR,"r") as file:
+        choices = json.load(file)
+
+    def verify_fieldname(self,value):
+        choices_keys = list(self.choices.keys())
+        if value not in choices_keys:
+            raise Http404("Invalid field name")
+        else:
+            return value
+
+
+    def get(self,request):
+        param = request.query_params.get("field_name")
+        choices_keys = list(self.choices.keys())
+
+        if not param:
+            return Response({"field_names":choices_keys},status=status.HTTP_200_OK)
+        else:
+            if param not in choices_keys:
+                return Response({'error':'Invalid field name.','Avalable_names':choices_keys},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                valid_data = self.choices[param]
+                return Response({"field_name":param,"Valid options":valid_data},status=status.HTTP_200_OK)
+
+    def post(self,request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            validated_data = serializer.validated_data
+            choices_keys = list(self.choices.keys())
+            field_name = validated_data.get("field_name")
+            if field_name not in choices_keys:
+                return Response({"error":"Invalid field name"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                self.choices[field_name].append(validated_data.get("value"))
+                #Preventing duplication of values in list
+                self.choices[field_name] = list(set(self.choices[field_name]))
+
+                with open(self.CHOICE_DIR,"w") as file:
+                    json.dump(self.choices,file)
+                return Response({"status":"success","message":f"Added value '{validated_data.get('value')}' to field name '{field_name}'"},status=status.HTTP_200_OK)
+
+    def delete(self,request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            validated_data = serializer.validated_data
+            field_name = self.verify_fieldname(validated_data["field_name"])
+            try:
+                self.choices[field_name].remove(validated_data["value"])
+                with open(self.CHOICE_DIR,"w") as file:
+                    json.dump(self.choices,file)
+                return Response({"status":f"Deleted {validated_data['value']} from choice list"},status=status.HTTP_200_OK)
+            except ValueError:
+                return Response({"error":"Inexistent value in field options"},status=status.HTTP_400_BAD_REQUEST)

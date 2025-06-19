@@ -2,10 +2,13 @@ from rest_framework import serializers
 from django.conf import settings
 
 from . import models
+from users.options import get_choices
+
 from users.serializers import industry_options
 
 import os
 import joblib
+import uuid
 
 BASE_DIR = settings.BASE_DIR
 predictor_dir = os.path.join(BASE_DIR,"ML_Models")
@@ -24,27 +27,15 @@ def classify_jobs(text):
         return "others"
     else:
         return output
+
 #Valid Options
-employment_type = (
-    ("full_time","full_time"),
-    ("part_time","part_time"),
-    ("internship","internship"),
-    ("freelance","freelance"),
-    ("contract","contract")
-)
+CHOICES = get_choices()
 
-work_type = (
-    ("remote","remote"),
-    ("onsite","onsite"),
-    ("hybrid","hybrid")
-)
+employment_type = CHOICES["employment_category"]
 
-experience_level = (
-    ("entry","entry"),
-    ("mid","mid"),
-    ("senior","senior"),
-    ("executive","executive")
-)
+work_type = CHOICES["work_type"]
+
+experience_level = CHOICES["experience_level"]
 
 
 
@@ -52,10 +43,11 @@ experience_level = (
 class JobsSerializer(serializers.ModelSerializer):
     employment_type = serializers.ChoiceField(choices=employment_type)
     work_type = serializers.ChoiceField(choices=work_type)
+    experience_level = serializers.ChoiceField(choices=experience_level)
 
     class Meta:
         model = models.Jobs
-        fields = ["title","organization","employment_type","work_type","country","salary","overview","description"]
+        fields = ["title","organization","employment_type","work_type","country","salary","overview","description","experience_level"]
 
     def create(self,validated_data):
         validated_data["poster"] = self.context["user"]
@@ -72,7 +64,8 @@ class JobsSerializer(serializers.ModelSerializer):
             "salary":job.salary,
             "overview":job.overview,
             "description":job.description,
-            "industry":job.industry
+            "industry":job.industry,
+            "experience_level":job.experience_level,
         }
         return output
 
@@ -90,6 +83,14 @@ class JobPreferenceSerializer(serializers.Serializer):
         instance.industry = validated_data.get("industry",instance.industry)
         instance.experience_level = validated_data.get("experience_level",instance.experience_level)
         instance.save()
+        
+        #Creating a custom combination for unique preferences with ref_no to be used in constructing Group_name in JobNotification consumer.
+        preference_combination = f"{instance.title.lower().replace(' ','_')}_{instance.employment_type.lower()}_{instance.work_type.lower()}_{instance.industry.lower()}_{instance.experience_level.lower()}"
+        
+        if models.JobPreferenceSuffix.objects.filter(preference_combination=preference_combination).exists():
+            pass
+        else:
+            models.JobPreferenceSuffix.objects.create(ref_no=str(uuid.uuid4()),preference_combination=preference_combination)
         return instance
 
 
