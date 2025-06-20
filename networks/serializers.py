@@ -61,22 +61,22 @@ class RetrieveConnectionSerializer(serializers.Serializer):
 
 
 class ConnectionStatusSerializer(serializers.Serializer):
-    connection = serializers.PrimaryKeyRelatedField(queryset=models.Connection.objects.all())
+    connection_id = serializers.PrimaryKeyRelatedField(queryset=models.Connection.objects.all())
     status = serializers.ChoiceField(choices=status_options)
 
     def validate(self,data):
         user = self.context["user"]
-        connect = data["connection"].connection
+        connect = data["connection_id"].connection
         if user != connect:
-            raise serializers.ValidationError({"error":"Cannot Accept/Reject"})
-        elif data["connection"].status == "CONFIRMED":
-            raise serializers.ValidationError({"error":"Connection already accepted"})
+            raise serializers.ValidationError("Cannot Accept/Reject")
+        elif data["connection_id"].status == "CONFIRMED":
+            raise serializers.ValidationError("Connection already accepted")
         else:
             data["user"] = user
             return data 
 
     def create(self,validated_data):
-        connection_instance = validated_data.get("connection")
+        connection_instance = validated_data.get("connection_id")
         status = validated_data.get("status")
         if status == "Reject":
             connection_instance.delete()

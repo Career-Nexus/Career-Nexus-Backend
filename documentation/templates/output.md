@@ -12,45 +12,50 @@
 5. [alter country permissions](#alter_country_permissions)  
 6. [career nexus backend documentation](#career_nexus_backend_documentation)  
 7. [chat history](#chat_history)  
-8. [content management](#content_management)  
-9. [create comment](#create_comment)  
-10. [delete certification](#delete_certification)  
-11. [delete education](#delete_education)  
-12. [delete experience](#delete_experience)  
-13. [followings posts](#followings_posts)  
-14. [forget password](#forget_password)  
-15. [get chat sessions](#get_chat_sessions)  
-16. [get comment](#get_comment)  
-17. [get country phone codes](#get_country_phone_codes)  
-18. [get job posts](#get_job_posts)  
-19. [get job preferences](#get_job_preferences)  
-20. [get saved post](#get_saved_post)  
-21. [job create](#job_create)  
-22. [job notifications](#job_notifications)  
-23. [job preference](#job_preference)  
-24. [login api](#login_api)  
-25. [logout](#logout)  
-26. [post create](#post_create)  
-27. [post get](#post_get)  
-28. [post like](#post_like)  
-29. [post retrieve](#post_retrieve)  
-30. [post save](#post_save)  
-31. [post share](#post_share)  
-32. [profile completion](#profile_completion)  
-33. [profile retrieve api](#profile_retrieve_api)  
-34. [recommended job posts.](#recommended_job_posts.)  
-35. [reply comment](#reply_comment)  
-36. [reposting](#reposting)  
-37. [retrieve education api](#retrieve_education_api)  
-38. [update profile](#update_profile)  
-39. [updating user eperience](#updating_user_eperience)  
-40. [user analytics](#user_analytics)  
-41. [user registeration](#user_registeration)  
-42. [user-industry update](#user-industry_update)  
-43. [valid choice](#valid_choice)  
-44. [verify otp hash](#verify_otp_hash)  
-45. [view certification](#view_certification)  
-46. [view experience](#view_experience)  
+8. [connection accept/reject](#connection_accept/reject)  
+9. [connection create](#connection_create)  
+10. [connection pending retrieve](#connection_pending_retrieve)  
+11. [connection recommendation](#connection_recommendation)  
+12. [connection retrieve](#connection_retrieve)  
+13. [content management](#content_management)  
+14. [create comment](#create_comment)  
+15. [delete certification](#delete_certification)  
+16. [delete education](#delete_education)  
+17. [delete experience](#delete_experience)  
+18. [followings posts](#followings_posts)  
+19. [forget password](#forget_password)  
+20. [get chat sessions](#get_chat_sessions)  
+21. [get comment](#get_comment)  
+22. [get country phone codes](#get_country_phone_codes)  
+23. [get job posts](#get_job_posts)  
+24. [get job preferences](#get_job_preferences)  
+25. [get saved post](#get_saved_post)  
+26. [job create](#job_create)  
+27. [job notifications](#job_notifications)  
+28. [job preference](#job_preference)  
+29. [login api](#login_api)  
+30. [logout](#logout)  
+31. [post create](#post_create)  
+32. [post get](#post_get)  
+33. [post like](#post_like)  
+34. [post retrieve](#post_retrieve)  
+35. [post save](#post_save)  
+36. [post share](#post_share)  
+37. [profile completion](#profile_completion)  
+38. [profile retrieve api](#profile_retrieve_api)  
+39. [recommended job posts.](#recommended_job_posts.)  
+40. [reply comment](#reply_comment)  
+41. [reposting](#reposting)  
+42. [retrieve education api](#retrieve_education_api)  
+43. [update profile](#update_profile)  
+44. [updating user eperience](#updating_user_eperience)  
+45. [user analytics](#user_analytics)  
+46. [user registeration](#user_registeration)  
+47. [user-industry update](#user-industry_update)  
+48. [valid choice](#valid_choice)  
+49. [verify otp hash](#verify_otp_hash)  
+50. [view certification](#view_certification)  
+51. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -1938,6 +1943,197 @@ OR
     "senior",
     "executive"
   ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connection Retrieve<a name='connection_retrieve'></a>
+
+This endpoint retrieves all the connections that the user has established over the platform and the status whether they have or have not been confirmed by the recipient.
+
+**Endpoint:**`/connection/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 3,
+    "connection": {
+      "first_name": "N/A",
+      "last_name": "N/A",
+      "middle_name": "N/A",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+      "qualification": "Bachelor of Science",
+      "status": "CONFIRMED",
+      "user_id": 2
+    }
+  },
+  {
+    "id": 4,
+    "connection": {
+      "first_name": "N/A",
+      "last_name": "N/A",
+      "middle_name": "N/A",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "qualification": "Bachelor of Education (English)",
+      "status": "CONFIRMED",
+      "user_id": 3
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Connection Create<a name='connection_create'></a>
+
+This endpoint initiates a connection request to another user. The status of the connection is PENDING and is not regarded as a connection yet until the other User Accepts the reque connection to a user can only be initiated once while the status is PENDING/CONFIRMED>
+
+**Endpoint:**`/connection/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+connection:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "user": 4,
+  "connection": 3,
+  "status": "PENDING"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connection Pending Retrieve<a name='connection_pending_retrieve'></a>
+
+This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform.
+
+**Endpoint:**`/connection/pending/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 6,
+    "connection": {
+      "first_name": "Adeniji",
+      "last_name": "Adekogbe",
+      "middle_name": "Michael",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "qualification": "Bachelor of Science (Education)",
+      "status": "PENDING",
+      "user_id": 4
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Connection Accept/Reject<a name='connection_accept/reject'></a>
+
+This endpoint accepts or rejects a pending connection request initiated by another user on the platform. N.B:Valid status payload is either Accept or Reject.
+
+**Endpoint:**`/connection/status/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+connection_id:*****
+
+status:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Rejected"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connection Recommendation<a name='connection_recommendation'></a>
+
+This endpoint recommends connections for the logged in user based on any of the criteria location/industry. This must be explicitly specified in the request URL as a query parameter.
+
+**Endpoint:**`/connection/recommendation/?criteria=location`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 4,
+      "name": "Adeniji Adekogbe",
+      "qualification": "Bachelor of Science (Education)"
+    }
+  ],
+  "last_page": "http://127.0.0.1:8000/connection/recommendation/?page=1"
 }
 ```
 

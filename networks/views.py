@@ -55,7 +55,7 @@ class ConnectionStatusView(APIView):
         serializer = self.serializer_class(data=request.data,context={"user":request.user})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
-            return Response(output,status=status.HTTP_201_CREATED)
+            return Response(output,status=status.HTTP_200_OK)
 
 class ConnectionPendingView(APIView):
     permission_classes = [

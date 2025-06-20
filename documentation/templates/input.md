@@ -1896,3 +1896,194 @@ OR
 ```
 
 [Table of contents](#toc)
+
+
+# Connection Retrieve
+
+This endpoint retrieves all the connections that the user has established over the platform and the status whether they have or have not been confirmed by the recipient.
+
+**Endpoint:**`/connection/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 3,
+    "connection": {
+      "first_name": "N/A",
+      "last_name": "N/A",
+      "middle_name": "N/A",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+      "qualification": "Bachelor of Science",
+      "status": "CONFIRMED",
+      "user_id": 2
+    }
+  },
+  {
+    "id": 4,
+    "connection": {
+      "first_name": "N/A",
+      "last_name": "N/A",
+      "middle_name": "N/A",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "qualification": "Bachelor of Education (English)",
+      "status": "CONFIRMED",
+      "user_id": 3
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Connection Create
+
+This endpoint initiates a connection request to another user. The status of the connection is PENDING and is not regarded as a connection yet until the other User Accepts the reque connection to a user can only be initiated once while the status is PENDING/CONFIRMED>
+
+**Endpoint:**`/connection/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+connection:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "user": 4,
+  "connection": 3,
+  "status": "PENDING"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connection Pending Retrieve
+
+This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform.
+
+**Endpoint:**`/connection/pending/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 6,
+    "connection": {
+      "first_name": "Adeniji",
+      "last_name": "Adekogbe",
+      "middle_name": "Michael",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "qualification": "Bachelor of Science (Education)",
+      "status": "PENDING",
+      "user_id": 4
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Connection Accept/Reject
+
+This endpoint accepts or rejects a pending connection request initiated by another user on the platform. N.B:Valid status payload is either Accept or Reject.
+
+**Endpoint:**`/connection/status/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+connection_id:*****
+
+status:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Rejected"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connection Recommendation
+
+This endpoint recommends connections for the logged in user based on any of the criteria location/industry. This must be explicitly specified in the request URL as a query parameter.
+
+**Endpoint:**`/connection/recommendation/?criteria=location`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 4,
+      "name": "Adeniji Adekogbe",
+      "qualification": "Bachelor of Science (Education)"
+    }
+  ],
+  "last_page": "http://127.0.0.1:8000/connection/recommendation/?page=1"
+}
+```
+
+[Table of contents](#toc)
