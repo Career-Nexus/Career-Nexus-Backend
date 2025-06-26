@@ -1,5 +1,5 @@
 #from django.utils import connection
-from django.db.models.base import connection
+#from django.db.models.base import connection
 from rest_framework import serializers
 
 from . import models

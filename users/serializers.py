@@ -738,9 +738,10 @@ class DeleteCertificationSerializer(serializers.Serializer):
 class AnalyticsSerializer(serializers.ModelSerializer):
     total_posts = serializers.SerializerMethodField()
     total_views = serializers.SerializerMethodField()
+    total_connections = serializers.SerializerMethodField()
     class Meta:
         model = models.PersonalProfile
-        fields = ["total_posts","total_views"]
+        fields = ["total_posts","total_views","total_connections"]
 
     def get_total_posts(self,obj):
         total_posts = obj.posts_set.all().count()
@@ -748,6 +749,11 @@ class AnalyticsSerializer(serializers.ModelSerializer):
     def get_total_views(self,obj):
         user_viewed = obj.user.viewed.all().count()
         return user_viewed
+    def get_total_connections(self,obj):
+        connections_by_user = obj.user.connection_user.filter(status="CONFIRMED").count()
+        connections_toward_user = obj.user.connect.filter(status="CONFIRMED").count()
+        connections_total = connections_by_user + connections_toward_user
+        return connections_total
 
 
 

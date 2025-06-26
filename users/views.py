@@ -453,7 +453,6 @@ class EducationView(APIView):
             return Response(output,status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(request_body=serializers.UpdateEducationSerializer,operation_description="Deletes an education entry of the user.")
-    #TODO Resolve delete to use query parameter rather than request body.
 
     def delete(self,request):
         user = request.user
@@ -595,39 +594,41 @@ class WizardView(APIView):
         if user_profile.profile_photo == default_profile_photo:
             incomplete.append("profile_photo")
         else:
-            completion += 10
+            completion += 15
             complete.append("profile_photo")
 
         if user_profile.intro_video == default_intro_video:
             incomplete.append("intro_video")
         else:
-            completion += 10
+            completion += 15
             complete.append("intro_video")
 
         work_experience_count = user.experience_set.count()
         if work_experience_count == 0:
             incomplete.append("experience")
         else:
-            completion += 10
+            completion += 20
             complete.append("experience")
 
         certification_count = user.certification_set.count()
         if certification_count == 0:
             incomplete.append("certification")
         else:
-            completion += 10
+            completion += 15
             complete.append("certification")
-
-        mentors = user.follower.filter(user_following__user_type="mentor").count()
-        if mentors == 0:
-            incomplete.append("mentors")
+        if user.profile.bio == '':
+            incomplete.append("bio")
         else:
-            completion += 10
-            complete.append("mentors")
+            completion += 15
+            complete.append("bio")
+        if user.education_set.count() == 0:
+            incomplete.append("education")
+        else:
+            completion += 20 
+            complete.append("education")
 
-        percentage_completion = int((completion/60)*100)
         output = {
-            "completion":f"{percentage_completion}%",
+            "completion":completion,
             "incomplete_items":incomplete,
             "complete_items":complete
         }

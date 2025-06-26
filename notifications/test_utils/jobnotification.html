@@ -29,13 +29,13 @@
   <script>
     (function () {
 
-      const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwNDIzOTI0LCJpYXQiOjE3NTA0MDIzMjQsImp0aSI6IjNkZDExMTQ1MWJhMzQ4YzNhNDYwNzBhMjBmZTVlZjM3IiwidXNlcl9pZCI6NH0.syoWFU85czUhJlaPFeTkn_SWut8m8ggaPL5HVBlvvEQ";
+      const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwNDI4MzY5LCJpYXQiOjE3NTA0MDY3NjksImp0aSI6Ijg0NzFkMjRkMWU1MzQ1YTVhNGFhYzY4ZjgyYTljYTcyIiwidXNlcl9pZCI6MX0.Zw0ey2M69AUoEp2SkWhyTw9u8JXorpYIZwtviCWxMWE";
 
 
       const wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
       const wsHost = window.location.host;  // e.g. "localhost:8000" or "yourdomain.com"
-//      const wsPath = `wss://btest.career-nexus.com//ws/notification/jobs/?token=${jwtToken}`;
-        const wsPath = `ws://127.0.0.1:8000//ws/notification/jobs/?token=${jwtToken}`;
+      const wsPath = `wss://btest.career-nexus.com//ws/notification/jobs/?token=${jwtToken}`;
+//        const wsPath = `ws://127.0.0.1:8000//ws/notification/jobs/?token=${jwtToken}`;
 
 
     const socket = new WebSocket(wsPath);

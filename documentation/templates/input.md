@@ -693,25 +693,27 @@ Endpoint deletes a profile certification data.
 
 # User Analytics
 
-This endpoints retrieves details pertaining to the user profile and interaction of other users's with it.
+This endpoint retrieves all the analytic data of the users's profile like number of connections, number of times the profile was viewed, etc...
 
-**Endpoint:**`user/analytics/`
+**Endpoint:**`/user/analytics/`
 
 **Method:** `GET`
 
 ## Payload
 
-```json
+``` json
+
 
 ```
-
 ## Response body
 
-**status code:{**
+**status code:200**
 
-```json
-  "total_posts": 4,
-  "total_views": 1
+``` json
+{
+  "total_posts": 3,
+  "total_views": 12,
+  "total_connections": 1
 }
 ```
 
@@ -719,7 +721,7 @@ This endpoints retrieves details pertaining to the user profile and interaction 
 
 # Profile Completion
 
-This endpoint retrieves profile completion data.
+This endpoint retrieves the percentage completion of a user's profile along with the completed and incomplete items.
 
 **Endpoint:**`/user/completion/`
 
@@ -727,25 +729,25 @@ This endpoint retrieves profile completion data.
 
 ## Payload
 
-```json
+``` json
+
 
 ```
-
 ## Response body
 
 **status code:200**
 
-```json
+``` json
 {
-  "completion": "66%",
-  "incomplete_items": [
-    "mentors"
-  ],
+  "completion": 100,
+  "incomplete_items": [],
   "complete_items": [
     "profile_photo",
     "intro_video",
     "experience",
-    "certification"
+    "certification",
+    "bio",
+    "education"
   ]
 }
 ```
@@ -1821,9 +1823,9 @@ NONE
 [Table of contents](#toc)
 
 
-# Get Job Preferences
+# Get Job Preference
 
-This endpoint retrieves the job preferences set by the user or N/A if no preference has been set.
+This endpoint retrieves the job preferences set by the user or N/A if no preference has been set. It also includes a preference_set key in response which is True if the user has set his job preference or false if he has not.
 
 **Endpoint:**`/job/preference/`
 
@@ -1843,9 +1845,10 @@ This endpoint retrieves the job preferences set by the user or N/A if no prefere
 {
   "title": "Backend Developer",
   "employment_type": "full_time",
-  "work_type": "hybrid",
+  "work_type": "remote",
   "industry": "technology",
-  "experience_level": "senior"
+  "experience_level": "senior",
+  "preference_set": true
 }
 ```
 

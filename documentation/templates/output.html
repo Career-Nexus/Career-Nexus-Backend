@@ -1,23 +1,23 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -45,7 +45,7 @@
 <li><a href="#get_comment">get comment</a></li>
 <li><a href="#get_country_phone_codes">get country phone codes</a></li>
 <li><a href="#get_job_posts">get job posts</a></li>
-<li><a href="#get_job_preferences">get job preferences</a></li>
+<li><a href="#get_job_preference">get job preference</a></li>
 <li><a href="#get_saved_post">get saved post</a></li>
 <li><a href="#job_create">job create</a></li>
 <li><a href="#job_notifications">job notifications</a></li>
@@ -563,38 +563,42 @@ skills:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>User Analytics<a name='user_analytics'></a></h1>
-<p>This endpoints retrieves details pertaining to the user profile and interaction of other users's with it.</p>
-<p><strong>Endpoint:</strong><code>user/analytics/</code></p>
+<p>This endpoint retrieves all the analytic data of the users's profile like number of connections, number of times the profile was viewed, etc...</p>
+<p><strong>Endpoint:</strong><code>/user/analytics/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">
-</code></pre>
-<h2>Response body</h2>
-<p><strong>status code:{</strong></p>
-<pre><code class="language-json">  &quot;total_posts&quot;: 4,
-  &quot;total_views&quot;: 1
-}
-</code></pre>
-<p><a href="#toc">Table of contents</a></p>
-<h1>Profile Completion<a name='profile_completion'></a></h1>
-<p>This endpoint retrieves profile completion data.</p>
-<p><strong>Endpoint:</strong><code>/user/completion/</code></p>
-<p><strong>Method:</strong> <code>GET</code></p>
-<h2>Payload</h2>
-<pre><code class="language-json">
+
 </code></pre>
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;completion&quot;: &quot;66%&quot;,
-  &quot;incomplete_items&quot;: [
-    &quot;mentors&quot;
-  ],
+  &quot;total_posts&quot;: 3,
+  &quot;total_views&quot;: 12,
+  &quot;total_connections&quot;: 1
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Profile Completion<a name='profile_completion'></a></h1>
+<p>This endpoint retrieves the percentage completion of a user's profile along with the completed and incomplete items.</p>
+<p><strong>Endpoint:</strong><code>/user/completion/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;completion&quot;: 100,
+  &quot;incomplete_items&quot;: [],
   &quot;complete_items&quot;: [
     &quot;profile_photo&quot;,
     &quot;intro_video&quot;,
     &quot;experience&quot;,
-    &quot;certification&quot;
+    &quot;certification&quot;,
+    &quot;bio&quot;,
+    &quot;education&quot;
   ]
 }
 </code></pre>
@@ -1388,8 +1392,8 @@ experience_level:*****
 <pre><code class="language-json">NONE
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Get Job Preferences<a name='get_job_preferences'></a></h1>
-<p>This endpoint retrieves the job preferences set by the user or N/A if no preference has been set.</p>
+<h1>Get Job Preference<a name='get_job_preference'></a></h1>
+<p>This endpoint retrieves the job preferences set by the user or N/A if no preference has been set. It also includes a preference_set key in response which is True if the user has set his job preference or false if he has not.</p>
 <p><strong>Endpoint:</strong><code>/job/preference/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -1401,9 +1405,10 @@ experience_level:*****
 <pre><code class="language-json">{
   &quot;title&quot;: &quot;Backend Developer&quot;,
   &quot;employment_type&quot;: &quot;full_time&quot;,
-  &quot;work_type&quot;: &quot;hybrid&quot;,
+  &quot;work_type&quot;: &quot;remote&quot;,
   &quot;industry&quot;: &quot;technology&quot;,
-  &quot;experience_level&quot;: &quot;senior&quot;
+  &quot;experience_level&quot;: &quot;senior&quot;,
+  &quot;preference_set&quot;: true
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
@@ -1573,5 +1578,6 @@ status:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 
-</body>
-</html>
+        </body>
+        </html>
+        

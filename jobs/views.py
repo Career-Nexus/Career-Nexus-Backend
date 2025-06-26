@@ -124,7 +124,8 @@ class JobPreferenceView(APIView):
                 "employment_type":preference.employment_type,
                 "work_type":preference.work_type,
                 "industry":preference.industry,
-                "experience_level":preference.experience_level
+                "experience_level":preference.experience_level,
+                "preference_set":True
             }
             return Response(output,status=status.HTTP_200_OK)
         except models.JobPreference.DoesNotExist:
@@ -133,6 +134,7 @@ class JobPreferenceView(APIView):
                 "employment_type":"N/A",
                 "work_type":"N/A",
                 "industry":"N/A",
-                "experience_level":"N/A"
+                "experience_level":"N/A",
+                "preference_set":False
             }
             return Response(output,status=status.HTTP_200_OK)
