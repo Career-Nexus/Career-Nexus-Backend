@@ -2090,3 +2090,157 @@ This endpoint recommends connections for the logged in user based on any of the 
 ```
 
 [Table of contents](#toc)
+
+
+# Follow User
+
+This endpoint creates a one-way follow from one user (follower) and another (following). N.B:It is not possible to follow self or the same user multiple times.
+
+**Endpoint:**`/follow/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+user_following:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "follower": 1,
+  "following": 12
+}
+```
+
+[Table of contents](#toc)
+
+
+# Get Followings
+
+This endpoint curates a list of all the users the logged in user is currently following.
+
+**Endpoint:**`/followings/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 2,
+    "first_name": "N/A",
+    "last_name": "N/A",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+    "qualification": "Bachelor of Science"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# User Followers
+
+This endpoint retrieves all the users currently following the logged in user.
+
+**Endpoint:**`/followers/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 2,
+    "first_name": "N/A",
+    "last_name": "N/A",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+    "qualification": "Bachelor of Science"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Followings Count
+
+This endpoint retrieves the total numbers of users that the current logged in user is following.
+
+**Endpoint:**`/followings/count/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "following_count": 1
+}
+```
+
+[Table of contents](#toc)
+
+
+# Followers Count
+
+This endpoint retrieves the sum total of the number of Users the current logged in user is following.
+
+**Endpoint:**`/followers/count/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "followers count": 1
+}
+```
+
+[Table of contents](#toc)

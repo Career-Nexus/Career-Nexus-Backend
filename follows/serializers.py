@@ -39,4 +39,4 @@ class FollowSerializer(serializers.ModelSerializer):
 class RetrieveFollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PersonalProfile
-        fields = ["id","name","profile_photo","qualification"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","qualification"]

@@ -22,40 +22,45 @@
 15. [delete certification](#delete_certification)  
 16. [delete education](#delete_education)  
 17. [delete experience](#delete_experience)  
-18. [followings posts](#followings_posts)  
-19. [forget password](#forget_password)  
-20. [get chat sessions](#get_chat_sessions)  
-21. [get comment](#get_comment)  
-22. [get country phone codes](#get_country_phone_codes)  
-23. [get job posts](#get_job_posts)  
-24. [get job preference](#get_job_preference)  
-25. [get saved post](#get_saved_post)  
-26. [job create](#job_create)  
-27. [job notifications](#job_notifications)  
-28. [job preference](#job_preference)  
-29. [login api](#login_api)  
-30. [logout](#logout)  
-31. [post create](#post_create)  
-32. [post get](#post_get)  
-33. [post like](#post_like)  
-34. [post retrieve](#post_retrieve)  
-35. [post save](#post_save)  
-36. [post share](#post_share)  
-37. [profile completion](#profile_completion)  
-38. [profile retrieve api](#profile_retrieve_api)  
-39. [recommended job posts.](#recommended_job_posts.)  
-40. [reply comment](#reply_comment)  
-41. [reposting](#reposting)  
-42. [retrieve education api](#retrieve_education_api)  
-43. [update profile](#update_profile)  
-44. [updating user eperience](#updating_user_eperience)  
-45. [user analytics](#user_analytics)  
-46. [user registeration](#user_registeration)  
-47. [user-industry update](#user-industry_update)  
-48. [valid choice](#valid_choice)  
-49. [verify otp hash](#verify_otp_hash)  
-50. [view certification](#view_certification)  
-51. [view experience](#view_experience)  
+18. [follow user](#follow_user)  
+19. [followers count](#followers_count)  
+20. [followings count](#followings_count)  
+21. [followings posts](#followings_posts)  
+22. [forget password](#forget_password)  
+23. [get chat sessions](#get_chat_sessions)  
+24. [get comment](#get_comment)  
+25. [get country phone codes](#get_country_phone_codes)  
+26. [get followings](#get_followings)  
+27. [get job posts](#get_job_posts)  
+28. [get job preference](#get_job_preference)  
+29. [get saved post](#get_saved_post)  
+30. [job create](#job_create)  
+31. [job notifications](#job_notifications)  
+32. [job preference](#job_preference)  
+33. [login api](#login_api)  
+34. [logout](#logout)  
+35. [post create](#post_create)  
+36. [post get](#post_get)  
+37. [post like](#post_like)  
+38. [post retrieve](#post_retrieve)  
+39. [post save](#post_save)  
+40. [post share](#post_share)  
+41. [profile completion](#profile_completion)  
+42. [profile retrieve api](#profile_retrieve_api)  
+43. [recommended job posts.](#recommended_job_posts.)  
+44. [reply comment](#reply_comment)  
+45. [reposting](#reposting)  
+46. [retrieve education api](#retrieve_education_api)  
+47. [update profile](#update_profile)  
+48. [updating user eperience](#updating_user_eperience)  
+49. [user analytics](#user_analytics)  
+50. [user followers](#user_followers)  
+51. [user registeration](#user_registeration)  
+52. [user-industry update](#user-industry_update)  
+53. [valid choice](#valid_choice)  
+54. [verify otp hash](#verify_otp_hash)  
+55. [view certification](#view_certification)  
+56. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -2137,6 +2142,160 @@ This endpoint recommends connections for the logged in user based on any of the 
     }
   ],
   "last_page": "http://127.0.0.1:8000/connection/recommendation/?page=1"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Follow User<a name='follow_user'></a>
+
+This endpoint creates a one-way follow from one user (follower) and another (following). N.B:It is not possible to follow self or the same user multiple times.
+
+**Endpoint:**`/follow/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+user_following:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "follower": 1,
+  "following": 12
+}
+```
+
+[Table of contents](#toc)
+
+
+# Get Followings<a name='get_followings'></a>
+
+This endpoint curates a list of all the users the logged in user is currently following.
+
+**Endpoint:**`/followings/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 2,
+    "first_name": "N/A",
+    "last_name": "N/A",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+    "qualification": "Bachelor of Science"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# User Followers<a name='user_followers'></a>
+
+This endpoint retrieves all the users currently following the logged in user.
+
+**Endpoint:**`/followers/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 2,
+    "first_name": "N/A",
+    "last_name": "N/A",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+    "qualification": "Bachelor of Science"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Followings Count<a name='followings_count'></a>
+
+This endpoint retrieves the total numbers of users that the current logged in user is following.
+
+**Endpoint:**`/followings/count/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "following_count": 1
+}
+```
+
+[Table of contents](#toc)
+
+
+# Followers Count<a name='followers_count'></a>
+
+This endpoint retrieves the sum total of the number of Users the current logged in user is following.
+
+**Endpoint:**`/followers/count/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "followers count": 1
 }
 ```
 

@@ -25,3 +25,5 @@ posts/__pycache__/
 commit.txt
 posts/migrations/__pycache__/*
 users/resources/mail_otp.html.bak
+.celery_logs.txt
+boot.sh
