@@ -28,4 +28,5 @@ urlpatterns= [
             path("save/",views.SavePostView.as_view(),name="Save-post"),
             path("share/",views.ShareView.as_view(),name="Share-post"),
             path("following/",views.FollowingPostView.as_view(), name="Following-posts"),
+            path("posted/",views.OwnPosts.as_view(),name="Own-Posts"),
         ]

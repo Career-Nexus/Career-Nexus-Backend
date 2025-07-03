@@ -50,6 +50,7 @@
 <li><a href="#get_followings">get followings</a></li>
 <li><a href="#get_job_posts">get job posts</a></li>
 <li><a href="#get_job_preference">get job preference</a></li>
+<li><a href="#get_own_posts">get own posts</a></li>
 <li><a href="#get_saved_post">get saved post</a></li>
 <li><a href="#job_create">job create</a></li>
 <li><a href="#job_notifications">job notifications</a></li>
@@ -1673,6 +1674,108 @@ user_following:*****
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
   &quot;followers count&quot;: 1
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Get Own Posts<a name='get_own_posts'></a></h1>
+<p>This endpoint retrieves a paginated result of all the posts made by the logged in user.</p>
+<p><strong>Endpoint:</strong><code>/post/posted/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 12,
+  &quot;next&quot;: &quot;http://127.0.0.1:8000/post/posted/?page=2&quot;,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;profile&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      },
+      &quot;body&quot;: &quot;Did you know? The first 1GB hard drive, released by IBM in 1980, weighed over 500 pounds. Now we carry terabytes in our pockets. Wild. #TechHistory #Innovation&quot;,
+      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/a1195f39-adb5-408c-b5e0-ca3f50351201thumbnail.png&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
+      &quot;article&quot;: &quot;N/A&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-17T14:35:02.370818Z&quot;,
+      &quot;comment_count&quot;: 0,
+      &quot;like_count&quot;: 0,
+      &quot;share_count&quot;: 0,
+      &quot;parent&quot;: null,
+      &quot;post_id&quot;: 4
+    },
+    {
+      &quot;profile&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      },
+      &quot;body&quot;: &quot;AI isn’t just science fiction anymore — it’s helping detect cancer, drive cars, and even write code. The future is here. #AI #FutureOfTech&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
+      &quot;article&quot;: &quot;N/A&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-17T14:35:40.387128Z&quot;,
+      &quot;comment_count&quot;: 3,
+      &quot;like_count&quot;: 2,
+      &quot;share_count&quot;: 0,
+      &quot;parent&quot;: null,
+      &quot;post_id&quot;: 5
+    },
+    {
+      &quot;profile&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      },
+      &quot;body&quot;: &quot;Check this out guys...&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
+      &quot;article&quot;: &quot;N/A&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-17T15:46:40.954681Z&quot;,
+      &quot;comment_count&quot;: 0,
+      &quot;like_count&quot;: 1,
+      &quot;share_count&quot;: 0,
+      &quot;parent&quot;: {
+        &quot;profile&quot;: {
+          &quot;id&quot;: 2,
+          &quot;first_name&quot;: &quot;N/A&quot;,
+          &quot;last_name&quot;: &quot;N/A&quot;,
+          &quot;middle_name&quot;: &quot;N/A&quot;,
+          &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
+          &quot;qualification&quot;: &quot;Bachelor of Science&quot;
+        },
+        &quot;body&quot;: &quot;Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming&quot;,
+        &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg&quot;,
+        &quot;pic2&quot;: &quot;N/A&quot;,
+        &quot;pic3&quot;: &quot;N/A&quot;,
+        &quot;video&quot;: &quot;N/A&quot;,
+        &quot;article&quot;: &quot;N/A&quot;,
+        &quot;time_stamp&quot;: &quot;2025-04-17T14:30:11.005024Z&quot;
+      },
+      &quot;post_id&quot;: 6
+    }
+  ],
+  &quot;last_page&quot;: &quot;http://127.0.0.1:8000/post/posted/?page=4&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>

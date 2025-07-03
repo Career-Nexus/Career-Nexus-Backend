@@ -33,34 +33,35 @@
 26. [get followings](#get_followings)  
 27. [get job posts](#get_job_posts)  
 28. [get job preference](#get_job_preference)  
-29. [get saved post](#get_saved_post)  
-30. [job create](#job_create)  
-31. [job notifications](#job_notifications)  
-32. [job preference](#job_preference)  
-33. [login api](#login_api)  
-34. [logout](#logout)  
-35. [post create](#post_create)  
-36. [post get](#post_get)  
-37. [post like](#post_like)  
-38. [post retrieve](#post_retrieve)  
-39. [post save](#post_save)  
-40. [post share](#post_share)  
-41. [profile completion](#profile_completion)  
-42. [profile retrieve api](#profile_retrieve_api)  
-43. [recommended job posts.](#recommended_job_posts.)  
-44. [reply comment](#reply_comment)  
-45. [reposting](#reposting)  
-46. [retrieve education api](#retrieve_education_api)  
-47. [update profile](#update_profile)  
-48. [updating user eperience](#updating_user_eperience)  
-49. [user analytics](#user_analytics)  
-50. [user followers](#user_followers)  
-51. [user registeration](#user_registeration)  
-52. [user-industry update](#user-industry_update)  
-53. [valid choice](#valid_choice)  
-54. [verify otp hash](#verify_otp_hash)  
-55. [view certification](#view_certification)  
-56. [view experience](#view_experience)  
+29. [get own posts](#get_own_posts)  
+30. [get saved post](#get_saved_post)  
+31. [job create](#job_create)  
+32. [job notifications](#job_notifications)  
+33. [job preference](#job_preference)  
+34. [login api](#login_api)  
+35. [logout](#logout)  
+36. [post create](#post_create)  
+37. [post get](#post_get)  
+38. [post like](#post_like)  
+39. [post retrieve](#post_retrieve)  
+40. [post save](#post_save)  
+41. [post share](#post_share)  
+42. [profile completion](#profile_completion)  
+43. [profile retrieve api](#profile_retrieve_api)  
+44. [recommended job posts.](#recommended_job_posts.)  
+45. [reply comment](#reply_comment)  
+46. [reposting](#reposting)  
+47. [retrieve education api](#retrieve_education_api)  
+48. [update profile](#update_profile)  
+49. [updating user eperience](#updating_user_eperience)  
+50. [user analytics](#user_analytics)  
+51. [user followers](#user_followers)  
+52. [user registeration](#user_registeration)  
+53. [user-industry update](#user-industry_update)  
+54. [valid choice](#valid_choice)  
+55. [verify otp hash](#verify_otp_hash)  
+56. [view certification](#view_certification)  
+57. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -2296,6 +2297,120 @@ This endpoint retrieves the sum total of the number of Users the current logged 
 ``` json
 {
   "followers count": 1
+}
+```
+
+[Table of contents](#toc)
+
+
+# Get Own Posts<a name='get_own_posts'></a>
+
+This endpoint retrieves a paginated result of all the posts made by the logged in user.
+
+**Endpoint:**`/post/posted/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 12,
+  "next": "http://127.0.0.1:8000/post/posted/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "Did you know? The first 1GB hard drive, released by IBM in 1980, weighed over 500 pounds. Now we carry terabytes in our pockets. Wild. #TechHistory #Innovation",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/a1195f39-adb5-408c-b5e0-ca3f50351201thumbnail.png",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:35:02.370818Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "post_id": 4
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "AI isn’t just science fiction anymore — it’s helping detect cancer, drive cars, and even write code. The future is here. #AI #FutureOfTech",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:35:40.387128Z",
+      "comment_count": 3,
+      "like_count": 2,
+      "share_count": 0,
+      "parent": null,
+      "post_id": 5
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "Check this out guys...",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T15:46:40.954681Z",
+      "comment_count": 0,
+      "like_count": 1,
+      "share_count": 0,
+      "parent": {
+        "profile": {
+          "id": 2,
+          "first_name": "N/A",
+          "last_name": "N/A",
+          "middle_name": "N/A",
+          "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+          "qualification": "Bachelor of Science"
+        },
+        "body": "Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming",
+        "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg",
+        "pic2": "N/A",
+        "pic3": "N/A",
+        "video": "N/A",
+        "article": "N/A",
+        "time_stamp": "2025-04-17T14:30:11.005024Z"
+      },
+      "post_id": 6
+    }
+  ],
+  "last_page": "http://127.0.0.1:8000/post/posted/?page=4"
 }
 ```
 

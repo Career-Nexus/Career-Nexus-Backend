@@ -2244,3 +2244,117 @@ This endpoint retrieves the sum total of the number of Users the current logged 
 ```
 
 [Table of contents](#toc)
+
+
+# Get Own Posts
+
+This endpoint retrieves a paginated result of all the posts made by the logged in user.
+
+**Endpoint:**`/post/posted/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 12,
+  "next": "http://127.0.0.1:8000/post/posted/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "Did you know? The first 1GB hard drive, released by IBM in 1980, weighed over 500 pounds. Now we carry terabytes in our pockets. Wild. #TechHistory #Innovation",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/a1195f39-adb5-408c-b5e0-ca3f50351201thumbnail.png",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:35:02.370818Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "post_id": 4
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "AI isn’t just science fiction anymore — it’s helping detect cancer, drive cars, and even write code. The future is here. #AI #FutureOfTech",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:35:40.387128Z",
+      "comment_count": 3,
+      "like_count": 2,
+      "share_count": 0,
+      "parent": null,
+      "post_id": 5
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "Check this out guys...",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T15:46:40.954681Z",
+      "comment_count": 0,
+      "like_count": 1,
+      "share_count": 0,
+      "parent": {
+        "profile": {
+          "id": 2,
+          "first_name": "N/A",
+          "last_name": "N/A",
+          "middle_name": "N/A",
+          "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+          "qualification": "Bachelor of Science"
+        },
+        "body": "Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming",
+        "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg",
+        "pic2": "N/A",
+        "pic3": "N/A",
+        "video": "N/A",
+        "article": "N/A",
+        "time_stamp": "2025-04-17T14:30:11.005024Z"
+      },
+      "post_id": 6
+    }
+  ],
+  "last_page": "http://127.0.0.1:8000/post/posted/?page=4"
+}
+```
+
+[Table of contents](#toc)

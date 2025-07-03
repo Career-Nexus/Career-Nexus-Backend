@@ -82,6 +82,47 @@ class PostView(APIView):
                 return Response({"error":"Inexistent Post"},status=status.HTTP_404_NOT_FOUND)
 
 
+class OwnPosts(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    
+    def get(self,request):
+        base_url = request.build_absolute_uri()
+        base_url = base_url.split()[0]
+        user = request.user
+        page_number = request.query_params.get("page","1")
+        cache_key = f"{request.user.id}_ownposts_{page_number}"
+        cached_data = cache.get(cache_key)
+        if not cached_data:
+            posts = user.profile.posts_set.all().order_by("-time_stamp")
+            paginator = PostPagination()
+            paginated_items = paginator.paginate_queryset(posts,request)
+            serialized_items = serializers.RetrievePostSerializer(paginated_items,many=True).data
+
+            item_count = posts.count()
+            floor = item_count//paginator.page_size
+            if item_count % paginator.page_size == 0:
+                last_page = floor
+            else:
+                last_page = floor + 1
+
+            output = paginator.get_paginated_response(serialized_items).data
+            output["last_page"] = f"{base_url}?page={last_page}"
+            cache.set(cache_key,output,timeout=300)
+            return Response(output,status=status.HTTP_200_OK)
+        else:
+            return Response(cached_data,status=status.HTTP_200_OK)
+
+
+
+
+
+
+
+
+
+
 class FollowingPostView(APIView):
     permission_classes = [
         IsAuthenticated,
