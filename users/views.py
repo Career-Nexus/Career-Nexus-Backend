@@ -35,11 +35,7 @@ default_intro_video = ''
 
 
 def delete_cache(key):
-    #print("Tried")
-    if cache.get(key):
-        cache.delete(key)
-        #print(f"LOG:DELETED CACHE FOR {key}")
-
+    cache.delete(key)
 
 
 

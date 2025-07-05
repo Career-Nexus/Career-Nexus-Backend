@@ -36,6 +36,34 @@ class FollowSerializer(serializers.ModelSerializer):
                 }
         return output
 
+
+class UnfollowSerializer(serializers.Serializer):
+    user_following = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())
+
+    def validate(self,data):
+        user = self.context["user"]
+        user_following = data.get("user_following")
+        if user == user_following:
+            raise serializers.ValidationError("Cannot follow/unfollow self.")
+        if not models.UserFollow.objects.filter(user_follower=user,user_following=user_following).exists():
+            raise serializers.ValidationError("This user is not currently being followed.")
+        data["user"] = user
+        return data
+
+    def create(self,validated_data):
+        user_follower = validated_data.get("user")
+        user_following = validated_data.get("user_following")
+        models.UserFollow.objects.get(user_follower=user_follower,user_following=user_following).delete()
+        output = {
+            "status":"Unfollowed user"
+        }
+        return output
+
+
+
+
+
+
 class RetrieveFollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = PersonalProfile

@@ -12,6 +12,7 @@ from . import models, serializers
 from users.models import *
 from posts.models import *
 from users.serializers import PersonalProfileSerializer
+from posts.views import invalidate_post_cache
 
 
 class FollowView(APIView):
@@ -24,7 +25,28 @@ class FollowView(APIView):
         serializer = self.serializer_class(data=request.data,context={"user":request.user})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            user_industry = request.user.industry 
+            #Avoid returning stale can_follow data if a user is followed from their posts
+            invalidate_post_cache(user_industry)
             return Response(output,status=status.HTTP_201_CREATED)
+
+
+
+class UnfollowView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        serializer = serializers.UnfollowSerializer(data=request.data,context={"user":request.user})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            user_industry = request.user.industry
+            #Avoid returning stale can_follow data if a user is unfollowed from their posts
+            invalidate_post_cache(user_industry)
+            return Response(output,status=status.HTTP_200_OK)
+
+
 
 class FollowingView(APIView):
     permission_classes = [
@@ -37,6 +59,8 @@ class FollowingView(APIView):
         serializer = serializers.RetrieveFollowingSerializer(data,many=True).data
         return Response(serializer,status=status.HTTP_200_OK)
 
+
+
 class FollowerView(APIView):
     permission_classes = [
                 IsAuthenticated,
@@ -48,6 +72,8 @@ class FollowerView(APIView):
         serializer = serializers.RetrieveFollowingSerializer(data,many=True).data
         return Response(serializer,status=status.HTTP_200_OK)
 
+
+
 class FollowingCountView(APIView):
     permission_classes = [
         IsAuthenticated,
@@ -57,6 +83,9 @@ class FollowingCountView(APIView):
         followings = user.follower.all()
         followings_count = len(followings)
         return Response({"following_count":followings_count},status=status.HTTP_200_OK)
+
+
+
 
 class FollowerCountView(APIView):
     permission_classes = [

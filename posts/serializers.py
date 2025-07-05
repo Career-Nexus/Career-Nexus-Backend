@@ -2,14 +2,20 @@ from rest_framework import serializers
 
 from . import models
 from users.models import PersonalProfile
+from follows.models import UserFollow
 
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.utils.text import get_valid_filename
+from django.db.models import Q
 
 import uuid
 import joblib
 import os
+
+
+
+
 
 directory = os.path.dirname(os.path.abspath(__file__))
 model_directory = os.path.join(directory,"models")
@@ -139,13 +145,33 @@ class RetrievePostSerializer(serializers.ModelSerializer):
     share_count = serializers.SerializerMethodField()
     profile = PersonalProfileSerializer()
     parent = ParentPostSerializer()
+    can_like = serializers.SerializerMethodField()
+    can_follow = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Posts
-        fields = ["profile","id","body","pic1","pic2","pic3","video","article","time_stamp","comment_count","like_count","share_count","parent"]
+        fields = ["profile","id","body","pic1","pic2","pic3","video","article","time_stamp","comment_count","like_count","share_count","parent","can_like","can_follow"]
+
+    def get_can_follow(self,obj):
+        poster = obj.profile.user
+        user = self.context.get("user")
+        if poster == user:
+            return False
+        if UserFollow.objects.filter(user_follower=user,user_following=poster).exists():
+            return False
+        else:
+            return True
+
+    def get_can_like(self,obj):
+        user = self.context.get("user")
+        if user:
+            if models.Like.objects.filter(post=obj,user=user).exists():
+                return False
+            else:
+                return True
+        return "N/A"
 
     def get_comment_count(self,obj):
-        #comments = obj.comment_set.all()
         comments = models.Comment.objects.filter(post=obj,parent__isnull=True)
         return len(comments)
     def get_like_count(self,obj):
@@ -243,6 +269,33 @@ class CreateLikeSerializer(serializers.Serializer):
                     "post":like.post.id
                 }
         return output
+
+class UnlikePostSerializer(serializers.Serializer):
+    post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
+
+
+    def validate(self,data):
+        user = self.context["user"]
+        post = data.get("post")
+        if not models.Like.objects.filter(post=post,user=user).exists():
+            raise serializers.ValidationError("Post is yet to be liked")
+        data["user"] = user
+        return data
+
+    def create(self,validated_data):
+        user = validated_data.get("user")
+        post = validated_data.get("post")
+        models.Like.objects.get(user=user,post=post).delete()
+        output = {
+            "status":"Unliked post"
+        }
+        return output
+
+
+
+
+
+
 
 class RepostSerializer(serializers.Serializer):
     parent = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())

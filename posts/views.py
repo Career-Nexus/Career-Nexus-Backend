@@ -19,11 +19,22 @@ from django.core.cache import cache
 
 from users.views import delete_cache
 
+
+def invalidate_post_cache(user_industry):
+    if user_industry == "":
+        user_industry = "others"
+    for item in range(1,6):
+        cache_key = f"{user_industry}_post_{item}"
+        delete_cache(cache_key)
+
+
+
+
 class PostPagination(PageNumberPagination):
     page_size = 3
 
 
-# Create your views here.
+
 
 class PostView(APIView):
     permission_classes= [
@@ -56,7 +67,7 @@ class PostView(APIView):
                 paginator = PostPagination()
                 paginated_items = paginator.paginate_queryset(posts,request)
 
-                serializer = serializers.RetrievePostSerializer(paginated_items,many=True)
+                serializer = serializers.RetrievePostSerializer(paginated_items,many=True,context={"user":request.user})
 
                 item_counts = posts.count()
                 floor = item_counts//paginator.page_size
@@ -67,14 +78,13 @@ class PostView(APIView):
 
                 response = paginator.get_paginated_response(serializer.data).data
                 response["last_page"] = f"{base_url}?page={last_page}"
-                cache.set(cache_key,response,timeout=300)
+                cache.set(cache_key,response,timeout=60)
                 return Response(response,status=status.HTTP_200_OK)
             else:
                 return Response(cached_data,status=status.HTTP_200_OK)
         else:
             try:
                 post = models.Posts.objects.get(id=param)
-                #print(post.media)
 
                 output = serializers.RetrievePostSerializer(post,many=False).data
                 return Response(output,status=status.HTTP_200_OK)
@@ -98,7 +108,7 @@ class OwnPosts(APIView):
             posts = user.profile.posts_set.all().order_by("-time_stamp")
             paginator = PostPagination()
             paginated_items = paginator.paginate_queryset(posts,request)
-            serialized_items = serializers.RetrievePostSerializer(paginated_items,many=True).data
+            serialized_items = serializers.RetrievePostSerializer(paginated_items,many=True,context={"user":request.user}).data
 
             item_count = posts.count()
             floor = item_count//paginator.page_size
@@ -109,7 +119,7 @@ class OwnPosts(APIView):
 
             output = paginator.get_paginated_response(serialized_items).data
             output["last_page"] = f"{base_url}?page={last_page}"
-            cache.set(cache_key,output,timeout=300)
+            cache.set(cache_key,output,timeout=60)
             return Response(output,status=status.HTTP_200_OK)
         else:
             return Response(cached_data,status=status.HTTP_200_OK)
@@ -138,7 +148,7 @@ class FollowingPostView(APIView):
         paginator = PostPagination()
         paginated_items = paginator.paginate_queryset(following_posts,request)
 
-        serializer = self.serializer_class(paginated_items,many=True).data
+        serializer = self.serializer_class(paginated_items,many=True,context={"user":request.user}).data
         response = paginator.get_paginated_response(serializer).data
 
         return Response(response,status=status.HTTP_200_OK)
@@ -209,7 +219,28 @@ class CreateLikeView(APIView):
         serializer = self.serializer_class(data=request.data,context={"user":request.user})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            user_industry = request.user.industry
+            #Deleting cache to prevent returning stale data
+            invalidate_post_cache(user_industry)
             return Response(output,status=status.HTTP_201_CREATED)
+
+
+
+class UnlikePostView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        serializer = serializers.UnlikePostSerializer(data=request.data,context={"user":request.user})
+        if serializer.is_valid(raise_exception=True):
+            output = serializer.save()
+            user_industry = request.user.industry
+            #Avoiding returning stale data due to caching
+            invalidate_post_cache(user_industry)
+            return Response(output,status.HTTP_200_OK)
+
+
 
 
 class RepostView(APIView):

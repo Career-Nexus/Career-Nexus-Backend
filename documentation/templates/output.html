@@ -1,23 +1,23 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -42,7 +42,7 @@
 <li><a href="#follow_user">follow user</a></li>
 <li><a href="#followers_count">followers count</a></li>
 <li><a href="#followings_count">followings count</a></li>
-<li><a href="#followings_posts">followings posts</a></li>
+<li><a href="#followings_post">followings post</a></li>
 <li><a href="#forget_password">forget password</a></li>
 <li><a href="#get_chat_sessions">get chat sessions</a></li>
 <li><a href="#get_comment">get comment</a></li>
@@ -51,6 +51,7 @@
 <li><a href="#get_job_posts">get job posts</a></li>
 <li><a href="#get_job_preference">get job preference</a></li>
 <li><a href="#get_own_posts">get own posts</a></li>
+<li><a href="#get_posts">get posts</a></li>
 <li><a href="#get_saved_post">get saved post</a></li>
 <li><a href="#job_create">job create</a></li>
 <li><a href="#job_notifications">job notifications</a></li>
@@ -58,7 +59,6 @@
 <li><a href="#login_api">login api</a></li>
 <li><a href="#logout">logout</a></li>
 <li><a href="#post_create">post create</a></li>
-<li><a href="#post_get">post get</a></li>
 <li><a href="#post_like">post like</a></li>
 <li><a href="#post_retrieve">post retrieve</a></li>
 <li><a href="#post_save">post save</a></li>
@@ -69,6 +69,8 @@
 <li><a href="#reply_comment">reply comment</a></li>
 <li><a href="#reposting">reposting</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
+<li><a href="#unfollow_user">unfollow user</a></li>
+<li><a href="#unlike_post">unlike post</a></li>
 <li><a href="#update_profile">update profile</a></li>
 <li><a href="#updating_user_eperience">updating user eperience</a></li>
 <li><a href="#user_analytics">user analytics</a></li>
@@ -609,7 +611,7 @@ skills:*****
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Post Get<a name='post_get'></a></h1>
+<h1>Get Posts<a name='get_posts'></a></h1>
 <p>This endpoints retrieves posts associated with the user's selected industry and also posts by mentors on the platform.</p>
 <p><strong>Endpoint:</strong><code>/post/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
@@ -620,8 +622,8 @@ skills:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;count&quot;: 1,
-  &quot;next&quot;: null,
+  &quot;count&quot;: 5,
+  &quot;next&quot;: &quot;http://127.0.0.1:8000/post/?page=2&quot;,
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
@@ -633,21 +635,79 @@ skills:*****
         &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
         &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;Fadman Montessori. School building leaders and table shakers.&quot;,
-      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/pic/d0642e69-2ff3-4179-9b6b-b745ec637088fadman_thumbnail.png&quot;,
+      &quot;body&quot;: &quot;🌾 Tech in the Fields 📲🌍
+
+Agriculture isn’t just about soil and sun anymore — it’s about sensors, satellites, and software. Farmers today use data analytics, autonomous tractors, and climate-smart tools to grow more with less. With technology in their hands, they’re not just feeding communities — they’re feeding the future.
+
+#AgriInnovation #FarmTech #DigitalFarming #FutureOfFood&quot;,
+      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/0149c8fd-1055-4d23-9a2c-ac78ee61abc2branch.jpeg&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
+      &quot;article&quot;: &quot;#AgriTech #AgriInnovation&quot;,
+      &quot;time_stamp&quot;: &quot;2025-05-15T13:44:08.197325Z&quot;,
+      &quot;comment_count&quot;: 0,
+      &quot;like_count&quot;: 1,
+      &quot;share_count&quot;: 0,
+      &quot;parent&quot;: null,
+      &quot;can_like&quot;: false,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 11
+    },
+    {
+      &quot;profile&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      },
+      &quot;body&quot;: &quot;Farming Meets the Future 🚜💡
+
+From drones mapping crop health to AI-driven irrigation systems, agriculture is being transformed by technology. Precision farming is reducing waste, boosting yields, and helping farmers make smarter, faster decisions. As the world faces growing food demands and climate challenges, agri-tech is planting the seeds of a sustainable future.
+
+#AgriTech #SmartFarming #SustainableAgriculture #InnovationInFarming&quot;,
+      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/37653a4e-4370-40c5-8f8a-c5c296e27108branch.jpeg&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-06-18T19:25:29.242254Z&quot;,
+      &quot;time_stamp&quot;: &quot;2025-05-15T13:42:20.543966Z&quot;,
+      &quot;comment_count&quot;: 0,
+      &quot;like_count&quot;: 1,
+      &quot;share_count&quot;: 0,
+      &quot;parent&quot;: null,
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 10
+    },
+    {
+      &quot;profile&quot;: {
+        &quot;id&quot;: 2,
+        &quot;first_name&quot;: &quot;N/A&quot;,
+        &quot;last_name&quot;: &quot;N/A&quot;,
+        &quot;middle_name&quot;: &quot;N/A&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
+      },
+      &quot;body&quot;: &quot;Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
+      &quot;article&quot;: &quot;N/A&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-17T14:31:33.731704Z&quot;,
       &quot;comment_count&quot;: 0,
       &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
-      &quot;post_id&quot;: 12
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 3
     }
   ],
-  &quot;last_page&quot;: &quot;http://127.0.0.1:8000/post/?page=1&quot;
+  &quot;last_page&quot;: &quot;http://127.0.0.1:8000/post/?page=2&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
@@ -972,76 +1032,98 @@ post:*****
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Followings Posts<a name='followings_posts'></a></h1>
+<h1>Followings Post<a name='followings_post'></a></h1>
 <p>This endpoint retrieves the posts of users the logged in user is currently following.</p>
 <p><strong>Endpoint:</strong><code>/post/following/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">
+
 </code></pre>
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;count&quot;: 3,
-  &quot;next&quot;: null,
+  &quot;count&quot;: 12,
+  &quot;next&quot;: &quot;http://127.0.0.1:8000/post/following/?page=2&quot;,
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
       &quot;profile&quot;: {
-        &quot;id&quot;: 2,
-        &quot;first_name&quot;: &quot;N/A&quot;,
-        &quot;last_name&quot;: &quot;N/A&quot;,
-        &quot;middle_name&quot;: &quot;N/A&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming&quot;,
-      &quot;media&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg&quot;,
+      &quot;body&quot;: &quot;Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:30:11.005024Z&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-18T22:36:11.257113Z&quot;,
+      &quot;comment_count&quot;: 0,
+      &quot;like_count&quot;: 0,
+      &quot;share_count&quot;: 0,
+      &quot;parent&quot;: null,
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 15
+    },
+    {
+      &quot;profile&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      },
+      &quot;body&quot;: &quot;Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
+      &quot;article&quot;: &quot;N/A&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-18T22:34:36.796671Z&quot;,
+      &quot;comment_count&quot;: 0,
+      &quot;like_count&quot;: 0,
+      &quot;share_count&quot;: 0,
+      &quot;parent&quot;: null,
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 14
+    },
+    {
+      &quot;profile&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      },
+      &quot;body&quot;: &quot;Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
+
+At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
+
+Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
+
+Anyone else feeling that urge to slow down while everything else speeds up?&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
+      &quot;pic2&quot;: &quot;N/A&quot;,
+      &quot;pic3&quot;: &quot;N/A&quot;,
+      &quot;video&quot;: &quot;N/A&quot;,
+      &quot;article&quot;: &quot;N/A&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-18T21:46:34.030565Z&quot;,
       &quot;comment_count&quot;: 1,
       &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
-      &quot;post_id&quot;: 1
-    },
-    {
-      &quot;profile&quot;: {
-        &quot;id&quot;: 2,
-        &quot;first_name&quot;: &quot;N/A&quot;,
-        &quot;last_name&quot;: &quot;N/A&quot;,
-        &quot;middle_name&quot;: &quot;N/A&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
-      },
-      &quot;body&quot;: &quot;Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife&quot;,
-      &quot;media&quot;: &quot;N/A&quot;,
-      &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:30:44.280807Z&quot;,
-      &quot;comment_count&quot;: 0,
-      &quot;like_count&quot;: 0,
-      &quot;share_count&quot;: 0,
-      &quot;parent&quot;: null,
-      &quot;post_id&quot;: 2
-    },
-    {
-      &quot;profile&quot;: {
-        &quot;id&quot;: 2,
-        &quot;first_name&quot;: &quot;N/A&quot;,
-        &quot;last_name&quot;: &quot;N/A&quot;,
-        &quot;middle_name&quot;: &quot;N/A&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
-      },
-      &quot;body&quot;: &quot;Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming&quot;,
-      &quot;media&quot;: &quot;N/A&quot;,
-      &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:31:33.731704Z&quot;,
-      &quot;comment_count&quot;: 0,
-      &quot;like_count&quot;: 0,
-      &quot;share_count&quot;: 0,
-      &quot;parent&quot;: null,
-      &quot;post_id&quot;: 3
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 13
     }
   ]
 }
@@ -1701,18 +1783,20 @@ user_following:*****
         &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
         &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;Did you know? The first 1GB hard drive, released by IBM in 1980, weighed over 500 pounds. Now we carry terabytes in our pockets. Wild. #TechHistory #Innovation&quot;,
-      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/a1195f39-adb5-408c-b5e0-ca3f50351201thumbnail.png&quot;,
+      &quot;body&quot;: &quot;Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:35:02.370818Z&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-18T22:36:11.257113Z&quot;,
       &quot;comment_count&quot;: 0,
       &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
-      &quot;post_id&quot;: 4
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 15
     },
     {
       &quot;profile&quot;: {
@@ -1723,18 +1807,20 @@ user_following:*****
         &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
         &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;AI isn’t just science fiction anymore — it’s helping detect cancer, drive cars, and even write code. The future is here. #AI #FutureOfTech&quot;,
+      &quot;body&quot;: &quot;Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.&quot;,
       &quot;pic1&quot;: &quot;N/A&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T14:35:40.387128Z&quot;,
-      &quot;comment_count&quot;: 3,
-      &quot;like_count&quot;: 2,
+      &quot;time_stamp&quot;: &quot;2025-06-18T22:34:36.796671Z&quot;,
+      &quot;comment_count&quot;: 0,
+      &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
-      &quot;post_id&quot;: 5
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 14
     },
     {
       &quot;profile&quot;: {
@@ -1745,40 +1831,71 @@ user_following:*****
         &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
         &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;Check this out guys...&quot;,
+      &quot;body&quot;: &quot;Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
+
+At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
+
+Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
+
+Anyone else feeling that urge to slow down while everything else speeds up?&quot;,
       &quot;pic1&quot;: &quot;N/A&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-04-17T15:46:40.954681Z&quot;,
-      &quot;comment_count&quot;: 0,
-      &quot;like_count&quot;: 1,
+      &quot;time_stamp&quot;: &quot;2025-06-18T21:46:34.030565Z&quot;,
+      &quot;comment_count&quot;: 1,
+      &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
-      &quot;parent&quot;: {
-        &quot;profile&quot;: {
-          &quot;id&quot;: 2,
-          &quot;first_name&quot;: &quot;N/A&quot;,
-          &quot;last_name&quot;: &quot;N/A&quot;,
-          &quot;middle_name&quot;: &quot;N/A&quot;,
-          &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
-          &quot;qualification&quot;: &quot;Bachelor of Science&quot;
-        },
-        &quot;body&quot;: &quot;Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming&quot;,
-        &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg&quot;,
-        &quot;pic2&quot;: &quot;N/A&quot;,
-        &quot;pic3&quot;: &quot;N/A&quot;,
-        &quot;video&quot;: &quot;N/A&quot;,
-        &quot;article&quot;: &quot;N/A&quot;,
-        &quot;time_stamp&quot;: &quot;2025-04-17T14:30:11.005024Z&quot;
-      },
-      &quot;post_id&quot;: 6
+      &quot;parent&quot;: null,
+      &quot;can_like&quot;: true,
+      &quot;can_follow&quot;: false,
+      &quot;post_id&quot;: 13
     }
   ],
   &quot;last_page&quot;: &quot;http://127.0.0.1:8000/post/posted/?page=4&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
+<h1>Unlike Post<a name='unlike_post'></a></h1>
+<p>This endpoint unlikes a Post that has been previously liked. N.B: To unlike a post, the post should have been liked previously.</p>
+<p><strong>Endpoint:</strong><code>/post/unlike/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
 
-</body>
-</html>
+post:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;Unliked post&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Unfollow User<a name='unfollow_user'></a></h1>
+<p>This endpoint unfollows an already followeduser. N.B:The user must have been previously followed in order to be eligible to be unfollowed.</p>
+<p><strong>Endpoint:</strong><code>/unfollow/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+user_following:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;Unfollowed user&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+
+        </body>
+        </html>
+        
