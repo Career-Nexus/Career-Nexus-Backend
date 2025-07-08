@@ -774,9 +774,9 @@ This endpoints retrieves posts associated with the user's selected industry and 
 
 ``` json
 {
-  "count": 5,
-  "next": "http://127.0.0.1:8000/post/?page=2",
-  "previous": null,
+  "count": 6,
+  "next": null,
+  "previous": "http://127.0.0.1:8000/post/",
   "results": [
     {
       "profile": {
@@ -787,24 +787,43 @@ This endpoints retrieves posts associated with the user's selected industry and 
         "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
         "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
-      "body": "🌾 Tech in the Fields 📲🌍
+      "body": "Driving the Future: How Technology is Transforming Transportation
+Transportation has always been the engine of progress—moving people, goods, and ideas across cities, countries, and continents. But in the 21st century, it’s not just about getting from point A to point B. It’s about how we get there: faster, safer, cleaner, and smarter. And at the heart of this transformation? Technology.
 
-Agriculture isn’t just about soil and sun anymore — it’s about sensors, satellites, and software. Farmers today use data analytics, autonomous tractors, and climate-smart tools to grow more with less. With technology in their hands, they’re not just feeding communities — they’re feeding the future.
+1. Autonomous Vehicles: From Sci-Fi to Street Legal
+What was once a futuristic dream is now cruising through city streets. Autonomous vehicles (AVs) use AI, sensors, and real-time data to navigate without human input. Companies like Waymo, Tesla, and Cruise are already testing and deploying self-driving cars, while autonomous trucks promise to revolutionize logistics and supply chains. The potential benefits are huge: fewer accidents, reduced congestion, and more accessible transportation for the elderly and disabled.
 
-#AgriInnovation #FarmTech #DigitalFarming #FutureOfFood",
-      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/0149c8fd-1055-4d23-9a2c-ac78ee61abc2branch.jpeg",
+2. Electrification: Powering a Sustainable Tomorrow
+The shift from fossil fuels to electric power is reshaping the automotive industry. Electric vehicles (EVs) are no longer niche—they're mainstream. Governments are offering incentives, automakers are committing to electric-only futures, and battery tech is advancing rapidly. Beyond cars, electric buses, bikes, and even airplanes are emerging, helping reduce emissions and create a cleaner planet.
+
+3. Smart Infrastructure: Cities That Talk Back
+Roads, traffic lights, and parking lots are getting an upgrade. Smart infrastructure uses IoT (Internet of Things) sensors and connectivity to manage traffic flow, detect maintenance needs, and even communicate with autonomous vehicles. Imagine a traffic signal that adapts in real time to reduce congestion or a parking lot that directs you to an open spot. These innovations aren't just cool—they improve safety, reduce fuel use, and enhance urban life.
+
+4. Mobility-as-a-Service (MaaS): The End of Car Ownership?
+With apps like Uber, Lyft, Bird, and Lime, personal car ownership is becoming less necessary in urban environments. MaaS platforms integrate various transport options—bikes, scooters, rideshares, public transit—into a single, seamless service. Add in AI-powered route planning, and getting around becomes effortless, personalized, and more eco-friendly.
+
+5. Hyperloop & High-Speed Rail: Redefining Long-Distance Travel
+While still in early stages, hyperloop technology—propelling pods through low-pressure tubes at airplane speeds—could dramatically shorten travel times between major cities. Meanwhile, countries like Japan and France continue to lead the way with efficient high-speed rail, showing the world what’s possible with investment in advanced public transport.
+
+6. Data-Driven Decisions: Analytics Behind the Wheel
+Every vehicle on the road today is a rolling data center. From GPS tracking to engine diagnostics, real-time data helps optimize routes, predict maintenance issues, and improve safety. Municipalities and logistics companies alike are leveraging this data to make smarter transportation decisions, reduce emissions, and cut costs.
+
+The Road Ahead
+Technology isn’t just changing how we move—it’s changing what’s possible. The intersection of AI, data, automation, and sustainability is creating a transportation revolution. But as we accelerate toward the future, we must ensure equity, safety, and accessibility for all. The journey has just begun.",
+      "pic1": "N/A",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
-      "article": "#AgriTech #AgriInnovation",
-      "time_stamp": "2025-05-15T13:44:08.197325Z",
-      "comment_count": 0,
-      "like_count": 1,
-      "share_count": 0,
+      "article": "N/A",
+      "time_stamp": "2025-04-24T14:06:45.666911Z",
+      "comment_count": 3,
+      "like_count": 2,
+      "share_count": 1,
       "parent": null,
       "can_like": false,
       "can_follow": false,
-      "post_id": 11
+      "is_self": true,
+      "post_id": 7
     },
     {
       "profile": {
@@ -815,24 +834,21 @@ Agriculture isn’t just about soil and sun anymore — it’s about sensors, sa
         "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
         "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
-      "body": "Farming Meets the Future 🚜💡
-
-From drones mapping crop health to AI-driven irrigation systems, agriculture is being transformed by technology. Precision farming is reducing waste, boosting yields, and helping farmers make smarter, faster decisions. As the world faces growing food demands and climate challenges, agri-tech is planting the seeds of a sustainable future.
-
-#AgriTech #SmartFarming #SustainableAgriculture #InnovationInFarming",
-      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/37653a4e-4370-40c5-8f8a-c5c296e27108branch.jpeg",
+      "body": "AI isn’t just science fiction anymore — it’s helping detect cancer, drive cars, and even write code. The future is here. #AI #FutureOfTech",
+      "pic1": "N/A",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-05-15T13:42:20.543966Z",
-      "comment_count": 0,
-      "like_count": 1,
+      "time_stamp": "2025-04-17T14:35:40.387128Z",
+      "comment_count": 3,
+      "like_count": 2,
       "share_count": 0,
       "parent": null,
-      "can_like": true,
+      "can_like": false,
       "can_follow": false,
-      "post_id": 10
+      "is_self": true,
+      "post_id": 5
     },
     {
       "profile": {
@@ -855,12 +871,11 @@ From drones mapping crop health to AI-driven irrigation systems, agriculture is 
       "share_count": 0,
       "parent": null,
       "can_like": true,
-      "can_follow": false,
+      "can_follow": true,
+      "is_self": false,
       "post_id": 3
     }
   ],
-  "last_page": "http://127.0.0.1:8000/post/?page=2"
-}
 ```
 
 [Table of contents](#toc) 
@@ -1308,7 +1323,7 @@ post:*****
 
 [Table of contents](#toc) 
 
-# Followings Post
+# Get Followings Post
 
 This endpoint retrieves the posts of users the logged in user is currently following.
 
@@ -1328,87 +1343,84 @@ This endpoint retrieves the posts of users the logged in user is currently follo
 
 ``` json
 {
-  "count": 12,
-  "next": "http://127.0.0.1:8000/post/following/?page=2",
+  "count": 3,
+  "next": null,
   "previous": null,
   "results": [
     {
       "profile": {
-        "id": 1,
-        "first_name": "Opeyemi",
-        "last_name": "Saliu",
-        "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
       },
-      "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
+      "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
       "pic1": "N/A",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-06-18T22:36:11.257113Z",
+      "time_stamp": "2025-04-17T14:31:33.731704Z",
       "comment_count": 0,
       "like_count": 0,
       "share_count": 0,
       "parent": null,
       "can_like": true,
       "can_follow": false,
-      "post_id": 15
+      "is_self": false,
+      "post_id": 3
     },
     {
       "profile": {
-        "id": 1,
-        "first_name": "Opeyemi",
-        "last_name": "Saliu",
-        "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
       },
-      "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
+      "body": "Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife",
       "pic1": "N/A",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-06-18T22:34:36.796671Z",
+      "time_stamp": "2025-04-17T14:30:44.280807Z",
       "comment_count": 0,
       "like_count": 0,
       "share_count": 0,
       "parent": null,
       "can_like": true,
       "can_follow": false,
-      "post_id": 14
+      "is_self": false,
+      "post_id": 2
     },
     {
       "profile": {
-        "id": 1,
-        "first_name": "Opeyemi",
-        "last_name": "Saliu",
-        "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
       },
-      "body": "Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
-
-At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
-
-Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
-
-Anyone else feeling that urge to slow down while everything else speeds up?",
-      "pic1": "N/A",
+      "body": "Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-06-18T21:46:34.030565Z",
+      "time_stamp": "2025-04-17T14:30:11.005024Z",
       "comment_count": 1,
       "like_count": 0,
       "share_count": 0,
       "parent": null,
       "can_like": true,
       "can_follow": false,
-      "post_id": 13
+      "is_self": false,
+      "post_id": 1
     }
   ]
 }
@@ -2371,6 +2383,7 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
       "parent": null,
       "can_like": true,
       "can_follow": false,
+      "is_self": true,
       "post_id": 15
     },
     {
@@ -2395,6 +2408,7 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
       "parent": null,
       "can_like": true,
       "can_follow": false,
+      "is_self": true,
       "post_id": 14
     },
     {
@@ -2425,6 +2439,7 @@ Anyone else feeling that urge to slow down while everything else speeds up?",
       "parent": null,
       "can_like": true,
       "can_follow": false,
+      "is_self": true,
       "post_id": 13
     }
   ],

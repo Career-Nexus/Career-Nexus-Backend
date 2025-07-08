@@ -42,12 +42,12 @@
 <li><a href="#follow_user">follow user</a></li>
 <li><a href="#followers_count">followers count</a></li>
 <li><a href="#followings_count">followings count</a></li>
-<li><a href="#followings_post">followings post</a></li>
 <li><a href="#forget_password">forget password</a></li>
 <li><a href="#get_chat_sessions">get chat sessions</a></li>
 <li><a href="#get_comment">get comment</a></li>
 <li><a href="#get_country_phone_codes">get country phone codes</a></li>
 <li><a href="#get_followings">get followings</a></li>
+<li><a href="#get_followings_post">get followings post</a></li>
 <li><a href="#get_job_posts">get job posts</a></li>
 <li><a href="#get_job_preference">get job preference</a></li>
 <li><a href="#get_own_posts">get own posts</a></li>
@@ -622,9 +622,9 @@ skills:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;count&quot;: 5,
-  &quot;next&quot;: &quot;http://127.0.0.1:8000/post/?page=2&quot;,
-  &quot;previous&quot;: null,
+  &quot;count&quot;: 6,
+  &quot;next&quot;: null,
+  &quot;previous&quot;: &quot;http://127.0.0.1:8000/post/&quot;,
   &quot;results&quot;: [
     {
       &quot;profile&quot;: {
@@ -635,24 +635,43 @@ skills:*****
         &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
         &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;🌾 Tech in the Fields 📲🌍
+      &quot;body&quot;: &quot;Driving the Future: How Technology is Transforming Transportation
+Transportation has always been the engine of progress—moving people, goods, and ideas across cities, countries, and continents. But in the 21st century, it’s not just about getting from point A to point B. It’s about how we get there: faster, safer, cleaner, and smarter. And at the heart of this transformation? Technology.
 
-Agriculture isn’t just about soil and sun anymore — it’s about sensors, satellites, and software. Farmers today use data analytics, autonomous tractors, and climate-smart tools to grow more with less. With technology in their hands, they’re not just feeding communities — they’re feeding the future.
+1. Autonomous Vehicles: From Sci-Fi to Street Legal
+What was once a futuristic dream is now cruising through city streets. Autonomous vehicles (AVs) use AI, sensors, and real-time data to navigate without human input. Companies like Waymo, Tesla, and Cruise are already testing and deploying self-driving cars, while autonomous trucks promise to revolutionize logistics and supply chains. The potential benefits are huge: fewer accidents, reduced congestion, and more accessible transportation for the elderly and disabled.
 
-#AgriInnovation #FarmTech #DigitalFarming #FutureOfFood&quot;,
-      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/0149c8fd-1055-4d23-9a2c-ac78ee61abc2branch.jpeg&quot;,
+2. Electrification: Powering a Sustainable Tomorrow
+The shift from fossil fuels to electric power is reshaping the automotive industry. Electric vehicles (EVs) are no longer niche—they're mainstream. Governments are offering incentives, automakers are committing to electric-only futures, and battery tech is advancing rapidly. Beyond cars, electric buses, bikes, and even airplanes are emerging, helping reduce emissions and create a cleaner planet.
+
+3. Smart Infrastructure: Cities That Talk Back
+Roads, traffic lights, and parking lots are getting an upgrade. Smart infrastructure uses IoT (Internet of Things) sensors and connectivity to manage traffic flow, detect maintenance needs, and even communicate with autonomous vehicles. Imagine a traffic signal that adapts in real time to reduce congestion or a parking lot that directs you to an open spot. These innovations aren't just cool—they improve safety, reduce fuel use, and enhance urban life.
+
+4. Mobility-as-a-Service (MaaS): The End of Car Ownership?
+With apps like Uber, Lyft, Bird, and Lime, personal car ownership is becoming less necessary in urban environments. MaaS platforms integrate various transport options—bikes, scooters, rideshares, public transit—into a single, seamless service. Add in AI-powered route planning, and getting around becomes effortless, personalized, and more eco-friendly.
+
+5. Hyperloop &amp; High-Speed Rail: Redefining Long-Distance Travel
+While still in early stages, hyperloop technology—propelling pods through low-pressure tubes at airplane speeds—could dramatically shorten travel times between major cities. Meanwhile, countries like Japan and France continue to lead the way with efficient high-speed rail, showing the world what’s possible with investment in advanced public transport.
+
+6. Data-Driven Decisions: Analytics Behind the Wheel
+Every vehicle on the road today is a rolling data center. From GPS tracking to engine diagnostics, real-time data helps optimize routes, predict maintenance issues, and improve safety. Municipalities and logistics companies alike are leveraging this data to make smarter transportation decisions, reduce emissions, and cut costs.
+
+The Road Ahead
+Technology isn’t just changing how we move—it’s changing what’s possible. The intersection of AI, data, automation, and sustainability is creating a transportation revolution. But as we accelerate toward the future, we must ensure equity, safety, and accessibility for all. The journey has just begun.&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
-      &quot;article&quot;: &quot;#AgriTech #AgriInnovation&quot;,
-      &quot;time_stamp&quot;: &quot;2025-05-15T13:44:08.197325Z&quot;,
-      &quot;comment_count&quot;: 0,
-      &quot;like_count&quot;: 1,
-      &quot;share_count&quot;: 0,
+      &quot;article&quot;: &quot;N/A&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-24T14:06:45.666911Z&quot;,
+      &quot;comment_count&quot;: 3,
+      &quot;like_count&quot;: 2,
+      &quot;share_count&quot;: 1,
       &quot;parent&quot;: null,
       &quot;can_like&quot;: false,
       &quot;can_follow&quot;: false,
-      &quot;post_id&quot;: 11
+      &quot;is_self&quot;: true,
+      &quot;post_id&quot;: 7
     },
     {
       &quot;profile&quot;: {
@@ -663,24 +682,21 @@ Agriculture isn’t just about soil and sun anymore — it’s about sensors, sa
         &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
         &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
       },
-      &quot;body&quot;: &quot;Farming Meets the Future 🚜💡
-
-From drones mapping crop health to AI-driven irrigation systems, agriculture is being transformed by technology. Precision farming is reducing waste, boosting yields, and helping farmers make smarter, faster decisions. As the world faces growing food demands and climate challenges, agri-tech is planting the seeds of a sustainable future.
-
-#AgriTech #SmartFarming #SustainableAgriculture #InnovationInFarming&quot;,
-      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/37653a4e-4370-40c5-8f8a-c5c296e27108branch.jpeg&quot;,
+      &quot;body&quot;: &quot;AI isn’t just science fiction anymore — it’s helping detect cancer, drive cars, and even write code. The future is here. #AI #FutureOfTech&quot;,
+      &quot;pic1&quot;: &quot;N/A&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-05-15T13:42:20.543966Z&quot;,
-      &quot;comment_count&quot;: 0,
-      &quot;like_count&quot;: 1,
+      &quot;time_stamp&quot;: &quot;2025-04-17T14:35:40.387128Z&quot;,
+      &quot;comment_count&quot;: 3,
+      &quot;like_count&quot;: 2,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
-      &quot;can_like&quot;: true,
+      &quot;can_like&quot;: false,
       &quot;can_follow&quot;: false,
-      &quot;post_id&quot;: 10
+      &quot;is_self&quot;: true,
+      &quot;post_id&quot;: 5
     },
     {
       &quot;profile&quot;: {
@@ -703,12 +719,11 @@ From drones mapping crop health to AI-driven irrigation systems, agriculture is 
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
       &quot;can_like&quot;: true,
-      &quot;can_follow&quot;: false,
+      &quot;can_follow&quot;: true,
+      &quot;is_self&quot;: false,
       &quot;post_id&quot;: 3
     }
   ],
-  &quot;last_page&quot;: &quot;http://127.0.0.1:8000/post/?page=2&quot;
-}
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Post Retrieve<a name='post_retrieve'></a></h1>
@@ -1032,7 +1047,7 @@ post:*****
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>Followings Post<a name='followings_post'></a></h1>
+<h1>Get Followings Post<a name='get_followings_post'></a></h1>
 <p>This endpoint retrieves the posts of users the logged in user is currently following.</p>
 <p><strong>Endpoint:</strong><code>/post/following/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
@@ -1043,87 +1058,84 @@ post:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;count&quot;: 12,
-  &quot;next&quot;: &quot;http://127.0.0.1:8000/post/following/?page=2&quot;,
+  &quot;count&quot;: 3,
+  &quot;next&quot;: null,
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
       &quot;profile&quot;: {
-        &quot;id&quot;: 1,
-        &quot;first_name&quot;: &quot;Opeyemi&quot;,
-        &quot;last_name&quot;: &quot;Saliu&quot;,
-        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+        &quot;id&quot;: 2,
+        &quot;first_name&quot;: &quot;N/A&quot;,
+        &quot;last_name&quot;: &quot;N/A&quot;,
+        &quot;middle_name&quot;: &quot;N/A&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
       },
-      &quot;body&quot;: &quot;Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.&quot;,
+      &quot;body&quot;: &quot;Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming&quot;,
       &quot;pic1&quot;: &quot;N/A&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-06-18T22:36:11.257113Z&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-17T14:31:33.731704Z&quot;,
       &quot;comment_count&quot;: 0,
       &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
       &quot;can_like&quot;: true,
       &quot;can_follow&quot;: false,
-      &quot;post_id&quot;: 15
+      &quot;is_self&quot;: false,
+      &quot;post_id&quot;: 3
     },
     {
       &quot;profile&quot;: {
-        &quot;id&quot;: 1,
-        &quot;first_name&quot;: &quot;Opeyemi&quot;,
-        &quot;last_name&quot;: &quot;Saliu&quot;,
-        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+        &quot;id&quot;: 2,
+        &quot;first_name&quot;: &quot;N/A&quot;,
+        &quot;last_name&quot;: &quot;N/A&quot;,
+        &quot;middle_name&quot;: &quot;N/A&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
       },
-      &quot;body&quot;: &quot;Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.&quot;,
+      &quot;body&quot;: &quot;Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife&quot;,
       &quot;pic1&quot;: &quot;N/A&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-06-18T22:34:36.796671Z&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-17T14:30:44.280807Z&quot;,
       &quot;comment_count&quot;: 0,
       &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
       &quot;can_like&quot;: true,
       &quot;can_follow&quot;: false,
-      &quot;post_id&quot;: 14
+      &quot;is_self&quot;: false,
+      &quot;post_id&quot;: 2
     },
     {
       &quot;profile&quot;: {
-        &quot;id&quot;: 1,
-        &quot;first_name&quot;: &quot;Opeyemi&quot;,
-        &quot;last_name&quot;: &quot;Saliu&quot;,
-        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
-        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
-        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+        &quot;id&quot;: 2,
+        &quot;first_name&quot;: &quot;N/A&quot;,
+        &quot;last_name&quot;: &quot;N/A&quot;,
+        &quot;middle_name&quot;: &quot;N/A&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Science&quot;
       },
-      &quot;body&quot;: &quot;Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
-
-At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
-
-Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
-
-Anyone else feeling that urge to slow down while everything else speeds up?&quot;,
-      &quot;pic1&quot;: &quot;N/A&quot;,
+      &quot;body&quot;: &quot;Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming&quot;,
+      &quot;pic1&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg&quot;,
       &quot;pic2&quot;: &quot;N/A&quot;,
       &quot;pic3&quot;: &quot;N/A&quot;,
       &quot;video&quot;: &quot;N/A&quot;,
       &quot;article&quot;: &quot;N/A&quot;,
-      &quot;time_stamp&quot;: &quot;2025-06-18T21:46:34.030565Z&quot;,
+      &quot;time_stamp&quot;: &quot;2025-04-17T14:30:11.005024Z&quot;,
       &quot;comment_count&quot;: 1,
       &quot;like_count&quot;: 0,
       &quot;share_count&quot;: 0,
       &quot;parent&quot;: null,
       &quot;can_like&quot;: true,
       &quot;can_follow&quot;: false,
-      &quot;post_id&quot;: 13
+      &quot;is_self&quot;: false,
+      &quot;post_id&quot;: 1
     }
   ]
 }
@@ -1796,6 +1808,7 @@ user_following:*****
       &quot;parent&quot;: null,
       &quot;can_like&quot;: true,
       &quot;can_follow&quot;: false,
+      &quot;is_self&quot;: true,
       &quot;post_id&quot;: 15
     },
     {
@@ -1820,6 +1833,7 @@ user_following:*****
       &quot;parent&quot;: null,
       &quot;can_like&quot;: true,
       &quot;can_follow&quot;: false,
+      &quot;is_self&quot;: true,
       &quot;post_id&quot;: 14
     },
     {
@@ -1850,6 +1864,7 @@ Anyone else feeling that urge to slow down while everything else speeds up?&quot
       &quot;parent&quot;: null,
       &quot;can_like&quot;: true,
       &quot;can_follow&quot;: false,
+      &quot;is_self&quot;: true,
       &quot;post_id&quot;: 13
     }
   ],

@@ -147,10 +147,19 @@ class RetrievePostSerializer(serializers.ModelSerializer):
     parent = ParentPostSerializer()
     can_like = serializers.SerializerMethodField()
     can_follow = serializers.SerializerMethodField()
+    is_self = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Posts
-        fields = ["profile","id","body","pic1","pic2","pic3","video","article","time_stamp","comment_count","like_count","share_count","parent","can_like","can_follow"]
+        fields = ["profile","id","body","pic1","pic2","pic3","video","article","time_stamp","comment_count","like_count","share_count","parent","can_like","can_follow","is_self"]
+
+    def get_is_self(self,obj):
+        poster = obj.profile.user
+        user = self.context["user"]
+        if poster == user:
+            return True
+        else:
+            return False
 
     def get_can_follow(self,obj):
         poster = obj.profile.user
