@@ -8,40 +8,41 @@
 
 # User Registeration
 
-This API registers user on the platform. N.B: Email confirmation is enforced using OTP.
+This endpoint registers a new user (Learner/Mentor) in the system. If the payload property 'industry' is sent in the payload request, a mentor is registered in the system. If the payload 'industry' is not included in the request, a learner is registered into the system. N.B:Otp is enforced to certify email address ownership. In the first stage, a request without OTP property in the payload is sent, after email validation, an otp is sent to the email for verification. In the second stage, the same request payload is repeated but this time sent with an otp after verification, an account is created for the user, logged in and an access token is returned in the response.
 
-**Endpoint:**`user/signup/`
+**Endpoint:**`/user/signup/`
+
+**Method:** `POST`
 
 ## Payload
 
-```json
+``` json
+{
+
 email:*****
+
+industry:*****
 
 password1:*****
 
 password2:*****
 
-otp **for confirmation:*****
+otp:*****
 
 }
+
 ```
-
-**Method:** `POST`
-
 ## Response body
 
 **status code:201**
 
-```json
-"status":"OTP sent"
-  } success without sending OTP payload
-
+``` json
 {
-"refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NzI5MTM4MCwiaWF0IjoxNzQ3MjA0OTgwLCJqdGkiOiI5MjRlMWY3NTNjM2I0NzFjYmNjYmM4YTc0MTJhZTQ4ZSIsInVzZXJfaWQiOjF9.3XAZo7Y5ylKUt5pQRFJEgT-pcY7h48XZ17L0WPrLePQ",
-  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3MjI2NTgwLCJpYXQiOjE3NDcyMDQ5ODAsImp0aSI6IjkzYWMxZWQ4MjMyMzRjYWFiYzdmM2ZiZmZmMzVkMGRjIiwidXNlcl9pZCI6MX0.ho7_rOofWa_bSyL88Wa1cf7kr-9C_-7uDRtMbkq14GA"
-"email":"example@gmail.com"
-"status":"Success"
-} success with sending OTP payload
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MjEzMTY4MiwiaWF0IjoxNzUyMDQ1MjgyLCJqdGkiOiJlMmNjZmY0NTU5NjY0Njk0YmUzZDJhM2EzYjI5YzI1NyIsInVzZXJfaWQiOjExfQ.A6FBhNeJ3TZAP4vFOETfT1KgPxBh_6Joe2GAHeiYLWM",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUyMDY2ODgyLCJpYXQiOjE3NTIwNDUyODIsImp0aSI6IjI2YTRiZWYwZTBhOTQwMmRiM2U1YjExZjMzMzlkZDZmIiwidXNlcl9pZCI6MTF9.oq8ScALElAUkGUoAf3UfLyRSam94IXCjouHKrHd-MC8",
+  "user": "opeyemi_cn2@yopmail.com",
+  "status": "Success"
+}
 ```
 
 [Table of contents](#toc)
@@ -92,27 +93,32 @@ YzdmM2ZiZmZmMzVkMGRjIiwidXNlcl9pZCI6MX0.ho7_rOofWa_bSyL88Wa1cf7kr-9C_-7uDRtMbkq
 
 This endpoint authenticates a user using email and password.
 
-**Method:** `POST`  
-**Endpoint:** `/user/signin`
+**Endpoint:**`/user/signin/`
 
-## Request Body
+**Method:** `POST`
 
-```json
+## Payload
+
+``` json
 {
-  "email": "user@example.com",
-  "password": "securepassword"
+
+email:*****
+
+password:*****
+
 }
+
 ```
+## Response body
 
-## Response
+**status code:200**
 
- **status code:200**
-
-```json
+``` json
 {
- "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NjA5MDgxNCwiaWF0IjoxNzQ2MDA0NDE0LCJqdGkiOiI3NjkyOGY4OTZhYmY0ZmEwODJmYTc3NmUzYWZkZmRiMyIsInVzZXJfaWQiOjF9.BWuP8ogqd8DngeZQTgdzrEPW8c3dKi9_tYdTHLyEmhw",
- "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MDI2MDE0LCJpYXQiOjE3NDYwMDQ0MTQsImp0aSI6IjJkNzRlNDI1N2E1YzQ1ZTQ5NGQ1OTQ2MTU3Njc5NzNhIiwidXNlcl9pZCI6MX0.TkC5-SF7KQI993gQFMme9juUVzlF4IJqN4GmLAx8o8I",
- "user": "saliuoazeez@gmail.com"
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MjEzMzY0OSwiaWF0IjoxNzUyMDQ3MjQ5LCJqdGkiOiI3NTYxZDVjY2ZkNjk0YzBhYTRjN2YzYWYyZTc2ODBhNiIsInVzZXJfaWQiOjF9.JTan4KwvZYOy5J696suc_klUvl16ruVzr8mCmHgsh4g",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUyMDY4ODQ5LCJpYXQiOjE3NTIwNDcyNDksImp0aSI6IjVlY2E0ZjA4OGRhODRiODRhODRmMzgxM2Y2YjQ1YzdkIiwidXNlcl9pZCI6MX0.xQRfYoFM9tbaz7SOt9jKqro9GcrKk4t-dj3UT_qp4Fk",
+  "user": "saliuoazeez@gmail.com",
+  "user_type": "learner"
 }
 ```
 
@@ -145,115 +151,98 @@ refresh:*****
 
 [Table of contents](#toc)
 
-# Profile Retrieve API
+# Profile Retrieve
 
-This endpoint retrieve a logged in user or retrieves a third party's profile data if a query parameter of user_id is passed to the url.
+This endpoint retrieve a logged in user or retrieves a third party's profile data if a query parameter of user_id is passed to the url. N.B:The user_type of the request instance determines the structure of the data passed in the response. properties like years_of_experience,timezone,mentorship_styles,technical_skills etc are only available to mentors profile which is automatically retrieved in response. Retrieving learners profile does not contain sthese properties.
 
-**NB:user must be authenticated via Bearer token**
+**Endpoint:**`/user/retrieve-profile/`
 
-**Method:** `GET`  
-**Endpoint:** `user/retrieve-profile/`
+**Method:** `GET`
 
-## Response Body
+## Payload
+
+``` json
+
+
+```
+## Response body
 
 **status code:200**
 
-```json
+``` json
+LEARNERS
+{
+  "first_name": "Adeniji",
+  "last_name": "Adekogbe",
+  "middle_name": "Michael",
+  "country_code": "+000",
+  "phone_number": "00000000000",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+  "location": "Ogun state",
+  "position": "Team lead.",
+  "bio": "Customer service | Complaint resolver | Innovation expert",
+  "qualification": "Bachelor of Science (Education)",
+  "intro_video": "",
+  "summary": "A customer service expert with about 2 years of experience in delivering optimum customer service to clients and customers.",
+  "experience": [],
+  "education": [],
+  "certification": [],
+  "followers": 0,
+  "followings": 0
+}
+MENTORS
 {
   "first_name": "Opeyemi",
   "last_name": "Saliu",
   "middle_name": "Abdul-Azeez",
-  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
-  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-  "location": "Alabama, USA",
-  "position": "Aquaculturist and Graduate assistant",
-  "bio": "Aquaculturist | UI/UX | Graduate Assistant",
-  "qualification": "Bachelor of Science",
+  "country_code": "+234",
+  "phone_number": "9069102522",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
+  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+  "location": "Ogun state",
+  "position": "",
+  "bio": "",
+  "qualification": "Bachelor of Engineering",
   "intro_video": "",
-  "summary": "An aquaculturist with over 5 years of working expeience.",
-  "experience": [
-    {
-      "id": 4,
-      "title": "Extension Officer",
-      "organization": "Aller Aqua",
-      "start_date": "2022-12-21",
-      "end_date": "2024-12-20",
-      "location": "Lagos",
-      "employment_type": "Onsite",
-      "detail": "Managed the sales department of the company."
-    },
-    {
-      "id": 3,
-      "title": "Aquaculturist",
-      "organization": "Atlantic shrimpers",
-      "start_date": "2020-01-19",
-      "end_date": "2022-11-29",
-      "location": "Lagos",
-      "employment_type": "Onsite",
-      "detail": "Managed the culturing of shrimps and prawns."
-    }
+  "summary": "",
+  "experience": [],
+  "education": [],
+  "certification": [],
+  "years_of_experience": 6,
+  "availability": "weekends",
+  "current_job": "Backend Developer",
+  "areas_of_expertise": [],
+  "technical_skills": [
+    "Python",
+    "Shell Scripting",
+    "Backend development",
+    "Devops",
+    "AI/ML",
+    "Database Management System"
   ],
-  "education": [
-    {
-      "id": 6,
-      "course": "Aquaculture (MsC)",
-      "school": "Auburn University Alabama,",
-      "start_date": "2025-01-03",
-      "end_date": "Present",
-      "location": "USA",
-      "detail": "Began studying for a masters degree in Aquaculture."
-    },
-    {
-      "id": 5,
-      "course": "Aquaculture and Fisheries Management",
-      "school": "Federal University of Agriculture Abeokuta",
-      "start_date": "2011-02-12",
-      "end_date": "2016-07-23",
-      "location": "Abeokuta",
-      "detail": "Graduated with a Second class upper honors"
-    }
-  ],
-  "certification": [
-    {
-      "id": 3,
-      "title": "Introduction to frontend development",
-      "school": "Coursera",
-      "issue_date": "2023-07-04",
-      "cert_id": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ1MzIzMTE1LCJpYXQiOjE3NDUzMDE1MTUsImp0aSI6IjU2ZGY1YTVhMGQ2NTRjMGI4MDMwMTcxY2MwZjUxMzE1IiwidXNlcl9pZCI6Mn0.y-c-FZ9U-130hlP0B4cIK8Vl21c72xnJHJWGZBWiiaU",
-      "skills": "Html,CSS"
-    }
-  ],
-  "followers": 1,
+  "mentorship_styles": [],
+  "timezone": null,
+  "linkedin_url": null,
+  "followers": 0,
   "followings": 0
 }
 ```
 
 [Table of contents](#toc) 
 
-# Update Profile
+# Profile Update
 
-Updates profile data.
+This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles,timezone and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.
 
 **Endpoint:**`/user/profile-update/`
 
+**Method:** `PUT`
+
 ## Payload
 
-```json
-qualification:*****
-
-summary:*****
-
-location:*****
-
-position:*****
-
-bio:*****
-
-profile_photo:*****
-
-cover_photo:*****
-
-intro_video:*****
+``` json
+{
 
 first_name:*****
 
@@ -261,26 +250,90 @@ last_name:*****
 
 middle_name:*****
 
-country_code:****
+country_code:*****
 
-phone_number:****
+phone_number:*****
+
+availability:*****
+
+qualification:*****
+
+location:*****
+
+areas_of_expertise:*****
+
+years_of_experience:*****
+
+current_job:*****
+
+technical_skills:*****
+
+mentorship_styles:*****
+
+profile_photo:*****
+
+cover_photo:*****
+
+summary:*****
+
+position:*****
+
+bio:*****
+
+intro_video:*****
+
+timezone:*****
+
+linkedin_url:*****
+
 }
+
 ```
-
-**Method:** `PUT`
-
 ## Response body
 
-**status code:201**
+**status code:200**
 
-```json
+``` json
+MENTORS
+{
   "first_name": "Opeyemi",
   "last_name": "Saliu",
-  "middle_name": "Abdul Azeez",
+  "middle_name": "Abdul-Azeez",
   "country_code": "+234",
   "phone_number": "9069102522",
-  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg",
-  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/6a687725-56b1-4f1e-ad55-ae814dce20febg_image1.jpeg",
+  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
+  "qualification": "Bachelor of Engineering",
+  "intro_video": "",
+  "location": "Ogun state",
+  "bio": "",
+  "position": "",
+  "summary": "",
+  "years_of_experience": 6,
+  "availability": "weekends",
+  "current_job": "Backend Developer",
+  "areas_of_expertise": [],
+  "technical_skills": [
+    "Python",
+    "Shell Scripting",
+    "Backend development",
+    "Devops",
+    "AI/ML",
+    "Database Management System"
+  ],
+  "mentorship_styles": [],
+  "timezone": null,
+  "linkedin_url": null
+}
+LEARNERS
+{
+  "first_name": "Opeyemi",
+  "last_name": "Saliu",
+  "middle_name": "Abdul-Azeez",
+  "country_code": "+234",
+  "phone_number": "9069102522",
+  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
   "qualification": "Bachelor of Engineering (Civil Engineering)",
   "intro_video": "https://careernexus-storage1.s3.amazonaws.com/intro_videos/6e34ee76-ac17-4146-b7e6-f645f46ce886test_video.mp4",
   "location": "Ogun",

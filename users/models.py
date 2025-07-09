@@ -44,8 +44,8 @@ class Otp(models.Model):
 # USER PROFILE MODELS --------------------------------------------
 
 class PersonalProfile(models.Model):
+    #General profile properties
     user = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="profile")
-    #name = models.CharField(max_length=250,default="Unregistered")
     first_name = models.CharField(max_length=200,default="N/A")
     last_name = models.CharField(max_length=200,default="N/A")
     middle_name = models.CharField(max_length=200,default="N/A")
@@ -59,6 +59,18 @@ class PersonalProfile(models.Model):
     bio = models.CharField(max_length=4000,default='')
     intro_video = models.CharField(max_length=300,default='')
     summary = models.CharField(max_length=5000,default='')
+    resume = models.CharField(max_length=5000,default='')
+    #Extra properties for mentors
+    years_of_experience = models.IntegerField(null=True,blank=True)
+    availability = models.CharField(null=True,blank=True)
+    current_job = models.CharField(null=True,blank=True)
+    areas_of_expertise = models.JSONField(default=list)
+    technical_skills = models.JSONField(default=list)
+    mentorship_styles = models.JSONField(default=list)
+    timezone = models.CharField(null=True,blank=True)
+    linkedin_url = models.CharField(null=True,blank=True)
+
+
 
 class ProfileView(models.Model):
     viewer = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="viewer")

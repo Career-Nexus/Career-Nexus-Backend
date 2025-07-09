@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'portfolios',
     'networks',
     'jobs',
+    'mentors',
 
 
     #Extensions

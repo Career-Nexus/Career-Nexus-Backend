@@ -1,13 +1,10 @@
-#from django.forms import fields
-#from requests import request
-#from requests.models import LocationParseError
-#from typing_extensions import Required
+from time import timezone
 from django.utils.timezone import make_aware
 from django.contrib.auth import get_user_model
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
-#from rest_framework.serializers import ModelSerializer
+
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
 from . import models
@@ -15,7 +12,7 @@ from . import models
 
 from .generator.referral_code_generator import *
 from .Hasher import hasher
-#from .mmail import Agent
+
 from .tasks import send_email
 from .options import get_choices
 from datetime import datetime
@@ -45,6 +42,8 @@ user_options = CHOICES["user"]
 industry_options = CHOICES["industry"]
 
 employment_type_options = CHOICES["employment_type"]
+
+availability_options = CHOICES["availability"]
 
 
 
@@ -163,6 +162,7 @@ class NewsLetterUnsubscribeSerializer(serializers.Serializer):
 
 class RegisterSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=300)
+    industry = serializers.ChoiceField(choices=industry_options,required=False)
     password1 = serializers.CharField(max_length=200)
     password2 = serializers.CharField(max_length=200)
     otp = serializers.CharField(max_length=20,required=False)
@@ -194,6 +194,7 @@ class RegisterSerializer(serializers.Serializer):
         username = uuid.uuid4()
         password1 = validated_data.get("password1")
         otp = validated_data.get("otp",None)
+        industry = validated_data.get("industry")
 
         if otp == None:
             ref_code_generated = ref_agent.generate_otp()
@@ -215,11 +216,22 @@ class RegisterSerializer(serializers.Serializer):
                     raise serializers.ValidationError({"OTP Error":"Expired OTP"})
                 else:
                     models.Otp.objects.filter(email=email).delete()
-                    user_obj = models.Users.objects.create_user(
-                            email= email.lower(),
+                    #If industry is not specified at registeration, default user_type to learner
+                    if not industry:
+                        user_obj = models.Users.objects.create_user(
+                                email= email.lower(),
+                                username = str(username),
+                                password = password1
+                                )
+                    else:
+                        #If industry is specified at registeration, create user as a mentor.
+                        user_obj = models.Users.objects.create_user(
+                            email=email.lower(),
                             username = str(username),
-                            password = password1
-                            )
+                            password = password1,
+                            user_type = "mentor",
+                            industry = industry
+                        )
                     models.PersonalProfile.objects.create(user=user_obj)
                     output = user_obj
                     return output
@@ -441,6 +453,32 @@ class PersonalProfileSerializer(serializers.Serializer):
     position = serializers.CharField(max_length=1000,required=False)
     location = serializers.CharField(max_length=1000,required=False)
     bio = serializers.CharField(max_length=4000,required=False)
+    resume = serializers.FileField(required=False)
+    #Field options for mentors.
+    years_of_experience = serializers.IntegerField(required=False)
+    availability = serializers.ChoiceField(choices=availability_options,required=False)
+    current_job = serializers.CharField(max_length=250,required=False)
+    areas_of_expertise = serializers.JSONField(required=False)
+    technical_skills = serializers.JSONField(required=False)
+    mentorship_styles = serializers.JSONField(required=False)
+    timezone = serializers.CharField(required=False,max_length=100)
+    linkedin_url = serializers.CharField(max_length=500,required=False)
+
+    def validate(self,data):
+        areas_of_expertise = data.get("areas_of_expertise")
+        technical_skills = data.get("technical_skills")
+        mentorship_styles = data.get("mentorship_styles")
+        container = [areas_of_expertise,technical_skills,mentorship_styles]
+        for item in container:
+            if item and not isinstance(item,list):
+                raise serializers.ValidationError(f"{item} must be a list of values.")
+        return data
+
+    def validate_resume(self,file):
+        size = file.size
+        if size/1000000 > 5:
+            raise serializers.ValidationError("File size too large.")
+        return file
 
     def update(self,instance,validated_data):
         profile_photo = validated_data.get('profile_photo','')
@@ -448,6 +486,8 @@ class PersonalProfileSerializer(serializers.Serializer):
         qualification = validated_data.get('qualification',instance.qualification)
         intro_video = validated_data.get('intro_video','')
         summary = validated_data.get('summary',instance.summary)
+        resume = validated_data.get("resume",'')
+
 
         instance.position = validated_data.get("position",instance.position)
         instance.location = validated_data.get("location",instance.location)
@@ -457,6 +497,37 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.middle_name = validated_data.get("middle_name",instance.middle_name)
         instance.country_code = validated_data.get("country_code",instance.country_code)
         instance.phone_number = validated_data.get("phone_number",instance.phone_number)
+
+        #Extra updates if instance is a mentor.
+        if instance.user.user_type == "mentor":
+            years_of_experience = validated_data.get("years_of_experience",instance.years_of_experience)
+            availability = validated_data.get("availability",instance.availability)
+            current_job = validated_data.get("current_job",instance.current_job)
+            areas_of_expertise = validated_data.get("areas_of_expertise",instance.areas_of_expertise)
+            technical_skills = validated_data.get("technical_skills",instance.technical_skills)
+            mentorship_styles = validated_data.get("mentorship_styles",instance.mentorship_styles)
+            timezone = validated_data.get("timezone",instance.timezone)
+            linkedin_url = validated_data.get("linkedin_url",instance.linkedin_url)
+
+
+            instance.years_of_experience = years_of_experience
+            instance.availability = availability
+            instance.current_job = current_job
+            instance.areas_of_expertise = areas_of_expertise
+            instance.technical_skills = technical_skills
+            instance.mentorship_styles = mentorship_styles
+            instance.timezone = timezone
+            instance.linkedin_url = linkedin_url
+        
+
+        if resume != '':
+            file_name = f"resumes/{uuid.uuid4()}{resume.name}"
+            file_path = default_storage.save(file_name,ContentFile(resume.read()))
+            url = default_storage.url(file_path)
+            resume = url
+        else:
+            resume = instance.resume
+
 
         if profile_photo != '':
             #TODO create auto-cleaning logic for profile photo that has been changed
@@ -494,22 +565,30 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.qualification = qualification
         instance.intro_video = intro_video
         instance.summary = summary
+        instance.resume = resume
         instance.save()
-        return {
-                "first_name":instance.first_name,
-                "last_name":instance.last_name,
-                "middle_name":instance.middle_name,
-                "country_code":instance.country_code,
-                "phone_number":instance.phone_number,
-                "profile_photo":instance.profile_photo,
-                "cover_photo":instance.cover_photo,
-                "qualification":instance.qualification,
-                "intro_video":instance.intro_video,
-                "location":instance.location,
-                "bio":instance.bio,
-                "position":instance.position,
-                "summary":instance.summary
-                }
+        if instance.user.user_type == "learner":
+            output = LearnerUpdateOutputSerializer(instance,many=False).data
+        else:
+            output = MentorUpdateOutputSerializer(instance,many=False).data
+        return output
+
+
+class MentorUpdateOutputSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.PersonalProfile
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","profile_photo","cover_photo","qualification","intro_video","location","bio","position","summary","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","timezone","linkedin_url"]
+
+
+
+
+class LearnerUpdateOutputSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.PersonalProfile
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","profile_photo","cover_photo","qualification","intro_video","location","bio","position","summary","availability"]
+
 
 
 class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
@@ -521,6 +600,40 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.PersonalProfile
         fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
+
+    def get_followings(self,obj):
+        followings = len(obj.user.follower.all())
+        return followings
+
+    def get_followers(self,obj):
+        followers = len(obj.user.following.all())
+        return followers
+
+    def get_experience(self,obj):
+        experience = obj.user.experience_set.all().order_by("-start_date")
+        data = ExperienceSerializer(experience,many=True).data
+        return data
+
+    def get_education(self,obj):
+        education = obj.user.education_set.all().order_by("-start_date")
+        data = EducationSerializer(education,many=True).data
+        return data
+
+    def get_certification(self,obj):
+        certifications = obj.user.certification_set.all().order_by("-issue_date")
+        data = CertificationSerializer(certifications,many=True).data
+        return data
+
+class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
+    experience = serializers.SerializerMethodField()
+    education = serializers.SerializerMethodField()
+    certification = serializers.SerializerMethodField()
+    followers = serializers.SerializerMethodField()
+    followings = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.PersonalProfile
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","timezone","linkedin_url","followers","followings"]
 
     def get_followings(self,obj):
         followings = len(obj.user.follower.all())

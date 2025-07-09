@@ -216,7 +216,8 @@ class LoginView(APIView):
                 {
                     "refresh":str(refresh),
                     "access":str(refresh.access_token),
-                    "user":user.email
+                    "user":user.email,
+                    "user_type":user.user_type
                     },
                 status=status.HTTP_200_OK
                 )
@@ -308,7 +309,7 @@ class RetreiveProfileView(APIView):
             user =models.Users.objects.get(email=request.user.email)
             return user
         except:
-            raise Http404({"error":"Inexistent User"})
+            raise Http404("Inexistent User")
 
     @swagger_auto_schema(operation_description="Retrieves User complete profile including their work experience, education and certification.")
     def get(self,request):
@@ -319,9 +320,12 @@ class RetreiveProfileView(APIView):
             if not cached_data:
                 user = self.get_user(request)
                 profile = models.PersonalProfile.objects.get(user=user)
-                output = serializers.RetrieveAnotherProfileSerializer(profile).data
+                if user.user_type == "learner":
+                    output = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
+                #TODO establish serializer for user_type=employer
+                else:
+                    output = serializers.RetrieveMentorProfileSerializer(profile,many=False).data
                 cache.set(cache_key,output,timeout=7200)
-                #notify(user.id,f"profile for {user.email} was successfully retrieved")
                 return Response(output,status=status.HTTP_200_OK)
             else:
                 #print(cache_key)
@@ -329,9 +333,8 @@ class RetreiveProfileView(APIView):
         else:
             try:
                 user = models.Users.objects.get(id=param)
-            except:
-                raise Http404({"error":"Invalid User Id"})
-
+            except models.Users.DoesNotExist:
+                raise Http404("Invalid User Id")
             cache_key = f"{user.id}_profile"
             cached_data = cache.get(cache_key)
             if not cached_data:
@@ -339,8 +342,12 @@ class RetreiveProfileView(APIView):
 
                 #Implementation profile viewing counter 
                 models.ProfileView.objects.create(viewer=request.user,viewed=user)
-                profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
-                cache.set(cache_key,profile_data,timeout=7200)
+                if user.user_type == "learner":
+                    profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
+                #TODO establish serializer for user_type=employer
+                else:
+                    profile_data = serializers.RetrieveMentorProfileSerializer(profile,many=False).data
+                cache.set(cache_key,profile_data,timeout=7200)                   
                 return Response(profile_data,status=status.HTTP_200_OK)
             else:
                 return Response(cached_data,status=status.HTTP_200_OK)
