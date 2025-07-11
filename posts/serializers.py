@@ -207,15 +207,30 @@ class CommentSerializer(serializers.ModelSerializer):
     body = serializers.CharField(max_length=5000)
     parent = serializers.PrimaryKeyRelatedField(queryset=models.Comment.objects.all())
     replies = serializers.SerializerMethodField()
+    likes = serializers.SerializerMethodField()
+    can_like = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Comment
-        fields = ["id","post","commenter","body","parent","replies","time_stamp"]
+        fields = ["id","post","commenter","body","media","parent","replies","likes","time_stamp","can_like"]
+
+    def get_can_like(self,obj):
+        user = self.context["user"]
+        if models.CommentLike.objects.filter(user=user,comment=obj).exists():
+            return False
+        else:
+            return True
+
+
+    def get_likes(self,obj):
+        number_of_likes = models.CommentLike.objects.filter(comment=obj).count()
+        return number_of_likes
 
     def get_replies(self,obj):
         replies = obj.replies.all()
-        data = CommentSerializer(replies,many=True).data
+        data = CommentSerializer(replies,context=self.context,many=True).data
         return data
+
     def get_commenter(self,obj):
         commenter_profile = obj.user.profile
         output = {
@@ -235,13 +250,25 @@ class CommentSerializer(serializers.ModelSerializer):
 class CreateCommentSerializer(serializers.Serializer):
     post = serializers.PrimaryKeyRelatedField(queryset=models.Posts.objects.all())
     body = serializers.CharField(max_length=5000)
+    media = serializers.ImageField(required=False)
+
+    def validate_media(self,image):
+        if image.size/1000000 > 1:
+            raise serializers.ValidationError("Image size too large.")
+        return image
 
     def create(self,validated_data):
         validated_data["user"] = self.context["request"].user
+        media = validated_data.get("media")
+        if media:
+            file_name = f"comments/media/{uuid.uuid4()}{get_valid_filename(media.name)}"
+            file_path = default_storage.save(file_name,ContentFile(media.read()))
+            validated_data["media"] = default_storage.url(file_path)
         comment = models.Comment.objects.create(**validated_data)
         output = {
                     "user":PersonalProfileSerializer(comment.user.profile,many=False).data,
                     "body":comment.body,
+                    "media":comment.media,
                     "time_stamp":comment.time_stamp
                 }
         return output
@@ -302,7 +329,31 @@ class UnlikePostSerializer(serializers.Serializer):
 
 
 
+class CommentLikeSerializer(serializers.Serializer):
+    comment = serializers.PrimaryKeyRelatedField(queryset=models.Comment.objects.all())
 
+    def validate(self,data):
+        user = self.context["user"]
+        comment = data.get("comment")
+        if models.CommentLike.objects.filter(user=user,comment=comment).exists():
+            raise serializers.ValidationError("Comment already liked.")
+        data["user"] = user
+        return data
+
+    def create(self,validated_data):
+        instance = models.CommentLike.objects.create(**validated_data)
+        return instance
+
+
+class CommentUnlikeSerializer(serializers.Serializer):
+    comment = serializers.PrimaryKeyRelatedField(queryset=models.Comment.objects.all())
+
+    def validate(self,data):
+        user = self.context["user"]
+        comment = data.get("comment")
+        if not models.CommentLike.objects.filter(user=user,comment=comment).exists():
+            raise serializers.ValidationError("Comment has not been previously liked.")
+        return data
 
 
 
@@ -313,7 +364,11 @@ class RepostSerializer(serializers.Serializer):
     def create(self,validated_data):
         user = self.context["user"]
         validated_data["profile"] = PersonalProfile.objects.get(user=user)
-        #validated_data["body"] = ""
+
+        new_classification = classify_content(validated_data["body"])
+        old_classification = validated_data["parent"].industries
+        validated_data["industries"] = f"{old_classification},{new_classification}"
+        
         repost = models.Posts.objects.create(**validated_data)
         output = ParentPostSerializer(repost)
         return output.data

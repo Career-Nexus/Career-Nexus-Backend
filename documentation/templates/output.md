@@ -39,31 +39,33 @@
 32. [job create](#job_create)  
 33. [job notifications](#job_notifications)  
 34. [job preference](#job_preference)  
-35. [login api](#login_api)  
-36. [logout](#logout)  
-37. [post create](#post_create)  
-38. [post like](#post_like)  
-39. [post retrieve](#post_retrieve)  
-40. [post save](#post_save)  
-41. [post share](#post_share)  
-42. [profile completion](#profile_completion)  
-43. [profile retrieve](#profile_retrieve)  
-44. [profile update](#profile_update)  
-45. [recommended job posts.](#recommended_job_posts.)  
-46. [reply comment](#reply_comment)  
-47. [reposting](#reposting)  
-48. [retrieve education api](#retrieve_education_api)  
-49. [unfollow user](#unfollow_user)  
-50. [unlike post](#unlike_post)  
-51. [updating user eperience](#updating_user_eperience)  
-52. [user analytics](#user_analytics)  
-53. [user followers](#user_followers)  
-54. [user registeration](#user_registeration)  
-55. [user-industry update](#user-industry_update)  
-56. [valid choice](#valid_choice)  
-57. [verify otp hash](#verify_otp_hash)  
-58. [view certification](#view_certification)  
-59. [view experience](#view_experience)  
+35. [like comment/reply](#like_comment/reply)  
+36. [login api](#login_api)  
+37. [logout](#logout)  
+38. [post create](#post_create)  
+39. [post like](#post_like)  
+40. [post retrieve](#post_retrieve)  
+41. [post save](#post_save)  
+42. [post share](#post_share)  
+43. [profile completion](#profile_completion)  
+44. [profile retrieve](#profile_retrieve)  
+45. [profile update](#profile_update)  
+46. [recommended job posts.](#recommended_job_posts.)  
+47. [reply comment](#reply_comment)  
+48. [reposting](#reposting)  
+49. [retrieve education api](#retrieve_education_api)  
+50. [unfollow user](#unfollow_user)  
+51. [unlike comment/reply](#unlike_comment/reply)  
+52. [unlike post](#unlike_post)  
+53. [updating user eperience](#updating_user_eperience)  
+54. [user analytics](#user_analytics)  
+55. [user followers](#user_followers)  
+56. [user registeration](#user_registeration)  
+57. [user-industry update](#user-industry_update)  
+58. [valid choice](#valid_choice)  
+59. [verify otp hash](#verify_otp_hash)  
+60. [view certification](#view_certification)  
+61. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -1091,7 +1093,7 @@ Anyone else feeling that urge to slow down while everything else speeds up?",
 
 # Create comment<a name='create_comment'></a>
 
-This endpoint creates a comment to a post.
+This endpoint creates a comment to a post. N.B:The media field is optional meaning a comment can be made with or without a media attached but however, a comment MUST have a body text
 
 **Endpoint:**`/post/comment/`
 
@@ -1099,32 +1101,35 @@ This endpoint creates a comment to a post.
 
 ## Payload
 
-```json
+``` json
 {
 
 post:*****
 
 body:*****
 
-}
-```
+media:*****
 
+}
+
+```
 ## Response body
 
 **status code:201**
 
-```json
+``` json
 {
   "user": {
     "id": 1,
     "first_name": "Opeyemi",
     "last_name": "Saliu",
     "middle_name": "Abdul-Azeez",
-    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
     "qualification": "Bachelor of Engineering (Civil Engineering)"
   },
-  "body": "Lol, I think it has become somewhat like a custom.",
-  "time_stamp": "2025-05-14T11:46:12.094543Z"
+  "body": "This is how i spend my time now.",
+  "media": "https://careernexus-storage1.s3.amazonaws.com/comments/media/48214744-ac6a-410a-8116-e33492a1fd3dScreenshot_from_2025-04-30_23-26-06.png",
+  "time_stamp": "2025-07-11T10:33:59.533796Z"
 }
 ```
 
@@ -1132,91 +1137,94 @@ body:*****
 
 # Get comment<a name='get_comment'></a>
 
-This endpoint retrieves all the comments and sub-comment/replies relating to a post.
+This endpoint retrieves all the comments and sub-comments (replies) relating to a post.
 
-**Endpoint:**`/post/comment/?post_id=7`
+**Endpoint:**`/post/comment/?post_id=13`
 
 **Method:** `GET`
 
 ## Payload
 
-```json
+``` json
+
 
 ```
-
 ## Response body
 
 **status code:200**
 
-```json
-  [
+``` json
+[
   {
-    "post": 7,
+    "post": 13,
     "commenter": {
       "first_name": "N/A",
       "last_name": "N/A",
       "middle_name": "N/A",
       "profile_picture": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png"
     },
-    "body": "Great content and really worth reading. Thank you Saliu.",
-    "parent": null,
-    "replies": [],
-    "time_stamp": "2025-04-24T14:30:29.567863Z",
-    "comment_id": 6
-  },
-  {
-    "post": 7,
-    "commenter": {
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_picture": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"
-    },
-    "body": "You really need to see this guys!! Don't forget to leave a comment.",
-    "parent": null,
-    "replies": [],
-    "time_stamp": "2025-05-13T16:35:39.864129Z",
-    "comment_id": 7
-  },
-  {
-    "post": 7,
-    "commenter": {
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_picture": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"
-    },
-    "body": "You really need to see this guys!! Don't forget to leave a comment.",
+    "body": "That's a very interesting piece",
+    "media": "N/A",
     "parent": null,
     "replies": [
       {
-        "post": 7,
+        "post": 13,
         "commenter": {
           "first_name": "Opeyemi",
           "last_name": "Saliu",
           "middle_name": "Abdul-Azeez",
-          "profile_picture": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg"
+          "profile_picture": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg"
         },
-        "body": "Don't forget to leave a comment guys.",
-        "parent": 8,
+        "body": "I can't believe I did comment this.",
+        "media": "N/A",
+        "parent": 12,
         "replies": [],
-        "time_stamp": "2025-05-13T16:45:58.617940Z",
-        "comment_id": 9
+        "likes": 0,
+        "time_stamp": "2025-07-11T11:13:31.478023Z",
+        "can_like": true,
+        "comment_id": 15
       }
     ],
-    "time_stamp": "2025-05-13T16:36:28.468871Z",
-    "comment_id": 8
+    "likes": 0,
+    "time_stamp": "2025-06-18T21:54:43.242430Z",
+    "can_like": true,
+    "comment_id": 12
+  },
+  {
+    "post": 13,
+    "commenter": {
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_picture": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg"
+    },
+    "body": "This is how i spend my time now.",
+    "media": "https://careernexus-storage1.s3.amazonaws.com/comments/media/c036ce59-229f-4143-bc5b-49c63060c1d1Screenshot_from_2025-04-30_23-26-06.png",
+    "parent": null,
+    "replies": [],
+    "likes": 1,
+    "time_stamp": "2025-07-11T10:29:20.820639Z",
+    "can_like": false,
+    "comment_id": 13
+  },
+  {
+    "post": 13,
+    "commenter": {
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_picture": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg"
+    },
+    "body": "This is how i spend my time now.",
+    "media": "https://careernexus-storage1.s3.amazonaws.com/comments/media/48214744-ac6a-410a-8116-e33492a1fd3dScreenshot_from_2025-04-30_23-26-06.png",
+    "parent": null,
+    "replies": [],
+    "likes": 0,
+    "time_stamp": "2025-07-11T10:33:59.533796Z",
+    "can_like": true,
+    "comment_id": 14
   }
 ]
-```
-
-## Failure
-
-**status code:400**
-
-```{
-  "error": "Inexistent post"
-}
 ```
 
 [Table of contents](#toc)
@@ -2618,6 +2626,74 @@ user_following:*****
 ``` json
 {
   "status": "Unfollowed user"
+}
+```
+
+[Table of contents](#toc)
+
+
+
+
+
+
+# Like Comment/Reply<a name='like_comment/reply'></a>
+
+This endpoint likes a comment or reply. N.B: The comment or reply can only be liked once and must not have been previously liked by the user.
+
+**Endpoint:**`/post/like/comment/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+comment:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "comment_id": 13,
+  "user_id": 1,
+  "status": "Liked Comment"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Unlike Comment/Reply<a name='unlike_comment/reply'></a>
+
+This endpoint unlikes a comment or reply. N.B: The comment/reply must have been previously liked in order to be available for unlike.
+
+**Endpoint:**`/post/unlike/comment/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+comment:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Unliked Comment"
 }
 ```
 

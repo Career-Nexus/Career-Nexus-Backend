@@ -1,3 +1,4 @@
+from multiprocessing import context
 from drf_yasg.utils import swagger_auto_schema
 
 from . import serializers
@@ -157,10 +158,6 @@ class FollowingPostView(APIView):
 
 
 
-
-
-
-
 class CreateCommentView(APIView):
     permission_classes = [
                 IsAuthenticated,
@@ -181,11 +178,11 @@ class CreateCommentView(APIView):
             try:
                 post = models.Posts.objects.get(id=post_id)
                 comments = models.Comment.objects.filter(post=post)
-                serializer = serializers.CommentSerializer(comments,many=True).data
+                serializer = serializers.CommentSerializer(comments,context={"user":request.user},many=True).data
                 output = [comment for comment in serializer if not comment["parent"]]
                 return Response(output,status=status.HTTP_200_OK)
 
-            except:
+            except models.Posts.DoesNotExist:
                 return Response({"error":"Inexistent post"},status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"error":"No query parameter"},status=status.HTTP_400_BAD_REQUEST)
@@ -239,6 +236,39 @@ class UnlikePostView(APIView):
             #Avoiding returning stale data due to caching
             invalidate_post_cache(user_industry)
             return Response(output,status.HTTP_200_OK)
+
+
+class CommentLikeView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        serializer = serializers.CommentLikeSerializer(data=request.data,context={"user":request.user})
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = {
+                "comment_id":output_instance.comment.id,
+                "user_id":output_instance.user.id,
+                "status":"Liked Comment"
+            }
+            return Response(output,status=status.HTTP_201_CREATED)
+
+
+class CommentUnlikeView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        serializer = serializers.CommentUnlikeSerializer(data=request.data,context={"user":request.user})
+        if serializer.is_valid(raise_exception=True):
+            comment = serializer.validated_data.get("comment")
+            models.CommentLike.objects.filter(user=request.user,comment=comment).delete()
+            return Response({"status":"Unliked Comment"},status=status.HTTP_200_OK)
+
+
+
 
 
 
