@@ -888,9 +888,9 @@ This endpoints retrieves posts associated with the user's selected industry and 
 
 ``` json
 {
-  "count": 6,
-  "next": null,
-  "previous": "http://127.0.0.1:8000/post/",
+  "count": 7,
+  "next": "http://127.0.0.1:8000/post/?page=2",
+  "previous": null,
   "results": [
     {
       "profile": {
@@ -898,46 +898,41 @@ This endpoints retrieves posts associated with the user's selected industry and 
         "first_name": "Opeyemi",
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
         "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
-      "body": "Driving the Future: How Technology is Transforming Transportation
-Transportation has always been the engine of progress—moving people, goods, and ideas across cities, countries, and continents. But in the 21st century, it’s not just about getting from point A to point B. It’s about how we get there: faster, safer, cleaner, and smarter. And at the heart of this transformation? Technology.
-
-1. Autonomous Vehicles: From Sci-Fi to Street Legal
-What was once a futuristic dream is now cruising through city streets. Autonomous vehicles (AVs) use AI, sensors, and real-time data to navigate without human input. Companies like Waymo, Tesla, and Cruise are already testing and deploying self-driving cars, while autonomous trucks promise to revolutionize logistics and supply chains. The potential benefits are huge: fewer accidents, reduced congestion, and more accessible transportation for the elderly and disabled.
-
-2. Electrification: Powering a Sustainable Tomorrow
-The shift from fossil fuels to electric power is reshaping the automotive industry. Electric vehicles (EVs) are no longer niche—they're mainstream. Governments are offering incentives, automakers are committing to electric-only futures, and battery tech is advancing rapidly. Beyond cars, electric buses, bikes, and even airplanes are emerging, helping reduce emissions and create a cleaner planet.
-
-3. Smart Infrastructure: Cities That Talk Back
-Roads, traffic lights, and parking lots are getting an upgrade. Smart infrastructure uses IoT (Internet of Things) sensors and connectivity to manage traffic flow, detect maintenance needs, and even communicate with autonomous vehicles. Imagine a traffic signal that adapts in real time to reduce congestion or a parking lot that directs you to an open spot. These innovations aren't just cool—they improve safety, reduce fuel use, and enhance urban life.
-
-4. Mobility-as-a-Service (MaaS): The End of Car Ownership?
-With apps like Uber, Lyft, Bird, and Lime, personal car ownership is becoming less necessary in urban environments. MaaS platforms integrate various transport options—bikes, scooters, rideshares, public transit—into a single, seamless service. Add in AI-powered route planning, and getting around becomes effortless, personalized, and more eco-friendly.
-
-5. Hyperloop & High-Speed Rail: Redefining Long-Distance Travel
-While still in early stages, hyperloop technology—propelling pods through low-pressure tubes at airplane speeds—could dramatically shorten travel times between major cities. Meanwhile, countries like Japan and France continue to lead the way with efficient high-speed rail, showing the world what’s possible with investment in advanced public transport.
-
-6. Data-Driven Decisions: Analytics Behind the Wheel
-Every vehicle on the road today is a rolling data center. From GPS tracking to engine diagnostics, real-time data helps optimize routes, predict maintenance issues, and improve safety. Municipalities and logistics companies alike are leveraging this data to make smarter transportation decisions, reduce emissions, and cut costs.
-
-The Road Ahead
-Technology isn’t just changing how we move—it’s changing what’s possible. The intersection of AI, data, automation, and sustainability is creating a transportation revolution. But as we accelerate toward the future, we must ensure equity, safety, and accessibility for all. The journey has just begun.",
+      "body": "From a friend.",
       "pic1": "N/A",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-04-24T14:06:45.666911Z",
-      "comment_count": 3,
-      "like_count": 2,
-      "share_count": 1,
-      "parent": null,
-      "can_like": false,
+      "time_stamp": "2025-07-11T11:44:28.647331Z",
+      "comment_count": 1,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": {
+        "profile": {
+          "id": 2,
+          "first_name": "N/A",
+          "last_name": "N/A",
+          "middle_name": "N/A",
+          "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+          "qualification": "Bachelor of Science"
+        },
+        "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
+        "pic1": "N/A",
+        "pic2": "N/A",
+        "pic3": "N/A",
+        "video": "N/A",
+        "article": "N/A",
+        "time_stamp": "2025-04-17T14:31:33.731704Z"
+      },
+      "can_like": true,
       "can_follow": false,
       "is_self": true,
-      "post_id": 7
+      "is_saved": false,
+      "post_id": 18
     },
     {
       "profile": {
@@ -945,51 +940,65 @@ Technology isn’t just changing how we move—it’s changing what’s possible
         "first_name": "Opeyemi",
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
         "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
-      "body": "AI isn’t just science fiction anymore — it’s helping detect cancer, drive cars, and even write code. The future is here. #AI #FutureOfTech",
+      "body": "Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
+
+At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
+
+Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
+
+Anyone else feeling that urge to slow down while everything else speeds up?",
       "pic1": "N/A",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-04-17T14:35:40.387128Z",
+      "time_stamp": "2025-06-18T21:46:34.030565Z",
       "comment_count": 3,
-      "like_count": 2,
-      "share_count": 0,
-      "parent": null,
-      "can_like": false,
-      "can_follow": false,
-      "is_self": true,
-      "post_id": 5
-    },
-    {
-      "profile": {
-        "id": 2,
-        "first_name": "N/A",
-        "last_name": "N/A",
-        "middle_name": "N/A",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-        "qualification": "Bachelor of Science"
-      },
-      "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
-      "pic1": "N/A",
-      "pic2": "N/A",
-      "pic3": "N/A",
-      "video": "N/A",
-      "article": "N/A",
-      "time_stamp": "2025-04-17T14:31:33.731704Z",
-      "comment_count": 0,
       "like_count": 0,
       "share_count": 0,
       "parent": null,
       "can_like": true,
-      "can_follow": true,
-      "is_self": false,
-      "post_id": 3
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": false,
+      "post_id": 13
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "🌾 Tech in the Fields 📲🌍
+
+Agriculture isn’t just about soil and sun anymore — it’s about sensors, satellites, and software. Farmers today use data analytics, autonomous tractors, and climate-smart tools to grow more with less. With technology in their hands, they’re not just feeding communities — they’re feeding the future.
+
+#AgriInnovation #FarmTech #DigitalFarming #FutureOfFood",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/0149c8fd-1055-4d23-9a2c-ac78ee61abc2branch.jpeg",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "#AgriTech #AgriInnovation",
+      "time_stamp": "2025-05-15T13:44:08.197325Z",
+      "comment_count": 0,
+      "like_count": 1,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": false,
+      "post_id": 11
     }
   ],
+  "last_page": "http://127.0.0.1:8000/post/?page=3"
+}
 ```
 
 [Table of contents](#toc) 
@@ -1374,7 +1383,7 @@ post:*****
 
 # Get Saved Post<a name='get_saved_post'></a>
 
-This endpoint retrieves all the saved posts by the logged in user.
+This endpoint retrieves all the saved posts by the logged in user
 
 **Endpoint:**`/post/save/`
 
@@ -1382,15 +1391,15 @@ This endpoint retrieves all the saved posts by the logged in user.
 
 ## Payload
 
-```json
+``` json
+
 
 ```
-
 ## Response body
 
 **status code:200**
 
-```json
+``` json
 [
   {
     "post": {
@@ -1399,13 +1408,47 @@ This endpoint retrieves all the saved posts by the logged in user.
         "first_name": "Opeyemi",
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/e740aee1-0716-4d16-aebc-924d43c3843dMy_Torso_Picture.jpg",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
         "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
-      "body": "Driving the Future: How Technology is Transforming Transportation\nTransportation has always been the engine of progress—moving people, goods, and ideas across cities, countries, and continents. But in the 21st century, it’s not just about getting from point A to point B. It’s about how we get there: faster, safer, cleaner, and smarter. And at the heart of this transformation? Technology.\n\n1. Autonomous Vehicles: From Sci-Fi to Street Legal\nWhat was once a futuristic dream is now cruising through city streets. Autonomous vehicles (AVs) use AI, sensors, and real-time data to navigate without human input. Companies like Waymo, Tesla, and Cruise are already testing and deploying self-driving cars, while autonomous trucks promise to revolutionize logistics and supply chains. The potential benefits are huge: fewer accidents, reduced congestion, and more accessible transportation for the elderly and disabled.\n\n2. Electrification: Powering a Sustainable Tomorrow\nThe shift from fossil fuels to electric power is reshaping the automotive industry. Electric vehicles (EVs) are no longer niche—they're mainstream. Governments are offering incentives, automakers are committing to electric-only futures, and battery tech is advancing rapidly. Beyond cars, electric buses, bikes, and even airplanes are emerging, helping reduce emissions and create a cleaner planet.\n\n3. Smart Infrastructure: Cities That Talk Back\nRoads, traffic lights, and parking lots are getting an upgrade. Smart infrastructure uses IoT (Internet of Things) sensors and connectivity to manage traffic flow, detect maintenance needs, and even communicate with autonomous vehicles. Imagine a traffic signal that adapts in real time to reduce congestion or a parking lot that directs you to an open spot. These innovations aren't just cool—they improve safety, reduce fuel use, and enhance urban life.\n\n4. Mobility-as-a-Service (MaaS): The End of Car Ownership?\nWith apps like Uber, Lyft, Bird, and Lime, personal car ownership is becoming less necessary in urban environments. MaaS platforms integrate various transport options—bikes, scooters, rideshares, public transit—into a single, seamless service. Add in AI-powered route planning, and getting around becomes effortless, personalized, and more eco-friendly.\n\n5. Hyperloop & High-Speed Rail: Redefining Long-Distance Travel\nWhile still in early stages, hyperloop technology—propelling pods through low-pressure tubes at airplane speeds—could dramatically shorten travel times between major cities. Meanwhile, countries like Japan and France continue to lead the way with efficient high-speed rail, showing the world what’s possible with investment in advanced public transport.\n\n6. Data-Driven Decisions: Analytics Behind the Wheel\nEvery vehicle on the road today is a rolling data center. From GPS tracking to engine diagnostics, real-time data helps optimize routes, predict maintenance issues, and improve safety. Municipalities and logistics companies alike are leveraging this data to make smarter transportation decisions, reduce emissions, and cut costs.\n\nThe Road Ahead\nTechnology isn’t just changing how we move—it’s changing what’s possible. The intersection of AI, data, automation, and sustainability is creating a transportation revolution. But as we accelerate toward the future, we must ensure equity, safety, and accessibility for all. The journey has just begun.",
-      "media": "N/A",
+      "body": "Driving the Future: How Technology is Transforming Transportation
+Transportation has always been the engine of progress—moving people, goods, and ideas across cities, countries, and continents. But in the 21st century, it’s not just about getting from point A to point B. It’s about how we get there: faster, safer, cleaner, and smarter. And at the heart of this transformation? Technology.
+
+1. Autonomous Vehicles: From Sci-Fi to Street Legal
+What was once a futuristic dream is now cruising through city streets. Autonomous vehicles (AVs) use AI, sensors, and real-time data to navigate without human input. Companies like Waymo, Tesla, and Cruise are already testing and deploying self-driving cars, while autonomous trucks promise to revolutionize logistics and supply chains. The potential benefits are huge: fewer accidents, reduced congestion, and more accessible transportation for the elderly and disabled.
+
+2. Electrification: Powering a Sustainable Tomorrow
+The shift from fossil fuels to electric power is reshaping the automotive industry. Electric vehicles (EVs) are no longer niche—they're mainstream. Governments are offering incentives, automakers are committing to electric-only futures, and battery tech is advancing rapidly. Beyond cars, electric buses, bikes, and even airplanes are emerging, helping reduce emissions and create a cleaner planet.
+
+3. Smart Infrastructure: Cities That Talk Back
+Roads, traffic lights, and parking lots are getting an upgrade. Smart infrastructure uses IoT (Internet of Things) sensors and connectivity to manage traffic flow, detect maintenance needs, and even communicate with autonomous vehicles. Imagine a traffic signal that adapts in real time to reduce congestion or a parking lot that directs you to an open spot. These innovations aren't just cool—they improve safety, reduce fuel use, and enhance urban life.
+
+4. Mobility-as-a-Service (MaaS): The End of Car Ownership?
+With apps like Uber, Lyft, Bird, and Lime, personal car ownership is becoming less necessary in urban environments. MaaS platforms integrate various transport options—bikes, scooters, rideshares, public transit—into a single, seamless service. Add in AI-powered route planning, and getting around becomes effortless, personalized, and more eco-friendly.
+
+5. Hyperloop & High-Speed Rail: Redefining Long-Distance Travel
+While still in early stages, hyperloop technology—propelling pods through low-pressure tubes at airplane speeds—could dramatically shorten travel times between major cities. Meanwhile, countries like Japan and France continue to lead the way with efficient high-speed rail, showing the world what’s possible with investment in advanced public transport.
+
+6. Data-Driven Decisions: Analytics Behind the Wheel
+Every vehicle on the road today is a rolling data center. From GPS tracking to engine diagnostics, real-time data helps optimize routes, predict maintenance issues, and improve safety. Municipalities and logistics companies alike are leveraging this data to make smarter transportation decisions, reduce emissions, and cut costs.
+
+The Road Ahead
+Technology isn’t just changing how we move—it’s changing what’s possible. The intersection of AI, data, automation, and sustainability is creating a transportation revolution. But as we accelerate toward the future, we must ensure equity, safety, and accessibility for all. The journey has just begun.",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-04-24T14:06:45.666911Z"
+      "time_stamp": "2025-04-24T14:06:45.666911Z",
+      "comment_count": 3,
+      "like_count": 2,
+      "share_count": 1,
+      "parent": null,
+      "can_like": false,
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": true,
+      "post_id": 7
     }
   }
 ]
@@ -1445,7 +1488,7 @@ post:*****
 
 # Get Followings Post<a name='get_followings_post'></a>
 
-This endpoint retrieves the posts of users the logged in user is currently following.
+This endpoint retrieves the posts of users the logged in user is currently following
 
 **Endpoint:**`/post/following/`
 
@@ -1490,6 +1533,7 @@ This endpoint retrieves the posts of users the logged in user is currently follo
       "can_like": true,
       "can_follow": false,
       "is_self": false,
+      "is_saved": false,
       "post_id": 3
     },
     {
@@ -1515,6 +1559,7 @@ This endpoint retrieves the posts of users the logged in user is currently follo
       "can_like": true,
       "can_follow": false,
       "is_self": false,
+      "is_saved": false,
       "post_id": 2
     },
     {
@@ -1540,6 +1585,7 @@ This endpoint retrieves the posts of users the logged in user is currently follo
       "can_like": true,
       "can_follow": false,
       "is_self": false,
+      "is_saved": false,
       "post_id": 1
     }
   ]
@@ -2477,7 +2523,7 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
 
 ``` json
 {
-  "count": 12,
+  "count": 13,
   "next": "http://127.0.0.1:8000/post/posted/?page=2",
   "previous": null,
   "results": [
@@ -2487,7 +2533,49 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
         "first_name": "Opeyemi",
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "body": "From a friend.",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-07-11T11:44:28.647331Z",
+      "comment_count": 1,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": {
+        "profile": {
+          "id": 2,
+          "first_name": "N/A",
+          "last_name": "N/A",
+          "middle_name": "N/A",
+          "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+          "qualification": "Bachelor of Science"
+        },
+        "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
+        "pic1": "N/A",
+        "pic2": "N/A",
+        "pic3": "N/A",
+        "video": "N/A",
+        "article": "N/A",
+        "time_stamp": "2025-04-17T14:31:33.731704Z"
+      },
+      "can_like": true,
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": false,
+      "post_id": 18
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
         "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
       "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
@@ -2504,6 +2592,7 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
       "can_like": true,
       "can_follow": false,
       "is_self": true,
+      "is_saved": false,
       "post_id": 15
     },
     {
@@ -2512,7 +2601,7 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
         "first_name": "Opeyemi",
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
         "qualification": "Bachelor of Engineering (Civil Engineering)"
       },
       "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
@@ -2529,41 +2618,11 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
       "can_like": true,
       "can_follow": false,
       "is_self": true,
+      "is_saved": false,
       "post_id": 14
-    },
-    {
-      "profile": {
-        "id": 1,
-        "first_name": "Opeyemi",
-        "last_name": "Saliu",
-        "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
-      },
-      "body": "Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
-
-At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
-
-Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
-
-Anyone else feeling that urge to slow down while everything else speeds up?",
-      "pic1": "N/A",
-      "pic2": "N/A",
-      "pic3": "N/A",
-      "video": "N/A",
-      "article": "N/A",
-      "time_stamp": "2025-06-18T21:46:34.030565Z",
-      "comment_count": 1,
-      "like_count": 0,
-      "share_count": 0,
-      "parent": null,
-      "can_like": true,
-      "can_follow": false,
-      "is_self": true,
-      "post_id": 13
     }
   ],
-  "last_page": "http://127.0.0.1:8000/post/posted/?page=4"
+  "last_page": "http://127.0.0.1:8000/post/posted/?page=5"
 }
 ```
 

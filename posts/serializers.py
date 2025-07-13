@@ -148,10 +148,17 @@ class RetrievePostSerializer(serializers.ModelSerializer):
     can_like = serializers.SerializerMethodField()
     can_follow = serializers.SerializerMethodField()
     is_self = serializers.SerializerMethodField()
+    is_saved = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Posts
-        fields = ["profile","id","body","pic1","pic2","pic3","video","article","time_stamp","comment_count","like_count","share_count","parent","can_like","can_follow","is_self"]
+        fields = ["profile","id","body","pic1","pic2","pic3","video","article","time_stamp","comment_count","like_count","share_count","parent","can_like","can_follow","is_self","is_saved"]
+
+    def get_is_saved(self,obj):
+        user = self.context["user"]
+        if models.PostSave.objects.filter(user=user,post=obj).exists():
+            return True
+        return False
 
     def get_is_self(self,obj):
         poster = obj.profile.user
@@ -389,7 +396,7 @@ class SavePostSerializer(serializers.ModelSerializer):
         return output
 
 class RetrieveSavePostSerializer(serializers.ModelSerializer):
-    post = ParentPostSerializer()
+    post = RetrievePostSerializer()
     class Meta:
         model = models.PostSave
         fields = ["post"]

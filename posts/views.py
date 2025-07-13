@@ -306,7 +306,7 @@ class SavePostView(APIView):
         user = request.user
         saved_posts = models.PostSave.objects.filter(user=user)
         #print(saved_posts.values())
-        saved_posts = serializers.RetrieveSavePostSerializer(saved_posts,many=True).data
+        saved_posts = serializers.RetrieveSavePostSerializer(saved_posts,many=True,context={"user":request.user}).data
         return Response(saved_posts,status=status.HTTP_200_OK)
 
 
