@@ -20,6 +20,16 @@ class MentorRecommendationView(APIView):
         return Response(output,status=status.HTTP_200_OK)
 
 
+class MentorSearchAndFilterView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        pass
+
+
+
 
 class TestView(APIView):
     permission_classes = [

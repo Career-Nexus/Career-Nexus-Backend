@@ -21,12 +21,16 @@ from django.core.cache import cache
 from users.views import delete_cache
 
 
-def invalidate_post_cache(user_industry):
+def invalidate_post_cache(user_industry,user_id=None):
     if user_industry == "":
         user_industry = "others"
     for item in range(1,6):
         cache_key = f"{user_industry}_post_{item}"
         delete_cache(cache_key)
+    if user_id:
+        for item in range(1,6):
+            cache_key = f"{user_id}_ownposts_{item}"
+            delete_cache(cache_key)
 
 
 
@@ -218,7 +222,7 @@ class CreateLikeView(APIView):
             output = serializer.save()
             user_industry = request.user.industry
             #Deleting cache to prevent returning stale data
-            invalidate_post_cache(user_industry)
+            invalidate_post_cache(user_industry,user_id=request.user.id)
             return Response(output,status=status.HTTP_201_CREATED)
 
 

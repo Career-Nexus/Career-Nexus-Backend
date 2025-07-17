@@ -4,6 +4,14 @@ from users.models import PersonalProfile
 
 
 
+experience_level_choices = (
+    ("junior","junior"),
+    ("mid","mid"),
+    ("senior","senior")
+)
+
+
+
 class MentorRecommendationSerializer(serializers.ModelSerializer):
     experience_level = serializers.SerializerMethodField()
 
@@ -21,3 +29,8 @@ class MentorRecommendationSerializer(serializers.ModelSerializer):
                 return "Senior"
         else:
             return "Junior"
+
+class MentorSearchAndFilterSerializer(serializers.Serializer):
+    text = serializers.CharField(max_length=1000,required=False)
+    experience_level = serializers.ChoiceField(choices=experience_level_choices)
+
