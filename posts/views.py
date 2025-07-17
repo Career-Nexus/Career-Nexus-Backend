@@ -238,7 +238,7 @@ class UnlikePostView(APIView):
             output = serializer.save()
             user_industry = request.user.industry
             #Avoiding returning stale data due to caching
-            invalidate_post_cache(user_industry)
+            invalidate_post_cache(user_industry,user_id=request.user.id)
             return Response(output,status.HTTP_200_OK)
 
 
