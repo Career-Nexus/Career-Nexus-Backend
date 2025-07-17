@@ -2696,3 +2696,44 @@ comment:*****
 ```
 
 [Table of contents](#toc)
+
+
+# Mentor Search/Filter
+
+This API searches for mentors based on query parameters. The query parameters allowed include text,experience_level(entry,mid,senior,executive),skills and availability(weekdays,weekends).
+
+**Endpoint:**`/mentor/search/?text=yemi&availability=weekends`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 11,
+    "name": "Opeyemi Abdul-Azeez Saliu",
+    "qualification": "Bachelor of Engineering",
+    "position": "",
+    "years_of_experience": 6,
+    "technical_skills": [
+      "Python",
+      "Shell Scripting",
+      "Backend development",
+      "Devops",
+      "AI/ML",
+      "Database Management System"
+    ]
+  }
+]
+```
+
+[Table of contents](#toc)

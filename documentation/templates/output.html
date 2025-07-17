@@ -59,6 +59,7 @@
 <li><a href="#like_comment/reply">like comment/reply</a></li>
 <li><a href="#login_api">login api</a></li>
 <li><a href="#logout">logout</a></li>
+<li><a href="#mentor_search/filter">mentor search/filter</a></li>
 <li><a href="#post_create">post create</a></li>
 <li><a href="#post_like">post like</a></li>
 <li><a href="#post_retrieve">post retrieve</a></li>
@@ -2075,6 +2076,35 @@ comment:*****
 <pre><code class="language-json">{
   &quot;status&quot;: &quot;Unliked Comment&quot;
 }
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Mentor Search/Filter<a name='mentor_search/filter'></a></h1>
+<p>This API searches for mentors based on query parameters. The query parameters allowed include text,experience_level(entry,mid,senior,executive),skills and availability(weekdays,weekends).</p>
+<p><strong>Endpoint:</strong><code>/mentor/search/?text=yemi&amp;availability=weekends</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 11,
+    &quot;name&quot;: &quot;Opeyemi Abdul-Azeez Saliu&quot;,
+    &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;,
+    &quot;position&quot;: &quot;&quot;,
+    &quot;years_of_experience&quot;: 6,
+    &quot;technical_skills&quot;: [
+      &quot;Python&quot;,
+      &quot;Shell Scripting&quot;,
+      &quot;Backend development&quot;,
+      &quot;Devops&quot;,
+      &quot;AI/ML&quot;,
+      &quot;Database Management System&quot;
+    ]
+  }
+]
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 

@@ -91,9 +91,9 @@ class PostView(APIView):
             try:
                 post = models.Posts.objects.get(id=param)
 
-                output = serializers.RetrievePostSerializer(post,many=False).data
+                output = serializers.RetrievePostSerializer(post,many=False,context={"user":request.user}).data
                 return Response(output,status=status.HTTP_200_OK)
-            except:
+            except models.Posts.DoesNotExist:
                 return Response({"error":"Inexistent Post"},status=status.HTTP_404_NOT_FOUND)
 
 

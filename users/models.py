@@ -45,7 +45,7 @@ class Otp(models.Model):
 
 class PersonalProfile(models.Model):
     #General profile properties
-    user = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="profile")
+    user = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="profile",primary_key=True)
     first_name = models.CharField(max_length=200,default="N/A")
     last_name = models.CharField(max_length=200,default="N/A")
     middle_name = models.CharField(max_length=200,default="N/A")
@@ -69,6 +69,11 @@ class PersonalProfile(models.Model):
     mentorship_styles = models.JSONField(default=list)
     timezone = models.CharField(null=True,blank=True)
     linkedin_url = models.CharField(null=True,blank=True)
+    
+    #Ensuring that the user id is always the same as profile id
+    @property
+    def id(self):
+        return self.user_id
 
 
 

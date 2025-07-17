@@ -42,30 +42,31 @@
 35. [like comment/reply](#like_comment/reply)  
 36. [login api](#login_api)  
 37. [logout](#logout)  
-38. [post create](#post_create)  
-39. [post like](#post_like)  
-40. [post retrieve](#post_retrieve)  
-41. [post save](#post_save)  
-42. [post share](#post_share)  
-43. [profile completion](#profile_completion)  
-44. [profile retrieve](#profile_retrieve)  
-45. [profile update](#profile_update)  
-46. [recommended job posts.](#recommended_job_posts.)  
-47. [reply comment](#reply_comment)  
-48. [reposting](#reposting)  
-49. [retrieve education api](#retrieve_education_api)  
-50. [unfollow user](#unfollow_user)  
-51. [unlike comment/reply](#unlike_comment/reply)  
-52. [unlike post](#unlike_post)  
-53. [updating user eperience](#updating_user_eperience)  
-54. [user analytics](#user_analytics)  
-55. [user followers](#user_followers)  
-56. [user registeration](#user_registeration)  
-57. [user-industry update](#user-industry_update)  
-58. [valid choice](#valid_choice)  
-59. [verify otp hash](#verify_otp_hash)  
-60. [view certification](#view_certification)  
-61. [view experience](#view_experience)  
+38. [mentor search/filter](#mentor_search/filter)  
+39. [post create](#post_create)  
+40. [post like](#post_like)  
+41. [post retrieve](#post_retrieve)  
+42. [post save](#post_save)  
+43. [post share](#post_share)  
+44. [profile completion](#profile_completion)  
+45. [profile retrieve](#profile_retrieve)  
+46. [profile update](#profile_update)  
+47. [recommended job posts.](#recommended_job_posts.)  
+48. [reply comment](#reply_comment)  
+49. [reposting](#reposting)  
+50. [retrieve education api](#retrieve_education_api)  
+51. [unfollow user](#unfollow_user)  
+52. [unlike comment/reply](#unlike_comment/reply)  
+53. [unlike post](#unlike_post)  
+54. [updating user eperience](#updating_user_eperience)  
+55. [user analytics](#user_analytics)  
+56. [user followers](#user_followers)  
+57. [user registeration](#user_registeration)  
+58. [user-industry update](#user-industry_update)  
+59. [valid choice](#valid_choice)  
+60. [verify otp hash](#verify_otp_hash)  
+61. [view certification](#view_certification)  
+62. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -2754,6 +2755,47 @@ comment:*****
 {
   "status": "Unliked Comment"
 }
+```
+
+[Table of contents](#toc)
+
+
+# Mentor Search/Filter<a name='mentor_search/filter'></a>
+
+This API searches for mentors based on query parameters. The query parameters allowed include text,experience_level(entry,mid,senior,executive),skills and availability(weekdays,weekends).
+
+**Endpoint:**`/mentor/search/?text=yemi&availability=weekends`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 11,
+    "name": "Opeyemi Abdul-Azeez Saliu",
+    "qualification": "Bachelor of Engineering",
+    "position": "",
+    "years_of_experience": 6,
+    "technical_skills": [
+      "Python",
+      "Shell Scripting",
+      "Backend development",
+      "Devops",
+      "AI/ML",
+      "Database Management System"
+    ]
+  }
+]
 ```
 
 [Table of contents](#toc)
