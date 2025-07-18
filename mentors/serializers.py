@@ -1,13 +1,19 @@
+from django.utils.timezone import make_aware
 from rest_framework import serializers
-from users.options import get_choices
 
+
+from users.options import get_choices
 from users.models import PersonalProfile,Users
 
+
+
+from datetime import datetime,timedelta,date,time
 
 CHOICES = get_choices()
 
 experience_level_choices= CHOICES["experience_level"]
 availability_options = CHOICES["availability"]
+session_categories = CHOICES["session_categories"]
 
 
 
@@ -65,4 +71,23 @@ class MentorSearchAndFilterSerializer(serializers.Serializer):
     experience_level = serializers.ChoiceField(choices=experience_level_choices,required=False)
     skills = serializers.CharField(max_length=500,required=False)
     availability = serializers.ChoiceField(choices=availability_options,required=False)
+
+
+
+class CreateMentorshipSessionSerializer(serializers.Serializer):
+    mentor = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())
+    session_type = serializers.ChoiceField(choices=session_categories)
+    date = serializers.DateField()
+    time = serializers.TimeField()
+    discourse = serializers.CharField()
+
+    def validate_mentor(self,value):
+        if Users.objects.filter(id=value).first().user_type != "mentor":
+            raise serializers.ValidationError("This User is not a mentor.")
+        return value
+
+    def validate_date(self,value):
+        now = make_aware(datetime.now())
+        set_time = make_aware()
+
 

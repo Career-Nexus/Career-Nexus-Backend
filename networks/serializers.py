@@ -93,10 +93,19 @@ class ConnectionStatusSerializer(serializers.Serializer):
 class RetrieveRecommendationDetailSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
     qualification = serializers.SerializerMethodField()
+    profile_photo = serializers.SerializerMethodField()
+    followers = serializers.SerializerMethodField()
 
     class Meta:
         model = Users
-        fields = ["id","name","qualification"]
+        fields = ["id","name","qualification","profile_photo","followers"]
+
+    def get_followers(self,obj):
+        followers_count = obj.following.all().count()
+        return followers_count
+
+    def get_profile_photo(self,obj):
+        return obj.profile.profile_photo
 
     def get_name(self,obj):
         return f"{obj.profile.first_name} {obj.profile.last_name}"

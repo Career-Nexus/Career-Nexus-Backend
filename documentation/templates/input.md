@@ -2271,14 +2271,23 @@ This endpoint recommends connections for the logged in user based on any of the 
 
 ``` json
 {
-  "count": 1,
+  "count": 2,
   "next": null,
   "previous": null,
   "results": [
     {
       "id": 4,
       "name": "Adeniji Adekogbe",
-      "qualification": "Bachelor of Science (Education)"
+      "qualification": "Bachelor of Science (Education)",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "followers": 0
+    },
+    {
+      "id": 11,
+      "name": "Opeyemi Saliu",
+      "qualification": "Bachelor of Engineering",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "followers": 0
     }
   ],
   "last_page": "http://127.0.0.1:8000/connection/recommendation/?page=1"
