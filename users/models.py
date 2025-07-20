@@ -67,7 +67,7 @@ class PersonalProfile(models.Model):
     areas_of_expertise = models.JSONField(default=list)
     technical_skills = models.JSONField(default=list)
     mentorship_styles = models.JSONField(default=list)
-    timezone = models.CharField(null=True,blank=True)
+    timezone = models.CharField(default="UTC")
     linkedin_url = models.CharField(null=True,blank=True)
     
     #Ensuring that the user id is always the same as profile id

@@ -1,32 +1,34 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Documentation</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-            <style>
-                body {
-                    box-sizing: border-box;
-                    min-width: 200px;
-                    max-width: 980px;
-                    margin: 0 auto;
-                    padding: 45px;
-                }
-            </style>
-        </head>
-        <body class="markdown-body">
-        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
 <ol>
 <li><a href="#"></a></li>
+<li><a href="#accept/reject_mentorship_session_request">accept/reject mentorship session request</a></li>
 <li><a href="#add_certification">add certification</a></li>
 <li><a href="#add_education_api">add education api</a></li>
 <li><a href="#add_experience">add experience</a></li>
 <li><a href="#alter_country_permissions">alter country permissions</a></li>
+<li><a href="#book_mentorship_session">book mentorship session</a></li>
 <li><a href="#career_nexus_backend_documentation">career nexus backend documentation</a></li>
 <li><a href="#chat_history">chat history</a></li>
 <li><a href="#connection_accept/reject">connection accept/reject</a></li>
@@ -72,6 +74,7 @@
 <li><a href="#reply_comment">reply comment</a></li>
 <li><a href="#reposting">reposting</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
+<li><a href="#retrieve_mentorship_sessions">retrieve mentorship sessions</a></li>
 <li><a href="#unfollow_user">unfollow user</a></li>
 <li><a href="#unlike_comment/reply">unlike comment/reply</a></li>
 <li><a href="#unlike_post">unlike post</a></li>
@@ -253,7 +256,7 @@ MENTORS
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Profile Update<a name='profile_update'></a></h1>
-<p>This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles,timezone and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.</p>
+<p>This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.</p>
 <p><strong>Endpoint:</strong><code>/user/profile-update/</code></p>
 <p><strong>Method:</strong> <code>PUT</code></p>
 <h2>Payload</h2>
@@ -334,7 +337,7 @@ linkedin_url:*****
     &quot;Database Management System&quot;
   ],
   &quot;mentorship_styles&quot;: [],
-  &quot;timezone&quot;: null,
+  &quot;timezone&quot;: &quot;UTC&quot;,
   &quot;linkedin_url&quot;: null
 }
 LEARNERS
@@ -351,7 +354,8 @@ LEARNERS
   &quot;location&quot;: &quot;Ogun&quot;,
   &quot;bio&quot;: &quot;Developer|Programmer|Innovation Specialist&quot;,
   &quot;position&quot;: &quot;Backend Developer at CareerNexus&quot;,
-  &quot;summary&quot;: &quot;I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture.&quot;
+  &quot;summary&quot;: &quot;I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture.&quot;,
+    &quot;timezone&quot;: &quot;UTC&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
@@ -2116,7 +2120,143 @@ comment:*****
 ]
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
+<h1>Book Mentorship Session<a name='book_mentorship_session'></a></h1>
+<p>This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual.</p>
+<p><strong>Endpoint:</strong><code>/mentor/sessions/book/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
 
-        </body>
-        </html>
-        
+mentor:*****
+
+session_type:*****
+
+date:*****
+
+time:*****
+
+discourse:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="language-json">{
+  &quot;mentor&quot;: {
+    &quot;id&quot;: 11,
+    &quot;first_name&quot;: &quot;Opeyemi&quot;,
+    &quot;last_name&quot;: &quot;Saliu&quot;,
+    &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+    &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+    &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;
+  },
+  &quot;mentee&quot;: {
+    &quot;id&quot;: 1,
+    &quot;first_name&quot;: &quot;Opeyemi&quot;,
+    &quot;last_name&quot;: &quot;Saliu&quot;,
+    &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+    &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+    &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+  },
+  &quot;session_type&quot;: &quot;individual&quot;,
+  &quot;session_at&quot;: {
+    &quot;date&quot;: &quot;2025-07-21&quot;,
+    &quot;time&quot;: &quot;00:00:00&quot;
+  },
+  &quot;discourse&quot;: &quot;Career Building&quot;,
+  &quot;status&quot;: &quot;PENDING&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Mentorship Sessions<a name='retrieve_mentorship_sessions'></a></h1>
+<p>This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:This retrieves all the mentorship sessions that was requested by the user but has not been accepted/rejected yet. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.</p>
+<p><strong>Endpoint:</strong><code>/mentor/sessions/?status=requested</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 7,
+    &quot;mentor&quot;: {
+      &quot;id&quot;: 11,
+      &quot;first_name&quot;: &quot;Opeyemi&quot;,
+      &quot;last_name&quot;: &quot;Saliu&quot;,
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;
+    },
+    &quot;mentee&quot;: {
+      &quot;id&quot;: 1,
+      &quot;first_name&quot;: &quot;Opeyemi&quot;,
+      &quot;last_name&quot;: &quot;Saliu&quot;,
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+    },
+    &quot;session_type&quot;: &quot;individual&quot;,
+    &quot;session_at&quot;: {
+      &quot;date&quot;: &quot;2025-07-21&quot;,
+      &quot;time&quot;: &quot;00:00:00&quot;
+    },
+    &quot;discourse&quot;: &quot;Career Building&quot;,
+    &quot;status&quot;: &quot;PENDING&quot;
+  },
+  {
+    &quot;id&quot;: 8,
+    &quot;mentor&quot;: {
+      &quot;id&quot;: 11,
+      &quot;first_name&quot;: &quot;Opeyemi&quot;,
+      &quot;last_name&quot;: &quot;Saliu&quot;,
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;
+    },
+    &quot;mentee&quot;: {
+      &quot;id&quot;: 1,
+      &quot;first_name&quot;: &quot;Opeyemi&quot;,
+      &quot;last_name&quot;: &quot;Saliu&quot;,
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+    },
+    &quot;session_type&quot;: &quot;individual&quot;,
+    &quot;session_at&quot;: {
+      &quot;date&quot;: &quot;2025-07-21&quot;,
+      &quot;time&quot;: &quot;00:00:00&quot;
+    },
+    &quot;discourse&quot;: &quot;Career Building&quot;,
+    &quot;status&quot;: &quot;PENDING&quot;
+  }
+]
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Accept/Reject Mentorship Session Request<a name='accept/reject_mentorship_session_request'></a></h1>
+<p>This endpoint enables a mentor to accept/reject a mentorship session request. N.B:A session can only be accepted/rejected once. Also a Rejected session is not available for viewing again and would be subsequently deleted from the system. The action property can either be Accept or Reject.</p>
+<p><strong>Endpoint:</strong><code>/mentor/sessions/accept-reject/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+session:*****
+
+action:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;session_id&quot;: 11,
+  &quot;action&quot;: &quot;Accepted&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+
+</body>
+</html>

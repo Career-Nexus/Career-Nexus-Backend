@@ -45,6 +45,8 @@ employment_type_options = CHOICES["employment_type"]
 
 availability_options = CHOICES["availability"]
 
+timezones_choices = CHOICES["timezones"]
+
 
 
 Users = get_user_model()
@@ -454,6 +456,7 @@ class PersonalProfileSerializer(serializers.Serializer):
     location = serializers.CharField(max_length=1000,required=False)
     bio = serializers.CharField(max_length=4000,required=False)
     resume = serializers.FileField(required=False)
+    timezone = serializers.ChoiceField(choices=timezones_choices,required=False)
     #Field options for mentors.
     years_of_experience = serializers.IntegerField(required=False)
     availability = serializers.ChoiceField(choices=availability_options,required=False)
@@ -461,7 +464,6 @@ class PersonalProfileSerializer(serializers.Serializer):
     areas_of_expertise = serializers.JSONField(required=False)
     technical_skills = serializers.JSONField(required=False)
     mentorship_styles = serializers.JSONField(required=False)
-    timezone = serializers.CharField(required=False,max_length=100)
     linkedin_url = serializers.CharField(max_length=500,required=False)
 
     def validate(self,data):
@@ -497,6 +499,7 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.middle_name = validated_data.get("middle_name",instance.middle_name)
         instance.country_code = validated_data.get("country_code",instance.country_code)
         instance.phone_number = validated_data.get("phone_number",instance.phone_number)
+        instance.timezone = validated_data.get("timezone",instance.timezone)
 
         #Extra updates if instance is a mentor.
         if instance.user.user_type == "mentor":
@@ -506,7 +509,6 @@ class PersonalProfileSerializer(serializers.Serializer):
             areas_of_expertise = validated_data.get("areas_of_expertise",instance.areas_of_expertise)
             technical_skills = validated_data.get("technical_skills",instance.technical_skills)
             mentorship_styles = validated_data.get("mentorship_styles",instance.mentorship_styles)
-            timezone = validated_data.get("timezone",instance.timezone)
             linkedin_url = validated_data.get("linkedin_url",instance.linkedin_url)
 
 
@@ -516,7 +518,7 @@ class PersonalProfileSerializer(serializers.Serializer):
             instance.areas_of_expertise = areas_of_expertise
             instance.technical_skills = technical_skills
             instance.mentorship_styles = mentorship_styles
-            instance.timezone = timezone
+
             instance.linkedin_url = linkedin_url
         
 
@@ -599,7 +601,7 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
     followings = serializers.SerializerMethodField()
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings","timezone"]
 
     def get_followings(self,obj):
         followings = len(obj.user.follower.all())

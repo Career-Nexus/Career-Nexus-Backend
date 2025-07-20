@@ -6,67 +6,70 @@
 
 ## 
 1. [](#)  
-2. [add certification](#add_certification)  
-3. [add education api](#add_education_api)  
-4. [add experience](#add_experience)  
-5. [alter country permissions](#alter_country_permissions)  
-6. [career nexus backend documentation](#career_nexus_backend_documentation)  
-7. [chat history](#chat_history)  
-8. [connection accept/reject](#connection_accept/reject)  
-9. [connection create](#connection_create)  
-10. [connection pending retrieve](#connection_pending_retrieve)  
-11. [connection recommendation](#connection_recommendation)  
-12. [connection retrieve](#connection_retrieve)  
-13. [content management](#content_management)  
-14. [create comment](#create_comment)  
-15. [delete certification](#delete_certification)  
-16. [delete education](#delete_education)  
-17. [delete experience](#delete_experience)  
-18. [follow user](#follow_user)  
-19. [followers count](#followers_count)  
-20. [followings count](#followings_count)  
-21. [forget password](#forget_password)  
-22. [get chat sessions](#get_chat_sessions)  
-23. [get comment](#get_comment)  
-24. [get country phone codes](#get_country_phone_codes)  
-25. [get followings](#get_followings)  
-26. [get followings post](#get_followings_post)  
-27. [get job posts](#get_job_posts)  
-28. [get job preference](#get_job_preference)  
-29. [get own posts](#get_own_posts)  
-30. [get posts](#get_posts)  
-31. [get saved post](#get_saved_post)  
-32. [job create](#job_create)  
-33. [job notifications](#job_notifications)  
-34. [job preference](#job_preference)  
-35. [like comment/reply](#like_comment/reply)  
-36. [login api](#login_api)  
-37. [logout](#logout)  
-38. [mentor search/filter](#mentor_search/filter)  
-39. [post create](#post_create)  
-40. [post like](#post_like)  
-41. [post retrieve](#post_retrieve)  
-42. [post save](#post_save)  
-43. [post share](#post_share)  
-44. [profile completion](#profile_completion)  
-45. [profile retrieve](#profile_retrieve)  
-46. [profile update](#profile_update)  
-47. [recommended job posts.](#recommended_job_posts.)  
-48. [reply comment](#reply_comment)  
-49. [reposting](#reposting)  
-50. [retrieve education api](#retrieve_education_api)  
-51. [unfollow user](#unfollow_user)  
-52. [unlike comment/reply](#unlike_comment/reply)  
-53. [unlike post](#unlike_post)  
-54. [updating user eperience](#updating_user_eperience)  
-55. [user analytics](#user_analytics)  
-56. [user followers](#user_followers)  
-57. [user registeration](#user_registeration)  
-58. [user-industry update](#user-industry_update)  
-59. [valid choice](#valid_choice)  
-60. [verify otp hash](#verify_otp_hash)  
-61. [view certification](#view_certification)  
-62. [view experience](#view_experience)  
+2. [accept/reject mentorship session request](#accept/reject_mentorship_session_request)  
+3. [add certification](#add_certification)  
+4. [add education api](#add_education_api)  
+5. [add experience](#add_experience)  
+6. [alter country permissions](#alter_country_permissions)  
+7. [book mentorship session](#book_mentorship_session)  
+8. [career nexus backend documentation](#career_nexus_backend_documentation)  
+9. [chat history](#chat_history)  
+10. [connection accept/reject](#connection_accept/reject)  
+11. [connection create](#connection_create)  
+12. [connection pending retrieve](#connection_pending_retrieve)  
+13. [connection recommendation](#connection_recommendation)  
+14. [connection retrieve](#connection_retrieve)  
+15. [content management](#content_management)  
+16. [create comment](#create_comment)  
+17. [delete certification](#delete_certification)  
+18. [delete education](#delete_education)  
+19. [delete experience](#delete_experience)  
+20. [follow user](#follow_user)  
+21. [followers count](#followers_count)  
+22. [followings count](#followings_count)  
+23. [forget password](#forget_password)  
+24. [get chat sessions](#get_chat_sessions)  
+25. [get comment](#get_comment)  
+26. [get country phone codes](#get_country_phone_codes)  
+27. [get followings](#get_followings)  
+28. [get followings post](#get_followings_post)  
+29. [get job posts](#get_job_posts)  
+30. [get job preference](#get_job_preference)  
+31. [get own posts](#get_own_posts)  
+32. [get posts](#get_posts)  
+33. [get saved post](#get_saved_post)  
+34. [job create](#job_create)  
+35. [job notifications](#job_notifications)  
+36. [job preference](#job_preference)  
+37. [like comment/reply](#like_comment/reply)  
+38. [login api](#login_api)  
+39. [logout](#logout)  
+40. [mentor search/filter](#mentor_search/filter)  
+41. [post create](#post_create)  
+42. [post like](#post_like)  
+43. [post retrieve](#post_retrieve)  
+44. [post save](#post_save)  
+45. [post share](#post_share)  
+46. [profile completion](#profile_completion)  
+47. [profile retrieve](#profile_retrieve)  
+48. [profile update](#profile_update)  
+49. [recommended job posts.](#recommended_job_posts.)  
+50. [reply comment](#reply_comment)  
+51. [reposting](#reposting)  
+52. [retrieve education api](#retrieve_education_api)  
+53. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+54. [unfollow user](#unfollow_user)  
+55. [unlike comment/reply](#unlike_comment/reply)  
+56. [unlike post](#unlike_post)  
+57. [updating user eperience](#updating_user_eperience)  
+58. [user analytics](#user_analytics)  
+59. [user followers](#user_followers)  
+60. [user registeration](#user_registeration)  
+61. [user-industry update](#user-industry_update)  
+62. [valid choice](#valid_choice)  
+63. [verify otp hash](#verify_otp_hash)  
+64. [view certification](#view_certification)  
+65. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -295,7 +298,7 @@ MENTORS
 
 # Profile Update<a name='profile_update'></a>
 
-This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles,timezone and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.
+This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.
 
 **Endpoint:**`/user/profile-update/`
 
@@ -384,7 +387,7 @@ MENTORS
     "Database Management System"
   ],
   "mentorship_styles": [],
-  "timezone": null,
+  "timezone": "UTC",
   "linkedin_url": null
 }
 LEARNERS
@@ -401,7 +404,8 @@ LEARNERS
   "location": "Ogun",
   "bio": "Developer|Programmer|Innovation Specialist",
   "position": "Backend Developer at CareerNexus",
-  "summary": "I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture."
+  "summary": "I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture.",
+    "timezone": "UTC"
 }
 ```
 
@@ -2805,6 +2809,180 @@ This API searches for mentors based on query parameters. The query parameters al
     ]
   }
 ]
+```
+
+[Table of contents](#toc)
+
+
+
+# Book Mentorship Session<a name='book_mentorship_session'></a>
+
+This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual.
+
+**Endpoint:**`/mentor/sessions/book/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+mentor:*****
+
+session_type:*****
+
+date:*****
+
+time:*****
+
+discourse:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "mentor": {
+    "id": 11,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "qualification": "Bachelor of Engineering"
+  },
+  "mentee": {
+    "id": 1,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+    "qualification": "Bachelor of Engineering (Civil Engineering)"
+  },
+  "session_type": "individual",
+  "session_at": {
+    "date": "2025-07-21",
+    "time": "00:00:00"
+  },
+  "discourse": "Career Building",
+  "status": "PENDING"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Mentorship Sessions<a name='retrieve_mentorship_sessions'></a>
+
+This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:This retrieves all the mentorship sessions that was requested by the user but has not been accepted/rejected yet. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.
+
+**Endpoint:**`/mentor/sessions/?status=requested`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 7,
+    "mentor": {
+      "id": 11,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-07-21",
+      "time": "00:00:00"
+    },
+    "discourse": "Career Building",
+    "status": "PENDING"
+  },
+  {
+    "id": 8,
+    "mentor": {
+      "id": 11,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-07-21",
+      "time": "00:00:00"
+    },
+    "discourse": "Career Building",
+    "status": "PENDING"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Accept/Reject Mentorship Session Request<a name='accept/reject_mentorship_session_request'></a>
+
+This endpoint enables a mentor to accept/reject a mentorship session request. N.B:A session can only be accepted/rejected once. Also a Rejected session is not available for viewing again and would be subsequently deleted from the system. The action property can either be Accept or Reject.
+
+**Endpoint:**`/mentor/sessions/accept-reject/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+session:*****
+
+action:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "session_id": 11,
+  "action": "Accepted"
+}
 ```
 
 [Table of contents](#toc)

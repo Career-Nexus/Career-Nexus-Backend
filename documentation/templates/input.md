@@ -233,7 +233,7 @@ MENTORS
 
 # Profile Update
 
-This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles,timezone and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.
+This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.
 
 **Endpoint:**`/user/profile-update/`
 
@@ -322,7 +322,7 @@ MENTORS
     "Database Management System"
   ],
   "mentorship_styles": [],
-  "timezone": null,
+  "timezone": "UTC",
   "linkedin_url": null
 }
 LEARNERS
@@ -339,7 +339,8 @@ LEARNERS
   "location": "Ogun",
   "bio": "Developer|Programmer|Innovation Specialist",
   "position": "Backend Developer at CareerNexus",
-  "summary": "I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture."
+  "summary": "I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture.",
+    "timezone": "UTC"
 }
 ```
 
@@ -2743,6 +2744,180 @@ This API searches for mentors based on query parameters. The query parameters al
     ]
   }
 ]
+```
+
+[Table of contents](#toc)
+
+
+
+# Book Mentorship Session
+
+This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual.
+
+**Endpoint:**`/mentor/sessions/book/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+mentor:*****
+
+session_type:*****
+
+date:*****
+
+time:*****
+
+discourse:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "mentor": {
+    "id": 11,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "qualification": "Bachelor of Engineering"
+  },
+  "mentee": {
+    "id": 1,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+    "qualification": "Bachelor of Engineering (Civil Engineering)"
+  },
+  "session_type": "individual",
+  "session_at": {
+    "date": "2025-07-21",
+    "time": "00:00:00"
+  },
+  "discourse": "Career Building",
+  "status": "PENDING"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Mentorship Sessions
+
+This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:This retrieves all the mentorship sessions that was requested by the user but has not been accepted/rejected yet. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.
+
+**Endpoint:**`/mentor/sessions/?status=requested`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 7,
+    "mentor": {
+      "id": 11,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-07-21",
+      "time": "00:00:00"
+    },
+    "discourse": "Career Building",
+    "status": "PENDING"
+  },
+  {
+    "id": 8,
+    "mentor": {
+      "id": 11,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-07-21",
+      "time": "00:00:00"
+    },
+    "discourse": "Career Building",
+    "status": "PENDING"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Accept/Reject Mentorship Session Request
+
+This endpoint enables a mentor to accept/reject a mentorship session request. N.B:A session can only be accepted/rejected once. Also a Rejected session is not available for viewing again and would be subsequently deleted from the system. The action property can either be Accept or Reject.
+
+**Endpoint:**`/mentor/sessions/accept-reject/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+session:*****
+
+action:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "session_id": 11,
+  "action": "Accepted"
+}
 ```
 
 [Table of contents](#toc)
