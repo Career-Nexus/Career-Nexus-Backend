@@ -172,30 +172,81 @@ This endpoint retrieve a logged in user or retrieves a third party's profile dat
 ``` json
 LEARNERS
 {
-  "first_name": "Adeniji",
-  "last_name": "Adekogbe",
-  "middle_name": "Michael",
-  "country_code": "+000",
-  "phone_number": "00000000000",
-  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
-  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
-  "location": "Ogun state",
-  "position": "Team lead.",
-  "bio": "Customer service | Complaint resolver | Innovation expert",
-  "qualification": "Bachelor of Science (Education)",
-  "intro_video": "",
-  "summary": "A customer service expert with about 2 years of experience in delivering optimum customer service to clients and customers.",
-  "experience": [],
-  "education": [],
-  "certification": [],
-  "followers": 0,
-  "followings": 0
-}
-MENTORS
-{
   "first_name": "Opeyemi",
   "last_name": "Saliu",
   "middle_name": "Abdul-Azeez",
+  "country_code": "+234",
+  "phone_number": "9069102522",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
+  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+  "location": "Ogun",
+  "position": "Backend Developer at CareerNexus",
+  "bio": "Developer|Programmer|Innovation Specialist",
+  "qualification": "Bachelor of Engineering (Civil Engineering)",
+  "intro_video": "https://careernexus-storage1.s3.amazonaws.com/intro_videos/6e34ee76-ac17-4146-b7e6-f645f46ce886test_video.mp4",
+  "summary": "I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture.",
+  "experience": [
+    {
+      "id": 2,
+      "title": "Research Methodologist/Programmer",
+      "organization": "Delta Logistics",
+      "start_date": "2022-10-29",
+      "end_date": "2024-11-29",
+      "location": "Lagos",
+      "employment_type": "Remote",
+      "detail": "Worked as a Research Methodologist, Innovation specialist and Python developer."
+    },
+    {
+      "id": 1,
+      "title": "Branch Service Associate",
+      "organization": "Wema Bank PLC",
+      "start_date": "2021-02-15",
+      "end_date": "2022-10-18",
+      "location": "Ogun",
+      "employment_type": "Onsite",
+      "detail": "Managed the cashpoint in various branches within the location."
+    }
+  ],
+  "education": [
+    {
+      "id": 2,
+      "course": "Civil Engineering",
+      "school": "Federal University of Agriculture Abeokuta",
+      "start_date": "2021-04-21",
+      "end_date": "2022-06-05",
+      "location": "Abeokuta",
+      "detail": "Completed the online course"
+    },
+    {
+      "id": 3,
+      "course": "Civil Engineering",
+      "school": "Federal University of Agriculture Abeokuta",
+      "start_date": "2013-01-13",
+      "end_date": "2018-11-15",
+      "location": "Abeokuta",
+      "detail": "Awarded Bachelor of Engineering honours Graduated with a Second Class Upper honors."
+    }
+  ],
+  "certification": [
+    {
+      "id": 1,
+      "title": "Django Rest Framework",
+      "school": "Coursera",
+      "issue_date": "2023-07-04",
+      "cert_id": "iJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyMzEzMDI2LCJpYXQiOjE3NDIyOTE0MjYsImp0aSI6ImYwZjVjMzNjYWQzMTRmYjY5NzMzNjRmYzQ2NzFkMjIwIiwidXNlcl9pZCI6NX0.2jYCbFrubaroyRZ",
+      "skills": "Python Programming, Web development, Algorithms"
+    }
+  ],
+  "followers": 1,
+  "followings": 2,
+  "resume": "https://careernexus-storage1.s3.amazonaws.com/resumes/51b434ab-441f-4ab1-ab72-a58c91ac7172Resume_080525.pdf",
+  "timezone": "Africa/Lagos"
+}
+MENTORS
+{
+  "first_name": "Abdul Azeez",
+  "last_name": "Balogun",
+  "middle_name": "Abiola",
   "country_code": "+234",
   "phone_number": "9069102522",
   "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
@@ -222,7 +273,8 @@ MENTORS
     "Database Management System"
   ],
   "mentorship_styles": [],
-  "timezone": null,
+  "resume": "",
+  "timezone": "Canada/Central",
   "linkedin_url": null,
   "followers": 0,
   "followings": 0
@@ -259,6 +311,8 @@ availability:*****
 qualification:*****
 
 location:*****
+
+resume:*****
 
 areas_of_expertise:*****
 

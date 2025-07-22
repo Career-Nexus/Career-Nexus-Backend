@@ -580,7 +580,7 @@ class MentorUpdateOutputSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","profile_photo","cover_photo","qualification","intro_video","location","bio","position","summary","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","timezone","linkedin_url"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","profile_photo","cover_photo","qualification","intro_video","location","bio","position","summary","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","resume","mentorship_styles","timezone","linkedin_url"]
 
 
 
@@ -601,7 +601,7 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
     followings = serializers.SerializerMethodField()
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings","timezone"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings","resume","timezone"]
 
     def get_followings(self,obj):
         followings = len(obj.user.follower.all())
@@ -635,7 +635,7 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","timezone","linkedin_url","followers","followings"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","resume","timezone","linkedin_url","followers","followings"]
 
     def get_followings(self,obj):
         followings = len(obj.user.follower.all())

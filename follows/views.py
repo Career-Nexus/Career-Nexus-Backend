@@ -98,11 +98,12 @@ class FollowerCountView(APIView):
         return Response({"followers count":followers_count},status=status.HTTP_200_OK)
 
 
-
-
-
-
-
+class FollowingRecommendationView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    def get(self,request):
+        pass
 
 
 
