@@ -18,58 +18,61 @@
 11. [connection create](#connection_create)  
 12. [connection pending retrieve](#connection_pending_retrieve)  
 13. [connection recommendation](#connection_recommendation)  
-14. [connection retrieve](#connection_retrieve)  
-15. [content management](#content_management)  
-16. [create comment](#create_comment)  
-17. [delete certification](#delete_certification)  
-18. [delete education](#delete_education)  
-19. [delete experience](#delete_experience)  
-20. [follow user](#follow_user)  
-21. [followers count](#followers_count)  
-22. [followings count](#followings_count)  
-23. [forget password](#forget_password)  
-24. [get chat sessions](#get_chat_sessions)  
-25. [get comment](#get_comment)  
-26. [get country phone codes](#get_country_phone_codes)  
-27. [get followings](#get_followings)  
-28. [get followings post](#get_followings_post)  
-29. [get job posts](#get_job_posts)  
-30. [get job preference](#get_job_preference)  
-31. [get own posts](#get_own_posts)  
-32. [get posts](#get_posts)  
-33. [get saved post](#get_saved_post)  
-34. [job create](#job_create)  
-35. [job notifications](#job_notifications)  
-36. [job preference](#job_preference)  
-37. [like comment/reply](#like_comment/reply)  
-38. [login api](#login_api)  
-39. [logout](#logout)  
-40. [mentor search/filter](#mentor_search/filter)  
-41. [post create](#post_create)  
-42. [post like](#post_like)  
-43. [post retrieve](#post_retrieve)  
-44. [post save](#post_save)  
-45. [post share](#post_share)  
-46. [profile completion](#profile_completion)  
-47. [profile retrieve](#profile_retrieve)  
-48. [profile update](#profile_update)  
-49. [recommended job posts.](#recommended_job_posts.)  
-50. [reply comment](#reply_comment)  
-51. [reposting](#reposting)  
-52. [retrieve education api](#retrieve_education_api)  
-53. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-54. [unfollow user](#unfollow_user)  
-55. [unlike comment/reply](#unlike_comment/reply)  
-56. [unlike post](#unlike_post)  
-57. [updating user eperience](#updating_user_eperience)  
-58. [user analytics](#user_analytics)  
-59. [user followers](#user_followers)  
-60. [user registeration](#user_registeration)  
-61. [user-industry update](#user-industry_update)  
-62. [valid choice](#valid_choice)  
-63. [verify otp hash](#verify_otp_hash)  
-64. [view certification](#view_certification)  
-65. [view experience](#view_experience)  
+14. [connection requests sent](#connection_requests_sent)  
+15. [connection retrieve](#connection_retrieve)  
+16. [connections count](#connections_count)  
+17. [content management](#content_management)  
+18. [create comment](#create_comment)  
+19. [delete certification](#delete_certification)  
+20. [delete education](#delete_education)  
+21. [delete experience](#delete_experience)  
+22. [follow user](#follow_user)  
+23. [followers count](#followers_count)  
+24. [following recommendation](#following_recommendation)  
+25. [followings count](#followings_count)  
+26. [forget password](#forget_password)  
+27. [get chat sessions](#get_chat_sessions)  
+28. [get comment](#get_comment)  
+29. [get country phone codes](#get_country_phone_codes)  
+30. [get followings](#get_followings)  
+31. [get followings post](#get_followings_post)  
+32. [get job posts](#get_job_posts)  
+33. [get job preference](#get_job_preference)  
+34. [get own posts](#get_own_posts)  
+35. [get posts](#get_posts)  
+36. [get saved post](#get_saved_post)  
+37. [job create](#job_create)  
+38. [job notifications](#job_notifications)  
+39. [job preference](#job_preference)  
+40. [like comment/reply](#like_comment/reply)  
+41. [login api](#login_api)  
+42. [logout](#logout)  
+43. [mentor search/filter](#mentor_search/filter)  
+44. [post create](#post_create)  
+45. [post like](#post_like)  
+46. [post retrieve](#post_retrieve)  
+47. [post save](#post_save)  
+48. [post share](#post_share)  
+49. [profile completion](#profile_completion)  
+50. [profile retrieve](#profile_retrieve)  
+51. [profile update](#profile_update)  
+52. [recommended job posts.](#recommended_job_posts.)  
+53. [reply comment](#reply_comment)  
+54. [reposting](#reposting)  
+55. [retrieve education api](#retrieve_education_api)  
+56. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+57. [unfollow user](#unfollow_user)  
+58. [unlike comment/reply](#unlike_comment/reply)  
+59. [unlike post](#unlike_post)  
+60. [updating user eperience](#updating_user_eperience)  
+61. [user analytics](#user_analytics)  
+62. [user followers](#user_followers)  
+63. [user registeration](#user_registeration)  
+64. [user-industry update](#user-industry_update)  
+65. [valid choice](#valid_choice)  
+66. [verify otp hash](#verify_otp_hash)  
+67. [view certification](#view_certification)  
+68. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -2302,7 +2305,7 @@ connection:*****
 
 # Connection Pending Retrieve<a name='connection_pending_retrieve'></a>
 
-This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform.
+This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform. This API also retrieves the total number of these items.
 
 **Endpoint:**`/connection/pending/`
 
@@ -2319,20 +2322,23 @@ This endpoint retrieves all the pending connection requests that was initiated b
 **status code:200**
 
 ``` json
-[
-  {
-    "id": 6,
-    "connection": {
-      "first_name": "Adeniji",
-      "last_name": "Adekogbe",
-      "middle_name": "Michael",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
-      "qualification": "Bachelor of Science (Education)",
-      "status": "PENDING",
-      "user_id": 4
+{
+  "pending_requests": [
+    {
+      "id": 7,
+      "connection": {
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "status": "PENDING",
+        "user_id": 1
+      }
     }
-  }
-]
+  ],
+  "count": 1
+}
 ```
 
 [Table of contents](#toc)
@@ -3036,6 +3042,131 @@ action:*****
 {
   "session_id": 11,
   "action": "Accepted"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Following Recommendation<a name='following_recommendation'></a>
+
+This API suggests to the login user other users that can be followed. It considers the logged in user's location and industry. (Most applicable in columns such as Who To Follow,etc)
+
+**Endpoint:**`/follow/recommendation/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 4,
+      "name": "Adeniji Adekogbe",
+      "qualification": "Bachelor of Science (Education)",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "followers": 0
+    },
+    {
+      "id": 11,
+      "name": "Abdul Azeez Balogun",
+      "qualification": "Bachelor of Engineering",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "followers": 0
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connections Count<a name='connections_count'></a>
+
+This API retrieves the count of all established connections. N.B:Connection requests that are still pending are not counted.
+
+**Endpoint:**`/connection/count/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "connections_count": 2
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connection Requests Sent<a name='connection_requests_sent'></a>
+
+This API retrieves all the connections that was initiated by the logged in user and are yet to be Confirmed or Rejected.
+
+**Endpoint:**`/connection/requests/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "connection_requests": [
+    {
+      "id": 7,
+      "connection": {
+        "first_name": "Abdul Azeez",
+        "last_name": "Balogun",
+        "middle_name": "Abiola",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering",
+        "status": "PENDING",
+        "user_id": 11
+      }
+    },
+    {
+      "id": 8,
+      "connection": {
+        "first_name": "Adeniji",
+        "last_name": "Adekogbe",
+        "middle_name": "Michael",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+        "qualification": "Bachelor of Science (Education)",
+        "status": "PENDING",
+        "user_id": 4
+      }
+    }
+  ],
+  "count": 2
 }
 ```
 

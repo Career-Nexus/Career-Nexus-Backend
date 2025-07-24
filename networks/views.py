@@ -66,8 +66,13 @@ class ConnectionPendingView(APIView):
     def get(self,request):
         user = request.user
         pending_confirmation = user.connect.select_related("user","connection").filter(status="PENDING")
+        pending_count = pending_confirmation.count()
         serialized_data = self.serializer_class(pending_confirmation,many=True,context={"user":user}).data
-        return Response(serialized_data,status=status.HTTP_200_OK)
+        output = {
+            "pending_requests":serialized_data,
+            "count":pending_count
+        }
+        return Response(output,status=status.HTTP_200_OK)
 
 
 class ConnectionRecommendationView(APIView):
@@ -117,3 +122,33 @@ class ConnectionRecommendationView(APIView):
             response["last_page"] = f"{base_url}?page={pages}"
             #serialized_data = self.serializer_class(recommendations,many=True).data
             return Response(response,status=status.HTTP_200_OK)
+
+class ConnectionsCountView(APIView):
+    permission_classes=[
+        IsAuthenticated,
+    ]
+    def get(self,request):
+        user = request.user
+        connection_count = models.Connection.objects.filter(
+            Q(user=user,status="CONFIRMED") |
+            Q(connection=user,status="CONFIRMED")
+        ).count()
+        output = {
+            "connections_count":connection_count
+        }
+        return Response(output,status=status.HTTP_200_OK)
+
+class ConnectionRequestSentView(APIView):
+    permission_classes=[
+        IsAuthenticated,
+    ]
+    def get(self,request):
+        user = request.user
+        requests_sent = models.Connection.objects.filter(user=user,status="PENDING")
+        requests_count = requests_sent.count()
+        request_output = serializers.RetrieveConnectionSerializer(requests_sent,many=True,context={"user":user}).data
+        output = {
+            "connection_requests":request_output,
+            "count":requests_count
+        }
+        return Response(output,status=status.HTTP_200_OK)

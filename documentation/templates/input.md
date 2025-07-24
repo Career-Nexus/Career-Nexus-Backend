@@ -2237,7 +2237,7 @@ connection:*****
 
 # Connection Pending Retrieve
 
-This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform.
+This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform. This API also retrieves the total number of these items.
 
 **Endpoint:**`/connection/pending/`
 
@@ -2254,20 +2254,23 @@ This endpoint retrieves all the pending connection requests that was initiated b
 **status code:200**
 
 ``` json
-[
-  {
-    "id": 6,
-    "connection": {
-      "first_name": "Adeniji",
-      "last_name": "Adekogbe",
-      "middle_name": "Michael",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
-      "qualification": "Bachelor of Science (Education)",
-      "status": "PENDING",
-      "user_id": 4
+{
+  "pending_requests": [
+    {
+      "id": 7,
+      "connection": {
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "status": "PENDING",
+        "user_id": 1
+      }
     }
-  }
-]
+  ],
+  "count": 1
+}
 ```
 
 [Table of contents](#toc)
@@ -2971,6 +2974,131 @@ action:*****
 {
   "session_id": 11,
   "action": "Accepted"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Following Recommendation
+
+This API suggests to the login user other users that can be followed. It considers the logged in user's location and industry. (Most applicable in columns such as Who To Follow,etc)
+
+**Endpoint:**`/follow/recommendation/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 4,
+      "name": "Adeniji Adekogbe",
+      "qualification": "Bachelor of Science (Education)",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+      "followers": 0
+    },
+    {
+      "id": 11,
+      "name": "Abdul Azeez Balogun",
+      "qualification": "Bachelor of Engineering",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "followers": 0
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connections Count
+
+This API retrieves the count of all established connections. N.B:Connection requests that are still pending are not counted.
+
+**Endpoint:**`/connection/count/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "connections_count": 2
+}
+```
+
+[Table of contents](#toc)
+
+
+# Connection Requests Sent
+
+This API retrieves all the connections that was initiated by the logged in user and are yet to be Confirmed or Rejected.
+
+**Endpoint:**`/connection/requests/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "connection_requests": [
+    {
+      "id": 7,
+      "connection": {
+        "first_name": "Abdul Azeez",
+        "last_name": "Balogun",
+        "middle_name": "Abiola",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering",
+        "status": "PENDING",
+        "user_id": 11
+      }
+    },
+    {
+      "id": 8,
+      "connection": {
+        "first_name": "Adeniji",
+        "last_name": "Adekogbe",
+        "middle_name": "Michael",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+        "qualification": "Bachelor of Science (Education)",
+        "status": "PENDING",
+        "user_id": 4
+      }
+    }
+  ],
+  "count": 2
 }
 ```
 

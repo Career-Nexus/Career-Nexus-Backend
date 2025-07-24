@@ -1,23 +1,23 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Documentation</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-            <style>
-                body {
-                    box-sizing: border-box;
-                    min-width: 200px;
-                    max-width: 980px;
-                    margin: 0 auto;
-                    padding: 45px;
-                }
-            </style>
-        </head>
-        <body class="markdown-body">
-        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -35,7 +35,9 @@
 <li><a href="#connection_create">connection create</a></li>
 <li><a href="#connection_pending_retrieve">connection pending retrieve</a></li>
 <li><a href="#connection_recommendation">connection recommendation</a></li>
+<li><a href="#connection_requests_sent">connection requests sent</a></li>
 <li><a href="#connection_retrieve">connection retrieve</a></li>
+<li><a href="#connections_count">connections count</a></li>
 <li><a href="#content_management">content management</a></li>
 <li><a href="#create_comment">create comment</a></li>
 <li><a href="#delete_certification">delete certification</a></li>
@@ -43,6 +45,7 @@
 <li><a href="#delete_experience">delete experience</a></li>
 <li><a href="#follow_user">follow user</a></li>
 <li><a href="#followers_count">followers count</a></li>
+<li><a href="#following_recommendation">following recommendation</a></li>
 <li><a href="#followings_count">followings count</a></li>
 <li><a href="#forget_password">forget password</a></li>
 <li><a href="#get_chat_sessions">get chat sessions</a></li>
@@ -1779,7 +1782,7 @@ connection:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Connection Pending Retrieve<a name='connection_pending_retrieve'></a></h1>
-<p>This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform.</p>
+<p>This endpoint retrieves all the pending connection requests that was initiated by other users of the platform. N.B: These connection requests are those involving the logged in user and not any requests between other users of the platform. This API also retrieves the total number of these items.</p>
 <p><strong>Endpoint:</strong><code>/connection/pending/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -1788,20 +1791,23 @@ connection:*****
 </code></pre>
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
-<pre><code class="language-json">[
-  {
-    &quot;id&quot;: 6,
-    &quot;connection&quot;: {
-      &quot;first_name&quot;: &quot;Adeniji&quot;,
-      &quot;last_name&quot;: &quot;Adekogbe&quot;,
-      &quot;middle_name&quot;: &quot;Michael&quot;,
-      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png&quot;,
-      &quot;qualification&quot;: &quot;Bachelor of Science (Education)&quot;,
-      &quot;status&quot;: &quot;PENDING&quot;,
-      &quot;user_id&quot;: 4
+<pre><code class="language-json">{
+  &quot;pending_requests&quot;: [
+    {
+      &quot;id&quot;: 7,
+      &quot;connection&quot;: {
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;,
+        &quot;status&quot;: &quot;PENDING&quot;,
+        &quot;user_id&quot;: 1
+      }
     }
-  }
-]
+  ],
+  &quot;count&quot;: 1
+}
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Connection Accept/Reject<a name='connection_accept/reject'></a></h1>
@@ -2311,7 +2317,95 @@ action:*****
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
+<h1>Following Recommendation<a name='following_recommendation'></a></h1>
+<p>This API suggests to the login user other users that can be followed. It considers the logged in user's location and industry. (Most applicable in columns such as Who To Follow,etc)</p>
+<p><strong>Endpoint:</strong><code>/follow/recommendation/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
 
-        </body>
-        </html>
-        
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 2,
+  &quot;next&quot;: null,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: 4,
+      &quot;name&quot;: &quot;Adeniji Adekogbe&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Science (Education)&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png&quot;,
+      &quot;followers&quot;: 0
+    },
+    {
+      &quot;id&quot;: 11,
+      &quot;name&quot;: &quot;Abdul Azeez Balogun&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+      &quot;followers&quot;: 0
+    }
+  ]
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Connections Count<a name='connections_count'></a></h1>
+<p>This API retrieves the count of all established connections. N.B:Connection requests that are still pending are not counted.</p>
+<p><strong>Endpoint:</strong><code>/connection/count/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;connections_count&quot;: 2
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Connection Requests Sent<a name='connection_requests_sent'></a></h1>
+<p>This API retrieves all the connections that was initiated by the logged in user and are yet to be Confirmed or Rejected.</p>
+<p><strong>Endpoint:</strong><code>/connection/requests/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;connection_requests&quot;: [
+    {
+      &quot;id&quot;: 7,
+      &quot;connection&quot;: {
+        &quot;first_name&quot;: &quot;Abdul Azeez&quot;,
+        &quot;last_name&quot;: &quot;Balogun&quot;,
+        &quot;middle_name&quot;: &quot;Abiola&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;,
+        &quot;status&quot;: &quot;PENDING&quot;,
+        &quot;user_id&quot;: 11
+      }
+    },
+    {
+      &quot;id&quot;: 8,
+      &quot;connection&quot;: {
+        &quot;first_name&quot;: &quot;Adeniji&quot;,
+        &quot;last_name&quot;: &quot;Adekogbe&quot;,
+        &quot;middle_name&quot;: &quot;Michael&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Science (Education)&quot;,
+        &quot;status&quot;: &quot;PENDING&quot;,
+        &quot;user_id&quot;: 4
+      }
+    }
+  ],
+  &quot;count&quot;: 2
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+
+</body>
+</html>

@@ -11,4 +11,5 @@ urlpatterns = [
     path("followers/",views.FollowerView.as_view(),name="followers"),
     path("followers/count/",views.FollowerCountView.as_view(), name="followers-count"),
     path("followings/count/", views.FollowingCountView.as_view(), name="followings-count"),
+    path("follow/recommendation/",views.FollowingRecommendationView.as_view(),name="Recommend-Following-View"),
         ]

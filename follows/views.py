@@ -1,10 +1,13 @@
 #from django.shortcuts import render
+from django.db.models import Q
+from django.core.cache import cache
+from django.http import Http404
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import AllowAny,IsAuthenticated
 
-from django.http import Http404
 
 from . import models, serializers
 
@@ -13,6 +16,8 @@ from users.models import *
 from posts.models import *
 from users.serializers import PersonalProfileSerializer
 from posts.views import invalidate_post_cache
+from networks.views import RecommendationPaginator
+from networks.serializers import RetrieveRecommendationDetailSerializer
 
 
 class FollowView(APIView):
@@ -103,7 +108,32 @@ class FollowingRecommendationView(APIView):
         IsAuthenticated,
     ]
     def get(self,request):
-        pass
+        user = request.user
+        user_industry = user.industry
+        user_location = user.profile.location
+        page = request.query_params.get("page",1)
+        cache_key = f"{user.email}_following_recommendation_{page}"
+        cached_data = cache.get(cache_key)
+        if not cached_data:
+            follows_recommendation = Users.objects.filter(
+                Q(industry=user_industry) |
+                Q(profile__location__icontains=user_location)
+            ).exclude(id=user.id)
+            #Exclude those that have been previously followed and shuffle them
+            recommendation = follows_recommendation.exclude(
+                Q(follower__user_following=user) |
+                Q(following__user_follower=user)
+            ).order_by("?")
+            paginator = RecommendationPaginator()
+            paginated_items = paginator.paginate_queryset(recommendation,request)
+            serialized_items = RetrieveRecommendationDetailSerializer(paginated_items,many=True).data
+            output = paginator.get_paginated_response(serialized_items).data
+            cache.set(cache_key,output,timeout=3600)
+            return Response(output,status=status.HTTP_200_OK)
+        else:
+            output= cached_data
+            return Response(output,status=status.HTTP_200_OK)
+
 
 
 

@@ -328,7 +328,6 @@ class RetreiveProfileView(APIView):
                 cache.set(cache_key,output,timeout=7200)
                 return Response(output,status=status.HTTP_200_OK)
             else:
-                #print(cache_key)
                 return Response(cached_data,status=status.HTTP_200_OK)
         else:
             try:
