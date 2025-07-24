@@ -13,11 +13,19 @@ from . import models, serializers
 
 
 from users.models import *
+from users.views import delete_cache
 from posts.models import *
 from users.serializers import PersonalProfileSerializer
 from posts.views import invalidate_post_cache
 from networks.views import RecommendationPaginator
 from networks.serializers import RetrieveRecommendationDetailSerializer
+
+
+def invalidate_following_cache(user_email):
+    for item in range(1,11):
+        cache_key = f"{user_email}_following_recommendation_{item}"
+        delete_cache(cache_key)
+
 
 
 class FollowView(APIView):
@@ -33,6 +41,7 @@ class FollowView(APIView):
             user_industry = request.user.industry 
             #Avoid returning stale can_follow data if a user is followed from their posts
             invalidate_post_cache(user_industry)
+            invalidate_following_cache(request.user.email)
             return Response(output,status=status.HTTP_201_CREATED)
 
 
@@ -49,6 +58,7 @@ class UnfollowView(APIView):
             user_industry = request.user.industry
             #Avoid returning stale can_follow data if a user is unfollowed from their posts
             invalidate_post_cache(user_industry)
+            invalidate_following_cache(request.user.email)
             return Response(output,status=status.HTTP_200_OK)
 
 

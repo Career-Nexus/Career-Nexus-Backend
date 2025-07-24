@@ -1,5 +1,3 @@
-#from django.shortcuts import render
-#from django.db.models.base import connection
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -9,6 +7,7 @@ from rest_framework.pagination import PageNumberPagination
 
 from django.http import Http404
 from django.db.models import Q
+from django.core.cache import cache
 
 from . import serializers
 from . import models
@@ -100,9 +99,11 @@ class ConnectionRecommendationView(APIView):
                 recommendations = industry_recommendations.exclude(Q(connection_user__connection=user) | Q(connect__user=user)).order_by("id")
 
 
+
             elif criteria.lower() == "location":
                 location_recommendations = Users.objects.select_related("profile").filter(profile__location__icontains=user.profile.location).exclude(id=user.id)
                 recommendations = location_recommendations.exclude(Q(connection_user__connection = user) | Q(connect__user = user)).order_by("id")
+
             else:
                 return Response({"criteria error":"Unrecognized recommendation criteria."},status=status.HTTP_400_BAD_REQUEST)
 
