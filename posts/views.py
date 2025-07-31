@@ -1,4 +1,3 @@
-from multiprocessing import context
 from drf_yasg.utils import swagger_auto_schema
 
 from . import serializers
@@ -31,7 +30,6 @@ def invalidate_post_cache(user_industry,user_id=None):
         for item in range(1,6):
             cache_key = f"{user_id}_ownposts_{item}"
             delete_cache(cache_key)
-
 
 
 

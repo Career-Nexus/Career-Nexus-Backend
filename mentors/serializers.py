@@ -12,6 +12,7 @@ from . import models
 
 from datetime import datetime,timedelta,date,time
 import pytz
+import uuid
 
 CHOICES = get_choices()
 
@@ -131,6 +132,10 @@ class CreateMentorshipSessionSerializer(serializers.Serializer):
         return data
 
     def create(self,validated_data):
+        mentee = validated_data.get("mentee")
+        mentor = validated_data.get("mentor")
+        validated_data["room_name"] = f"Room_{mentee.id}_{mentor.id}_{uuid.uuid4()}"
+
         session_instance = models.Sessions.objects.create(**validated_data)
         return session_instance
 
@@ -172,10 +177,24 @@ class SessionRetrieveSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     mentor = serializers.SerializerMethodField()
     mentee = serializers.SerializerMethodField()
+    join = serializers.SerializerMethodField()
     session_type = serializers.CharField()
     session_at = serializers.SerializerMethodField()
     discourse = serializers.CharField()
     status = serializers.CharField()
+
+    def get_join(self,obj):
+        if obj.status != "PENDING":
+            utc = pytz.timezone("UTC")
+            present = utc.localize(datetime.now())
+            session_at = obj.session_at
+            if session_at > present:
+                return False
+            else:
+                return True
+        return False
+
+
 
     def get_mentor(self,obj):
         output = PersonalProfileSerializer(obj.mentor.profile,many=False).data

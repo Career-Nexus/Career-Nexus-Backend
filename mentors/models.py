@@ -7,6 +7,7 @@ class Sessions(models.Model):
     mentor = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor")
     mentee = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentee")
     session_type = models.CharField(max_length=20)
+    room_name = models.CharField()
     session_at = models.DateTimeField()
     discourse = models.TextField()
     status = models.CharField(max_length=20,default="PENDING")

@@ -10,6 +10,8 @@ from users.models import PersonalProfile, experience
 from . import serializers,models
 from users.models import Users
 
+import uuid
+
 
 def extract_years_from_experience_level(text):
     if text.lower() == "entry":
