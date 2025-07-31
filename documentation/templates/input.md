@@ -3132,3 +3132,61 @@ This API retrieves all the connections that was initiated by the logged in user 
 ```
 
 [Table of contents](#toc)
+
+
+# Mentors Recommendation
+
+This endpoint recommends mentors to the logged in user
+
+**Endpoint:**`/mentor/recommendation/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "first_name": "Adedeji",
+    "last_name": "Balogun",
+    "middle_name": "Akanbi",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": null,
+    "experience_level": "Junior"
+  },
+  {
+    "first_name": "Samuel O.",
+    "last_name": "Arowojolu",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": "Business Analysts",
+    "experience_level": "Mid"
+  },
+  {
+    "first_name": "Adugbe",
+    "last_name": "Arowosafe",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": "Business Man",
+    "experience_level": "Mid"
+  },
+  {
+    "first_name": "Michael",
+    "last_name": "Obi",
+    "middle_name": "Mike",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": "Software",
+    "experience_level": "Mid"
+  }
+]
+```
+
+[Table of contents](#toc)

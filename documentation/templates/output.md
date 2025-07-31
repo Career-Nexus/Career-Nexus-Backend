@@ -48,31 +48,32 @@
 41. [login api](#login_api)  
 42. [logout](#logout)  
 43. [mentor search/filter](#mentor_search/filter)  
-44. [post create](#post_create)  
-45. [post like](#post_like)  
-46. [post retrieve](#post_retrieve)  
-47. [post save](#post_save)  
-48. [post share](#post_share)  
-49. [profile completion](#profile_completion)  
-50. [profile retrieve](#profile_retrieve)  
-51. [profile update](#profile_update)  
-52. [recommended job posts.](#recommended_job_posts.)  
-53. [reply comment](#reply_comment)  
-54. [reposting](#reposting)  
-55. [retrieve education api](#retrieve_education_api)  
-56. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-57. [unfollow user](#unfollow_user)  
-58. [unlike comment/reply](#unlike_comment/reply)  
-59. [unlike post](#unlike_post)  
-60. [updating user eperience](#updating_user_eperience)  
-61. [user analytics](#user_analytics)  
-62. [user followers](#user_followers)  
-63. [user registeration](#user_registeration)  
-64. [user-industry update](#user-industry_update)  
-65. [valid choice](#valid_choice)  
-66. [verify otp hash](#verify_otp_hash)  
-67. [view certification](#view_certification)  
-68. [view experience](#view_experience)  
+44. [mentors recommendation](#mentors_recommendation)  
+45. [post create](#post_create)  
+46. [post like](#post_like)  
+47. [post retrieve](#post_retrieve)  
+48. [post save](#post_save)  
+49. [post share](#post_share)  
+50. [profile completion](#profile_completion)  
+51. [profile retrieve](#profile_retrieve)  
+52. [profile update](#profile_update)  
+53. [recommended job posts.](#recommended_job_posts.)  
+54. [reply comment](#reply_comment)  
+55. [reposting](#reposting)  
+56. [retrieve education api](#retrieve_education_api)  
+57. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+58. [unfollow user](#unfollow_user)  
+59. [unlike comment/reply](#unlike_comment/reply)  
+60. [unlike post](#unlike_post)  
+61. [updating user eperience](#updating_user_eperience)  
+62. [user analytics](#user_analytics)  
+63. [user followers](#user_followers)  
+64. [user registeration](#user_registeration)  
+65. [user-industry update](#user-industry_update)  
+66. [valid choice](#valid_choice)  
+67. [verify otp hash](#verify_otp_hash)  
+68. [view certification](#view_certification)  
+69. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -3197,6 +3198,64 @@ This API retrieves all the connections that was initiated by the logged in user 
   ],
   "count": 2
 }
+```
+
+[Table of contents](#toc)
+
+
+# Mentors Recommendation<a name='mentors_recommendation'></a>
+
+This endpoint recommends mentors to the logged in user
+
+**Endpoint:**`/mentor/recommendation/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "first_name": "Adedeji",
+    "last_name": "Balogun",
+    "middle_name": "Akanbi",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": null,
+    "experience_level": "Junior"
+  },
+  {
+    "first_name": "Samuel O.",
+    "last_name": "Arowojolu",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": "Business Analysts",
+    "experience_level": "Mid"
+  },
+  {
+    "first_name": "Adugbe",
+    "last_name": "Arowosafe",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": "Business Man",
+    "experience_level": "Mid"
+  },
+  {
+    "first_name": "Michael",
+    "last_name": "Obi",
+    "middle_name": "Mike",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "current_job": "Software",
+    "experience_level": "Mid"
+  }
+]
 ```
 
 [Table of contents](#toc)
