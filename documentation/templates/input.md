@@ -2889,12 +2889,12 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
 ``` json
 [
   {
-    "id": 7,
+    "id": 11,
     "mentor": {
       "id": 11,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
       "qualification": "Bachelor of Engineering"
     },
@@ -2906,21 +2906,49 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
+    "join": true,
     "session_type": "individual",
     "session_at": {
-      "date": "2025-07-21",
-      "time": "00:00:00"
+      "date": "2025-07-20",
+      "time": "18:00:00"
+    },
+    "discourse": "Career Building",
+    "status": "ACCEPTED"
+  },
+  {
+    "id": 12,
+    "mentor": {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "join": false,
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-07-20",
+      "time": "18:00:00"
     },
     "discourse": "Career Building",
     "status": "PENDING"
   },
   {
-    "id": 8,
+    "id": 13,
     "mentor": {
       "id": 11,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
       "qualification": "Bachelor of Engineering"
     },
@@ -2932,13 +2960,14 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
+    "join": true,
     "session_type": "individual",
     "session_at": {
-      "date": "2025-07-21",
-      "time": "00:00:00"
+      "date": "2025-07-31",
+      "time": "01:36:00"
     },
     "discourse": "Career Building",
-    "status": "PENDING"
+    "status": "ACCEPTED"
   }
 ]
 ```
