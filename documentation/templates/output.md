@@ -3205,7 +3205,7 @@ This API retrieves all the connections that was initiated by the logged in user 
 
 # Mentors Recommendation<a name='mentors_recommendation'></a>
 
-This endpoint recommends mentors to the logged in user
+This endpoint recommends mentors to the logged in user.
 
 **Endpoint:**`/mentor/recommendation/`
 
@@ -3224,36 +3224,13 @@ This endpoint recommends mentors to the logged in user
 ``` json
 [
   {
-    "first_name": "Adedeji",
+    "id": 11,
+    "first_name": "Abdul Azeez",
     "last_name": "Balogun",
-    "middle_name": "Akanbi",
+    "middle_name": "Abiola",
     "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-    "current_job": null,
-    "experience_level": "Junior"
-  },
-  {
-    "first_name": "Samuel O.",
-    "last_name": "Arowojolu",
-    "middle_name": "N/A",
-    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-    "current_job": "Business Analysts",
-    "experience_level": "Mid"
-  },
-  {
-    "first_name": "Adugbe",
-    "last_name": "Arowosafe",
-    "middle_name": "N/A",
-    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-    "current_job": "Business Man",
-    "experience_level": "Mid"
-  },
-  {
-    "first_name": "Michael",
-    "last_name": "Obi",
-    "middle_name": "Mike",
-    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-    "current_job": "Software",
-    "experience_level": "Mid"
+    "current_job": "Backend Developer",
+    "experience_level": "Senior"
   }
 ]
 ```

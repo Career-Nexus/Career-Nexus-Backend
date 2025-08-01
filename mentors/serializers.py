@@ -64,11 +64,15 @@ class RetrieveMentorsSerializer(serializers.ModelSerializer):
 
 
 class MentorRecommendationSerializer(serializers.ModelSerializer):
+    id = serializers.SerializerMethodField()
     experience_level = serializers.SerializerMethodField()
 
     class Meta:
         model = PersonalProfile
-        fields = ["first_name","last_name","middle_name","profile_photo","current_job","experience_level"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","experience_level"]
+
+    def get_id(self,obj):
+        return obj.user.id
 
     def get_experience_level(self,obj):
         if obj.years_of_experience:
