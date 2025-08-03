@@ -31,4 +31,5 @@ urlpatterns = [
     path("info/",include("info.urls")),
     path("chats/",include("notifications.urls")),
     path("mentor/",include("mentors.urls")),
+    path("newsletter/",include("newsletters.urls")),
 ]

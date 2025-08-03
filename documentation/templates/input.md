@@ -3167,3 +3167,172 @@ This endpoint recommends mentors to the logged in user.
 ```
 
 [Table of contents](#toc)
+
+
+# Subscribe to Newsletter
+
+This API subscribes a user to the platforms Newsletter updates. 
+
+**Endpoint:**`/newsletter/subscribe/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "subscriber": {
+    "id": 1,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+    "qualification": "Bachelor of Engineering (Civil Engineering)"
+  },
+  "subscribed_at": "2025-08-03T08:18:10.419778Z"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Unsubscribe from NewsLetter
+
+This API Unsubscribes a user from the Newsletter Updates. N.B:The User must have been previously subscribed.
+
+**Endpoint:**`/newsletter/unsubscribe/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Unsubscribed from Newsletter"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Create a NewsLetter
+
+This API allows the creation of a NewsLetter. N.B:This API is designed for admin use.
+
+**Endpoint:**`/newsletter/create/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+content:*****
+
+image (.png,.jpg,.jpeg):*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "title": "\"Build & Beyond – Your Weekly Dive into Tech, Tools, and Tactics\"",
+  "content": "Hey Builders,\n\nWelcome back to Build & Beyond, your space to explore the latest in modern tech, smarter workflows, and the people reimagining what’s possible.\n\nThis week, we're diving into innovation that isn’t just loud — it’s smart.\n\n🧠 This Week’s Highlights\n⚙️ Productivity Stack: What’s Hot in 2025\nOur curated list of top tools to speed up your workflows — from browser extensions to AI assistants. Whether you're coding, designing, or organizing your life, this stack is a game-changer.\n\n🔥 Side Project Spotlight: “RecurTrack”\nBuilt by a solo founder in Lagos, RecurTrack is a lightweight tool that helps freelancers track recurring clients without needing a full CRM. Simple, elegant, and now open-source.\n\n🔍 Framework Deep Dive: Django 5.1\nThe new Django update introduces native async views, stricter typing, and performance boosts. Our guide shows how to upgrade and what to watch for if you’re building APIs.\n\n📚 Learn Something New:\n\n“How SQLite is secretly powering the world”\n\n“The psychology of clean code”\n\n“Why battery tech matters to cloud computing”\n\n🎯 Quick Tip of the Week\nUse htop instead of top in your Linux terminal. It’s interactive, colorful, and gives you real-time control over process priorities.\n\n🧭 What We’re Exploring Next Week\nA deep look at Postgres tuning\n\nHow indie developers are funding projects without VCs\n\nBuilding a minimalist dev environment (yes, even on 4GB RAM)\n\nKeep tinkering, keep shipping — and remember: the best tools are the ones you actually use.\n\nSee you next week,\n— The Build & Beyond Crew",
+  "image": "https://careernexus-storage1.s3.amazonaws.com/Newsletter/Images/0ca08693-14c4-4fff-8954-2bdb337ba28d/techtacticsmay2025.jpg",
+  "timestamp": "2025-08-03T11:05:28.134040Z"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Get NewsLetter
+
+This API retrieves the latest newsletter article and also includes a list of newsletter archives.
+
+**Endpoint:**`/newsletter/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "recent": {
+    "title": "\"Focus Frame – Clarity in a Noisy World\"",
+    "content": "Hello Thinker,\n\nWelcome to this week's edition of Focus Frame, where we distill powerful ideas, simple systems, and grounded insight to help you work better and live smarter.\n\n🧭 This Week's Frame\n📌 1. One Goal, One Week\nWhat’s the one thing you need to ship, solve, or start this week? Clarity comes when we give one goal full attention. Write it down. Make it real.\n\n🛠️ 2. System > Hustle\nWe often chase motivation, but it’s fleeting. What works long term? Quiet, boring systems. The checklist. The morning reset. The Friday review. Build systems — not streaks.\n\n📖 3. Reading Corner: “The Psychology of Attention”\nThis week’s pick is a short read on how to protect your focus in high-noise environments. Key takeaway: the more inputs you silence, the deeper your clarity grows.\n\n🔧 4. Tool in Focus: Obsidian (Your Second Brain)\nObsidian is more than just a note app. It’s a quiet place to think, connect ideas, and build your own knowledge base. Markdown-powered. Offline-friendly. Highly recommended for focused minds.\n\n🌱 Practice This Week\nPause before switching tasks.\nEven 10 seconds of breathing between contexts improves focus, energy, and intentionality.\n\nThanks for reading. Stay clear, stay steady, and stay in your frame.\n\nTill next time,\n— The Focus Frame Team",
+    "image": "",
+    "timestamp": "2025-08-03T15:15:04.097683Z"
+  },
+  "archive": {
+    "count": 5,
+    "next": null,
+    "previous": null,
+    "results": [
+      {
+        "title": "\"Creative Current – Flowing Ideas for Modern Makers\"",
+        "content": "Hey Creator,\n\nWelcome to this week’s issue of Creative Current, your go-to burst of fresh ideas, tools, and trends designed to keep you in motion and ahead of the curve.\n\n⚡ What’s Flowing This Week\n🎨 1. Design Is Solving Real Problems Again\nWe’re seeing a shift from over-stylized UIs to interfaces that do more with less. Utility-driven design is back — and users love it. Clean, purposeful, minimal. It’s not boring — it’s smart.\n\n📣 2. Product Launch Tip: Talk to 5 People Before You Build\nStill thinking of your next MVP? Before writing a single line of code, talk to 5 real users. A 30-minute conversation can save you 3 weeks of feature bloat.\n\n🧰 3. Tool Spotlight: Penpot (Free Design & Prototyping)\nAn open-source Figma alternative that respects your data, works in teams, and integrates beautifully into dev workflows. Free forever, community-powered, and quickly maturing.\n\n🔎 4. Quick Peek: What’s Working on Landing Pages in 2025\n\n1 headline\n\n1 image or demo\n\n1 call to action\nEverything else? Distraction.\n\n🚀 Challenge of the Week\nCreate a “one-screen” version of your project — just the essence. No menus, no subpages. Then ask: does the value still shine through?\n\nThanks for riding the current with us. Stay bold, stay curious — and build with joy.\n\nSee you next wave,\n— The Creative Current Team",
+        "image": "",
+        "timestamp": "2025-08-03T13:06:18.976427Z"
+      },
+      {
+        "title": "\"Insight Loop – Your Weekly Edge in Tech & Innovation\"",
+        "content": "Hi Innovator,\n\nWelcome to this week’s edition of Insight Loop, where we connect you with ideas, tools, and developments shaping the tech ecosystem — all in under 5 minutes.\n\n🌟 This Week's Briefing\n⚡ Feature Focus: Smarter Automation, Simpler Workflows\nNo-code automation tools like Make and Pipedream are changing how teams link APIs and manage workflows. We walk through how one team saved 9 hours a week using 3 automations — no engineers involved.\n\n📊 Industry Insight: AI Isn’t Just the Future — It’s the New Baseline\nFrom customer service to backend optimization, AI is now table stakes. We share 3 quick ways to plug affordable AI into your stack — even if you're not “building AI.”\n\n🧠 Thought Piece: The Silent Value of Internal Documentation\nClear internal docs aren’t a nice-to-have. They’re competitive leverage. This week, we break down how good docs reduce onboarding time by 40% and improve system resilience.\n\n🔧 Team Pick: Cronicle (Lightweight Job Scheduler)\nLooking for an alternative to bulky cron dashboards? Cronicle is an open-source task runner with a beautiful UI and REST API support. Super handy for DevOps or small backend teams.\n\n🎯 Pro Tip of the Week\nUse watch -n 2 \"df -h\" to monitor disk space in real time — great for managing logs or backup-heavy environments.\n\nKeep learning. Keep refining. Keep building with purpose.\n\nSee you next week,\n— The Insight Loop Team",
+        "image": "https://careernexus-storage1.s3.amazonaws.com/Newsletter/Images/760bdaaf-03d1-4e5e-8a0d-67d120314f08/Innovator.png",
+        "timestamp": "2025-08-03T13:04:59.094410Z"
+      },
+      {
+        "title": "\"The Forward Byte – Small Ideas, Big Impact\"",
+        "content": "Hey there, Trailblazer,\n\nWelcome to this week’s edition of The Forward Byte, where we break down powerful trends, clever tools, and the kind of ideas that quietly change the game.\n\n🚀 This Week’s Highlights\n🧠 1. Micro Productivity is the New Superpower\nForget 4-hour work marathons. Studies now show that consistent, focused 20-minute sessions produce better results, especially in deep work. Try the \"3x20 rule\" this week — and track the difference.\n\n🛠️ 2. Tool of the Week: \"Raycast\" for Devs & Creators\nImagine Spotlight Search on steroids. Raycast brings code snippets, GitHub issues, Slack commands, and custom scripts all under your keyboard. And it’s free.\n\n📈 3. Quietly Exploding: Voice Interfaces in SaaS\nVoice commands aren’t just for Alexa anymore. Startups are embedding whisper-quiet voice input into CRMs, dashboards, and analytics tools — making SaaS more accessible and hands-free.\n\n💬 4. Quote Worth Sharing:\n\n\"Don’t aim for a million users. Aim to help 10 people so well they can’t live without it.\"\n— Paul Graham\n\n🧭 Your Weekly Action Step:\n✅ Choose one tool, habit, or workflow tweak this week and stick with it for 3 days straight.\nSmall change = massive momentum.\n\nThanks for reading — keep building, stay curious, and never underestimate a small shift.\n\nUntil next week,\n— The Forward Byte Team",
+        "image": "",
+        "timestamp": "2025-08-03T12:59:42.577694Z"
+      },
+      {
+        "title": "\"TechPulse Weekly – Staying Ahead in a Rapidly Changing World\"",
+        "content": "Hello Innovators,\n\nWelcome to this week’s edition of TechPulse Weekly, where we bring you the latest insights, tools, and trends shaping the future of technology, business, and beyond.\n\n🔍 What’s Inside This Week:\n1. 🚀 AI Adoption Surges in Small Businesses\nA new study reveals that over 60% of small businesses have integrated AI tools into their daily operations, with automation and content generation leading the way. Experts predict this trend will only accelerate as tools become more affordable and accessible.\n\n2. 🔐 Cybersecurity Breaches on the Rise\nA string of high-profile cyberattacks has put data privacy back in the spotlight. We explore best practices for safeguarding your systems — and why zero-trust architecture is more than just a buzzword.\n\n3. 💡 Dev Spotlight: Open-Source Tools to Watch\nFrom low-code platforms to innovative data visualizers, we highlight three rising open-source projects making waves in the dev community.\n\n4. 📱 App of the Week: Arc Browser\nIt’s not just another Chrome alternative. Arc’s unique sidebar, tab containers, and personal spaces are redefining how we interact with the web. Our tech writer breaks down the pros and cons.\n\n5. 🌍 Global Tech Events Coming Up\n\nDEFCON 33 (Aug 8–11) – Las Vegas\n\nFOSDEM Africa (Sep) – Nairobi\n\nAI Expo Europe (Oct) – Amsterdam\n\n💬 From the Editor\nTechnology moves fast, but thoughtful adoption and community learning can help us move smarter. Whether you’re a developer, entrepreneur, or lifelong learner, keep experimenting, keep sharing, and most of all — stay curious.\n\nTill next time,\n— The TechPulse Team",
+        "image": "https://careernexus-storage1.s3.amazonaws.com/Newsletter/Images/53782840-1409-4aca-b5b7-e6612d0b1bab/pngtree-business-technology-digital-high-tech-world-background-image_15631454.jpg",
+        "timestamp": "2025-08-03T11:21:59.707107Z"
+      },
+      {
+        "title": "\"Build & Beyond – Your Weekly Dive into Tech, Tools, and Tactics\"",
+        "content": "Hey Builders,\n\nWelcome back to Build & Beyond, your space to explore the latest in modern tech, smarter workflows, and the people reimagining what’s possible.\n\nThis week, we're diving into innovation that isn’t just loud — it’s smart.\n\n🧠 This Week’s Highlights\n⚙️ Productivity Stack: What’s Hot in 2025\nOur curated list of top tools to speed up your workflows — from browser extensions to AI assistants. Whether you're coding, designing, or organizing your life, this stack is a game-changer.\n\n🔥 Side Project Spotlight: “RecurTrack”\nBuilt by a solo founder in Lagos, RecurTrack is a lightweight tool that helps freelancers track recurring clients without needing a full CRM. Simple, elegant, and now open-source.\n\n🔍 Framework Deep Dive: Django 5.1\nThe new Django update introduces native async views, stricter typing, and performance boosts. Our guide shows how to upgrade and what to watch for if you’re building APIs.\n\n📚 Learn Something New:\n\n“How SQLite is secretly powering the world”\n\n“The psychology of clean code”\n\n“Why battery tech matters to cloud computing”\n\n🎯 Quick Tip of the Week\nUse htop instead of top in your Linux terminal. It’s interactive, colorful, and gives you real-time control over process priorities.\n\n🧭 What We’re Exploring Next Week\nA deep look at Postgres tuning\n\nHow indie developers are funding projects without VCs\n\nBuilding a minimalist dev environment (yes, even on 4GB RAM)\n\nKeep tinkering, keep shipping — and remember: the best tools are the ones you actually use.\n\nSee you next week,\n— The Build & Beyond Crew",
+        "image": "https://careernexus-storage1.s3.amazonaws.com/Newsletter/Images/0ca08693-14c4-4fff-8954-2bdb337ba28d/techtacticsmay2025.jpg",
+        "timestamp": "2025-08-03T11:05:28.134040Z"
+      }
+    ]
+  }
+}
+```
+
+[Table of contents](#toc)

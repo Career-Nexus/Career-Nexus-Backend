@@ -12,3 +12,4 @@ class Countrycodes(models.Model):
     country = models.CharField(max_length=1000)
     code = models.CharField(max_length=20)
     permitted = models.BooleanField(default=True)
+
