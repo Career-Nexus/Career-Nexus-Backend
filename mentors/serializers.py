@@ -65,25 +65,13 @@ class RetrieveMentorsSerializer(serializers.ModelSerializer):
 
 class MentorRecommendationSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
-    experience_level = serializers.SerializerMethodField()
 
     class Meta:
         model = PersonalProfile
-        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","experience_level"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","years_of_experience","technical_skills"]
 
     def get_id(self,obj):
         return obj.user.id
-
-    def get_experience_level(self,obj):
-        if obj.years_of_experience:
-            if obj.years_of_experience <= 2:
-                return "Junior"
-            elif obj.years_of_experience > 2 and obj.years_of_experience <=5:
-                return "Mid"
-            else:
-                return "Senior"
-        else:
-            return "Junior"
 
 class MentorSearchAndFilterSerializer(serializers.Serializer):
     text = serializers.CharField(max_length=1000,required=False)
@@ -224,3 +212,37 @@ class SessionRetrieveSerializer(serializers.Serializer):
         }
         return output
 
+
+class RetrieveMentorSearchAndRetrieveSerializer(serializers.ModelSerializer):
+    first_name = serializers.SerializerMethodField()
+    last_name = serializers.SerializerMethodField()
+    middle_name = serializers.SerializerMethodField()
+    years_of_experience = serializers.SerializerMethodField()
+    technical_skills = serializers.SerializerMethodField()
+    current_job = serializers.SerializerMethodField()
+    profile_photo = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Users
+        fields = ["id","first_name","last_name","middle_name","years_of_experience","technical_skills","current_job","profile_photo"]
+
+    def get_first_name(self,obj):
+        return obj.profile.first_name
+
+    def get_last_name(self,obj):
+        return obj.profile.last_name
+
+    def get_middle_name(self,obj):
+        return obj.profile.middle_name
+
+    def get_years_of_experience(self,obj):
+        return obj.profile.years_of_experience
+
+    def get_technical_skills(self,obj):
+        return obj.profile.technical_skills
+
+    def get_current_job(self,obj):
+        return obj.profile.current_job
+
+    def get_profile_photo(self,obj):
+        return obj.profile.profile_photo

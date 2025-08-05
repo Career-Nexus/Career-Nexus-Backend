@@ -78,7 +78,7 @@ class MentorSearchAndFilterView(APIView):
                 filter = search_data["availability"]
                 mentors = mentors.filter(profile__availability=filter)
                 
-            output = serializers.RetrieveMentorsSerializer(mentors,many=True).data
+            output = serializers.RetrieveMentorSearchAndRetrieveSerializer(mentors,many=True).data
             return Response(output,status=status.HTTP_200_OK)
 
 
