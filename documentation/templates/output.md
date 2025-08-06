@@ -40,44 +40,47 @@
 33. [get job posts](#get_job_posts)  
 34. [get job preference](#get_job_preference)  
 35. [get newsletter](#get_newsletter)  
-36. [get own posts](#get_own_posts)  
-37. [get posts](#get_posts)  
-38. [get saved post](#get_saved_post)  
-39. [job create](#job_create)  
-40. [job notifications](#job_notifications)  
-41. [job preference](#job_preference)  
-42. [like comment/reply](#like_comment/reply)  
-43. [login api](#login_api)  
-44. [logout](#logout)  
-45. [mentor search/filter](#mentor_search/filter)  
-46. [mentors recommendation](#mentors_recommendation)  
-47. [post create](#post_create)  
-48. [post like](#post_like)  
-49. [post retrieve](#post_retrieve)  
-50. [post save](#post_save)  
-51. [post share](#post_share)  
-52. [profile completion](#profile_completion)  
-53. [profile retrieve](#profile_retrieve)  
-54. [profile update](#profile_update)  
-55. [recommended job posts.](#recommended_job_posts.)  
-56. [reply comment](#reply_comment)  
-57. [reposting](#reposting)  
-58. [retrieve education api](#retrieve_education_api)  
-59. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-60. [subscribe to newsletter](#subscribe_to_newsletter)  
-61. [unfollow user](#unfollow_user)  
-62. [unlike comment/reply](#unlike_comment/reply)  
-63. [unlike post](#unlike_post)  
-64. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-65. [updating user eperience](#updating_user_eperience)  
-66. [user analytics](#user_analytics)  
-67. [user followers](#user_followers)  
-68. [user registeration](#user_registeration)  
-69. [user-industry update](#user-industry_update)  
-70. [valid choice](#valid_choice)  
-71. [verify otp hash](#verify_otp_hash)  
-72. [view certification](#view_certification)  
-73. [view experience](#view_experience)  
+36. [get other user post](#get_other_user_post)  
+37. [get own posts](#get_own_posts)  
+38. [get posts](#get_posts)  
+39. [get saved post](#get_saved_post)  
+40. [job create](#job_create)  
+41. [job notifications](#job_notifications)  
+42. [job preference](#job_preference)  
+43. [like comment/reply](#like_comment/reply)  
+44. [login api](#login_api)  
+45. [logout](#logout)  
+46. [mentor search/filter](#mentor_search/filter)  
+47. [mentors recommendation](#mentors_recommendation)  
+48. [post create](#post_create)  
+49. [post like](#post_like)  
+50. [post retrieve](#post_retrieve)  
+51. [post save](#post_save)  
+52. [post share](#post_share)  
+53. [profile completion](#profile_completion)  
+54. [profile retrieve](#profile_retrieve)  
+55. [profile update](#profile_update)  
+56. [recommended job posts.](#recommended_job_posts.)  
+57. [reply comment](#reply_comment)  
+58. [reposting](#reposting)  
+59. [retrieve education api](#retrieve_education_api)  
+60. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+61. [retrieve user settings](#retrieve_user_settings)  
+62. [subscribe to newsletter](#subscribe_to_newsletter)  
+63. [unfollow user](#unfollow_user)  
+64. [unlike comment/reply](#unlike_comment/reply)  
+65. [unlike post](#unlike_post)  
+66. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+67. [update user account settings](#update_user_account_settings)  
+68. [updating user eperience](#updating_user_eperience)  
+69. [user analytics](#user_analytics)  
+70. [user followers](#user_followers)  
+71. [user registeration](#user_registeration)  
+72. [user-industry update](#user-industry_update)  
+73. [valid choice](#valid_choice)  
+74. [verify otp hash](#verify_otp_hash)  
+75. [view certification](#view_certification)  
+76. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -3405,6 +3408,205 @@ This API retrieves the latest newsletter article and also includes a list of new
       }
     ]
   }
+}
+```
+
+[Table of contents](#toc)
+
+
+# Get Other User Post<a name='get_other_user_post'></a>
+
+This API retrieves the posts of another userby specifying the user_id query parameter in the url endpoint.
+
+**Endpoint:**`/post/by-user/?user_id=2`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 3,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "profile": {
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
+      },
+      "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:31:33.731704Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 3
+    },
+    {
+      "profile": {
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
+      },
+      "body": "Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:30:44.280807Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 2
+    },
+    {
+      "profile": {
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
+      },
+      "body": "Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:30:11.005024Z",
+      "comment_count": 1,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 1
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve User Settings<a name='retrieve_user_settings'></a>
+
+This API retrieves user settings parameters.
+
+**Endpoint:**`/user/settings/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "email_notify": true,
+  "push_notify": true,
+  "message_notify": false,
+  "weekly_summary": false,
+  "job_alerts": true,
+  "marketing": false,
+  "show_email": true,
+  "show_activity": false,
+  "show_location": false
+}
+```
+
+[Table of contents](#toc)
+
+
+# Update User Account Settings<a name='update_user_account_settings'></a>
+
+This API updates user account settings parameters. N.B:All fields are Boolean (True/False).
+
+**Endpoint:**`/user/settings/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+email_notify:*****
+
+push_notify:*****
+
+message_notify:*****
+
+weekly_summary:*****
+
+job_alerts:*****
+
+marketing:*****
+
+show_email:*****
+
+show_activity:*****
+
+show_location:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "email_notify": true,
+  "push_notify": true,
+  "message_notify": false,
+  "weekly_summary": false,
+  "job_alerts": true,
+  "marketing": false,
+  "show_email": true,
+  "show_activity": false,
+  "show_location": false
 }
 ```
 

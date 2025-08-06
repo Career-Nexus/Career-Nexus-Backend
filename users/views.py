@@ -637,4 +637,28 @@ class WizardView(APIView):
 
         return Response(output,status=status.HTTP_200_OK)
 
-        
+
+class SettingsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        user = request.user
+        cache_key = f"{user.id}_settings"
+        cached_data = cache.get(cache_key)
+        if not cached_data:
+            output = serializers.RetrieveSettingsSerializer(user,many=False).data
+            cache.set(cache_key,output,timeout=60*60*24*30)
+            return Response(output,status=status.HTTP_200_OK)
+        else:
+            return Response(cached_data,status=status.HTTP_200_OK)
+
+    def put(self,request):
+        user = request.user
+        serializer = serializers.SettingsSerializer(data=request.data,instance=user)
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            delete_cache(f"{user.id}_settings")
+            output = serializers.RetrieveSettingsSerializer(output_instance,many=False).data
+            return Response(output,status=status.HTTP_200_OK)

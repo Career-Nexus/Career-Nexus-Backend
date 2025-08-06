@@ -18,6 +18,7 @@ from django.db.models import Prefetch
 from django.core.cache import cache
 
 from users.views import delete_cache
+from users.models import Users
 
 
 def invalidate_post_cache(user_industry,user_id=None):
@@ -47,9 +48,11 @@ class PostView(APIView):
 
     @swagger_auto_schema(request_body=serializer_class, operation_description="Allows the user to create a new feed post. N.B:This endpoint returns paginated responses.")
     def post(self,request):
+        user = request.user
         serializer = self.serializer_class(data=request.data,context={"request":request})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
+            invalidate_post_cache(user_industry=user.industry,user_id=user.id)
             return Response(output,status=status.HTTP_201_CREATED)
 
     @swagger_auto_schema(operation_description="Retrieves Post data and related data count for comments and likes")
@@ -95,6 +98,39 @@ class PostView(APIView):
                 return Response({"error":"Inexistent Post"},status=status.HTTP_404_NOT_FOUND)
 
 
+
+
+class OtherUserPosts(APIView):
+    permission_classes =[
+        IsAuthenticated,
+    ]
+    def get(self,request):
+        user = request.user
+        param = request.query_params.get("user_id")
+        page_number = request.query_params.get("page",'1')
+        if not param:
+            return Response({"error":"No user_id query parameter was provided."},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            other_user = Users.objects.filter(id=param).first()
+            if not other_user:
+                return Response({"error":"Invalid user_id"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                cache_key = f"{other_user.id}_ownposts_{page_number}"
+                cached_data = cache.get(cache_key)
+                if not cached_data:
+                    other_users_posts = models.Posts.objects.filter(profile=other_user.profile).order_by("-time_stamp")
+                    paginator = PostPagination()
+                    paginated_items = paginator.paginate_queryset(other_users_posts,request)
+                    serialized_data = serializers.RetrievePostSerializer(paginated_items,many=True,context={"user":user}).data
+                    output = paginator.get_paginated_response(serialized_data).data
+                    cache.set(cache_key,output,timeout=60)
+                    return Response(output,status=status.HTTP_200_OK)
+                else:
+                    return Response(cached_data,status=status.HTTP_200_OK)
+
+
+
+
 class OwnPosts(APIView):
     permission_classes = [
         IsAuthenticated,
@@ -126,12 +162,6 @@ class OwnPosts(APIView):
             return Response(output,status=status.HTTP_200_OK)
         else:
             return Response(cached_data,status=status.HTTP_200_OK)
-
-
-
-
-
-
 
 
 

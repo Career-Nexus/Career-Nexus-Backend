@@ -3336,3 +3336,202 @@ This API retrieves the latest newsletter article and also includes a list of new
 ```
 
 [Table of contents](#toc)
+
+
+# Get Other User Post
+
+This API retrieves the posts of another userby specifying the user_id query parameter in the url endpoint.
+
+**Endpoint:**`/post/by-user/?user_id=2`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 3,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "profile": {
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
+      },
+      "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:31:33.731704Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 3
+    },
+    {
+      "profile": {
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
+      },
+      "body": "Farmers are the backbone of our food system. Supporting local agriculture means supporting healthier food and stronger communities. Let’s buy local. #SupportFarmers #AgroLife",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:30:44.280807Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 2
+    },
+    {
+      "profile": {
+        "id": 2,
+        "first_name": "N/A",
+        "last_name": "N/A",
+        "middle_name": "N/A",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
+        "qualification": "Bachelor of Science"
+      },
+      "body": "Did you know? Conservation agriculture can increase crop yields by up to 30% while preserving soil health. Time to rethink how we farm sustainably. #AgriFacts #SustainableFarming",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/98c7a008-4433-4f13-ae73-0e4640a758b4branch.jpeg",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-04-17T14:30:11.005024Z",
+      "comment_count": 1,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 1
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve User Settings
+
+This API retrieves user settings parameters.
+
+**Endpoint:**`/user/settings/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "email_notify": true,
+  "push_notify": true,
+  "message_notify": false,
+  "weekly_summary": false,
+  "job_alerts": true,
+  "marketing": false,
+  "show_email": true,
+  "show_activity": false,
+  "show_location": false
+}
+```
+
+[Table of contents](#toc)
+
+
+# Update User Account Settings
+
+This API updates user account settings parameters. N.B:All fields are Boolean (True/False).
+
+**Endpoint:**`/user/settings/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+email_notify:*****
+
+push_notify:*****
+
+message_notify:*****
+
+weekly_summary:*****
+
+job_alerts:*****
+
+marketing:*****
+
+show_email:*****
+
+show_activity:*****
+
+show_location:*****
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "email_notify": true,
+  "push_notify": true,
+  "message_notify": false,
+  "weekly_summary": false,
+  "job_alerts": true,
+  "marketing": false,
+  "show_email": true,
+  "show_activity": false,
+  "show_location": false
+}
+```
+
+[Table of contents](#toc)

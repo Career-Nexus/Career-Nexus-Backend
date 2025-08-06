@@ -880,7 +880,45 @@ class AnalyticsSerializer(serializers.ModelSerializer):
 
 
 
+class SettingsSerializer(serializers.Serializer):
+    email_notify = serializers.BooleanField(required=False)
+    push_notify = serializers.BooleanField(required=False)
+    message_notify = serializers.BooleanField(required=False)
+    weekly_summary = serializers.BooleanField(required=False)
+    job_alerts = serializers.BooleanField(required=False)
+    marketing = serializers.BooleanField(required=False)
+    show_email = serializers.BooleanField(required=False)
+    show_activity = serializers.BooleanField(required=False)
+    show_location = serializers.BooleanField(required=False)
+
+    def update(self,instance,validated_data):
+        instance.email_notify = validated_data.get("email_notify",instance.email_notify)
+        instance.push_notify = validated_data.get("push_notify",instance.push_notify)
+        instance.message_notify = validated_data.get("message_notify",instance.message_notify)
+        instance.weekly_summary = validated_data.get("weekly_summary",instance.weekly_summary)
+        instance.job_alerts = validated_data.get("job_alerts",instance.job_alerts)
+        instance.marketing = validated_data.get("marketing",instance.marketing)
+        instance.show_email = validated_data.get("show_email",instance.show_email)
+        instance.show_activity = validated_data.get("show_activity",instance.show_activity)
+        instance.show_location = validated_data.get("show_location",instance.show_location)
+
+        instance.save()
+        return instance
+
+
+class RetrieveSettingsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Users
+        fields = ["email_notify","push_notify","message_notify","weekly_summary","job_alerts","marketing","show_email","show_activity","show_location"]
+
+
+
+
+
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Test
         fields = "__all__"
+
+

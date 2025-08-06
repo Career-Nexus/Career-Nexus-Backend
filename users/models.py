@@ -19,11 +19,26 @@ class WaitList(models.Model):
     def __str__(self):
         return f"{self.name} with email {self.email} interested in {self.industry}"
 
+
+
+
 class Users(AbstractUser):
     user_type = models.CharField(max_length=20,default="learner")
     industry = models.CharField(max_length=100,default="others")
     change_password = models.BooleanField(default=False)
     request_time = models.DateTimeField(auto_now_add=True)
+
+    #Settings Specific Fields
+    email_notify = models.BooleanField(default=False)
+    push_notify = models.BooleanField(default=True)
+    message_notify = models.BooleanField(default=False)
+    weekly_summary = models.BooleanField(default=False)
+    job_alerts = models.BooleanField(default=True)
+    marketing = models.BooleanField(default=False)
+    show_email = models.BooleanField(default=True)
+    show_activity = models.BooleanField(default=False)
+    show_location = models.BooleanField(default=False)
+
 
 
     def __str__(self):

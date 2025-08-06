@@ -41,6 +41,7 @@ urlpatterns = [
     path("retrieve-profile/",views.RetreiveProfileView.as_view(), name="Retrieve-Profile"),
     path("analytics/",views.AnalyticsView.as_view(),name="User-Analytics"),
     path("completion/",views.WizardView.as_view(),name="wizard-view"),
+    path("settings/",views.SettingsView.as_view(),name="Settings-View"),
 
 
 
