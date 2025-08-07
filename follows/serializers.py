@@ -2,6 +2,7 @@ from rest_framework import serializers
 from . import models
 
 from users.models import Users, PersonalProfile
+from users.views import delete_cache
 
 
 
@@ -34,6 +35,9 @@ class FollowSerializer(serializers.ModelSerializer):
                     "follower":following.user_follower.id,
                     "following":following.user_following.id,
                 }
+        #Clear cahes to avoid returning stale data
+        delete_cache(f"{following.user_follower.id}_profile")
+        delete_cache(f"{following.user_following.id}_profile")
         return output
 
 
@@ -53,6 +57,11 @@ class UnfollowSerializer(serializers.Serializer):
     def create(self,validated_data):
         user_follower = validated_data.get("user")
         user_following = validated_data.get("user_following")
+
+        #Clear cahes to avoid returning stale data
+        delete_cache(f"{user_follower.id}_profile")
+        delete_cache(f"{user_following.id}_profile")
+
         models.UserFollow.objects.get(user_follower=user_follower,user_following=user_following).delete()
         output = {
             "status":"Unfollowed user"

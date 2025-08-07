@@ -42,6 +42,7 @@ class FollowView(APIView):
             #Avoid returning stale can_follow data if a user is followed from their posts
             invalidate_post_cache(user_industry)
             invalidate_following_cache(request.user.email)
+
             return Response(output,status=status.HTTP_201_CREATED)
 
 
@@ -59,6 +60,8 @@ class UnfollowView(APIView):
             #Avoid returning stale can_follow data if a user is unfollowed from their posts
             invalidate_post_cache(user_industry)
             invalidate_following_cache(request.user.email)
+
+
             return Response(output,status=status.HTTP_200_OK)
 
 
