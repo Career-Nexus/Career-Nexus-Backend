@@ -8,43 +8,48 @@ import uuid
 
 
 
-class RetrieveProjectSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Project
-        fields = ["cover_image","title","description","role","tools","image"]
+class CreateProjectCatalogueSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=150)
+    description = serializers.CharField()
+    image = serializers.ImageField(required=False)
+    download_material = serializers.FileField(required=False)
 
-class ProjectSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField()
-    cover_image = serializers.ImageField()
-    class Meta:
-        model = models.Project
-        fields = ["cover_image","role","tools","title","description","image"]
+    def validate_image(self,file):
+        allowed_formats = (".png",".jpg",".jpeg")
+        if not file.name.lower().endswith(allowed_formats):
+            raise serializers.ValidationError("Image format is not supported.")
+        if (file.size/1000000) > 1:
+            raise serializers.ValidationError("Images size too large.")
+        return file
+
+    def validate_download_material(self,file):
+        if (file.size/1000000) > 5:
+            raise serializers.ValidationError("File too large.")
+        return file
 
     def create(self,validated_data):
-        validated_data["user"] = self.context["user"]
-        image = validated_data.get("image","")
-        cover_image = validated_data.get("cover_image","")
-
-        if cover_image != "":
-            image_name = f"project/{uuid.uuid4()}{cover_image.name}"
-            path = default_storage.save(image_name,ContentFile(cover_image.read()))
-            validated_data["cover_image"] = default_storage.url(path)
-        else:
-            validated_data["cover_image"] = ""
-
-        if image != "":
-            file_name = f"project/{uuid.uuid4()}{image.name}"
+        image = validated_data.get("image")
+        if image:
+            file_name = f"portfolio/image/{str(uuid.uuid4())}{image.name}"
             file_path = default_storage.save(file_name,ContentFile(image.read()))
             validated_data["image"] = default_storage.url(file_path)
-        else:
-            validated_data["image"] = ""
-        project = models.Project.objects.create(**validated_data)
-        output = {
-            "cover_image":project.cover_image,
-            "title":project.title,
-            "description":project.description,
-            "role":project.role,
-            "tools":project.tools,
-            "image":project.image,
-        }
-        return output
+
+        download_material = validated_data.get("download_material")
+        if download_material:
+            file_name = f"portfolio/material/{str(uuid.uuid4())}{download_material.name}"
+            file_path = default_storage.save(file_name,ContentFile(download_material.read()))
+            validated_data["download_material"] = default_storage.url(file_path)
+
+        validated_data["owner"] = self.context["user"]
+
+        output_instance = models.ProjectCatalogue.objects.create(**validated_data)
+        return output_instance
+
+
+
+
+class ProjectCatalogueSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.ProjectCatalogue
+        fields = ["id","title","description","image","download_material"]

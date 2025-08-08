@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
+from django.db.models import Q
 #import email
 import os
 from django.utils.html import strip_tags
@@ -16,6 +17,8 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.exceptions import ValidationError
 from drf_yasg.utils import swagger_auto_schema
+
+from networks.serializers import RetrieveRecommendationDetailSerializer
 
 
 from . import serializers
@@ -37,6 +40,10 @@ default_intro_video = ''
 def delete_cache(key):
     cache.delete(key)
 
+
+
+class UserPaginator(PageNumberPagination):
+    page_size = 4
 
 
 class ItemPagination(PageNumberPagination):
@@ -636,6 +643,33 @@ class WizardView(APIView):
         }
 
         return Response(output,status=status.HTTP_200_OK)
+
+
+class UserSearchView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        user = request.user
+        param = request.query_params.get("keyword")
+        if not param:
+            return Response({'error':"No keyword query param is provided"},status=status.HTTP_400_BAD_REQUEST)
+        user_result_instances = models.Users.objects.filter(
+            Q(profile__first_name__icontains=param) |
+            Q(profile__last_name__icontains=param) |
+            Q(profile__middle_name__icontains= param) |
+            Q(profile__qualification__icontains=param) |
+            Q(profile__bio__icontains=param) |
+            Q(profile__summary__icontains=param)
+        )
+        paginator = UserPaginator()
+        paginated_items = paginator.paginate_queryset(user_result_instances,request)
+        serialized_items = RetrieveRecommendationDetailSerializer(paginated_items,many=True).data
+        output = paginator.get_paginated_response(serialized_items).data
+        return Response(output,status=status.HTTP_200_OK)
+
+
 
 
 class SettingsView(APIView):

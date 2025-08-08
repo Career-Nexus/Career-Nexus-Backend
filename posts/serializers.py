@@ -371,10 +371,15 @@ class RepostSerializer(serializers.Serializer):
     def create(self,validated_data):
         user = self.context["user"]
         validated_data["profile"] = PersonalProfile.objects.get(user=user)
+        parent = validated_data.get("parent")
 
         new_classification = classify_content(validated_data["body"])
         old_classification = validated_data["parent"].industries
         validated_data["industries"] = f"{old_classification},{new_classification}"
+
+        #Check if the parent post was reposted and reference the main parent post instead.
+        if parent.parent:
+            validated_data["parent"] = parent.parent
         
         repost = models.Posts.objects.create(**validated_data)
         output = ParentPostSerializer(repost)

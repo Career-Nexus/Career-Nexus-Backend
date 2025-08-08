@@ -3535,3 +3535,82 @@ show_location:*****
 ```
 
 [Table of contents](#toc)
+
+
+# User Search
+
+This API searches for users based on a keyword query.
+
+**Endpoint:**`/user/search/?keyword=backend developer`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "name": "Opeyemi Saliu",
+      "qualification": "Bachelor of Engineering (Civil Engineering)",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "followers": 1
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Create Project Catalogue
+
+This API creates a project catalogue for the logged in user. N.B:The image and downloadable_material fields are optional. Image(max_size=1mb), Download_material(max_size=5mb)
+
+**Endpoint:**`/project/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+description:*****
+
+image:*****
+
+download_material:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 1,
+  "title": "Backend architecture",
+  "description": "A complete backend code base to support small, medium and large social media startups and webapps.",
+  "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/6229255a-7c60-4f15-b932-39c525350c86default_portfolio.png",
+  "download_material": null
+}
+```
+
+[Table of contents](#toc)

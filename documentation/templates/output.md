@@ -24,63 +24,65 @@
 17. [content management](#content_management)  
 18. [create a newsletter](#create_a_newsletter)  
 19. [create comment](#create_comment)  
-20. [delete certification](#delete_certification)  
-21. [delete education](#delete_education)  
-22. [delete experience](#delete_experience)  
-23. [follow user](#follow_user)  
-24. [followers count](#followers_count)  
-25. [following recommendation](#following_recommendation)  
-26. [followings count](#followings_count)  
-27. [forget password](#forget_password)  
-28. [get chat sessions](#get_chat_sessions)  
-29. [get comment](#get_comment)  
-30. [get country phone codes](#get_country_phone_codes)  
-31. [get followings](#get_followings)  
-32. [get followings post](#get_followings_post)  
-33. [get job posts](#get_job_posts)  
-34. [get job preference](#get_job_preference)  
-35. [get newsletter](#get_newsletter)  
-36. [get other user post](#get_other_user_post)  
-37. [get own posts](#get_own_posts)  
-38. [get posts](#get_posts)  
-39. [get saved post](#get_saved_post)  
-40. [job create](#job_create)  
-41. [job notifications](#job_notifications)  
-42. [job preference](#job_preference)  
-43. [like comment/reply](#like_comment/reply)  
-44. [login api](#login_api)  
-45. [logout](#logout)  
-46. [mentor search/filter](#mentor_search/filter)  
-47. [mentors recommendation](#mentors_recommendation)  
-48. [post create](#post_create)  
-49. [post like](#post_like)  
-50. [post retrieve](#post_retrieve)  
-51. [post save](#post_save)  
-52. [post share](#post_share)  
-53. [profile completion](#profile_completion)  
-54. [profile retrieve](#profile_retrieve)  
-55. [profile update](#profile_update)  
-56. [recommended job posts.](#recommended_job_posts.)  
-57. [reply comment](#reply_comment)  
-58. [reposting](#reposting)  
-59. [retrieve education api](#retrieve_education_api)  
-60. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-61. [retrieve user settings](#retrieve_user_settings)  
-62. [subscribe to newsletter](#subscribe_to_newsletter)  
-63. [unfollow user](#unfollow_user)  
-64. [unlike comment/reply](#unlike_comment/reply)  
-65. [unlike post](#unlike_post)  
-66. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-67. [update user account settings](#update_user_account_settings)  
-68. [updating user eperience](#updating_user_eperience)  
-69. [user analytics](#user_analytics)  
-70. [user followers](#user_followers)  
-71. [user registeration](#user_registeration)  
-72. [user-industry update](#user-industry_update)  
-73. [valid choice](#valid_choice)  
-74. [verify otp hash](#verify_otp_hash)  
-75. [view certification](#view_certification)  
-76. [view experience](#view_experience)  
+20. [create project catalogue](#create_project_catalogue)  
+21. [delete certification](#delete_certification)  
+22. [delete education](#delete_education)  
+23. [delete experience](#delete_experience)  
+24. [follow user](#follow_user)  
+25. [followers count](#followers_count)  
+26. [following recommendation](#following_recommendation)  
+27. [followings count](#followings_count)  
+28. [forget password](#forget_password)  
+29. [get chat sessions](#get_chat_sessions)  
+30. [get comment](#get_comment)  
+31. [get country phone codes](#get_country_phone_codes)  
+32. [get followings](#get_followings)  
+33. [get followings post](#get_followings_post)  
+34. [get job posts](#get_job_posts)  
+35. [get job preference](#get_job_preference)  
+36. [get newsletter](#get_newsletter)  
+37. [get other user post](#get_other_user_post)  
+38. [get own posts](#get_own_posts)  
+39. [get posts](#get_posts)  
+40. [get saved post](#get_saved_post)  
+41. [job create](#job_create)  
+42. [job notifications](#job_notifications)  
+43. [job preference](#job_preference)  
+44. [like comment/reply](#like_comment/reply)  
+45. [login api](#login_api)  
+46. [logout](#logout)  
+47. [mentor search/filter](#mentor_search/filter)  
+48. [mentors recommendation](#mentors_recommendation)  
+49. [post create](#post_create)  
+50. [post like](#post_like)  
+51. [post retrieve](#post_retrieve)  
+52. [post save](#post_save)  
+53. [post share](#post_share)  
+54. [profile completion](#profile_completion)  
+55. [profile retrieve](#profile_retrieve)  
+56. [profile update](#profile_update)  
+57. [recommended job posts.](#recommended_job_posts.)  
+58. [reply comment](#reply_comment)  
+59. [reposting](#reposting)  
+60. [retrieve education api](#retrieve_education_api)  
+61. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+62. [retrieve user settings](#retrieve_user_settings)  
+63. [subscribe to newsletter](#subscribe_to_newsletter)  
+64. [unfollow user](#unfollow_user)  
+65. [unlike comment/reply](#unlike_comment/reply)  
+66. [unlike post](#unlike_post)  
+67. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+68. [update user account settings](#update_user_account_settings)  
+69. [updating user eperience](#updating_user_eperience)  
+70. [user analytics](#user_analytics)  
+71. [user followers](#user_followers)  
+72. [user registeration](#user_registeration)  
+73. [user search](#user_search)  
+74. [user-industry update](#user-industry_update)  
+75. [valid choice](#valid_choice)  
+76. [verify otp hash](#verify_otp_hash)  
+77. [view certification](#view_certification)  
+78. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -3607,6 +3609,85 @@ show_location:*****
   "show_email": true,
   "show_activity": false,
   "show_location": false
+}
+```
+
+[Table of contents](#toc)
+
+
+# User Search<a name='user_search'></a>
+
+This API searches for users based on a keyword query.
+
+**Endpoint:**`/user/search/?keyword=backend developer`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "name": "Opeyemi Saliu",
+      "qualification": "Bachelor of Engineering (Civil Engineering)",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "followers": 1
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Create Project Catalogue<a name='create_project_catalogue'></a>
+
+This API creates a project catalogue for the logged in user. N.B:The image and downloadable_material fields are optional. Image(max_size=1mb), Download_material(max_size=5mb)
+
+**Endpoint:**`/project/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+description:*****
+
+image:*****
+
+download_material:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 1,
+  "title": "Backend architecture",
+  "description": "A complete backend code base to support small, medium and large social media startups and webapps.",
+  "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/6229255a-7c60-4f15-b932-39c525350c86default_portfolio.png",
+  "download_material": null
 }
 ```
 

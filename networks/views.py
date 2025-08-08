@@ -19,7 +19,7 @@ from users.models import Users
 connection_status = ["PENDING","CONFIRMED"]
 
 class RecommendationPaginator(PageNumberPagination):
-    page_size = 5
+    page_size = 4
 
 
 

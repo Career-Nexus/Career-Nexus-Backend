@@ -39,7 +39,7 @@ class FollowView(APIView):
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             user_industry = request.user.industry 
-            #Avoid returning stale can_follow data if a user is followed from their posts
+            #Avoid returning stale can_follow data if a user is followed from their posts page on the frontend.
             invalidate_post_cache(user_industry)
             invalidate_following_cache(request.user.email)
 
@@ -57,7 +57,7 @@ class UnfollowView(APIView):
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
             user_industry = request.user.industry
-            #Avoid returning stale can_follow data if a user is unfollowed from their posts
+            #Avoid returning stale can_follow data if a user is unfollowed from their posts page in the frontend.
             invalidate_post_cache(user_industry)
             invalidate_following_cache(request.user.email)
 

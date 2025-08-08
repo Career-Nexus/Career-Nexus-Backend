@@ -8,20 +8,17 @@ from . import serializers, models
 
 
 
-class ProjectView(APIView):
+class ProjectCatalogueView(APIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = serializers.ProjectSerializer
-    
+
     def post(self,request):
-        serializer = self.serializer_class(data=request.data,context={"user":request.user})
+        user = request.user
+        serializer = serializers.CreateProjectCatalogueSerializer(data=request.data,context={"user":user})
         if serializer.is_valid(raise_exception=True):
-            output = serializer.save()
+            output_instance = serializer.save()
+            output = serializers.ProjectCatalogueSerializer(output_instance,many=False).data
             return Response(output,status=status.HTTP_201_CREATED)
 
-    def get(self,request):
-        user = request.user
-        portfolios = models.Project.objects.filter(user=user)
-        portfolios = serializers.RetrieveProjectSerializer(portfolios,many=True).data
-        return Response(portfolios,status=status.HTTP_200_OK)
+
