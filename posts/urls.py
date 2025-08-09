@@ -21,6 +21,7 @@ urlpatterns= [
             #path("doc/",schema_view.with_ui("swagger",cache_timeout=0), name="Post-App-Documentation"),
             path("",views.PostView.as_view(),name="Add-View-Posts"),
             path("by-user/",views.OtherUserPosts.as_view(),name="Other-Users-Posts"),
+            path("by-mentors/",views.MentorPostsView.as_view(),name="Mentors-Posts"),
             path("comment/",views.CreateCommentView.as_view(),name="Create-comment"),
             path("reply/",views.CreateReplyView.as_view(),name="Create-reply"),
             path("like/",views.CreateLikeView.as_view(),name="Create-Post-like"),

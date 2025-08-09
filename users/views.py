@@ -519,6 +519,7 @@ class CertificationView(APIView):
                 raise Http404("Inexistent certification")
 
 
+
 class AnalyticsView(APIView):
     permission_classes = [
         IsAuthenticated,
@@ -533,29 +534,6 @@ class AnalyticsView(APIView):
 
 
 
-
-class TestView(APIView):
-    permission_classes=[
-                AllowAny,
-            ]
-    serializer_class = serializers.TestSerializer
-
-    def get(self,request):
-        items = models.Test.objects.all().values("id","file").order_by("id")
-        paginator = ItemPagination()
-        paginated_items = paginator.paginate_queryset(items,request)
-        serializer = self.serializer_class(paginated_items,many=True)
-
-        total_items = items.count()
-        floor = total_items//paginator.page_size
-        if total_items % paginator.page_size == 0:
-            total_pages = floor
-        else:
-            total_pages = floor + 1
-
-        response_data = paginator.get_paginated_response(serializer.data).data
-        response_data["last_page"] = f"?page={total_pages}"
-        return Response(response_data,status=status.HTTP_200_OK)
 
 
 def CallTestView(request):

@@ -3614,3 +3614,132 @@ download_material:*****
 ```
 
 [Table of contents](#toc)
+
+
+# Retrieve Portfolio Projects
+
+This API retrieves all the project portfolio uploaded by the user. N.B:By passing a portfolio_id in the url, data of a particular portfolio could be retrieved.
+
+**Endpoint:**`/project/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "title": "Backend architecture",
+    "description": "A complete backend code base to support small, medium and large social media startups and webapps.",
+    "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/6229255a-7c60-4f15-b932-39c525350c86default_portfolio.png",
+    "download_material": null
+  },
+  {
+    "id": 2,
+    "title": "Graphics Design",
+    "description": "A beautiful graphic design by myself",
+    "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/21909625-6545-415c-b047-88535407590eKSK_IV.jpg",
+    "download_material": null
+  },
+  {
+    "id": 3,
+    "title": "Graphics and Art Design",
+    "description": "An Invitation IV by myself.",
+    "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/ae1ebba5-8f28-4252-8fe6-483d91468be8KSK_IV.jpg",
+    "download_material": "https://careernexus-storage1.s3.amazonaws.com/portfolio/material/2f985276-5a60-4d6d-bf57-4a239ebc140fChatGPT%20Image%20Jun%2013%2C%202025%2C%2010_31_26%20PM.png"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Delete Project Catalogue
+
+This API deletes a project catalogue belonging to the loged in user. N.B:A portfolio_id must be provided in the endpoint url.
+
+**Endpoint:**`/project/?portfolio_id=4`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+``` json
+ 
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Mentors Posts
+
+This API retrieves Posts made by mentors on the platform.
+
+**Endpoint:**`/post/by-mentors/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "profile": {
+        "id": 11,
+        "first_name": "Abdul Azeez",
+        "last_name": "Balogun",
+        "middle_name": "Abiola",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering"
+      },
+      "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-08-09T10:18:07.879587Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": true,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 21
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)

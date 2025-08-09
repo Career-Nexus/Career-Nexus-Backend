@@ -19,7 +19,7 @@ class CreateProjectCatalogueSerializer(serializers.Serializer):
         if not file.name.lower().endswith(allowed_formats):
             raise serializers.ValidationError("Image format is not supported.")
         if (file.size/1000000) > 1:
-            raise serializers.ValidationError("Images size too large.")
+            raise serializers.ValidationError("Image size too large.")
         return file
 
     def validate_download_material(self,file):

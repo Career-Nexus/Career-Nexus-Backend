@@ -28,61 +28,64 @@
 21. [delete certification](#delete_certification)  
 22. [delete education](#delete_education)  
 23. [delete experience](#delete_experience)  
-24. [follow user](#follow_user)  
-25. [followers count](#followers_count)  
-26. [following recommendation](#following_recommendation)  
-27. [followings count](#followings_count)  
-28. [forget password](#forget_password)  
-29. [get chat sessions](#get_chat_sessions)  
-30. [get comment](#get_comment)  
-31. [get country phone codes](#get_country_phone_codes)  
-32. [get followings](#get_followings)  
-33. [get followings post](#get_followings_post)  
-34. [get job posts](#get_job_posts)  
-35. [get job preference](#get_job_preference)  
-36. [get newsletter](#get_newsletter)  
-37. [get other user post](#get_other_user_post)  
-38. [get own posts](#get_own_posts)  
-39. [get posts](#get_posts)  
-40. [get saved post](#get_saved_post)  
-41. [job create](#job_create)  
-42. [job notifications](#job_notifications)  
-43. [job preference](#job_preference)  
-44. [like comment/reply](#like_comment/reply)  
-45. [login api](#login_api)  
-46. [logout](#logout)  
-47. [mentor search/filter](#mentor_search/filter)  
-48. [mentors recommendation](#mentors_recommendation)  
-49. [post create](#post_create)  
-50. [post like](#post_like)  
-51. [post retrieve](#post_retrieve)  
-52. [post save](#post_save)  
-53. [post share](#post_share)  
-54. [profile completion](#profile_completion)  
-55. [profile retrieve](#profile_retrieve)  
-56. [profile update](#profile_update)  
-57. [recommended job posts.](#recommended_job_posts.)  
-58. [reply comment](#reply_comment)  
-59. [reposting](#reposting)  
-60. [retrieve education api](#retrieve_education_api)  
-61. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-62. [retrieve user settings](#retrieve_user_settings)  
-63. [subscribe to newsletter](#subscribe_to_newsletter)  
-64. [unfollow user](#unfollow_user)  
-65. [unlike comment/reply](#unlike_comment/reply)  
-66. [unlike post](#unlike_post)  
-67. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-68. [update user account settings](#update_user_account_settings)  
-69. [updating user eperience](#updating_user_eperience)  
-70. [user analytics](#user_analytics)  
-71. [user followers](#user_followers)  
-72. [user registeration](#user_registeration)  
-73. [user search](#user_search)  
-74. [user-industry update](#user-industry_update)  
-75. [valid choice](#valid_choice)  
-76. [verify otp hash](#verify_otp_hash)  
-77. [view certification](#view_certification)  
-78. [view experience](#view_experience)  
+24. [delete project catalogue](#delete_project_catalogue)  
+25. [follow user](#follow_user)  
+26. [followers count](#followers_count)  
+27. [following recommendation](#following_recommendation)  
+28. [followings count](#followings_count)  
+29. [forget password](#forget_password)  
+30. [get chat sessions](#get_chat_sessions)  
+31. [get comment](#get_comment)  
+32. [get country phone codes](#get_country_phone_codes)  
+33. [get followings](#get_followings)  
+34. [get followings post](#get_followings_post)  
+35. [get job posts](#get_job_posts)  
+36. [get job preference](#get_job_preference)  
+37. [get newsletter](#get_newsletter)  
+38. [get other user post](#get_other_user_post)  
+39. [get own posts](#get_own_posts)  
+40. [get posts](#get_posts)  
+41. [get saved post](#get_saved_post)  
+42. [job create](#job_create)  
+43. [job notifications](#job_notifications)  
+44. [job preference](#job_preference)  
+45. [like comment/reply](#like_comment/reply)  
+46. [login api](#login_api)  
+47. [logout](#logout)  
+48. [mentor search/filter](#mentor_search/filter)  
+49. [mentors recommendation](#mentors_recommendation)  
+50. [post create](#post_create)  
+51. [post like](#post_like)  
+52. [post retrieve](#post_retrieve)  
+53. [post save](#post_save)  
+54. [post share](#post_share)  
+55. [profile completion](#profile_completion)  
+56. [profile retrieve](#profile_retrieve)  
+57. [profile update](#profile_update)  
+58. [recommended job posts.](#recommended_job_posts.)  
+59. [reply comment](#reply_comment)  
+60. [reposting](#reposting)  
+61. [retrieve education api](#retrieve_education_api)  
+62. [retrieve mentors posts](#retrieve_mentors_posts)  
+63. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+64. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+65. [retrieve user settings](#retrieve_user_settings)  
+66. [subscribe to newsletter](#subscribe_to_newsletter)  
+67. [unfollow user](#unfollow_user)  
+68. [unlike comment/reply](#unlike_comment/reply)  
+69. [unlike post](#unlike_post)  
+70. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+71. [update user account settings](#update_user_account_settings)  
+72. [updating user eperience](#updating_user_eperience)  
+73. [user analytics](#user_analytics)  
+74. [user followers](#user_followers)  
+75. [user registeration](#user_registeration)  
+76. [user search](#user_search)  
+77. [user-industry update](#user-industry_update)  
+78. [valid choice](#valid_choice)  
+79. [verify otp hash](#verify_otp_hash)  
+80. [view certification](#view_certification)  
+81. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -3688,6 +3691,135 @@ download_material:*****
   "description": "A complete backend code base to support small, medium and large social media startups and webapps.",
   "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/6229255a-7c60-4f15-b932-39c525350c86default_portfolio.png",
   "download_material": null
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Portfolio Projects<a name='retrieve_portfolio_projects'></a>
+
+This API retrieves all the project portfolio uploaded by the user. N.B:By passing a portfolio_id in the url, data of a particular portfolio could be retrieved.
+
+**Endpoint:**`/project/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "title": "Backend architecture",
+    "description": "A complete backend code base to support small, medium and large social media startups and webapps.",
+    "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/6229255a-7c60-4f15-b932-39c525350c86default_portfolio.png",
+    "download_material": null
+  },
+  {
+    "id": 2,
+    "title": "Graphics Design",
+    "description": "A beautiful graphic design by myself",
+    "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/21909625-6545-415c-b047-88535407590eKSK_IV.jpg",
+    "download_material": null
+  },
+  {
+    "id": 3,
+    "title": "Graphics and Art Design",
+    "description": "An Invitation IV by myself.",
+    "image": "https://careernexus-storage1.s3.amazonaws.com/portfolio/image/ae1ebba5-8f28-4252-8fe6-483d91468be8KSK_IV.jpg",
+    "download_material": "https://careernexus-storage1.s3.amazonaws.com/portfolio/material/2f985276-5a60-4d6d-bf57-4a239ebc140fChatGPT%20Image%20Jun%2013%2C%202025%2C%2010_31_26%20PM.png"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Delete Project Catalogue<a name='delete_project_catalogue'></a>
+
+This API deletes a project catalogue belonging to the loged in user. N.B:A portfolio_id must be provided in the endpoint url.
+
+**Endpoint:**`/project/?portfolio_id=4`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+``` json
+ 
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Mentors Posts<a name='retrieve_mentors_posts'></a>
+
+This API retrieves Posts made by mentors on the platform.
+
+**Endpoint:**`/post/by-mentors/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "profile": {
+        "id": 11,
+        "first_name": "Abdul Azeez",
+        "last_name": "Balogun",
+        "middle_name": "Abiola",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering"
+      },
+      "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-08-09T10:18:07.879587Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": true,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 21
+    }
+  ]
 }
 ```
 

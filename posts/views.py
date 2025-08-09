@@ -1,3 +1,4 @@
+from django.template import context
 from drf_yasg.utils import swagger_auto_schema
 
 from . import serializers
@@ -162,6 +163,21 @@ class OwnPosts(APIView):
             return Response(output,status=status.HTTP_200_OK)
         else:
             return Response(cached_data,status=status.HTTP_200_OK)
+
+
+class MentorPostsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        mentors_posts = models.Posts.objects.filter(profile__user__user_type="mentor").order_by("-time_stamp")
+        paginator = PostPagination()
+        paginated_items = paginator.paginate_queryset(mentors_posts,request)
+        serialized_items = serializers.RetrievePostSerializer(paginated_items,many=True,context={"user":request.user}).data
+        output = paginator.get_paginated_response(serialized_items).data
+        return Response(output,status=status.HTTP_200_OK)
+
 
 
 
