@@ -32,4 +32,5 @@ urlpatterns = [
     path("chats/",include("notifications.urls")),
     path("mentor/",include("mentors.urls")),
     path("newsletter/",include("newsletters.urls")),
+    #path("payments/",include("payments.urls")),
 ]

@@ -3136,7 +3136,7 @@ This API retrieves all the connections that was initiated by the logged in user 
 
 # Mentors Recommendation
 
-This endpoint recommends mentors to the logged in user.
+This API retrieves mentor recommendations for the logged in user.
 
 **Endpoint:**`/mentor/recommendation/`
 
@@ -3161,7 +3161,16 @@ This endpoint recommends mentors to the logged in user.
     "middle_name": "Abiola",
     "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
     "current_job": "Backend Developer",
-    "experience_level": "Senior"
+    "years_of_experience": 6,
+    "technical_skills": [
+      "Python",
+      "Shell Scripting",
+      "Backend development",
+      "Devops",
+      "AI/ML",
+      "Database Management System"
+    ],
+    "is_saved": false
   }
 ]
 ```
@@ -3741,5 +3750,118 @@ This API retrieves Posts made by mentors on the platform.
   ]
 }
 ```
+
+[Table of contents](#toc)
+
+
+# Save a Mentor
+
+This API saves a Mentor for future reference. N.B:The user to be saved must be a mentor and must not have been previously saved.
+
+**Endpoint:**`/mentor/save/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+mentor:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "saved": {
+    "id": 11,
+    "first_name": "Abdul Azeez",
+    "last_name": "Balogun",
+    "middle_name": "Abiola",
+    "years_of_experience": 6,
+    "technical_skills": [
+      "Python",
+      "Shell Scripting",
+      "Backend development",
+      "Devops",
+      "AI/ML",
+      "Database Management System"
+    ],
+    "current_job": "Backend Developer",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg"
+  }
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Saved Mentors
+
+This API retrieves all the Mentors that have been saved by the logged in user.
+
+**Endpoint:**`/mentor/save/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "saved": {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "years_of_experience": 6,
+      "technical_skills": [
+        "Python",
+        "Shell Scripting",
+        "Backend development",
+        "Devops",
+        "AI/ML",
+        "Database Management System"
+      ],
+      "current_job": "Backend Developer",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg"
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Unsave Mentor
+
+This API removes a mentor from the saved list. N.B:This user must have been previously saved by the loggedin user.
+
+**Endpoint:**`/mentor/save/?mentor=11`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
 
 [Table of contents](#toc)

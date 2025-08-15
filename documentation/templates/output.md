@@ -69,23 +69,26 @@
 62. [retrieve mentors posts](#retrieve_mentors_posts)  
 63. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
 64. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-65. [retrieve user settings](#retrieve_user_settings)  
-66. [subscribe to newsletter](#subscribe_to_newsletter)  
-67. [unfollow user](#unfollow_user)  
-68. [unlike comment/reply](#unlike_comment/reply)  
-69. [unlike post](#unlike_post)  
-70. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-71. [update user account settings](#update_user_account_settings)  
-72. [updating user eperience](#updating_user_eperience)  
-73. [user analytics](#user_analytics)  
-74. [user followers](#user_followers)  
-75. [user registeration](#user_registeration)  
-76. [user search](#user_search)  
-77. [user-industry update](#user-industry_update)  
-78. [valid choice](#valid_choice)  
-79. [verify otp hash](#verify_otp_hash)  
-80. [view certification](#view_certification)  
-81. [view experience](#view_experience)  
+65. [retrieve saved mentors](#retrieve_saved_mentors)  
+66. [retrieve user settings](#retrieve_user_settings)  
+67. [save a mentor](#save_a_mentor)  
+68. [subscribe to newsletter](#subscribe_to_newsletter)  
+69. [unfollow user](#unfollow_user)  
+70. [unlike comment/reply](#unlike_comment/reply)  
+71. [unlike post](#unlike_post)  
+72. [unsave mentor](#unsave_mentor)  
+73. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+74. [update user account settings](#update_user_account_settings)  
+75. [updating user eperience](#updating_user_eperience)  
+76. [user analytics](#user_analytics)  
+77. [user followers](#user_followers)  
+78. [user registeration](#user_registeration)  
+79. [user search](#user_search)  
+80. [user-industry update](#user-industry_update)  
+81. [valid choice](#valid_choice)  
+82. [verify otp hash](#verify_otp_hash)  
+83. [view certification](#view_certification)  
+84. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -3217,7 +3220,7 @@ This API retrieves all the connections that was initiated by the logged in user 
 
 # Mentors Recommendation<a name='mentors_recommendation'></a>
 
-This endpoint recommends mentors to the logged in user.
+This API retrieves mentor recommendations for the logged in user.
 
 **Endpoint:**`/mentor/recommendation/`
 
@@ -3242,7 +3245,16 @@ This endpoint recommends mentors to the logged in user.
     "middle_name": "Abiola",
     "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
     "current_job": "Backend Developer",
-    "experience_level": "Senior"
+    "years_of_experience": 6,
+    "technical_skills": [
+      "Python",
+      "Shell Scripting",
+      "Backend development",
+      "Devops",
+      "AI/ML",
+      "Database Management System"
+    ],
+    "is_saved": false
   }
 ]
 ```
@@ -3822,5 +3834,118 @@ This API retrieves Posts made by mentors on the platform.
   ]
 }
 ```
+
+[Table of contents](#toc)
+
+
+# Save a Mentor<a name='save_a_mentor'></a>
+
+This API saves a Mentor for future reference. N.B:The user to be saved must be a mentor and must not have been previously saved.
+
+**Endpoint:**`/mentor/save/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+mentor:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "saved": {
+    "id": 11,
+    "first_name": "Abdul Azeez",
+    "last_name": "Balogun",
+    "middle_name": "Abiola",
+    "years_of_experience": 6,
+    "technical_skills": [
+      "Python",
+      "Shell Scripting",
+      "Backend development",
+      "Devops",
+      "AI/ML",
+      "Database Management System"
+    ],
+    "current_job": "Backend Developer",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg"
+  }
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Saved Mentors<a name='retrieve_saved_mentors'></a>
+
+This API retrieves all the Mentors that have been saved by the logged in user.
+
+**Endpoint:**`/mentor/save/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "saved": {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "years_of_experience": 6,
+      "technical_skills": [
+        "Python",
+        "Shell Scripting",
+        "Backend development",
+        "Devops",
+        "AI/ML",
+        "Database Management System"
+      ],
+      "current_job": "Backend Developer",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg"
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Unsave Mentor<a name='unsave_mentor'></a>
+
+This API removes a mentor from the saved list. N.B:This user must have been previously saved by the loggedin user.
+
+**Endpoint:**`/mentor/save/?mentor=11`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
 
 [Table of contents](#toc)

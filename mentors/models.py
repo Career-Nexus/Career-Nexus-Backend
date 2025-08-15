@@ -11,3 +11,8 @@ class Sessions(models.Model):
     session_at = models.DateTimeField()
     discourse = models.TextField()
     status = models.CharField(max_length=20,default="PENDING")
+
+
+class SavedMentors(models.Model):
+    saver = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor_saver")
+    saved = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor_saved")

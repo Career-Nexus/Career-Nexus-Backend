@@ -38,7 +38,7 @@ class MentorRecommendationView(APIView):
         industry = request.user.industry
         mentors = PersonalProfile.objects.filter(user__user_type="mentor",user__industry=industry)
         #TODO Paginate results
-        output = serializers.MentorRecommendationSerializer(mentors,many=True).data
+        output = serializers.MentorRecommendationSerializer(mentors,many=True,context={"user":request.user}).data
         return Response(output,status=status.HTTP_200_OK)
 
 
@@ -136,6 +136,34 @@ class RetrieveMentorshipSessionsView(APIView):
                 return Response(output,status=status.HTTP_200_OK)
 
 
+class SaveMentorView(APIView):
+    permission_classes=[
+        IsAuthenticated,
+    ]
+    def post(self,request):
+        serializer = serializers.SaveMentorSerializer(data=request.data,context={'user':request.user})
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.RetrieveSavedMentorSerializer(output_instance,many=False).data
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        user = request.user
+        saved_mentors = user.mentor_saver.all()
+        output = serializers.RetrieveSavedMentorSerializer(saved_mentors,many=True).data
+        return Response(output,status=status.HTTP_200_OK)
+
+    def delete(self,request):
+        user = request.user
+        param = request.query_params.get("mentor")
+        if not param:
+            return Response({"error":"A mentor query parameter is required to Unsave a mentor."},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            serializer = serializers.UnsaveMentorSerializer(data=request.query_params,context={"user":user})
+            if serializer.is_valid(raise_exception=True):
+                saved_instance = serializer.validated_data
+                saved_instance.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 

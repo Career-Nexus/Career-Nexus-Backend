@@ -1,55 +1,55 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
-</script>
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
+        </script>
+                    
 
 
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -118,11 +118,14 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#retrieve_mentors_posts">retrieve mentors posts</a></li>
 <li><a href="#retrieve_mentorship_sessions">retrieve mentorship sessions</a></li>
 <li><a href="#retrieve_portfolio_projects">retrieve portfolio projects</a></li>
+<li><a href="#retrieve_saved_mentors">retrieve saved mentors</a></li>
 <li><a href="#retrieve_user_settings">retrieve user settings</a></li>
+<li><a href="#save_a_mentor">save a mentor</a></li>
 <li><a href="#subscribe_to_newsletter">subscribe to newsletter</a></li>
 <li><a href="#unfollow_user">unfollow user</a></li>
 <li><a href="#unlike_comment/reply">unlike comment/reply</a></li>
 <li><a href="#unlike_post">unlike post</a></li>
+<li><a href="#unsave_mentor">unsave mentor</a></li>
 <li><a href="#unsubscribe_from_newsletter">unsubscribe from newsletter</a></li>
 <li><a href="#update_user_account_settings">update user account settings</a></li>
 <li><a href="#updating_user_eperience">updating user eperience</a></li>
@@ -2481,7 +2484,7 @@ action:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Mentors Recommendation<a name='mentors_recommendation'></a></h1>
-<p>This endpoint recommends mentors to the logged in user.</p>
+<p>This API retrieves mentor recommendations for the logged in user.</p>
 <p><strong>Endpoint:</strong><code>/mentor/recommendation/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -2498,7 +2501,16 @@ action:*****
     &quot;middle_name&quot;: &quot;Abiola&quot;,
     &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
     &quot;current_job&quot;: &quot;Backend Developer&quot;,
-    &quot;experience_level&quot;: &quot;Senior&quot;
+    &quot;years_of_experience&quot;: 6,
+    &quot;technical_skills&quot;: [
+      &quot;Python&quot;,
+      &quot;Shell Scripting&quot;,
+      &quot;Backend development&quot;,
+      &quot;Devops&quot;,
+      &quot;AI/ML&quot;,
+      &quot;Database Management System&quot;
+    ],
+    &quot;is_saved&quot;: false
   }
 ]
 </code></pre>
@@ -2935,6 +2947,86 @@ download_material:*****
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
+<h1>Save a Mentor<a name='save_a_mentor'></a></h1>
+<p>This API saves a Mentor for future reference. N.B:The user to be saved must be a mentor and must not have been previously saved.</p>
+<p><strong>Endpoint:</strong><code>/mentor/save/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
 
-</body>
-</html>
+mentor:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="language-json">{
+  &quot;saved&quot;: {
+    &quot;id&quot;: 11,
+    &quot;first_name&quot;: &quot;Abdul Azeez&quot;,
+    &quot;last_name&quot;: &quot;Balogun&quot;,
+    &quot;middle_name&quot;: &quot;Abiola&quot;,
+    &quot;years_of_experience&quot;: 6,
+    &quot;technical_skills&quot;: [
+      &quot;Python&quot;,
+      &quot;Shell Scripting&quot;,
+      &quot;Backend development&quot;,
+      &quot;Devops&quot;,
+      &quot;AI/ML&quot;,
+      &quot;Database Management System&quot;
+    ],
+    &quot;current_job&quot;: &quot;Backend Developer&quot;,
+    &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;
+  }
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Saved Mentors<a name='retrieve_saved_mentors'></a></h1>
+<p>This API retrieves all the Mentors that have been saved by the logged in user.</p>
+<p><strong>Endpoint:</strong><code>/mentor/save/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;saved&quot;: {
+      &quot;id&quot;: 11,
+      &quot;first_name&quot;: &quot;Abdul Azeez&quot;,
+      &quot;last_name&quot;: &quot;Balogun&quot;,
+      &quot;middle_name&quot;: &quot;Abiola&quot;,
+      &quot;years_of_experience&quot;: 6,
+      &quot;technical_skills&quot;: [
+        &quot;Python&quot;,
+        &quot;Shell Scripting&quot;,
+        &quot;Backend development&quot;,
+        &quot;Devops&quot;,
+        &quot;AI/ML&quot;,
+        &quot;Database Management System&quot;
+      ],
+      &quot;current_job&quot;: &quot;Backend Developer&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;
+    }
+  }
+]
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Unsave Mentor<a name='unsave_mentor'></a></h1>
+<p>This API removes a mentor from the saved list. N.B:This user must have been previously saved by the loggedin user.</p>
+<p><strong>Endpoint:</strong><code>/mentor/save/?mentor=11</code></p>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:204</strong></p>
+<p><a href="#toc">Table of contents</a></p>
+
+        </body>
+        </html>
+        

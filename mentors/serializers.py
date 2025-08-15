@@ -65,13 +65,24 @@ class RetrieveMentorsSerializer(serializers.ModelSerializer):
 
 class MentorRecommendationSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
+    is_saved = serializers.SerializerMethodField()
 
     class Meta:
         model = PersonalProfile
-        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","years_of_experience","technical_skills"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","years_of_experience","technical_skills","is_saved"]
 
     def get_id(self,obj):
         return obj.user.id
+
+    def get_is_saved(self,obj):
+        user = self.context.get("user")
+        if models.SavedMentors.objects.filter(saver=user,saved=obj.user).exists():
+            return True
+        else:
+            return False
+
+
+
 
 class MentorSearchAndFilterSerializer(serializers.Serializer):
     text = serializers.CharField(max_length=1000,required=False)
@@ -246,3 +257,52 @@ class RetrieveMentorSearchAndRetrieveSerializer(serializers.ModelSerializer):
 
     def get_profile_photo(self,obj):
         return obj.profile.profile_photo
+
+
+
+class SaveMentorSerializer(serializers.Serializer):
+    mentor = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())
+
+    def validate_mentor(self,value):
+        user = self.context["user"]
+        if user == value:
+            raise serializers.ValidationError("Cannot save self.")
+        if value.user_type != "mentor":
+            raise serializers.ValidationError("This user is not a mentor.")
+        if models.SavedMentors.objects.filter(saver=user,saved=value).exists():
+            raise serializers.ValidationError("This User has already been saved")
+        return value
+
+    def create(self,validated_data):
+        validated_data["saver"] = self.context["user"]
+        validated_data["saved"] = validated_data.pop("mentor")
+
+        output_instance = models.SavedMentors.objects.create(**validated_data)
+        return output_instance
+
+
+class UnsaveMentorSerializer(serializers.Serializer):
+    mentor = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())
+
+    def validate(self,data):
+        user = self.context["user"]
+        mentor = data.get("mentor")
+        saved_instance = models.SavedMentors.objects.filter(saver=user,saved=mentor)
+
+        if not saved_instance.exists():
+            raise serializers.ValidationError("This Mentor have not been previously saved.")
+        return saved_instance
+
+
+
+
+class RetrieveSavedMentorSerializer(serializers.ModelSerializer):
+    saved = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.SavedMentors
+        fields = ["saved"]
+
+    def get_saved(self,obj):
+        output = RetrieveMentorSearchAndRetrieveSerializer(obj.saved,many=False).data
+        return output

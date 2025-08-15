@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'jobs',
     'mentors',
     'newsletters',
+#    'payments',
 
 
     #Extensions
@@ -273,3 +274,7 @@ CACHES = {
     }
 }
 
+FLUTTERWAVE_PUBLIC_KEY=os.getenv("FLUTTERWAVE_PUBLIC_KEY")
+FLUTTERWAVE_SECRET_KEY= os.getenv("FLUTTERWAVE_SECRET_KEY")
+FLUTTERWAVE_ENCRYPTION_KEY= os.getenv("FLUTTERWAVE_ENCRYPTION_KEY")
+FLUTTERWAVE_BASE_URL = os.getenv("FLUTTERWAVE_BASE_URL")
