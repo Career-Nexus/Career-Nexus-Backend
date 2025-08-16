@@ -1906,7 +1906,7 @@ experience_level:*****
 
 # Get Job Posts
 
-This endpoint retrieves all the jobs posted by a user.
+This endpoint retrieves all the jobs posted the logged in user.
 
 **Endpoint:**`/job/`
 
@@ -1929,6 +1929,7 @@ This endpoint retrieves all the jobs posted by a user.
   "previous": null,
   "results": [
     {
+      "id": 2,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -1936,9 +1937,13 @@ This endpoint retrieves all the jobs posted by a user.
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
     },
     {
+      "id": 3,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -1946,7 +1951,10 @@ This endpoint retrieves all the jobs posted by a user.
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
     }
   ]
 }
@@ -1975,11 +1983,12 @@ This endpoint retrieves job posts related to the user based on their selected in
 
 ``` json
 {
-  "count": 2,
+  "count": 5,
   "next": null,
   "previous": null,
   "results": [
     {
+      "id": 2,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -1987,9 +1996,13 @@ This endpoint retrieves job posts related to the user based on their selected in
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
     },
     {
+      "id": 3,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -1997,7 +2010,52 @@ This endpoint retrieves job posts related to the user based on their selected in
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
+    },
+    {
+      "id": 6,
+      "title": "Backend Developer",
+      "organization": "Mitiget Assurance Limited",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-06-19",
+      "is_saved": false
+    },
+    {
+      "id": 7,
+      "title": "Backend Developer",
+      "organization": "Mitiget Assurance Limited",
+      "employment_type": "full_time",
+      "work_type": "remote",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-06-19",
+      "is_saved": false
+    },
+    {
+      "id": 8,
+      "title": "Backend Developer",
+      "organization": "TechExperts",
+      "employment_type": "full_time",
+      "work_type": "remote",
+      "country": "Nigeria",
+      "salary": "150,000NGN",
+      "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-06-19",
+      "is_saved": false
     }
   ]
 }
@@ -3851,6 +3909,209 @@ This API retrieves all the Mentors that have been saved by the logged in user.
 This API removes a mentor from the saved list. N.B:This user must have been previously saved by the loggedin user.
 
 **Endpoint:**`/mentor/save/?mentor=11`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[Table of contents](#toc)
+
+
+# Creating Library Content
+
+This API creates contents on the platform's library section. N.B:titles cannot be duplicated.
+
+**Endpoint:**`/info/library/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+description:*****
+
+tags (list of strings):*****
+
+file (downloadable file):*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 1,
+  "title": "Creating Udemy Courses",
+  "description": "This document is a template for creating courses \nover the Udemy LMS platform. Their requirements \nand standards.",
+  "tags": [
+    "courses",
+    "template"
+  ],
+  "file": "https://careernexus-storage1.s3.amazonaws.com/Library/uploads/df6e30bb-a6ef-486c-a323-fa54d111a6e5_CREATING_COURSES_ON%20UDEMY.docx"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Library Contents
+
+This API retrieves all the contents within the library. Also, by passing a content_id query parameter, information pertaining to a particular content could also be retrieved.
+
+**Endpoint:**`/info/library/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "title": "Creating Udemy Courses",
+    "description": "This document is a template for creating courses \nover the Udemy LMS platform. Their requirements \nand standards.",
+    "tags": [
+      "courses",
+      "template"
+    ],
+    "file": "https://careernexus-storage1.s3.amazonaws.com/Library/uploads/df6e30bb-a6ef-486c-a323-fa54d111a6e5_CREATING_COURSES_ON%20UDEMY.docx"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Delete Library Content
+
+Tis API deletes a content from the platform's library section. N>B: A content_id query parameter is required for this request.
+
+**Endpoint:**`/info/library/?content_id=2`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[Table of contents](#toc)
+
+
+# Save a Job
+
+This API saves a Job to be referenced and retrieved later.
+
+**Endpoint:**`/job/save/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+job:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "job": {
+    "title": "Backend Developer",
+    "organization": "Career Nexus Ltd",
+    "employment_type": "full_time",
+    "work_type": "hybrid",
+    "country": "Nigeria",
+    "salary": "350,000NGN",
+    "overview": "We are looking",
+    "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+    "experience_level": "entry"
+  }
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Saved Jobs
+
+This API retrieves all the jobs saved by the logged in user.
+
+**Endpoint:**`/job/save/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "job": {
+      "id": 2,
+      "title": "Backend Developer",
+      "organization": "Career Nexus Ltd",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are looking",
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry"
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Unsave Job
+
+This API removes a job from the users list of saved jobs. N.B:The job must have been previously saved.
+
+**Endpoint:**`/job/unsave/?job=3`
 
 **Method:** `DELETE`
 

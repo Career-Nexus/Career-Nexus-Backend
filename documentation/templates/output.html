@@ -1,55 +1,55 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Documentation</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-            <style>
-                body {
-                    box-sizing: border-box;
-                    min-width: 200px;
-                    max-width: 980px;
-                    margin: 0 auto;
-                    padding: 45px;
-                }
-            </style>
-        </head>
-        <body class="markdown-body">
-            <input type="text" id="searchBox" placeholder="Search index..." />
-                <ul id="searchResults"></ul>
-            
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            const searchBox = document.getElementById('searchBox');
-            const indexLinks = document.querySelectorAll('#index li a');
-            const resultsList = document.getElementById('searchResults');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <input type="text" id="searchBox" placeholder="Search index..." />
+    <ul id="searchResults"></ul>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchBox = document.getElementById('searchBox');
+  const indexLinks = document.querySelectorAll('#index li a');
+  const resultsList = document.getElementById('searchResults');
 
-            searchBox.addEventListener('input', function () {
-                const query = searchBox.value.toLowerCase();
-                resultsList.innerHTML = ''; // Clear previous results
+  searchBox.addEventListener('input', function () {
+    const query = searchBox.value.toLowerCase();
+    resultsList.innerHTML = ''; // Clear previous results
 
-                if (!query) return;
+    if (!query) return;
 
-                indexLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = link.href;
-                    a.textContent = link.textContent;
-                    li.appendChild(a);
-                    resultsList.appendChild(li);
-                }
-                });
-            });
-            });
-        </script>
-                    
+    indexLinks.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      if (text.includes(query)) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.textContent;
+        li.appendChild(a);
+        resultsList.appendChild(li);
+      }
+    });
+  });
+});
+</script>
 
 
-        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+    
+<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -74,9 +74,11 @@
 <li><a href="#create_a_newsletter">create a newsletter</a></li>
 <li><a href="#create_comment">create comment</a></li>
 <li><a href="#create_project_catalogue">create project catalogue</a></li>
+<li><a href="#creating_library_content">creating library content</a></li>
 <li><a href="#delete_certification">delete certification</a></li>
 <li><a href="#delete_education">delete education</a></li>
 <li><a href="#delete_experience">delete experience</a></li>
+<li><a href="#delete_library_content">delete library content</a></li>
 <li><a href="#delete_project_catalogue">delete project catalogue</a></li>
 <li><a href="#follow_user">follow user</a></li>
 <li><a href="#followers_count">followers count</a></li>
@@ -115,16 +117,20 @@
 <li><a href="#reply_comment">reply comment</a></li>
 <li><a href="#reposting">reposting</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
+<li><a href="#retrieve_library_contents">retrieve library contents</a></li>
 <li><a href="#retrieve_mentors_posts">retrieve mentors posts</a></li>
 <li><a href="#retrieve_mentorship_sessions">retrieve mentorship sessions</a></li>
 <li><a href="#retrieve_portfolio_projects">retrieve portfolio projects</a></li>
+<li><a href="#retrieve_saved_jobs">retrieve saved jobs</a></li>
 <li><a href="#retrieve_saved_mentors">retrieve saved mentors</a></li>
 <li><a href="#retrieve_user_settings">retrieve user settings</a></li>
+<li><a href="#save_a_job">save a job</a></li>
 <li><a href="#save_a_mentor">save a mentor</a></li>
 <li><a href="#subscribe_to_newsletter">subscribe to newsletter</a></li>
 <li><a href="#unfollow_user">unfollow user</a></li>
 <li><a href="#unlike_comment/reply">unlike comment/reply</a></li>
 <li><a href="#unlike_post">unlike post</a></li>
+<li><a href="#unsave_job">unsave job</a></li>
 <li><a href="#unsave_mentor">unsave mentor</a></li>
 <li><a href="#unsubscribe_from_newsletter">unsubscribe from newsletter</a></li>
 <li><a href="#update_user_account_settings">update user account settings</a></li>
@@ -1595,7 +1601,7 @@ experience_level:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Get Job Posts<a name='get_job_posts'></a></h1>
-<p>This endpoint retrieves all the jobs posted by a user.</p>
+<p>This endpoint retrieves all the jobs posted the logged in user.</p>
 <p><strong>Endpoint:</strong><code>/job/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -1610,6 +1616,7 @@ experience_level:*****
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
+      &quot;id&quot;: 2,
       &quot;title&quot;: &quot;Backend Developer&quot;,
       &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
       &quot;employment_type&quot;: &quot;full_time&quot;,
@@ -1617,9 +1624,13 @@ experience_level:*****
       &quot;country&quot;: &quot;Nigeria&quot;,
       &quot;salary&quot;: &quot;350,000NGN&quot;,
       &quot;overview&quot;: &quot;We are looking&quot;,
-      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
+      &quot;experience_level&quot;: &quot;entry&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-11&quot;,
+      &quot;is_saved&quot;: false
     },
     {
+      &quot;id&quot;: 3,
       &quot;title&quot;: &quot;Backend Developer&quot;,
       &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
       &quot;employment_type&quot;: &quot;full_time&quot;,
@@ -1627,7 +1638,10 @@ experience_level:*****
       &quot;country&quot;: &quot;Nigeria&quot;,
       &quot;salary&quot;: &quot;350,000NGN&quot;,
       &quot;overview&quot;: &quot;We are looking&quot;,
-      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
+      &quot;experience_level&quot;: &quot;entry&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-11&quot;,
+      &quot;is_saved&quot;: false
     }
   ]
 }
@@ -1644,11 +1658,12 @@ experience_level:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;count&quot;: 2,
+  &quot;count&quot;: 5,
   &quot;next&quot;: null,
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
+      &quot;id&quot;: 2,
       &quot;title&quot;: &quot;Backend Developer&quot;,
       &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
       &quot;employment_type&quot;: &quot;full_time&quot;,
@@ -1656,9 +1671,13 @@ experience_level:*****
       &quot;country&quot;: &quot;Nigeria&quot;,
       &quot;salary&quot;: &quot;350,000NGN&quot;,
       &quot;overview&quot;: &quot;We are looking&quot;,
-      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
+      &quot;experience_level&quot;: &quot;entry&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-11&quot;,
+      &quot;is_saved&quot;: false
     },
     {
+      &quot;id&quot;: 3,
       &quot;title&quot;: &quot;Backend Developer&quot;,
       &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
       &quot;employment_type&quot;: &quot;full_time&quot;,
@@ -1666,7 +1685,52 @@ experience_level:*****
       &quot;country&quot;: &quot;Nigeria&quot;,
       &quot;salary&quot;: &quot;350,000NGN&quot;,
       &quot;overview&quot;: &quot;We are looking&quot;,
-      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
+      &quot;experience_level&quot;: &quot;entry&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-11&quot;,
+      &quot;is_saved&quot;: false
+    },
+    {
+      &quot;id&quot;: 6,
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;Mitiget Assurance Limited&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;hybrid&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.&quot;,
+      &quot;description&quot;: &quot;As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.&quot;,
+      &quot;experience_level&quot;: &quot;senior&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-19&quot;,
+      &quot;is_saved&quot;: false
+    },
+    {
+      &quot;id&quot;: 7,
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;Mitiget Assurance Limited&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;remote&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.&quot;,
+      &quot;description&quot;: &quot;As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.&quot;,
+      &quot;experience_level&quot;: &quot;senior&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-19&quot;,
+      &quot;is_saved&quot;: false
+    },
+    {
+      &quot;id&quot;: 8,
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;TechExperts&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;remote&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;150,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.&quot;,
+      &quot;description&quot;: &quot;As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.&quot;,
+      &quot;experience_level&quot;: &quot;senior&quot;,
+      &quot;time_stamp&quot;: &quot;2025-06-19&quot;,
+      &quot;is_saved&quot;: false
     }
   ]
 }
@@ -3026,7 +3090,141 @@ mentor:*****
 <h2>Response body</h2>
 <p><strong>status code:204</strong></p>
 <p><a href="#toc">Table of contents</a></p>
+<h1>Creating Library Content<a name='creating_library_content'></a></h1>
+<p>This API creates contents on the platform's library section. N.B:titles cannot be duplicated.</p>
+<p><strong>Endpoint:</strong><code>/info/library/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
 
-        </body>
-        </html>
-        
+title:*****
+
+description:*****
+
+tags (list of strings):*****
+
+file (downloadable file):*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 1,
+  &quot;title&quot;: &quot;Creating Udemy Courses&quot;,
+  &quot;description&quot;: &quot;This document is a template for creating courses \nover the Udemy LMS platform. Their requirements \nand standards.&quot;,
+  &quot;tags&quot;: [
+    &quot;courses&quot;,
+    &quot;template&quot;
+  ],
+  &quot;file&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/Library/uploads/df6e30bb-a6ef-486c-a323-fa54d111a6e5_CREATING_COURSES_ON%20UDEMY.docx&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Library Contents<a name='retrieve_library_contents'></a></h1>
+<p>This API retrieves all the contents within the library. Also, by passing a content_id query parameter, information pertaining to a particular content could also be retrieved.</p>
+<p><strong>Endpoint:</strong><code>/info/library/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 1,
+    &quot;title&quot;: &quot;Creating Udemy Courses&quot;,
+    &quot;description&quot;: &quot;This document is a template for creating courses \nover the Udemy LMS platform. Their requirements \nand standards.&quot;,
+    &quot;tags&quot;: [
+      &quot;courses&quot;,
+      &quot;template&quot;
+    ],
+    &quot;file&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/Library/uploads/df6e30bb-a6ef-486c-a323-fa54d111a6e5_CREATING_COURSES_ON%20UDEMY.docx&quot;
+  }
+]
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Delete Library Content<a name='delete_library_content'></a></h1>
+<p>Tis API deletes a content from the platform's library section. N&gt;B: A content_id query parameter is required for this request.</p>
+<p><strong>Endpoint:</strong><code>/info/library/?content_id=2</code></p>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:204</strong></p>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Save a Job<a name='save_a_job'></a></h1>
+<p>This API saves a Job to be referenced and retrieved later.</p>
+<p><strong>Endpoint:</strong><code>/job/save/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+job:*****
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="language-json">{
+  &quot;job&quot;: {
+    &quot;title&quot;: &quot;Backend Developer&quot;,
+    &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+    &quot;employment_type&quot;: &quot;full_time&quot;,
+    &quot;work_type&quot;: &quot;hybrid&quot;,
+    &quot;country&quot;: &quot;Nigeria&quot;,
+    &quot;salary&quot;: &quot;350,000NGN&quot;,
+    &quot;overview&quot;: &quot;We are looking&quot;,
+    &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
+    &quot;experience_level&quot;: &quot;entry&quot;
+  }
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Saved Jobs<a name='retrieve_saved_jobs'></a></h1>
+<p>This API retrieves all the jobs saved by the logged in user.</p>
+<p><strong>Endpoint:</strong><code>/job/save/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;job&quot;: {
+      &quot;id&quot;: 2,
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;work_type&quot;: &quot;hybrid&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;overview&quot;: &quot;We are looking&quot;,
+      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
+      &quot;experience_level&quot;: &quot;entry&quot;
+    }
+  }
+]
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Unsave Job<a name='unsave_job'></a></h1>
+<p>This API removes a job from the users list of saved jobs. N.B:The job must have been previously saved.</p>
+<p><strong>Endpoint:</strong><code>/job/unsave/?job=3</code></p>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:204</strong></p>
+<p><a href="#toc">Table of contents</a></p>
+
+</body>
+</html>

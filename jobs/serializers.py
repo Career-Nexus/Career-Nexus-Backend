@@ -41,13 +41,14 @@ experience_level = CHOICES["experience_level"]
 
 
 class JobsSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(read_only=True)
     employment_type = serializers.ChoiceField(choices=employment_type)
     work_type = serializers.ChoiceField(choices=work_type)
     experience_level = serializers.ChoiceField(choices=experience_level)
 
     class Meta:
         model = models.Jobs
-        fields = ["title","organization","employment_type","work_type","country","salary","overview","description","experience_level"]
+        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level"]
 
     def create(self,validated_data):
         validated_data["poster"] = self.context["user"]
@@ -68,6 +69,23 @@ class JobsSerializer(serializers.ModelSerializer):
             "experience_level":job.experience_level,
         }
         return output
+
+
+class RetrieveJobSerializer(serializers.ModelSerializer):
+    is_saved = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Jobs
+        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level","time_stamp","is_saved"]
+
+    def get_is_saved(self,obj):
+        user = self.context["user"]
+        if models.SavedJobs.objects.filter(saver=user,job=obj).exists():
+            return True
+        else:
+            return False
+
+
 
 class JobPreferenceSerializer(serializers.Serializer):
     title = serializers.CharField(max_length=250)
@@ -94,3 +112,38 @@ class JobPreferenceSerializer(serializers.Serializer):
         return instance
 
 
+
+class SaveJobSerializer(serializers.Serializer):
+    job = serializers.PrimaryKeyRelatedField(queryset=models.Jobs.objects.all())
+
+    def validate_job(self,value):
+        user = self.context["user"]
+        if models.SavedJobs.objects.filter(saver=user,job=value).exists():
+            raise serializers.ValidationError("This Job has already been saved.")
+        return value
+
+    def create(self,validated_data):
+        validated_data["saver"] = self.context["user"]
+        output_instance = models.SavedJobs.objects.create(**validated_data)
+        return output_instance
+
+class UnsaveJobSerializer(serializers.Serializer):
+    job = serializers.PrimaryKeyRelatedField(queryset=models.Jobs.objects.all())
+
+    def validate(self,data):
+        saver = self.context["user"]
+        job = data["job"]
+
+        saved_instance = models.SavedJobs.objects.filter(saver=saver,job=job)
+        if not saved_instance.exists():
+            raise serializers.ValidationError("This job has not been previously saved.")
+        return saved_instance
+
+
+
+class RetrieveSavedJobSerializer(serializers.ModelSerializer):
+    job = JobsSerializer()
+
+    class Meta:
+        model = models.SavedJobs
+        fields = ["job"]

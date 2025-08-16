@@ -24,6 +24,15 @@ class JobPreference(models.Model):
     industry = models.CharField(max_length=150,null=True)
     experience_level = models.CharField(max_length=15,null=True)
 
+
+
 class JobPreferenceSuffix(models.Model):
     ref_no = models.CharField(max_length=99)
     preference_combination = models.CharField(max_length=500)
+
+
+
+class SavedJobs(models.Model):
+    saver = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="job_saver")
+    job = models.ForeignKey(Jobs,on_delete=models.CASCADE)
+    saved_at = models.DateTimeField(auto_now=True)

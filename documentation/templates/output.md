@@ -25,70 +25,76 @@
 18. [create a newsletter](#create_a_newsletter)  
 19. [create comment](#create_comment)  
 20. [create project catalogue](#create_project_catalogue)  
-21. [delete certification](#delete_certification)  
-22. [delete education](#delete_education)  
-23. [delete experience](#delete_experience)  
-24. [delete project catalogue](#delete_project_catalogue)  
-25. [follow user](#follow_user)  
-26. [followers count](#followers_count)  
-27. [following recommendation](#following_recommendation)  
-28. [followings count](#followings_count)  
-29. [forget password](#forget_password)  
-30. [get chat sessions](#get_chat_sessions)  
-31. [get comment](#get_comment)  
-32. [get country phone codes](#get_country_phone_codes)  
-33. [get followings](#get_followings)  
-34. [get followings post](#get_followings_post)  
-35. [get job posts](#get_job_posts)  
-36. [get job preference](#get_job_preference)  
-37. [get newsletter](#get_newsletter)  
-38. [get other user post](#get_other_user_post)  
-39. [get own posts](#get_own_posts)  
-40. [get posts](#get_posts)  
-41. [get saved post](#get_saved_post)  
-42. [job create](#job_create)  
-43. [job notifications](#job_notifications)  
-44. [job preference](#job_preference)  
-45. [like comment/reply](#like_comment/reply)  
-46. [login api](#login_api)  
-47. [logout](#logout)  
-48. [mentor search/filter](#mentor_search/filter)  
-49. [mentors recommendation](#mentors_recommendation)  
-50. [post create](#post_create)  
-51. [post like](#post_like)  
-52. [post retrieve](#post_retrieve)  
-53. [post save](#post_save)  
-54. [post share](#post_share)  
-55. [profile completion](#profile_completion)  
-56. [profile retrieve](#profile_retrieve)  
-57. [profile update](#profile_update)  
-58. [recommended job posts.](#recommended_job_posts.)  
-59. [reply comment](#reply_comment)  
-60. [reposting](#reposting)  
-61. [retrieve education api](#retrieve_education_api)  
-62. [retrieve mentors posts](#retrieve_mentors_posts)  
-63. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-64. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-65. [retrieve saved mentors](#retrieve_saved_mentors)  
-66. [retrieve user settings](#retrieve_user_settings)  
-67. [save a mentor](#save_a_mentor)  
-68. [subscribe to newsletter](#subscribe_to_newsletter)  
-69. [unfollow user](#unfollow_user)  
-70. [unlike comment/reply](#unlike_comment/reply)  
-71. [unlike post](#unlike_post)  
-72. [unsave mentor](#unsave_mentor)  
-73. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-74. [update user account settings](#update_user_account_settings)  
-75. [updating user eperience](#updating_user_eperience)  
-76. [user analytics](#user_analytics)  
-77. [user followers](#user_followers)  
-78. [user registeration](#user_registeration)  
-79. [user search](#user_search)  
-80. [user-industry update](#user-industry_update)  
-81. [valid choice](#valid_choice)  
-82. [verify otp hash](#verify_otp_hash)  
-83. [view certification](#view_certification)  
-84. [view experience](#view_experience)  
+21. [creating library content](#creating_library_content)  
+22. [delete certification](#delete_certification)  
+23. [delete education](#delete_education)  
+24. [delete experience](#delete_experience)  
+25. [delete library content](#delete_library_content)  
+26. [delete project catalogue](#delete_project_catalogue)  
+27. [follow user](#follow_user)  
+28. [followers count](#followers_count)  
+29. [following recommendation](#following_recommendation)  
+30. [followings count](#followings_count)  
+31. [forget password](#forget_password)  
+32. [get chat sessions](#get_chat_sessions)  
+33. [get comment](#get_comment)  
+34. [get country phone codes](#get_country_phone_codes)  
+35. [get followings](#get_followings)  
+36. [get followings post](#get_followings_post)  
+37. [get job posts](#get_job_posts)  
+38. [get job preference](#get_job_preference)  
+39. [get newsletter](#get_newsletter)  
+40. [get other user post](#get_other_user_post)  
+41. [get own posts](#get_own_posts)  
+42. [get posts](#get_posts)  
+43. [get saved post](#get_saved_post)  
+44. [job create](#job_create)  
+45. [job notifications](#job_notifications)  
+46. [job preference](#job_preference)  
+47. [like comment/reply](#like_comment/reply)  
+48. [login api](#login_api)  
+49. [logout](#logout)  
+50. [mentor search/filter](#mentor_search/filter)  
+51. [mentors recommendation](#mentors_recommendation)  
+52. [post create](#post_create)  
+53. [post like](#post_like)  
+54. [post retrieve](#post_retrieve)  
+55. [post save](#post_save)  
+56. [post share](#post_share)  
+57. [profile completion](#profile_completion)  
+58. [profile retrieve](#profile_retrieve)  
+59. [profile update](#profile_update)  
+60. [recommended job posts.](#recommended_job_posts.)  
+61. [reply comment](#reply_comment)  
+62. [reposting](#reposting)  
+63. [retrieve education api](#retrieve_education_api)  
+64. [retrieve library contents](#retrieve_library_contents)  
+65. [retrieve mentors posts](#retrieve_mentors_posts)  
+66. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+67. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+68. [retrieve saved jobs](#retrieve_saved_jobs)  
+69. [retrieve saved mentors](#retrieve_saved_mentors)  
+70. [retrieve user settings](#retrieve_user_settings)  
+71. [save a job](#save_a_job)  
+72. [save a mentor](#save_a_mentor)  
+73. [subscribe to newsletter](#subscribe_to_newsletter)  
+74. [unfollow user](#unfollow_user)  
+75. [unlike comment/reply](#unlike_comment/reply)  
+76. [unlike post](#unlike_post)  
+77. [unsave job](#unsave_job)  
+78. [unsave mentor](#unsave_mentor)  
+79. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+80. [update user account settings](#update_user_account_settings)  
+81. [updating user eperience](#updating_user_eperience)  
+82. [user analytics](#user_analytics)  
+83. [user followers](#user_followers)  
+84. [user registeration](#user_registeration)  
+85. [user search](#user_search)  
+86. [user-industry update](#user-industry_update)  
+87. [valid choice](#valid_choice)  
+88. [verify otp hash](#verify_otp_hash)  
+89. [view certification](#view_certification)  
+90. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -1990,7 +1996,7 @@ experience_level:*****
 
 # Get Job Posts<a name='get_job_posts'></a>
 
-This endpoint retrieves all the jobs posted by a user.
+This endpoint retrieves all the jobs posted the logged in user.
 
 **Endpoint:**`/job/`
 
@@ -2013,6 +2019,7 @@ This endpoint retrieves all the jobs posted by a user.
   "previous": null,
   "results": [
     {
+      "id": 2,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -2020,9 +2027,13 @@ This endpoint retrieves all the jobs posted by a user.
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
     },
     {
+      "id": 3,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -2030,7 +2041,10 @@ This endpoint retrieves all the jobs posted by a user.
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
     }
   ]
 }
@@ -2059,11 +2073,12 @@ This endpoint retrieves job posts related to the user based on their selected in
 
 ``` json
 {
-  "count": 2,
+  "count": 5,
   "next": null,
   "previous": null,
   "results": [
     {
+      "id": 2,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -2071,9 +2086,13 @@ This endpoint retrieves job posts related to the user based on their selected in
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
     },
     {
+      "id": 3,
       "title": "Backend Developer",
       "organization": "Career Nexus Ltd",
       "employment_type": "full_time",
@@ -2081,7 +2100,52 @@ This endpoint retrieves job posts related to the user based on their selected in
       "country": "Nigeria",
       "salary": "350,000NGN",
       "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications."
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry",
+      "time_stamp": "2025-06-11",
+      "is_saved": false
+    },
+    {
+      "id": 6,
+      "title": "Backend Developer",
+      "organization": "Mitiget Assurance Limited",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-06-19",
+      "is_saved": false
+    },
+    {
+      "id": 7,
+      "title": "Backend Developer",
+      "organization": "Mitiget Assurance Limited",
+      "employment_type": "full_time",
+      "work_type": "remote",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-06-19",
+      "is_saved": false
+    },
+    {
+      "id": 8,
+      "title": "Backend Developer",
+      "organization": "TechExperts",
+      "employment_type": "full_time",
+      "work_type": "remote",
+      "country": "Nigeria",
+      "salary": "150,000NGN",
+      "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-06-19",
+      "is_saved": false
     }
   ]
 }
@@ -3935,6 +3999,209 @@ This API retrieves all the Mentors that have been saved by the logged in user.
 This API removes a mentor from the saved list. N.B:This user must have been previously saved by the loggedin user.
 
 **Endpoint:**`/mentor/save/?mentor=11`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[Table of contents](#toc)
+
+
+# Creating Library Content<a name='creating_library_content'></a>
+
+This API creates contents on the platform's library section. N.B:titles cannot be duplicated.
+
+**Endpoint:**`/info/library/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+title:*****
+
+description:*****
+
+tags (list of strings):*****
+
+file (downloadable file):*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 1,
+  "title": "Creating Udemy Courses",
+  "description": "This document is a template for creating courses \nover the Udemy LMS platform. Their requirements \nand standards.",
+  "tags": [
+    "courses",
+    "template"
+  ],
+  "file": "https://careernexus-storage1.s3.amazonaws.com/Library/uploads/df6e30bb-a6ef-486c-a323-fa54d111a6e5_CREATING_COURSES_ON%20UDEMY.docx"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Library Contents<a name='retrieve_library_contents'></a>
+
+This API retrieves all the contents within the library. Also, by passing a content_id query parameter, information pertaining to a particular content could also be retrieved.
+
+**Endpoint:**`/info/library/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "title": "Creating Udemy Courses",
+    "description": "This document is a template for creating courses \nover the Udemy LMS platform. Their requirements \nand standards.",
+    "tags": [
+      "courses",
+      "template"
+    ],
+    "file": "https://careernexus-storage1.s3.amazonaws.com/Library/uploads/df6e30bb-a6ef-486c-a323-fa54d111a6e5_CREATING_COURSES_ON%20UDEMY.docx"
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Delete Library Content<a name='delete_library_content'></a>
+
+Tis API deletes a content from the platform's library section. N>B: A content_id query parameter is required for this request.
+
+**Endpoint:**`/info/library/?content_id=2`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[Table of contents](#toc)
+
+
+# Save a Job<a name='save_a_job'></a>
+
+This API saves a Job to be referenced and retrieved later.
+
+**Endpoint:**`/job/save/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+job:*****
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "job": {
+    "title": "Backend Developer",
+    "organization": "Career Nexus Ltd",
+    "employment_type": "full_time",
+    "work_type": "hybrid",
+    "country": "Nigeria",
+    "salary": "350,000NGN",
+    "overview": "We are looking",
+    "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+    "experience_level": "entry"
+  }
+}
+```
+
+[Table of contents](#toc)
+
+
+# Retrieve Saved Jobs<a name='retrieve_saved_jobs'></a>
+
+This API retrieves all the jobs saved by the logged in user.
+
+**Endpoint:**`/job/save/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "job": {
+      "id": 2,
+      "title": "Backend Developer",
+      "organization": "Career Nexus Ltd",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "We are looking",
+      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
+      "experience_level": "entry"
+    }
+  }
+]
+```
+
+[Table of contents](#toc)
+
+
+# Unsave Job<a name='unsave_job'></a>
+
+This API removes a job from the users list of saved jobs. N.B:The job must have been previously saved.
+
+**Endpoint:**`/job/unsave/?job=3`
 
 **Method:** `DELETE`
 

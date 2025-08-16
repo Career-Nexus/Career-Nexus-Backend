@@ -16,13 +16,22 @@ class InformationView(APIView):
 
     def get_permissions(self):
         if self.request.method == "POST":
-            #TODO Change permission to IsAdminUser
-            return [AllowAny()]
+            return [
+                IsAuthenticated(),
+                IsAdminUser()
+            ]
         elif self.request.method == "GET":
             return [AllowAny()]
         elif self.request.method == "PUT":
-            #TODO Change permission to IsAdminUser
-            return [AllowAny()]
+            return [
+                IsAuthenticated(),
+                IsAdminUser()
+            ]
+        elif self.request.method == "DELETE":
+            return [
+                IsAuthenticated(),
+                IsAdminUser()
+            ]
         return super().get_permissions()
 
     serializer_class = serializers.InformationSerializer
@@ -199,3 +208,55 @@ class ChoiceFieldView(APIView):
                 return Response({"status":f"Deleted {validated_data['value']} from choice list"},status=status.HTTP_200_OK)
             except ValueError:
                 return Response({"error":"Inexistent value in field options"},status=status.HTTP_400_BAD_REQUEST)
+
+
+class LibraryView(APIView):
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [
+                IsAuthenticated(),
+                IsAdminUser()
+            ]
+        elif self.request.method == "GET":
+            return [
+                IsAuthenticated(),
+            ]
+        elif self.request.method == "DELETE":
+            return [
+                IsAuthenticated(),
+                IsAdminUser(),
+            ]
+        return super().get_permissions()
+    
+    def post(self,request):
+        serializer = serializers.LibrarySerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.RetrieveLibrarySerializer(output_instance,many=False).data
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        param = request.query_params.get("content_id")
+        if not param:
+            all_contents = models.Library.objects.all()
+            output = serializers.RetrieveLibrarySerializer(all_contents,many=True).data
+            return Response(output,status=status.HTTP_200_OK)
+        else:
+            content = models.Library.objects.filter(id=param).first()
+            if not content:
+                return Response({"error":"Invalid content id"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                output = serializers.RetrieveLibrarySerializer(content,many=False).data
+                return Response(output,status=status.HTTP_200_OK)
+
+    def delete(self,request):
+        param = request.query_params.get("content_id")
+        if not param:
+            return Response({"error":"A content_id query parameter is required for this request"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            content = models.Library.objects.filter(id=param).first()
+            if not content:
+                return Response({"error":"Invalid Content ID"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                content.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)

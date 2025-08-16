@@ -67,7 +67,7 @@ class JobsView(APIView):
 
 
 
-        serialized_data = self.serializer_class(paginated_items,many=True).data
+        serialized_data = serializers.RetrieveJobSerializer(paginated_items,context={"user":user},many=True).data
         response = paginator.get_paginated_response(serialized_data).data
         return Response(response,status=status.HTTP_200_OK)
 
@@ -76,7 +76,7 @@ class RecommendJobView(APIView):
     permission_classes = [
         IsAuthenticated,
     ]
-    serializer_class = serializers.JobsSerializer
+    serializer_class = serializers.RetrieveJobSerializer
 
     def get(self,request):
         user = request.user
@@ -88,7 +88,7 @@ class RecommendJobView(APIView):
         paginated_items = paginator.paginate_queryset(recommended_jobs,request)
 
 
-        serialized_data = self.serializer_class(paginated_items,many=True).data
+        serialized_data = self.serializer_class(paginated_items,context={"user":user},many=True).data
         output = paginator.get_paginated_response(serialized_data).data
         return Response(output,status=status.HTTP_200_OK)
 
@@ -138,3 +138,40 @@ class JobPreferenceView(APIView):
                 "preference_set":False
             }
             return Response(output,status=status.HTTP_200_OK)
+
+
+class SaveJobView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        user = request.user
+        serializer = serializers.SaveJobSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.RetrieveSavedJobSerializer(output_instance,many=False).data
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        user = request.user
+        saved_jobs = user.job_saver.all()
+        output = serializers.RetrieveSavedJobSerializer(saved_jobs,many=True).data
+        return Response(output,status=status.HTTP_200_OK)
+
+class UnsaveJobView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def delete(self,request):
+        user = request.user
+        param = request.query_params.get("job")
+        if not param:
+            return Response({"error":"A job query parameter is required for this request"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            serializer = serializers.UnsaveJobSerializer(data=request.query_params,context={"user":user})
+            if serializer.is_valid(raise_exception=True):
+                saved_instance = serializer.validated_data
+                saved_instance.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)

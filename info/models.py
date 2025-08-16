@@ -13,3 +13,9 @@ class Countrycodes(models.Model):
     code = models.CharField(max_length=20)
     permitted = models.BooleanField(default=True)
 
+
+class Library(models.Model):
+    title = models.CharField(max_length=250)
+    description = models.TextField()
+    tags = models.JSONField()
+    file = models.CharField()

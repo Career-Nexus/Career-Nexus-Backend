@@ -1,5 +1,10 @@
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
+
 from rest_framework import serializers
 from . import models
+
+import uuid
 
 
 class InformationSerializer(serializers.ModelSerializer):
@@ -84,3 +89,43 @@ class AlterCountryPermitSerializer(serializers.Serializer):
 class ChoiceFieldSerializer(serializers.Serializer):
     field_name = serializers.CharField(max_length=200,required=True)
     value = serializers.CharField(max_length=255,required=True)
+
+class LibrarySerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=250)
+    description = serializers.CharField()
+    tags = serializers.JSONField()
+    file = serializers.FileField()
+
+    def validate_title(self,value):
+        if models.Library.objects.filter(title__iexact=value).exists():
+            raise serializers.ValidationError("A Library content with this title already exists.")
+        return value
+
+    def validate_tags(self,value):
+        if not isinstance(value,list):
+            raise serializers.ValidationError("Tags must be a list of Texts.")
+        return value
+
+    def validate_file(self,file):
+        file_size = file.size 
+        if (file_size/1000000) > 5:
+            raise serializers.ValidationError("File too large.")
+        return file
+
+    def create(self,validated_data):
+        file = validated_data.get("file")
+        if file:
+            file_name = f"Library/uploads/{str(uuid.uuid4())}_{file.name}"
+            file_path = default_storage.save(file_name,ContentFile(file.read()))
+            validated_data["file"] = default_storage.url(file_path)
+
+        output_instance = models.Library.objects.create(**validated_data)
+        return output_instance
+
+
+
+class RetrieveLibrarySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Library
+        fields = ["id","title","description","tags","file"]
