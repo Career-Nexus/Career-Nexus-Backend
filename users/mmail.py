@@ -6,8 +6,13 @@ from email.mime.base import MIMEBase
 from email import encoders
 import time
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 class Agent():
-    def __init__(self,client="smtp.mail.us-east-1.awsapps.com",email="no-reply@career-nexus.com",password="Hhlbbcnofns1$"):
+    def __init__(self,client="smtp.mail.us-east-1.awsapps.com",email="no-reply@career-nexus.com",password=os.getenv("GENERAL_PASSWORD")):
         self.client = client
         self.email = email
         self.password = password

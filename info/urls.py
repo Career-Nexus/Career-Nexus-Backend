@@ -6,4 +6,5 @@ urlpatterns = [
     path("country-permit/",views.CountryPermitView.as_view(),name="Permitted-Country"),
     path("choice-data/",views.ChoiceFieldView.as_view(),name="Choice-Data"),
     path("library/",views.LibraryView.as_view(),name="Library"),
+    path("exchange-rate/set/",views.SetExchangeRateView.as_view(),name="Set-Exchange-Rate"),
 ]

@@ -25,6 +25,7 @@ from . import serializers
 from . import models
 from .mmail import Agent
 from notifications.utils import notify
+from .tasks import send_email
 
 from django.contrib.auth import get_user_model
 
@@ -66,8 +67,7 @@ c_directory = os.path.dirname(os.path.abspath(__file__))
 resources_directory = os.path.join(c_directory,"resources")
 welcome_template = os.path.join(resources_directory,"welcome.html")
 logo = os.path.join(resources_directory,"career-nexus_logo.png")
-
-
+settings_change_template = os.path.join(resources_directory,"settings_change.html")
 
 
 
@@ -331,7 +331,7 @@ class RetreiveProfileView(APIView):
                     output = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
                 #TODO establish serializer for user_type=employer
                 else:
-                    output = serializers.RetrieveMentorProfileSerializer(profile,many=False).data
+                    output = serializers.RetrieveMentorProfileSerializer(profile,many=False,context={"user":user}).data
                 cache.set(cache_key,output,timeout=7200)
                 return Response(output,status=status.HTTP_200_OK)
             else:
@@ -352,7 +352,7 @@ class RetreiveProfileView(APIView):
                     profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
                 #TODO establish serializer for user_type=employer
                 else:
-                    profile_data = serializers.RetrieveMentorProfileSerializer(profile,many=False).data
+                    profile_data = serializers.RetrieveMentorProfileSerializer(profile,many=False,context={"user":request.user}).data
                 cache.set(cache_key,profile_data,timeout=7200)                   
                 return Response(profile_data,status=status.HTTP_200_OK)
             else:
@@ -673,4 +673,9 @@ class SettingsView(APIView):
             output_instance = serializer.save()
             delete_cache(f"{user.id}_settings")
             output = serializers.RetrieveSettingsSerializer(output_instance,many=False).data
+
+            if user.email_notify:
+                container = {"{NAME}":f"{user.profile.first_name}"}
+                send_email.delay(template=settings_change_template,subject="Account Settings",container=container,recipient=user.email)
+
             return Response(output,status=status.HTTP_200_OK)

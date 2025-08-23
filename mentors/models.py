@@ -11,6 +11,7 @@ class Sessions(models.Model):
     session_at = models.DateTimeField()
     discourse = models.TextField()
     status = models.CharField(max_length=20,default="PENDING")
+    is_paid = models.BooleanField(default=False)
 
 
 class SavedMentors(models.Model):

@@ -260,3 +260,15 @@ class LibraryView(APIView):
             else:
                 content.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class SetExchangeRateView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsAdminUser
+    ]
+    def post(self,request):
+        serializer = serializers.SetExchangeRateSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response({"status":"Set"},status=status.HTTP_200_OK)

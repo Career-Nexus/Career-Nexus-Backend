@@ -9,6 +9,9 @@ from django.core.files.base import ContentFile
 from django.utils.text import get_valid_filename
 from django.db.models import Q
 
+from users.tasks import send_email
+from notifications.utils import notify
+
 import uuid
 import joblib
 import os
@@ -19,9 +22,13 @@ import os
 
 directory = os.path.dirname(os.path.abspath(__file__))
 model_directory = os.path.join(directory,"models")
+resources_directory = os.path.join(directory,"resources")
 model_file = os.path.join(model_directory,"industry_classifier_model.pkl")
 binarizer_file = os.path.join(model_directory,"industry_label_binarizer.pkl")
 
+
+new_comment_template = os.path.join(resources_directory,"new_comment.html")
+new_like_template = os.path.join(resources_directory,"post_like.html")
 model = joblib.load(model_file)
 binarizer = joblib.load(binarizer_file)
 
@@ -266,12 +273,21 @@ class CreateCommentSerializer(serializers.Serializer):
 
     def create(self,validated_data):
         validated_data["user"] = self.context["request"].user
+        post = validated_data.get("post")
         media = validated_data.get("media")
         if media:
             file_name = f"comments/media/{uuid.uuid4()}{get_valid_filename(media.name)}"
             file_path = default_storage.save(file_name,ContentFile(media.read()))
             validated_data["media"] = default_storage.url(file_path)
         comment = models.Comment.objects.create(**validated_data)
+        #Email Notification for first comment
+        post_owner = post.profile.user
+        if post_owner.email_notify:
+            text = post.body[0:30]
+            container = {"{NAME}":post.profile.first_name,"{PHRASE}":text}
+            if not models.Comment.objects.filter(post=post).first():
+                send_email.delay(template=new_comment_template,subject="A New Comment",container=container,recipient=post_owner.email)
+
         output = {
                     "user":PersonalProfileSerializer(comment.user.profile,many=False).data,
                     "body":comment.body,
@@ -306,11 +322,18 @@ class CreateLikeSerializer(serializers.Serializer):
             return data
     
     def create(self,validated_data):
-        #validated_data["user"] = self.context["user"]
+        post = validated_data.get("post")
+        post_owner = post.profile.user
+        if post_owner.email_notify:
+            if not models.Like.objects.filter(post=post).first():
+                container = {"{NAME}":post_owner.profile.first_name,"{PHRASE}":post.body[0:30]}
+                send_email.delay(template=new_like_template,subject="Your Post Got a Like!!",container=container,recipient=post_owner.email)
+
         like = models.Like.objects.create(**validated_data)
         output = {
                     "post":like.post.id
                 }
+        notify(post_owner.id,text="Someone just liked your post.")
         return output
 
 class UnlikePostSerializer(serializers.Serializer):

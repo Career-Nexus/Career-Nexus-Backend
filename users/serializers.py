@@ -8,6 +8,7 @@ from django.core.files.base import ContentFile
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
 from . import models
+from info.models import ExchangeRate
 
 
 from .generator.referral_code_generator import *
@@ -464,7 +465,14 @@ class PersonalProfileSerializer(serializers.Serializer):
     areas_of_expertise = serializers.JSONField(required=False)
     technical_skills = serializers.JSONField(required=False)
     mentorship_styles = serializers.JSONField(required=False)
+    session_rate = serializers.IntegerField(required=False)
     linkedin_url = serializers.CharField(max_length=500,required=False)
+
+    def validate_session_rate(self,value):
+        session_rates = list(range(1,11))
+        if value not in session_rates:
+            raise serializers.ValidationError("This session rate is not within the allowed rates.")
+        return value
 
     def validate(self,data):
         areas_of_expertise = data.get("areas_of_expertise")
@@ -510,6 +518,7 @@ class PersonalProfileSerializer(serializers.Serializer):
             technical_skills = validated_data.get("technical_skills",instance.technical_skills)
             mentorship_styles = validated_data.get("mentorship_styles",instance.mentorship_styles)
             linkedin_url = validated_data.get("linkedin_url",instance.linkedin_url)
+            session_rate = validated_data.get("session_rate",instance.session_rate)
 
 
             instance.years_of_experience = years_of_experience
@@ -518,6 +527,7 @@ class PersonalProfileSerializer(serializers.Serializer):
             instance.areas_of_expertise = areas_of_expertise
             instance.technical_skills = technical_skills
             instance.mentorship_styles = mentorship_styles
+            instance.session_rate = session_rate
 
             instance.linkedin_url = linkedin_url
         
@@ -580,7 +590,7 @@ class MentorUpdateOutputSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","profile_photo","cover_photo","qualification","intro_video","location","bio","position","summary","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","resume","mentorship_styles","timezone","linkedin_url"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","profile_photo","cover_photo","qualification","intro_video","location","bio","position","summary","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","resume","mentorship_styles","timezone","linkedin_url","session_rate"]
 
 
 
@@ -637,10 +647,25 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
     followers = serializers.SerializerMethodField()
     followings = serializers.SerializerMethodField()
     user_type = serializers.SerializerMethodField()
+    session_rate = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","resume","timezone","linkedin_url","followers","followings","user_type"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","resume","timezone","linkedin_url","followers","followings","session_rate","user_type"]
+
+    def get_session_rate(self,obj):
+        user = self.context.get("user")
+        if not user:
+            return f"{obj.session_rate}USD"
+        else:
+            country_code = obj.country_code
+            rate_instance = ExchangeRate.objects.filter(country__code=country_code).first()
+            if not rate_instance:
+                return f"{obj.session_rate}USD"
+            else:
+                amount = int(rate_instance.exchange_rate*obj.session_rate)
+                currency = rate_instance.currency_initials
+                return f"{amount}{currency}"
 
     def get_user_type(self,obj):
         return obj.user.user_type

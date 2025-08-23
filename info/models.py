@@ -19,3 +19,9 @@ class Library(models.Model):
     description = models.TextField()
     tags = models.JSONField()
     file = models.CharField()
+
+class ExchangeRate(models.Model):
+    country = models.ForeignKey(Countrycodes,on_delete=models.CASCADE)
+    currency_name = models.CharField()
+    currency_initials = models.CharField()
+    exchange_rate = models.DecimalField(max_digits=10,decimal_places=2)

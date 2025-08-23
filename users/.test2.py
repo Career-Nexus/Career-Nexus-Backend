@@ -1,12 +1,16 @@
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 # AWS SES SMTP endpoint (you should use the correct endpoint for your region)
 smtp_server = "smtp.mail.us-east-1.awsapps.com"  # Change this to the appropriate region
 smtp_port = 465  # Typically 587 for TLS
 smtp_username = "no-reply@career-nexus.com"  # Replace with your SMTP username
-smtp_password = "Hhlbbcnofns1$"  # Replace with your SMTP password
+smtp_password = os.getenv("GENERAL_PASSWORD")  # Replace with your SMTP password
 
 # Sender and recipient information
 sender_email = "no-reply@career-nexus.com"

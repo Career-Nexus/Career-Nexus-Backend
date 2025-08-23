@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'jobs',
     'mentors',
     'newsletters',
-#    'payments',
+    'payments',
 
 
     #Extensions
@@ -188,7 +188,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_THROTTLE_RATES":{
         'user':"1000/hour",
-        "anon":"10/hour"
+        "anon":"5/hour"
     }
 
 }

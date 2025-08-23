@@ -82,6 +82,7 @@ class PersonalProfile(models.Model):
     areas_of_expertise = models.JSONField(default=list)
     technical_skills = models.JSONField(default=list)
     mentorship_styles = models.JSONField(default=list)
+    session_rate = models.IntegerField(default=0)
     timezone = models.CharField(default="UTC")
     linkedin_url = models.CharField(null=True,blank=True)
     

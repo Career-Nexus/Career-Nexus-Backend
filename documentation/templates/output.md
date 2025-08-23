@@ -36,65 +36,66 @@
 29. [following recommendation](#following_recommendation)  
 30. [followings count](#followings_count)  
 31. [forget password](#forget_password)  
-32. [get chat sessions](#get_chat_sessions)  
-33. [get comment](#get_comment)  
-34. [get country phone codes](#get_country_phone_codes)  
-35. [get followings](#get_followings)  
-36. [get followings post](#get_followings_post)  
-37. [get job posts](#get_job_posts)  
-38. [get job preference](#get_job_preference)  
-39. [get newsletter](#get_newsletter)  
-40. [get other user post](#get_other_user_post)  
-41. [get own posts](#get_own_posts)  
-42. [get posts](#get_posts)  
-43. [get saved post](#get_saved_post)  
-44. [job create](#job_create)  
-45. [job notifications](#job_notifications)  
-46. [job preference](#job_preference)  
-47. [like comment/reply](#like_comment/reply)  
-48. [login api](#login_api)  
-49. [logout](#logout)  
-50. [mentor search/filter](#mentor_search/filter)  
-51. [mentors recommendation](#mentors_recommendation)  
-52. [post create](#post_create)  
-53. [post like](#post_like)  
-54. [post retrieve](#post_retrieve)  
-55. [post save](#post_save)  
-56. [post share](#post_share)  
-57. [profile completion](#profile_completion)  
-58. [profile retrieve](#profile_retrieve)  
-59. [profile update](#profile_update)  
-60. [recommended job posts.](#recommended_job_posts.)  
-61. [reply comment](#reply_comment)  
-62. [reposting](#reposting)  
-63. [retrieve education api](#retrieve_education_api)  
-64. [retrieve library contents](#retrieve_library_contents)  
-65. [retrieve mentors posts](#retrieve_mentors_posts)  
-66. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-67. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-68. [retrieve saved jobs](#retrieve_saved_jobs)  
-69. [retrieve saved mentors](#retrieve_saved_mentors)  
-70. [retrieve user settings](#retrieve_user_settings)  
-71. [save a job](#save_a_job)  
-72. [save a mentor](#save_a_mentor)  
-73. [subscribe to newsletter](#subscribe_to_newsletter)  
-74. [unfollow user](#unfollow_user)  
-75. [unlike comment/reply](#unlike_comment/reply)  
-76. [unlike post](#unlike_post)  
-77. [unsave job](#unsave_job)  
-78. [unsave mentor](#unsave_mentor)  
-79. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-80. [update user account settings](#update_user_account_settings)  
-81. [updating user eperience](#updating_user_eperience)  
-82. [user analytics](#user_analytics)  
-83. [user followers](#user_followers)  
-84. [user registeration](#user_registeration)  
-85. [user search](#user_search)  
-86. [user-industry update](#user-industry_update)  
-87. [valid choice](#valid_choice)  
-88. [verify otp hash](#verify_otp_hash)  
-89. [view certification](#view_certification)  
-90. [view experience](#view_experience)  
+32. [general notifications](#general_notifications)  
+33. [get chat sessions](#get_chat_sessions)  
+34. [get comment](#get_comment)  
+35. [get country phone codes](#get_country_phone_codes)  
+36. [get followings](#get_followings)  
+37. [get followings post](#get_followings_post)  
+38. [get job posts](#get_job_posts)  
+39. [get job preference](#get_job_preference)  
+40. [get newsletter](#get_newsletter)  
+41. [get other user post](#get_other_user_post)  
+42. [get own posts](#get_own_posts)  
+43. [get posts](#get_posts)  
+44. [get saved post](#get_saved_post)  
+45. [job create](#job_create)  
+46. [job notifications](#job_notifications)  
+47. [job preference](#job_preference)  
+48. [like comment/reply](#like_comment/reply)  
+49. [login api](#login_api)  
+50. [logout](#logout)  
+51. [mentor search/filter](#mentor_search/filter)  
+52. [mentors recommendation](#mentors_recommendation)  
+53. [post create](#post_create)  
+54. [post like](#post_like)  
+55. [post retrieve](#post_retrieve)  
+56. [post save](#post_save)  
+57. [post share](#post_share)  
+58. [profile completion](#profile_completion)  
+59. [profile retrieve](#profile_retrieve)  
+60. [profile update](#profile_update)  
+61. [recommended job posts.](#recommended_job_posts.)  
+62. [reply comment](#reply_comment)  
+63. [reposting](#reposting)  
+64. [retrieve education api](#retrieve_education_api)  
+65. [retrieve library contents](#retrieve_library_contents)  
+66. [retrieve mentors posts](#retrieve_mentors_posts)  
+67. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+68. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+69. [retrieve saved jobs](#retrieve_saved_jobs)  
+70. [retrieve saved mentors](#retrieve_saved_mentors)  
+71. [retrieve user settings](#retrieve_user_settings)  
+72. [save a job](#save_a_job)  
+73. [save a mentor](#save_a_mentor)  
+74. [subscribe to newsletter](#subscribe_to_newsletter)  
+75. [unfollow user](#unfollow_user)  
+76. [unlike comment/reply](#unlike_comment/reply)  
+77. [unlike post](#unlike_post)  
+78. [unsave job](#unsave_job)  
+79. [unsave mentor](#unsave_mentor)  
+80. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+81. [update user account settings](#update_user_account_settings)  
+82. [updating user eperience](#updating_user_eperience)  
+83. [user analytics](#user_analytics)  
+84. [user followers](#user_followers)  
+85. [user registeration](#user_registeration)  
+86. [user search](#user_search)  
+87. [user-industry update](#user-industry_update)  
+88. [valid choice](#valid_choice)  
+89. [verify otp hash](#verify_otp_hash)  
+90. [view certification](#view_certification)  
+91. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -260,78 +261,6 @@ This endpoint retrieve a logged in user or retrieves a third party's profile dat
 **status code:200**
 
 ``` json
-LEARNERS
-{
-  "first_name": "Opeyemi",
-  "last_name": "Saliu",
-  "middle_name": "Abdul-Azeez",
-  "country_code": "+234",
-  "phone_number": "9069102522",
-  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
-  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-  "location": "Ogun",
-  "position": "Backend Developer at CareerNexus",
-  "bio": "Developer|Programmer|Innovation Specialist",
-  "qualification": "Bachelor of Engineering (Civil Engineering)",
-  "intro_video": "https://careernexus-storage1.s3.amazonaws.com/intro_videos/6e34ee76-ac17-4146-b7e6-f645f46ce886test_video.mp4",
-  "summary": "I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture.",
-  "experience": [
-    {
-      "id": 2,
-      "title": "Research Methodologist/Programmer",
-      "organization": "Delta Logistics",
-      "start_date": "2022-10-29",
-      "end_date": "2024-11-29",
-      "location": "Lagos",
-      "employment_type": "Remote",
-      "detail": "Worked as a Research Methodologist, Innovation specialist and Python developer."
-    },
-    {
-      "id": 1,
-      "title": "Branch Service Associate",
-      "organization": "Wema Bank PLC",
-      "start_date": "2021-02-15",
-      "end_date": "2022-10-18",
-      "location": "Ogun",
-      "employment_type": "Onsite",
-      "detail": "Managed the cashpoint in various branches within the location."
-    }
-  ],
-  "education": [
-    {
-      "id": 2,
-      "course": "Civil Engineering",
-      "school": "Federal University of Agriculture Abeokuta",
-      "start_date": "2021-04-21",
-      "end_date": "2022-06-05",
-      "location": "Abeokuta",
-      "detail": "Completed the online course"
-    },
-    {
-      "id": 3,
-      "course": "Civil Engineering",
-      "school": "Federal University of Agriculture Abeokuta",
-      "start_date": "2013-01-13",
-      "end_date": "2018-11-15",
-      "location": "Abeokuta",
-      "detail": "Awarded Bachelor of Engineering honours Graduated with a Second Class Upper honors."
-    }
-  ],
-  "certification": [
-    {
-      "id": 1,
-      "title": "Django Rest Framework",
-      "school": "Coursera",
-      "issue_date": "2023-07-04",
-      "cert_id": "iJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyMzEzMDI2LCJpYXQiOjE3NDIyOTE0MjYsImp0aSI6ImYwZjVjMzNjYWQzMTRmYjY5NzMzNjRmYzQ2NzFkMjIwIiwidXNlcl9pZCI6NX0.2jYCbFrubaroyRZ",
-      "skills": "Python Programming, Web development, Algorithms"
-    }
-  ],
-  "followers": 1,
-  "followings": 2,
-  "resume": "https://careernexus-storage1.s3.amazonaws.com/resumes/51b434ab-441f-4ab1-ab72-a58c91ac7172Resume_080525.pdf",
-  "timezone": "Africa/Lagos"
-}
 MENTORS
 {
   "first_name": "Abdul Azeez",
@@ -367,7 +296,33 @@ MENTORS
   "timezone": "Canada/Central",
   "linkedin_url": null,
   "followers": 0,
-  "followings": 0
+  "followings": 0,
+  "session_rate": "3000NGN",
+  "user_type": "mentor"
+}
+LEARNERS
+{
+  "first_name": "N/A",
+  "last_name": "N/A",
+  "middle_name": "N/A",
+  "country_code": "+000",
+  "phone_number": "00000000000",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+  "location": "Ogun state",
+  "position": "CEO MayTechStop",
+  "bio": "Educator | Teacher",
+  "qualification": "Bachelor of Education (English)",
+  "intro_video": "",
+  "summary": "A teacher and educator with 3 years working experience in the education industry.",
+  "experience": [],
+  "education": [],
+  "certification": [],
+  "followers": 1,
+  "followings": 0,
+  "resume": "",
+  "timezone": "UTC",
+  "user_type": "learner"
 }
 ```
 
@@ -386,63 +341,64 @@ This endpoint updates the profile data of a user. N.B:Some field updates such as
 ``` json
 {
 
-first_name:*****
+"first_name":"*****"
 
-last_name:*****
+"last_name":"*****"
 
-middle_name:*****
+"middle_name":"*****"
 
-country_code:*****
+"country_code":"*****"
 
-phone_number:*****
+"phone_number":"*****"
 
-availability:*****
+"availability":"*****"
 
-qualification:*****
+"qualification":"*****"
 
-location:*****
+"location":"*****"
 
-resume:*****
+"resume":"*****"
 
-areas_of_expertise:*****
+"areas_of_expertise":"*****"
 
-years_of_experience:*****
+"years_of_experience":"*****"
 
-current_job:*****
+"current_job":"*****"
 
-technical_skills:*****
+"technical_skills":"*****"
 
-mentorship_styles:*****
+"mentorship_styles":"*****"
 
-profile_photo:*****
+"profile_photo":"*****"
 
-cover_photo:*****
+"cover_photo":"*****"
 
-summary:*****
+"summary":"*****"
 
-position:*****
+"position":"*****"
 
-bio:*****
+"bio":"*****"
 
-intro_video:*****
+"intro_video":"*****"
 
-timezone:*****
+"timezone":"*****"
 
-linkedin_url:*****
+"linkedin_url":"*****"
+
+"session_rate":"*****"
 
 }
 
 ```
 ## Response body
 
-**status code:200**
+**status code:201**
 
 ``` json
-MENTORS
 {
-  "first_name": "Opeyemi",
-  "last_name": "Saliu",
-  "middle_name": "Abdul-Azeez",
+  "first_name": "Abdul Azeez",
+  "last_name": "Balogun",
+  "middle_name": "Abiola",
   "country_code": "+234",
   "phone_number": "9069102522",
   "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
@@ -465,26 +421,11 @@ MENTORS
     "AI/ML",
     "Database Management System"
   ],
+  "resume": "",
   "mentorship_styles": [],
-  "timezone": "UTC",
-  "linkedin_url": null
-}
-LEARNERS
-{
-  "first_name": "Opeyemi",
-  "last_name": "Saliu",
-  "middle_name": "Abdul-Azeez",
-  "country_code": "+234",
-  "phone_number": "9069102522",
-  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
-  "qualification": "Bachelor of Engineering (Civil Engineering)",
-  "intro_video": "https://careernexus-storage1.s3.amazonaws.com/intro_videos/6e34ee76-ac17-4146-b7e6-f645f46ce886test_video.mp4",
-  "location": "Ogun",
-  "bio": "Developer|Programmer|Innovation Specialist",
-  "position": "Backend Developer at CareerNexus",
-  "summary": "I am an experienced backend developer with over 4 years of experience in building world class standard tools, developing backend supporting systems and managing server side architecture.",
-    "timezone": "UTC"
+  "timezone": "Canada/Central",
+  "linkedin_url": null,
+  "session_rate": 2
 }
 ```
 
@@ -3037,33 +2978,6 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
 ``` json
 [
   {
-    "id": 11,
-    "mentor": {
-      "id": 11,
-      "first_name": "Abdul Azeez",
-      "last_name": "Balogun",
-      "middle_name": "Abiola",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
-    },
-    "mentee": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
-    "join": true,
-    "session_type": "individual",
-    "session_at": {
-      "date": "2025-07-20",
-      "time": "18:00:00"
-    },
-    "discourse": "Career Building",
-    "status": "ACCEPTED"
-  },
-  {
     "id": 12,
     "mentor": {
       "id": 11,
@@ -3084,38 +2998,12 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
     "join": false,
     "session_type": "individual",
     "session_at": {
-      "date": "2025-07-20",
-      "time": "18:00:00"
+      "date": "2025-07-21",
+      "time": "00:00:00"
     },
     "discourse": "Career Building",
+    "amount": "3000NGN",
     "status": "PENDING"
-  },
-  {
-    "id": 13,
-    "mentor": {
-      "id": 11,
-      "first_name": "Abdul Azeez",
-      "last_name": "Balogun",
-      "middle_name": "Abiola",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
-    },
-    "mentee": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
-    "join": true,
-    "session_type": "individual",
-    "session_at": {
-      "date": "2025-07-31",
-      "time": "01:36:00"
-    },
-    "discourse": "Career Building",
-    "status": "ACCEPTED"
   }
 ]
 ```
@@ -3318,6 +3206,7 @@ This API retrieves mentor recommendations for the logged in user.
       "AI/ML",
       "Database Management System"
     ],
+    "session_rate": "3000NGN",
     "is_saved": false
   }
 ]
@@ -4215,4 +4104,21 @@ This API removes a job from the users list of saved jobs. N.B:The job must have 
 
 **status code:204**
 
+[Table of contents](#toc)
+
+
+# General Notifications<a name='general_notifications'></a>
+
+This API enables connecting to a general notification websocket. N.B:Notification is connected via ws/wss protocol. Also a valid token must be attached to the url string.
+
+**Endpoint:**`/ws/notification/?token=****************`
+
+**Method:** `NONE`
+
+## Payload
+
+``` json
+
+
+```
 [Table of contents](#toc)

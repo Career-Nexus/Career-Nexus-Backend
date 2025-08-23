@@ -122,10 +122,26 @@ class LibrarySerializer(serializers.Serializer):
         output_instance = models.Library.objects.create(**validated_data)
         return output_instance
 
-
-
 class RetrieveLibrarySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Library
         fields = ["id","title","description","tags","file"]
+
+class SetExchangeRateSerializer(serializers.Serializer):
+    country = serializers.PrimaryKeyRelatedField(queryset=models.Countrycodes.objects.all())
+    currency_name = serializers.CharField()
+    currency_initials = serializers.CharField()
+    exchange_rate = serializers.FloatField()
+
+    def create(self,validated_data):
+        country = models.ExchangeRate.objects.filter(country=validated_data.get("country")).first()
+        if country:
+            country.currency_name = validated_data.get("currency_name",country.currency_name)
+            country.currency_initials = validated_data.get("currency_initials",country.currency_initials)
+            country.exchange_rate = validated_data.get("exchange_rate",country.exchange_rate)
+            country.save()
+        else:
+            country = models.ExchangeRate.objects.create(**validated_data)
+        return country
+

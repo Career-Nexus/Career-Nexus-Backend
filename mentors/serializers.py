@@ -7,6 +7,7 @@ from rest_framework.response import Serializer
 from users.options import get_choices
 from users.models import PersonalProfile,Users
 from posts.serializers import PersonalProfileSerializer
+from info.models import ExchangeRate
 
 from . import models
 
@@ -66,10 +67,22 @@ class RetrieveMentorsSerializer(serializers.ModelSerializer):
 class MentorRecommendationSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
     is_saved = serializers.SerializerMethodField()
+    session_rate = serializers.SerializerMethodField()
 
     class Meta:
         model = PersonalProfile
-        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","years_of_experience","technical_skills","is_saved"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","years_of_experience","technical_skills","session_rate","is_saved"]
+
+    def get_session_rate(self,obj):
+        session_rate = obj.session_rate
+        user = self.context["user"]
+        rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+        if not rate_instance:
+            return f"{session_rate}USD"
+        else:
+            amount = int(rate_instance.exchange_rate*session_rate)
+            currency = rate_instance.currency_initials
+            return f"{amount}{currency}"
 
     def get_id(self,obj):
         return obj.user.id
@@ -184,7 +197,19 @@ class SessionRetrieveSerializer(serializers.Serializer):
     session_type = serializers.CharField()
     session_at = serializers.SerializerMethodField()
     discourse = serializers.CharField()
+    amount = serializers.SerializerMethodField()
     status = serializers.CharField()
+
+    def get_amount(self,obj):
+        mentor_rate = obj.mentor.profile.session_rate
+        user = self.context["user"]
+        rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+        if rate_instance:
+            amount = int(rate_instance.exchange_rate * mentor_rate)
+            currency = rate_instance.currency_initials
+            return f"{amount}{currency}"
+        else:
+            return f"{mentor_rate}USD"
 
     def get_join(self,obj):
         if obj.status != "PENDING":
