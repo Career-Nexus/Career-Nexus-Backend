@@ -4,6 +4,8 @@ from . import models
 from users.models import Users, PersonalProfile
 from users.views import delete_cache
 
+from notifications.utils import send_notification
+
 
 
 class FollowSerializer(serializers.ModelSerializer):
@@ -31,6 +33,9 @@ class FollowSerializer(serializers.ModelSerializer):
     def create(self,validated_data):
         #validated_data["user_follower"] = self.context["user"]
         following = models.UserFollow.objects.create(**validated_data)
+
+        send_notification(following.user_following,f"{following.user_follower.profile.first_name} {following.user_follower.profile.last_name} just followed you.")
+
         output = {
                     "follower":following.user_follower.id,
                     "following":following.user_following.id,

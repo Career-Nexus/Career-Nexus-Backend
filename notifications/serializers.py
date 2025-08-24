@@ -3,6 +3,10 @@ from rest_framework import serializers
 from . import models
 from posts.serializers import PersonalProfileSerializer
 
+from .utils import notify
+
+from users.models import Users
+
 
 class ChatSerializer(serializers.ModelSerializer):
     initiator = serializers.SerializerMethodField()
@@ -38,3 +42,19 @@ class ChatMessageSerializer(serializers.ModelSerializer):
         person_profile = obj.person.profile
         data = PersonalProfileSerializer(person_profile,many=False).data
         return data
+
+class NotificationSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.Notification
+        fields = ["id","text","timestamp"]
+
+class TestNotificationSerializer(serializers.Serializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())
+    message = serializers.CharField()
+
+    def create(self,validated_data):
+        user = validated_data.get("user")
+        message = validated_data.get("message")
+        notify(user.id,message)
+        return {}

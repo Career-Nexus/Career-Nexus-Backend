@@ -37,65 +37,66 @@
 30. [followings count](#followings_count)  
 31. [forget password](#forget_password)  
 32. [general notifications](#general_notifications)  
-33. [get chat sessions](#get_chat_sessions)  
-34. [get comment](#get_comment)  
-35. [get country phone codes](#get_country_phone_codes)  
-36. [get followings](#get_followings)  
-37. [get followings post](#get_followings_post)  
-38. [get job posts](#get_job_posts)  
-39. [get job preference](#get_job_preference)  
-40. [get newsletter](#get_newsletter)  
-41. [get other user post](#get_other_user_post)  
-42. [get own posts](#get_own_posts)  
-43. [get posts](#get_posts)  
-44. [get saved post](#get_saved_post)  
-45. [job create](#job_create)  
-46. [job notifications](#job_notifications)  
-47. [job preference](#job_preference)  
-48. [like comment/reply](#like_comment/reply)  
-49. [login api](#login_api)  
-50. [logout](#logout)  
-51. [mentor search/filter](#mentor_search/filter)  
-52. [mentors recommendation](#mentors_recommendation)  
-53. [post create](#post_create)  
-54. [post like](#post_like)  
-55. [post retrieve](#post_retrieve)  
-56. [post save](#post_save)  
-57. [post share](#post_share)  
-58. [profile completion](#profile_completion)  
-59. [profile retrieve](#profile_retrieve)  
-60. [profile update](#profile_update)  
-61. [recommended job posts.](#recommended_job_posts.)  
-62. [reply comment](#reply_comment)  
-63. [reposting](#reposting)  
-64. [retrieve education api](#retrieve_education_api)  
-65. [retrieve library contents](#retrieve_library_contents)  
-66. [retrieve mentors posts](#retrieve_mentors_posts)  
-67. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-68. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-69. [retrieve saved jobs](#retrieve_saved_jobs)  
-70. [retrieve saved mentors](#retrieve_saved_mentors)  
-71. [retrieve user settings](#retrieve_user_settings)  
-72. [save a job](#save_a_job)  
-73. [save a mentor](#save_a_mentor)  
-74. [subscribe to newsletter](#subscribe_to_newsletter)  
-75. [unfollow user](#unfollow_user)  
-76. [unlike comment/reply](#unlike_comment/reply)  
-77. [unlike post](#unlike_post)  
-78. [unsave job](#unsave_job)  
-79. [unsave mentor](#unsave_mentor)  
-80. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-81. [update user account settings](#update_user_account_settings)  
-82. [updating user eperience](#updating_user_eperience)  
-83. [user analytics](#user_analytics)  
-84. [user followers](#user_followers)  
-85. [user registeration](#user_registeration)  
-86. [user search](#user_search)  
-87. [user-industry update](#user-industry_update)  
-88. [valid choice](#valid_choice)  
-89. [verify otp hash](#verify_otp_hash)  
-90. [view certification](#view_certification)  
-91. [view experience](#view_experience)  
+33. [get all notifications](#get_all_notifications)  
+34. [get chat sessions](#get_chat_sessions)  
+35. [get comment](#get_comment)  
+36. [get country phone codes](#get_country_phone_codes)  
+37. [get followings](#get_followings)  
+38. [get followings post](#get_followings_post)  
+39. [get job posts](#get_job_posts)  
+40. [get job preference](#get_job_preference)  
+41. [get newsletter](#get_newsletter)  
+42. [get other user post](#get_other_user_post)  
+43. [get own posts](#get_own_posts)  
+44. [get posts](#get_posts)  
+45. [get saved post](#get_saved_post)  
+46. [job create](#job_create)  
+47. [job notifications](#job_notifications)  
+48. [job preference](#job_preference)  
+49. [like comment/reply](#like_comment/reply)  
+50. [login api](#login_api)  
+51. [logout](#logout)  
+52. [mentor search/filter](#mentor_search/filter)  
+53. [mentors recommendation](#mentors_recommendation)  
+54. [post create](#post_create)  
+55. [post like](#post_like)  
+56. [post retrieve](#post_retrieve)  
+57. [post save](#post_save)  
+58. [post share](#post_share)  
+59. [profile completion](#profile_completion)  
+60. [profile retrieve](#profile_retrieve)  
+61. [profile update](#profile_update)  
+62. [recommended job posts.](#recommended_job_posts.)  
+63. [reply comment](#reply_comment)  
+64. [reposting](#reposting)  
+65. [retrieve education api](#retrieve_education_api)  
+66. [retrieve library contents](#retrieve_library_contents)  
+67. [retrieve mentors posts](#retrieve_mentors_posts)  
+68. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+69. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+70. [retrieve saved jobs](#retrieve_saved_jobs)  
+71. [retrieve saved mentors](#retrieve_saved_mentors)  
+72. [retrieve user settings](#retrieve_user_settings)  
+73. [save a job](#save_a_job)  
+74. [save a mentor](#save_a_mentor)  
+75. [subscribe to newsletter](#subscribe_to_newsletter)  
+76. [unfollow user](#unfollow_user)  
+77. [unlike comment/reply](#unlike_comment/reply)  
+78. [unlike post](#unlike_post)  
+79. [unsave job](#unsave_job)  
+80. [unsave mentor](#unsave_mentor)  
+81. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+82. [update user account settings](#update_user_account_settings)  
+83. [updating user eperience](#updating_user_eperience)  
+84. [user analytics](#user_analytics)  
+85. [user followers](#user_followers)  
+86. [user registeration](#user_registeration)  
+87. [user search](#user_search)  
+88. [user-industry update](#user-industry_update)  
+89. [valid choice](#valid_choice)  
+90. [verify otp hash](#verify_otp_hash)  
+91. [view certification](#view_certification)  
+92. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -1769,7 +1770,7 @@ This endpoint retrieves contents and meta data based on the query string title.
 
 This endpoint gets all chat sessions that had been initiated by or with the user.
 
-**Endpoint:**`/chats/`
+**Endpoint:**`/notification-chat/chats/`
 
 **Method:** `GET`
 
@@ -1799,7 +1800,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
       "first_name": "Opeyemi",
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "chat_id": 2
@@ -1810,7 +1811,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
       "first_name": "Opeyemi",
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "contributor": {
@@ -1833,7 +1834,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
 
 This endpoint gets all the previous chat messages of a particular chat session.
 
-**Endpoint:**`/chats/messages/?chat_id=2`
+**Endpoint:**`/notification-chat/chat/messages/?chat_id=2`
 
 **Method:** `GET`
 
@@ -1867,7 +1868,7 @@ This endpoint gets all the previous chat messages of a particular chat session.
       "first_name": "Opeyemi",
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "message": "Hello friend",
@@ -4121,4 +4122,40 @@ This API enables connecting to a general notification websocket. N.B:Notificatio
 
 
 ```
+[Table of contents](#toc)
+
+
+# Get All Notifications<a name='get_all_notifications'></a>
+
+This API retrieves all the notifications that have been recieved.
+
+**Endpoint:**`/notification-chat/notifications/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "text": "Someone just liked your post.",
+      "timestamp": "2025-08-24T08:53:48.487902Z"
+    }
+  ]
+}
+```
+
 [Table of contents](#toc)

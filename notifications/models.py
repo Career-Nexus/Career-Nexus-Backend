@@ -11,3 +11,8 @@ class Message(models.Model):
     person = models.ForeignKey(Users,on_delete=models.CASCADE)
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+class Notification(models.Model):
+    user = models.ForeignKey(Users,on_delete=models.CASCADE)
+    text = models.CharField(max_length=1500)
+    timestamp = models.DateTimeField(auto_now=True)

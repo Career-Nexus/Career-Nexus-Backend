@@ -10,7 +10,7 @@ from django.utils.text import get_valid_filename
 from django.db.models import Q
 
 from users.tasks import send_email
-from notifications.utils import notify
+from notifications.utils import notify, send_notification
 
 import uuid
 import joblib
@@ -301,8 +301,14 @@ class CreateReplySerializer(serializers.Serializer):
     body = serializers.CharField(max_length=5000)
 
     def create(self,validated_data):
-        validated_data["user"] = self.context["request"].user
+        user = self.context["request"].user
+        validated_data["user"] = user
         validated_data["post"] = validated_data["parent"].post
+
+        comment_owner = validated_data["parent"].user
+        if user != comment_owner:
+            send_notification(comment_owner,f"{user.profile.first_name} {user.profile.last_name} just replied to your comment.")
+
         comment = models.Comment.objects.create(**validated_data)
         output = {
                     "user":PersonalProfileSerializer(comment.user.profile,many=False).data,
@@ -328,12 +334,12 @@ class CreateLikeSerializer(serializers.Serializer):
             if not models.Like.objects.filter(post=post).first():
                 container = {"{NAME}":post_owner.profile.first_name,"{PHRASE}":post.body[0:30]}
                 send_email.delay(template=new_like_template,subject="Your Post Got a Like!!",container=container,recipient=post_owner.email)
+                send_notification(post_owner,text="Someone just liked your post.")
 
         like = models.Like.objects.create(**validated_data)
         output = {
                     "post":like.post.id
                 }
-        notify(post_owner.id,text="Someone just liked your post.")
         return output
 
 class UnlikePostSerializer(serializers.Serializer):
@@ -372,6 +378,12 @@ class CommentLikeSerializer(serializers.Serializer):
 
     def create(self,validated_data):
         instance = models.CommentLike.objects.create(**validated_data)
+
+        user = validated_data["user"]
+        comment_owner = validated_data.get("comment").user
+        #if user != comment_owner:
+        send_notification(comment_owner,f"{user.profile.first_name} {user.profile.last_name} just liked your comment.")
+
         return instance
 
 

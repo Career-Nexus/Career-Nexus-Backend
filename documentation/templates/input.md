@@ -1678,7 +1678,7 @@ This endpoint retrieves contents and meta data based on the query string title.
 
 This endpoint gets all chat sessions that had been initiated by or with the user.
 
-**Endpoint:**`/chats/`
+**Endpoint:**`/notification-chat/chats/`
 
 **Method:** `GET`
 
@@ -1708,7 +1708,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
       "first_name": "Opeyemi",
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "chat_id": 2
@@ -1719,7 +1719,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
       "first_name": "Opeyemi",
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "contributor": {
@@ -1742,7 +1742,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
 
 This endpoint gets all the previous chat messages of a particular chat session.
 
-**Endpoint:**`/chats/messages/?chat_id=2`
+**Endpoint:**`/notification-chat/chat/messages/?chat_id=2`
 
 **Method:** `GET`
 
@@ -1776,7 +1776,7 @@ This endpoint gets all the previous chat messages of a particular chat session.
       "first_name": "Opeyemi",
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "message": "Hello friend",
@@ -4030,4 +4030,40 @@ This API enables connecting to a general notification websocket. N.B:Notificatio
 
 
 ```
+[Table of contents](#toc)
+
+
+# Get All Notifications
+
+This API retrieves all the notifications that have been recieved.
+
+**Endpoint:**`/notification-chat/notifications/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "text": "Someone just liked your post.",
+      "timestamp": "2025-08-24T08:53:48.487902Z"
+    }
+  ]
+}
+```
+
 [Table of contents](#toc)

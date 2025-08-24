@@ -8,6 +8,7 @@ from users.options import get_choices
 from users.models import PersonalProfile,Users
 from posts.serializers import PersonalProfileSerializer
 from info.models import ExchangeRate
+from notifications.utils import send_notification
 
 from . import models
 
@@ -126,7 +127,9 @@ class CreateMentorshipSessionSerializer(serializers.Serializer):
         date = data.get("date")
         time = data.get("time")
         if not data or not time:
-            raise serializers.ValidationError("A Date and time must be set wen booking sessions.")
+            raise serializers.ValidationError("A Date and time must be set when booking sessions.")
+        if date.today() > date:
+            raise serializers.ValidationError("Cannot set a mentorship date in the past.")
 
         #Combine the User set date and time to a datetime object
         naive_datetime = datetime.combine(date=date,time=time)
@@ -153,6 +156,9 @@ class CreateMentorshipSessionSerializer(serializers.Serializer):
         validated_data["room_name"] = f"Room_{mentee.id}_{mentor.id}_{uuid.uuid4()}"
 
         session_instance = models.Sessions.objects.create(**validated_data)
+
+        send_notification(session_instance.mentor, f"{session_instance.mentee.profile.first_name} {session_instance.mentee.profile.last_name} requested a mentorship session from you.")
+
         return session_instance
 
 
@@ -176,10 +182,10 @@ class AcceptRejectMentorshipSessionSerializer(serializers.Serializer):
         session = validated_data.get("session")
         session_id = session.id
         if action == "Reject":
-            #TODO Notify the initiator of the session that the session was rejected.
+            send_notification(session.mentee,f"Mentor {session.mentor.profile.first_name} {session.mentor.profile.last_name} rejected your mentorship request.")
             session.delete()
         else:
-            #TODO Notify the initiator of the session that the session was accepted.
+            send_notification(session.mentee,f"Mentor {session.mentor.profile.first_name} {session.mentor.profile.last_name} accepted your mentorship request.")
             session.status = "ACCEPTED"
             session.save()
         return {

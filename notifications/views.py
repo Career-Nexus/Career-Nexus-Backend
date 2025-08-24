@@ -1,3 +1,4 @@
+from django.core.paginator import Page
 from django.shortcuts import render
 from django.db.models import Q
 from django.http import Http404
@@ -7,11 +8,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
 
 from . import models
 from . import serializers
 
+
+class NotificationPaginator(PageNumberPagination):
+    page_size = 5
 
 
 class ChatView(APIView):
@@ -43,7 +48,7 @@ class ChatMessageView(APIView):
 
 
     def get(self,request):
-        params = int(request.query_params.get("chat_id"))
+        params = request.query_params.get("chat_id")
         if not params:
             return Response({"error":"No chat_id provided"})
         else:
@@ -52,3 +57,38 @@ class ChatMessageView(APIView):
             serialized_data = self.serializer_class(messages,many=True).data
             return Response(serialized_data,status=status.HTTP_200_OK)
 
+
+class NotificationView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        user = request.user
+        all_notifications = models.Notification.objects.filter(user=user).order_by("-timestamp")
+
+        paginator = NotificationPaginator()
+        paginated_items = paginator.paginate_queryset(all_notifications,request)
+        serialized_items = serializers.NotificationSerializer(paginated_items,many=True).data
+        output = paginator.get_paginated_response(serialized_items).data
+        return Response(output,status=status.HTTP_200_OK)
+
+    def delete(self,request):
+        user = request.user
+        all_notifications = models.Notification.objects.filter(user=user)
+        all_notifications.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class TestNotificationView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        user = request.user
+        serializer = serializers.TestNotificationSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response({"status":"Sent push notification"},status=status.HTTP_200_OK)
+        

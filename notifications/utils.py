@@ -1,5 +1,7 @@
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from . import models
+
 
 def notify(user_id,text="default"):
     channel_layer = get_channel_layer()
@@ -20,3 +22,7 @@ def jobnotify(suffix,text):
             "message":text
         }
     )
+
+def send_notification(user,text):
+    notify(user.id,text)
+    models.Notification.objects.create(user=user,text=text)

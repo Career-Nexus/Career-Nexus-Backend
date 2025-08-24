@@ -36,7 +36,7 @@ def invalidate_post_cache(user_industry,user_id=None):
 
 
 class PostPagination(PageNumberPagination):
-    page_size = 3
+    page_size = 5
 
 
 
