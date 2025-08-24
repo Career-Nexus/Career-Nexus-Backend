@@ -4067,3 +4067,24 @@ This API retrieves all the notifications that have been recieved.
 ```
 
 [Table of contents](#toc)
+
+
+# Clear Notifications
+
+This API clears all the notifications for a user.
+
+**Endpoint:**`/notification-chat/notifications/`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[Table of contents](#toc)

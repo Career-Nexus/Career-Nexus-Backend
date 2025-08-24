@@ -32,15 +32,15 @@
     <script>
         (function () {
             // Your JWT token here
-            const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2MDQ0NDQxLCJpYXQiOjE3NTYwMjI4NDEsImp0aSI6IjUwN2RiZmRlZjBkMDRkMjc5NDUyMWI5ODExNTQ4MjE1IiwidXNlcl9pZCI6MX0.aptZNsjctGSeWuqinBZq1UhKIwY0nIJbvkfG0UMcSko";
+            const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2MDUyNTUwLCJpYXQiOjE3NTYwMzA5NTAsImp0aSI6IjEzMDQ4ZTM5MzRlMTQ1ODM4ZDZlN2EzN2M4ZGM4YTM5IiwidXNlcl9pZCI6MX0.N96lhMZj4YY8yTWEmA96Wjt04HuVr74t3GFNor2nBhA";
 
-            const test_host = "127.0.0.1:8000/"
-            const prod_host = "btest.career-nexus.com"
+            const test_host = "ws://127.0.0.1:8000/"
+            const prod_host = "wss://btest.career-nexus.com"
 
 
             const wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
             const wsHost = window.location.host;  // e.g. "localhost:8000" or "yourdomain.com"
-            const wsPath = `ws://${test_host}/ws/notification/?token=${jwtToken}`;
+            const wsPath = `${prod_host}/ws/notification/?token=${jwtToken}`;
 
             const socket = new WebSocket(wsPath);
 
