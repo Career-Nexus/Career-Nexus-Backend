@@ -137,6 +137,8 @@ class StripeCreateCheckoutView(APIView):
         serializer = serializers.StripeInitializePaymentSerializer(data=request.data,context={"user":user})
         if serializer.is_valid(raise_exception=True):
             session = serializer.validated_data.get("session")
+            amount = session.mentor.profile.session_rate
+
             #TODO Change domain to the actual domain.
             DOMAIN_NAME = "http://127.0.0.1:8000"
 
@@ -148,7 +150,7 @@ class StripeCreateCheckoutView(APIView):
                         "product_data":{
                             "name":"Payment for Mentorship Session."
                         },
-                        "unit_amount":2000
+                        "unit_amount":amount*100
                     },
                     "quantity":1
                 }],

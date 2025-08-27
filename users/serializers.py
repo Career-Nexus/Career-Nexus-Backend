@@ -610,9 +610,14 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
     followers = serializers.SerializerMethodField()
     followings = serializers.SerializerMethodField()
     user_type = serializers.SerializerMethodField()
+    industry = serializers.SerializerMethodField()
+
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings","resume","timezone","user_type"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings","resume","timezone","user_type","industry"]
+
+    def get_industry(self,obj):
+        return obj.user.industry
 
     def get_user_type(self,obj):
         return obj.user.user_type
@@ -648,10 +653,14 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
     followings = serializers.SerializerMethodField()
     user_type = serializers.SerializerMethodField()
     session_rate = serializers.SerializerMethodField()
+    industry = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","resume","timezone","linkedin_url","followers","followings","session_rate","user_type"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","resume","timezone","linkedin_url","followers","followings","session_rate","user_type","industry"]
+
+    def get_industry(self,obj):
+        return obj.user.industry
 
     def get_session_rate(self,obj):
         user = self.context.get("user")
