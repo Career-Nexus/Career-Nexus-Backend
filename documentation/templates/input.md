@@ -2887,32 +2887,33 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
 ``` json
 [
   {
-    "id": 12,
+    "id": 1,
     "mentor": {
-      "id": 11,
-      "first_name": "Abdul Azeez",
+      "id": 36,
+      "first_name": "Adedeji",
       "last_name": "Balogun",
-      "middle_name": "Abiola",
+      "middle_name": "Akanbi",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "mentee": {
       "id": 1,
       "first_name": "Opeyemi",
       "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
+      "middle_name": "Abdul Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/cea6d01e-1264-4b44-b4e7-1b173ae24506Profile_Photo.jpg",
+      "qualification": "Backend Developer | Python Programmer"
     },
     "join": false,
     "session_type": "individual",
     "session_at": {
       "date": "2025-07-21",
-      "time": "00:00:00"
+      "time": "08:00:00"
     },
     "discourse": "Career Building",
-    "amount": "3000NGN",
-    "status": "PENDING"
+    "amount": "0USD",
+    "status": "ACCEPTED",
+    "is_paid": false
   }
 ]
 ```
