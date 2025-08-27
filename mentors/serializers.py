@@ -205,6 +205,7 @@ class SessionRetrieveSerializer(serializers.Serializer):
     discourse = serializers.CharField()
     amount = serializers.SerializerMethodField()
     status = serializers.CharField()
+    is_paid = serializers.BooleanField()
 
     def get_amount(self,obj):
         mentor_rate = obj.mentor.profile.session_rate
@@ -218,7 +219,7 @@ class SessionRetrieveSerializer(serializers.Serializer):
             return f"{mentor_rate}USD"
 
     def get_join(self,obj):
-        if obj.status != "PENDING":
+        if obj.status != "PENDING" and obj.is_paid:
             utc = pytz.timezone("UTC")
             present = utc.localize(datetime.now())
             session_at = obj.session_at

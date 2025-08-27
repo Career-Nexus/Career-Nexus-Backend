@@ -3,12 +3,22 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
+from . import models
+
 import requests
 from django.conf import settings
 from django.shortcuts import redirect
 import uuid
 
+import stripe
+
 from payments import serializers
+
+
+
+
+stripe.api_key=settings.STRIPE_SECRET_KEY
+
 
 
 
@@ -55,8 +65,6 @@ class FLWInitializePaymentView(APIView):
             res_data = response.json()
             if res_data["status"] == "success":
                 return Response({"payment link":res_data["data"]["link"]},status=status.HTTP_200_OK)
-                #return redirect(res_data["data"]["link"])
-            #return redirect("/payment/error/")
             return Response({"error":"Failed to initialize payment"},status=status.HTTP_503_SERVICE_UNAVAILABLE)
 
 
@@ -66,23 +74,27 @@ class FLWPaymentCallBack(APIView):
         AllowAny,
     ]
     def get(self,request):
-        status = request.query_params.get("status")
+        transact_status = request.query_params.get("status")
         transaction_id = request.query_params.get("transaction_id")
         tx_ref = request.query_params.get("tx_ref")
-        container = [status,transaction_id,tx_ref]
+        container = [transact_status,transaction_id,tx_ref]
         for item in container:
             if not item:
                 return Response({"Error":"Invalid Payment References"},status=status.HTTP_400_BAD_REQUEST)
-        if status == "successful":
-            verify_payment(transaction_id)
-            return Response({"message": "Payment successful"})
-        else:
-            return Response({"message": "Payment failed"},status=status.HTTP_400_BAD_REQUEST)
+
+        models.TransactionCallbacks.objects.create(tx_ref=tx_ref,transaction_id=transaction_id)
+
+        if transact_status == "successful":
+            verification = verify_payment(transaction_id,tx_ref)
+            if verification:
+                return Response({"message": "Payment successful"},status=status.HTTP_200_OK)
+
+        return Response({"message": "Payment failed"},status=status.HTTP_400_BAD_REQUEST)
 
 
 
 
-def verify_payment(transaction_id):
+def verify_payment(transaction_id,tx_ref):
     url = f"{settings.FLUTTERWAVE_BASE_URL}/transactions/{transaction_id}/verify"
     headers = {"Authorization": f"Bearer {settings.FLUTTERWAVE_SECRET_KEY}"}
 
@@ -90,6 +102,58 @@ def verify_payment(transaction_id):
     res_data = response.json()
 
     if res_data["status"] == "success" and res_data["data"]["status"] == "successful":
-        #TODO Write algorithm to mark session as paid
-        return True
+        session_transaction = models.SessionTransactions.objects.filter(transaction_id=tx_ref).first()
+        #Defense again fraudulent API calls with previously verified credentials
+        if not session_transaction:
+            return False
+        elif session_transaction.status != "pending":
+            return False
+        else:
+            session_transaction.status = "successful"
+            session_transaction.session.is_paid = True
+            session_transaction.session.save()
+            session_transaction.save()
+            return True
     return False
+
+
+class TestRedirect(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+    def get(self,request):
+        return Response({"STATUS":"GOT HERE"},status=status.HTTP_200_OK)
+
+
+
+
+class StripeCreateCheckoutView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        user = request.user
+        serializer = serializers.StripeInitializePaymentSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            session = serializer.validated_data.get("session")
+            #TODO Change domain to the actual domain.
+            DOMAIN_NAME = "http://127.0.0.1:8000"
+
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=["card"],
+                line_items=[{
+                    "price_data":{
+                        "currency":"usd",
+                        "product_data":{
+                            "name":"Payment for Mentorship Session."
+                        },
+                        "unit_amount":2000
+                    },
+                    "quantity":1
+                }],
+                mode="payment",
+                success_url=f"{DOMAIN_NAME}/payments/test/redirect/?session_id={{CHECKOUT_SESSION_ID}}",
+                cancel_url=f"{DOMAIN_NAME}/payments/test/redirect/"
+            )
+        return Response({"session_id":checkout_session.id,"url":checkout_session.url})

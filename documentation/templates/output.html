@@ -1,55 +1,55 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
-</script>
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
+        </script>
+                    
 
 
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -685,7 +685,7 @@ skills:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>User Analytics<a name='user_analytics'></a></h1>
-<p>This endpoint retrieves all the analytic data of the users's profile like number of connections, number of times the profile was viewed, etc...</p>
+<p>This endpoint retrieves all the analytic data of the users's profile like number of connections, number of times the profile was viewed, etc... N.B:If a query parameter user_id is past into the url endpoint, analytics of another user can be retrieved (If the user enables show_analytics in their settings).</p>
 <p><strong>Endpoint:</strong><code>/user/analytics/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -696,7 +696,7 @@ skills:*****
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
   &quot;total_posts&quot;: 3,
-  &quot;total_views&quot;: 12,
+  &quot;total_views&quot;: 18,
   &quot;total_connections&quot;: 1
 }
 </code></pre>
@@ -2810,7 +2810,7 @@ download_material:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Retrieve Portfolio Projects<a name='retrieve_portfolio_projects'></a></h1>
-<p>This API retrieves all the project portfolio uploaded by the user. N.B:By passing a portfolio_id in the url, data of a particular portfolio could be retrieved.</p>
+<p>This API retrieves all the project portfolio uploaded by the user. N.B:By passing a portfolio_id in the url, data of a particular portfolio could be retrieved. Also, portfolios of other users can be retrieved by adding a user_id query parameter to the url endpoint.</p>
 <p><strong>Endpoint:</strong><code>/project/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -3161,5 +3161,6 @@ job:*****
 <p><strong>status code:204</strong></p>
 <p><a href="#toc">Table of contents</a></p>
 
-</body>
-</html>
+        </body>
+        </html>
+        

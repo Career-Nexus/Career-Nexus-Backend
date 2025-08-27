@@ -741,7 +741,7 @@ Endpoint deletes a profile certification data.
 
 # User Analytics
 
-This endpoint retrieves all the analytic data of the users's profile like number of connections, number of times the profile was viewed, etc...
+This endpoint retrieves all the analytic data of the users's profile like number of connections, number of times the profile was viewed, etc... N.B:If a query parameter user_id is past into the url endpoint, analytics of another user can be retrieved (If the user enables show_analytics in their settings).
 
 **Endpoint:**`/user/analytics/`
 
@@ -760,7 +760,7 @@ This endpoint retrieves all the analytic data of the users's profile like number
 ``` json
 {
   "total_posts": 3,
-  "total_views": 12,
+  "total_views": 18,
   "total_connections": 1
 }
 ```
@@ -3573,7 +3573,7 @@ download_material:*****
 
 # Retrieve Portfolio Projects
 
-This API retrieves all the project portfolio uploaded by the user. N.B:By passing a portfolio_id in the url, data of a particular portfolio could be retrieved.
+This API retrieves all the project portfolio uploaded by the user. N.B:By passing a portfolio_id in the url, data of a particular portfolio could be retrieved. Also, portfolios of other users can be retrieved by adding a user_id query parameter to the url endpoint.
 
 **Endpoint:**`/project/`
 

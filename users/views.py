@@ -347,7 +347,7 @@ class RetreiveProfileView(APIView):
                 profile = models.PersonalProfile.objects.get(user=user)
 
                 #Implementation profile viewing counter 
-                models.ProfileView.objects.create(viewer=request.user,viewed=user)
+                models.ProfileView.objects.get_or_create(viewer=request.user,viewed=user)
                 if user.user_type == "learner":
                     profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
                 #TODO establish serializer for user_type=employer
@@ -527,8 +527,19 @@ class AnalyticsView(APIView):
     serializer_class = serializers.AnalyticsSerializer
     def get(self,request):
         profile = request.user.profile
-        serializer = self.serializer_class(profile).data
-        return Response(serializer,status=status.HTTP_200_OK)
+        param = request.query_params.get("user_id")
+        if not param:
+            serializer = self.serializer_class(profile).data
+            return Response(serializer,status=status.HTTP_200_OK)
+        else:
+            user = models.Users.objects.filter(id=param).first()
+            if not user:
+                return Response({"error":"Invalid User ID"},status=status.HTTP_400_BAD_REQUEST)
+            if user.show_activity:
+                output = self.serializer_class(user.profile).data
+            else:
+                output = {"analytics":"Analytics is private for this user"}
+            return Response(output,status=status.HTTP_200_OK)
 
 
 
