@@ -7,5 +7,5 @@ urlpatterns = [
 
     path("stripe/initiate/",views.StripeCreateCheckoutView.as_view(),name="stripe-Initiate-Payment"),
 
-    path("test/redirect/",views.TestRedirect.as_view(),name="Test-Redirect"),
+    path("test/redirect/",views.StripeRedirect.as_view(),name="Test-Redirect"),
 ]

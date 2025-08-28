@@ -1,3 +1,4 @@
+from json import load
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -11,6 +12,7 @@ from django.shortcuts import redirect
 import uuid
 
 import stripe
+
 
 from payments import serializers
 
@@ -48,7 +50,7 @@ class FLWInitializePaymentView(APIView):
                 "tx_ref":transaction.transaction_id,
                 "amount":transaction.amount,
                 "currency":transaction.currency,
-                "redirect_url":"http://127.0.0.1:8000/payments/callback/",
+                "redirect_url":f"{settings.HOST_URL}/payments/callback/",
                 "payment_options": "card, banktransfer",
                 "customer": {
                     "email": transaction.initiator.email,
@@ -87,9 +89,10 @@ class FLWPaymentCallBack(APIView):
         if transact_status == "successful":
             verification = verify_payment(transaction_id,tx_ref)
             if verification:
-                return Response({"message": "Payment successful"},status=status.HTTP_200_OK)
+                return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-success/")
+        
+        return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-failed/")
 
-        return Response({"message": "Payment failed"},status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -117,12 +120,29 @@ def verify_payment(transaction_id,tx_ref):
     return False
 
 
-class TestRedirect(APIView):
+class StripeRedirect(APIView):
     permission_classes = [
         AllowAny,
     ]
     def get(self,request):
-        return Response({"STATUS":"GOT HERE"},status=status.HTTP_200_OK)
+        session_id = request.query_params.get("session_id")
+        if not session_id:
+            return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-failed/")
+        else:
+            #Ensure that the session_id exists in the database with a pending status
+            transaction = models.StripeTransactions.objects.filter(transaction_id=session_id,status="pending").first()
+            if not transaction:
+                return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-failed/")
+            else:
+                session = stripe.checkout.Session.retrieve(session_id,expand=["payment_intent"])
+                if session.payment_status == "paid":
+                    transaction.status = "successful"
+                    transaction.save()
+                    transaction.session.is_paid = True
+                    transaction.session.save()
+                    return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-success/")
+                else:
+                    return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-failed/")
 
 
 
@@ -139,8 +159,7 @@ class StripeCreateCheckoutView(APIView):
             session = serializer.validated_data.get("session")
             amount = session.mentor.profile.session_rate
 
-            #TODO Change domain to the actual domain.
-            DOMAIN_NAME = "http://127.0.0.1:8000"
+            DOMAIN_NAME = settings.HOST_URL
 
             checkout_session = stripe.checkout.Session.create(
                 payment_method_types=["card"],
@@ -158,4 +177,6 @@ class StripeCreateCheckoutView(APIView):
                 success_url=f"{DOMAIN_NAME}/payments/test/redirect/?session_id={{CHECKOUT_SESSION_ID}}",
                 cancel_url=f"{DOMAIN_NAME}/payments/test/redirect/"
             )
+
+            models.StripeTransactions.objects.create(transaction_id=checkout_session.id,session=session,initiator=session.mentee,amount=amount)
         return Response({"session_id":checkout_session.id,"url":checkout_session.url})

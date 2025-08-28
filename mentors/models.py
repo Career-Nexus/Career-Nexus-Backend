@@ -17,3 +17,7 @@ class Sessions(models.Model):
 class SavedMentors(models.Model):
     saver = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor_saver")
     saved = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor_saved")
+
+class MentorRating(models.Model):
+    mentor = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="rating")
+    ratings = models.JSONField(default=list)

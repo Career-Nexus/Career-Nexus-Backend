@@ -8,6 +8,7 @@ urlpatterns = [
     path("sessions/",views.RetrieveMentorshipSessionsView.as_view(),name="Retrieve-Requested-Accepted-mentorship-sessions"),
     path("sessions/accept-reject/",views.AcceptRejectMentorshipSessionsView.as_view(),name="Accept-Reject-Sessions"),
     path("save/",views.SaveMentorView.as_view(),name="Save-Mentor"),
+    path("annotate/",views.AnnotateMentorshipSessionView.as_view(),name="Annotate-Sessions"),
 
 
     path("test/",views.TestView.as_view(),name="Test-View"),

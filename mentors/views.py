@@ -4,13 +4,20 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.permissions import AllowAny,IsAuthenticated
+from rest_framework.pagination import PageNumberPagination
 
-from users.models import PersonalProfile, experience
+from users.models import PersonalProfile
+from info.models import ExchangeRate
 
 from . import serializers,models
 from users.models import Users
 
 import uuid
+
+
+
+class MentorRecommendationPagination(PageNumberPagination):
+    page_size = 4
 
 
 def extract_years_from_experience_level(text):
@@ -35,10 +42,20 @@ class MentorRecommendationView(APIView):
         IsAuthenticated,
     ]
     def get(self,request):
+        user = request.user
         industry = request.user.industry
         mentors = PersonalProfile.objects.filter(user__user_type="mentor",user__industry=industry)
-        #TODO Paginate results
-        output = serializers.MentorRecommendationSerializer(mentors,many=True,context={"user":request.user}).data
+        rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+        if not rate_instance:
+            rate_instance = None
+        saved_mentors_ids = models.SavedMentors.objects.filter(saver=user).values_list("saved_id",flat=True)
+        
+        paginator = MentorRecommendationPagination()
+        paginated_items = paginator.paginate_queryset(mentors,request)
+        serialized_items = serializers.MentorRecommendationSerializer(paginated_items,many=True,context={"user":request.user,"rate_instance":rate_instance,"saved_mentors":saved_mentors_ids}).data
+
+
+        output = paginator.get_paginated_response(serialized_items).data
         return Response(output,status=status.HTTP_200_OK)
 
 
@@ -88,11 +105,15 @@ class CreateMentorshipSessionView(APIView):
     ]
 
     def post(self,request):
+        user = request.user
         serializer = serializers.CreateMentorshipSessionSerializer(data=request.data,context={"user":request.user})
         if serializer.is_valid(raise_exception=True):
             output_instance = serializer.save()
             #TODO Create notification for the mentor about the session request
-            output = serializers.SessionRetrieveSerializer(output_instance,many=False,context={"user":request.user}).data
+            rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+            if not rate_instance:
+                rate_instance = None
+            output = serializers.SessionRetrieveSerializer(output_instance,many=False,context={"user":request.user,"rate_instance":rate_instance}).data
             return Response(output,status=status.HTTP_201_CREATED)
 
 
@@ -118,20 +139,28 @@ class RetrieveMentorshipSessionsView(APIView):
         if not param:
             return Response({"error":"No query parameter is provided for this request."},status=status.HTTP_400_BAD_REQUEST)
         else:
-            valid_parameters = ["requested","accepted","scheduled"]
+            valid_parameters = ["requested","accepted","scheduled","completed"]
             if param.lower() not in valid_parameters:
                 return Response({"error":"Invalid query parameter. Paramter can only be requested,accepted,pending"},status=status.HTTP_400_BAD_REQUEST)
             else:
                 if param.lower() == "requested":
-                    sessions =models.Sessions.objects.filter(mentee=user,status="PENDING")
+                    sessions =models.Sessions.objects.filter(mentee=user,status="PENDING").select_related("mentee__profile","mentor__profile")
                 elif param.lower() == "scheduled":
                     #scheduled sessions can only be called by mentors.
                     if user.user_type != "mentor":
                         return Response({"error":"Scheduled sessions are only available to mentors"},status=status.HTTP_400_BAD_REQUEST)
-                    sessions = models.Sessions.objects.filter(mentor=user)
+                    sessions = models.Sessions.objects.filter(mentor=user).select_related("mentee__profile","mentor__profile")
+                elif param.lower() == "completed":
+                    if user.user_type != "mentor":
+                        sessions = models.Sessions.objects.filter(mentee=user,status="COMPLETED").select_related("mentee__profile")
+                    else:
+                        sessions = models.Sessions.objects.filter(mentor=user,status="COMPLETED").select_related("mentee__profile","mentor__profile")
                 else:
-                    sessions = models.Sessions.objects.filter(mentee=user,status="ACCEPTED")
-                output = serializers.SessionRetrieveSerializer(sessions,many=True,context={"user":user}).data
+                    sessions = models.Sessions.objects.filter(mentee=user,status="ACCEPTED").select_related("mentee__profile","mentor__profile")
+                rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+                if not rate_instance:
+                    rate_instance = None
+                output = serializers.SessionRetrieveSerializer(sessions,many=True,context={"user":user,"rate_instance":rate_instance}).data
                 
                 return Response(output,status=status.HTTP_200_OK)
 
@@ -164,6 +193,26 @@ class SaveMentorView(APIView):
                 saved_instance = serializer.validated_data
                 saved_instance.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class AnnotateMentorshipSessionView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        user = request.user
+        if user.user_type != "learner":
+            return Response({"error":"Mentorship session annotation can only be carried out by learners"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            serializer = serializers.AnnotateMentorshipSessionSerializer(data=request.data,context={"user":user})
+            if serializer.is_valid(raise_exception=True):
+                output_instance = serializer.save()
+                rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+                if not rate_instance:
+                    rate_instance = None
+                output = serializers.SessionRetrieveSerializer(output_instance,many=False,context={"user":user,"rate_instance":rate_instance}).data
+                return Response(output,status=status.HTTP_200_OK)
 
 
 

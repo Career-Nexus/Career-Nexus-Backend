@@ -654,10 +654,21 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
     user_type = serializers.SerializerMethodField()
     session_rate = serializers.SerializerMethodField()
     industry = serializers.SerializerMethodField()
+    rating = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","resume","timezone","linkedin_url","followers","followings","session_rate","user_type","industry"]
+        fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","years_of_experience","availability","current_job","areas_of_expertise","technical_skills","mentorship_styles","resume","timezone","linkedin_url","followers","followings","session_rate","rating","user_type","industry"]
+
+    def get_rating(self,obj):
+        user = obj.user
+        try:
+            mentor_rating = user.rating
+            ratings = mentor_rating.ratings
+            average_rating = sum(ratings)/len(ratings)
+            return average_rating
+        except:
+            return 0
 
     def get_industry(self,obj):
         return obj.user.industry

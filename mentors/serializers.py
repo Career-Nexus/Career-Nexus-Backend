@@ -69,15 +69,25 @@ class MentorRecommendationSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
     is_saved = serializers.SerializerMethodField()
     session_rate = serializers.SerializerMethodField()
+    rating = serializers.SerializerMethodField()
 
     class Meta:
         model = PersonalProfile
-        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","years_of_experience","technical_skills","session_rate","is_saved"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","current_job","years_of_experience","technical_skills","session_rate","rating","is_saved"]
+
+    def get_rating(self,obj):
+        mentor = obj.user
+        try:
+            mentor_ratings = mentor.rating
+            average_rating = sum(mentor_ratings.ratings)/len(mentor_ratings.ratings)
+        except:
+            average_rating = 0
+        return average_rating
 
     def get_session_rate(self,obj):
         session_rate = obj.session_rate
         user = self.context["user"]
-        rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+        rate_instance = self.context["rate_instance"]
         if not rate_instance:
             return f"{session_rate}USD"
         else:
@@ -89,12 +99,10 @@ class MentorRecommendationSerializer(serializers.ModelSerializer):
         return obj.user.id
 
     def get_is_saved(self,obj):
-        user = self.context.get("user")
-        if models.SavedMentors.objects.filter(saver=user,saved=obj.user).exists():
+        saved_mentors = self.context["saved_mentors"]
+        if obj.id in saved_mentors:
             return True
-        else:
-            return False
-
+        return False
 
 
 
@@ -210,7 +218,7 @@ class SessionRetrieveSerializer(serializers.Serializer):
     def get_amount(self,obj):
         mentor_rate = obj.mentor.profile.session_rate
         user = self.context["user"]
-        rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
+        rate_instance = self.context["rate_instance"]
         if rate_instance:
             amount = int(rate_instance.exchange_rate * mentor_rate)
             currency = rate_instance.currency_initials
@@ -228,7 +236,6 @@ class SessionRetrieveSerializer(serializers.Serializer):
             else:
                 return True
         return False
-
 
 
     def get_mentor(self,obj):
@@ -338,3 +345,50 @@ class RetrieveSavedMentorSerializer(serializers.ModelSerializer):
     def get_saved(self,obj):
         output = RetrieveMentorSearchAndRetrieveSerializer(obj.saved,many=False).data
         return output
+
+class AnnotateMentorshipSessionSerializer(serializers.Serializer):
+    session = serializers.PrimaryKeyRelatedField(queryset=models.Sessions.objects.all())
+    mark_completed = serializers.BooleanField()
+    rating = serializers.IntegerField()
+
+    def validate_session(self,session):
+        user = self.context["user"]
+        if session.mentee != user:
+            raise serializers.ValidationError("This session was not initiated by you.")
+        #Ensure a session has been paid for without which attendance is impossible.
+        if not session.is_paid:
+            raise serializers.ValidationError("Cannot annotate a session that has not been paid for.")
+        #Check if the session has been previously marked as completed.
+        if session.status == "COMPLETED":
+            raise serializers.ValidationError("This session has been completed.")
+        #Check if the session is still in the future
+        timezone = pytz.timezone("UTC")
+        session_at = session.session_at
+        now = timezone.localize(datetime.now())
+        if session.status != "ACCEPTED" or (session_at > now):
+            raise serializers.ValidationError("This session has not been Completed.")
+        return session
+
+    def validate_mark_completed(self,value):
+        if value == False:
+            raise serializers.ValidationError("The session mark_completed must be True to annotate a session")
+        return value
+
+    def validate_rating(self,value):
+        rating_range = list(range(1,6))
+        if value not in rating_range:
+            raise serializers.ValidationError("A rating can only range from 1 to 5")
+        return value
+
+    def create(self,validated_data):
+        session = validated_data.get("session")
+        session.status = "COMPLETED"
+        session.save()
+
+        mentor = session.mentor
+        rating = validated_data.get("rating")
+
+        mentor_rating, created = models.MentorRating.objects.get_or_create(mentor=mentor)
+        mentor_rating.ratings.append(rating)
+        mentor_rating.save()
+        return session

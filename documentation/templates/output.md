@@ -59,45 +59,48 @@
 52. [logout](#logout)  
 53. [mentor search/filter](#mentor_search/filter)  
 54. [mentors recommendation](#mentors_recommendation)  
-55. [post create](#post_create)  
-56. [post like](#post_like)  
-57. [post retrieve](#post_retrieve)  
-58. [post save](#post_save)  
-59. [post share](#post_share)  
-60. [profile completion](#profile_completion)  
-61. [profile retrieve](#profile_retrieve)  
-62. [profile update](#profile_update)  
-63. [recommended job posts.](#recommended_job_posts.)  
-64. [reply comment](#reply_comment)  
-65. [reposting](#reposting)  
-66. [retrieve education api](#retrieve_education_api)  
-67. [retrieve library contents](#retrieve_library_contents)  
-68. [retrieve mentors posts](#retrieve_mentors_posts)  
-69. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-70. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-71. [retrieve saved jobs](#retrieve_saved_jobs)  
-72. [retrieve saved mentors](#retrieve_saved_mentors)  
-73. [retrieve user settings](#retrieve_user_settings)  
-74. [save a job](#save_a_job)  
-75. [save a mentor](#save_a_mentor)  
-76. [subscribe to newsletter](#subscribe_to_newsletter)  
-77. [unfollow user](#unfollow_user)  
-78. [unlike comment/reply](#unlike_comment/reply)  
-79. [unlike post](#unlike_post)  
-80. [unsave job](#unsave_job)  
-81. [unsave mentor](#unsave_mentor)  
-82. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-83. [update user account settings](#update_user_account_settings)  
-84. [updating user eperience](#updating_user_eperience)  
-85. [user analytics](#user_analytics)  
-86. [user followers](#user_followers)  
-87. [user registeration](#user_registeration)  
-88. [user search](#user_search)  
-89. [user-industry update](#user-industry_update)  
-90. [valid choice](#valid_choice)  
-91. [verify otp hash](#verify_otp_hash)  
-92. [view certification](#view_certification)  
-93. [view experience](#view_experience)  
+55. [mentorship session annotation.](#mentorship_session_annotation.)  
+56. [post create](#post_create)  
+57. [post like](#post_like)  
+58. [post retrieve](#post_retrieve)  
+59. [post save](#post_save)  
+60. [post share](#post_share)  
+61. [profile completion](#profile_completion)  
+62. [profile retrieve](#profile_retrieve)  
+63. [profile update](#profile_update)  
+64. [recommended job posts.](#recommended_job_posts.)  
+65. [reply comment](#reply_comment)  
+66. [reposting](#reposting)  
+67. [retrieve education api](#retrieve_education_api)  
+68. [retrieve library contents](#retrieve_library_contents)  
+69. [retrieve mentors posts](#retrieve_mentors_posts)  
+70. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+71. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+72. [retrieve saved jobs](#retrieve_saved_jobs)  
+73. [retrieve saved mentors](#retrieve_saved_mentors)  
+74. [retrieve user settings](#retrieve_user_settings)  
+75. [save a job](#save_a_job)  
+76. [save a mentor](#save_a_mentor)  
+77. [session payment with flutterwave](#session_payment_with_flutterwave)  
+78. [session payment with stripe](#session_payment_with_stripe)  
+79. [subscribe to newsletter](#subscribe_to_newsletter)  
+80. [unfollow user](#unfollow_user)  
+81. [unlike comment/reply](#unlike_comment/reply)  
+82. [unlike post](#unlike_post)  
+83. [unsave job](#unsave_job)  
+84. [unsave mentor](#unsave_mentor)  
+85. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+86. [update user account settings](#update_user_account_settings)  
+87. [updating user eperience](#updating_user_eperience)  
+88. [user analytics](#user_analytics)  
+89. [user followers](#user_followers)  
+90. [user registeration](#user_registeration)  
+91. [user search](#user_search)  
+92. [user-industry update](#user-industry_update)  
+93. [valid choice](#valid_choice)  
+94. [verify otp hash](#verify_otp_hash)  
+95. [view certification](#view_certification)  
+96. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -246,7 +249,7 @@ refresh:*****
 
 # Profile Retrieve<a name='profile_retrieve'></a>
 
-This endpoint retrieve a logged in user or retrieves a third party's profile data if a query parameter of user_id is passed to the url. N.B:The user_type of the request instance determines the structure of the data passed in the response. properties like years_of_experience,timezone,mentorship_styles,technical_skills etc are only available to mentors profile which is automatically retrieved in response. Retrieving learners profile does not contain sthese properties.
+This endpoint retrieve a logged in user or retrieves a third party's profile data if a query parameter of user_id is passed to the url. N.B:The user_type of the request instance determines the structure of the data passed in the response. properties like years_of_experience,timezone,mentorship_styles,technical_skills etc are only available to mentors profile which is automatically retrieved in response. Retrieving learners profile does not contain these properties.
 
 **Endpoint:**`/user/retrieve-profile/`
 
@@ -263,11 +266,54 @@ This endpoint retrieve a logged in user or retrieves a third party's profile dat
 **status code:200**
 
 ``` json
+MENTORS
+{
+  "first_name": "Abdul Azeez",
+  "last_name": "Balogun",
+  "middle_name": "Abiola",
+  "country_code": "+234",
+  "phone_number": "9069102522",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
+  "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+  "location": "Ogun state",
+  "position": "",
+  "bio": "",
+  "qualification": "Bachelor of Engineering",
+  "intro_video": "",
+  "summary": "",
+  "experience": [],
+  "education": [],
+  "certification": [],
+  "years_of_experience": 6,
+  "availability": "weekends",
+  "current_job": "Backend Developer",
+  "areas_of_expertise": [],
+  "technical_skills": [
+    "Python",
+    "Shell Scripting",
+    "Backend development",
+    "Devops",
+    "AI/ML",
+    "Database Management System"
+  ],
+  "mentorship_styles": [],
+  "resume": "",
+  "timezone": "Canada/Central",
+  "linkedin_url": null,
+  "followers": 0,
+  "followings": 0,
+  "session_rate": "3000NGN",
+  "rating": 0,
+  "user_type": "mentor",
+  "industry": "technology"
+}
+
+LEARNERS
 {
   "first_name": "Opeyemi",
   "last_name": "Saliu",
   "middle_name": "Abdul-Azeez",
-  "country_code": "+1",
+  "country_code": "+234",
   "phone_number": "9069102522",
   "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
   "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
@@ -3185,7 +3231,7 @@ This API retrieves all the connections that was initiated by the logged in user 
 
 # Mentors Recommendation<a name='mentors_recommendation'></a>
 
-This API retrieves mentor recommendations for the logged in user.
+This API recommends mentors for the logged in user which is based on their selected industry.
 
 **Endpoint:**`/mentor/recommendation/`
 
@@ -3202,27 +3248,33 @@ This API retrieves mentor recommendations for the logged in user.
 **status code:200**
 
 ``` json
-[
-  {
-    "id": 11,
-    "first_name": "Abdul Azeez",
-    "last_name": "Balogun",
-    "middle_name": "Abiola",
-    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-    "current_job": "Backend Developer",
-    "years_of_experience": 6,
-    "technical_skills": [
-      "Python",
-      "Shell Scripting",
-      "Backend development",
-      "Devops",
-      "AI/ML",
-      "Database Management System"
-    ],
-    "session_rate": "3000NGN",
-    "is_saved": false
-  }
-]
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "current_job": "Backend Developer",
+      "years_of_experience": 6,
+      "technical_skills": [
+        "Python",
+        "Shell Scripting",
+        "Backend development",
+        "Devops",
+        "AI/ML",
+        "Database Management System"
+      ],
+      "session_rate": "3000NGN",
+      "rating": 0,
+      "is_saved": true
+    }
+  ]
+}
 ```
 
 [Table of contents](#toc)
@@ -4190,5 +4242,129 @@ This API clears all the notifications for a user.
 ## Response body
 
 **status code:204**
+
+[Table of contents](#toc)
+
+
+# Mentorship Session Annotation.<a name='mentorship_session_annotation.'></a>
+
+This API marks a mentorship session as completed and allows the learner to rate the mentor. N.B:A session would be assumed to have been completed if it has been paid for and the set time for the mentorship session is not in the future. Also, a session can only be annotated by the learner that sent the booking request in the first place. Also, the mark_completed payload must be True for the request to be valid and also, the rating can only be from 1 to 5.
+
+**Endpoint:**`/mentor/annotate/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"session":"*****"
+
+"mark_completed":"*****"
+
+"rating":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "id": 11,
+  "mentor": {
+    "id": 11,
+    "first_name": "Abdul Azeez",
+    "last_name": "Balogun",
+    "middle_name": "Abiola",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+    "qualification": "Bachelor of Engineering"
+  },
+  "mentee": {
+    "id": 1,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+    "qualification": "Bachelor of Engineering (Civil Engineering)"
+  },
+  "join": true,
+  "session_type": "individual",
+  "session_at": {
+    "date": "2025-07-21",
+    "time": "00:00:00"
+  },
+  "discourse": "Career Building",
+  "amount": "2USD",
+  "status": "COMPLETED",
+  "is_paid": true
+}
+```
+
+[Table of contents](#toc)
+
+
+# Session Payment with Flutterwave<a name='session_payment_with_flutterwave'></a>
+
+This API allows a learner to pay for a session with flutterwave. N.B:The learner must be the one that initiated the session request and the session must have been accepted by the mentor inorder to be available for payment. NGN currency is enforced in use by this API.
+
+**Endpoint:**`/payments/flutterwave/initiate/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"session":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "payment link": "https://checkout-v2.dev-flutterwave.com/v3/hosted/pay/9f95437309518f386e80"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Session Payment with Stripe<a name='session_payment_with_stripe'></a>
+
+This API allows learners to pay for mentorship sessions using Stripe. N.B::The learner must be the one that initiated the session request and the session must have been accepted by the mentor inorder to be available for payment. The USD currency is enforced for this payment option.
+
+**Endpoint:**`/payments/stripe/initiate/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"session":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "session_id": "cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS",
+  "url": "https://checkout.stripe.com/c/pay/cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS#fidkdWxOYHwnPyd1blpxYHZxWjA0VjVLS1FGSkBURkp8YXRkTz1zdlBNaHBiUkowSDZ9YDRIZnxJRk9XTTNDaW5GfG53Y0pnQDZANGdOZ2Rqc2hXdF9fUl1Cc0ZpYUkwNH1LdF1DZF1%2FVk40NTV3NlNNNkZKQycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
+}
+```
 
 [Table of contents](#toc)
