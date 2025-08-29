@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#add_experience">add experience</a></li>
 <li><a href="#alter_country_permissions">alter country permissions</a></li>
 <li><a href="#book_mentorship_session">book mentorship session</a></li>
+<li><a href="#cancel_mentorship_session">cancel mentorship session</a></li>
 <li><a href="#career_nexus_backend_documentation">career nexus backend documentation</a></li>
 <li><a href="#chat_history">chat history</a></li>
 <li><a href="#clear_notifications">clear notifications</a></li>
@@ -103,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#job_create">job create</a></li>
 <li><a href="#job_notifications">job notifications</a></li>
 <li><a href="#job_preference">job preference</a></li>
+<li><a href="#join_mentorship_session">join mentorship session</a></li>
 <li><a href="#like_comment/reply">like comment/reply</a></li>
 <li><a href="#login_api">login api</a></li>
 <li><a href="#logout">logout</a></li>
@@ -2341,7 +2343,7 @@ discourse:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Retrieve Mentorship Sessions<a name='retrieve_mentorship_sessions'></a></h1>
-<p>This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:This retrieves all the mentorship sessions that was requested by the user but has not been accepted/rejected yet. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.</p>
+<p>This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:If this API is called by a learner, it retrieves all the sessions that has been requested by the user which are yet to be accepted by the mentor. However, if this API is called by a mentor, it retrieves all the mentorship booking requests made by other users towards himself. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.</p>
 <p><strong>Endpoint:</strong><code>/mentor/sessions/?status=requested</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -2352,32 +2354,32 @@ discourse:*****
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">[
   {
-    &quot;id&quot;: 1,
+    &quot;id&quot;: 17,
     &quot;mentor&quot;: {
-      &quot;id&quot;: 36,
-      &quot;first_name&quot;: &quot;Adedeji&quot;,
+      &quot;id&quot;: 11,
+      &quot;first_name&quot;: &quot;Abdul Azeez&quot;,
       &quot;last_name&quot;: &quot;Balogun&quot;,
-      &quot;middle_name&quot;: &quot;Akanbi&quot;,
+      &quot;middle_name&quot;: &quot;Abiola&quot;,
       &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
-      &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;
     },
     &quot;mentee&quot;: {
       &quot;id&quot;: 1,
       &quot;first_name&quot;: &quot;Opeyemi&quot;,
       &quot;last_name&quot;: &quot;Saliu&quot;,
-      &quot;middle_name&quot;: &quot;Abdul Azeez&quot;,
-      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/cea6d01e-1264-4b44-b4e7-1b173ae24506Profile_Photo.jpg&quot;,
-      &quot;qualification&quot;: &quot;Backend Developer | Python Programmer&quot;
+      &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+      &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
     },
     &quot;join&quot;: false,
     &quot;session_type&quot;: &quot;individual&quot;,
     &quot;session_at&quot;: {
-      &quot;date&quot;: &quot;2025-07-21&quot;,
-      &quot;time&quot;: &quot;08:00:00&quot;
+      &quot;date&quot;: &quot;2025-08-30&quot;,
+      &quot;time&quot;: &quot;00:00:00&quot;
     },
     &quot;discourse&quot;: &quot;Career Building&quot;,
-    &quot;amount&quot;: &quot;0USD&quot;,
-    &quot;status&quot;: &quot;ACCEPTED&quot;,
+    &quot;amount&quot;: &quot;3000NGN&quot;,
+    &quot;status&quot;: &quot;PENDING&quot;,
     &quot;is_paid&quot;: false
   }
 ]
@@ -3308,6 +3310,42 @@ job:*****
 <pre><code class="language-json">{
   &quot;session_id&quot;: &quot;cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS&quot;,
   &quot;url&quot;: &quot;https://checkout.stripe.com/c/pay/cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS#fidkdWxOYHwnPyd1blpxYHZxWjA0VjVLS1FGSkBURkp8YXRkTz1zdlBNaHBiUkowSDZ9YDRIZnxJRk9XTTNDaW5GfG53Y0pnQDZANGdOZ2Rqc2hXdF9fUl1Cc0ZpYUkwNH1LdF1DZF1%2FVk40NTV3NlNNNkZKQycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Cancel Mentorship Session<a name='cancel_mentorship_session'></a></h1>
+<p>This API cancels a mentorship sessions. N.B:Only the session initiator (mentee) can cancel a mentorship session. Also, a session can only be canceled if it is yet to be paid for.</p>
+<p><strong>Endpoint:</strong><code>/mentor/session/cancel/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+&quot;session&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;status&quot;: &quot;Success&quot;,
+  &quot;message&quot;: &quot;Cancelled Mentorship session&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Join Mentorship Session<a name='join_mentorship_session'></a></h1>
+<p>This API retrieves the room name of the mentorship session. N.B:The user must either be a learner(mentee) or the sessions mentor. Also, only paid sessions can be joined and also, the time set for the session must not be in the future.</p>
+<p><strong>Endpoint:</strong><code>/mentor/session/join/?session=13</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;session_id&quot;: 13,
+  &quot;room_name&quot;: &quot;Room_1_11_420b8956-49d4-4971-9a6c-a1759c0472ab&quot;
 }
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>

@@ -2921,7 +2921,7 @@ discourse:*****
 
 # Retrieve Mentorship Sessions
 
-This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:This retrieves all the mentorship sessions that was requested by the user but has not been accepted/rejected yet. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.
+This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:If this API is called by a learner, it retrieves all the sessions that has been requested by the user which are yet to be accepted by the mentor. However, if this API is called by a mentor, it retrieves all the mentorship booking requests made by other users towards himself. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.
 
 **Endpoint:**`/mentor/sessions/?status=requested`
 
@@ -2940,32 +2940,32 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
 ``` json
 [
   {
-    "id": 1,
+    "id": 17,
     "mentor": {
-      "id": 36,
-      "first_name": "Adedeji",
+      "id": 11,
+      "first_name": "Abdul Azeez",
       "last_name": "Balogun",
-      "middle_name": "Akanbi",
+      "middle_name": "Abiola",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
+      "qualification": "Bachelor of Engineering"
     },
     "mentee": {
       "id": 1,
       "first_name": "Opeyemi",
       "last_name": "Saliu",
-      "middle_name": "Abdul Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/cea6d01e-1264-4b44-b4e7-1b173ae24506Profile_Photo.jpg",
-      "qualification": "Backend Developer | Python Programmer"
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "join": false,
     "session_type": "individual",
     "session_at": {
-      "date": "2025-07-21",
-      "time": "08:00:00"
+      "date": "2025-08-30",
+      "time": "00:00:00"
     },
     "discourse": "Career Building",
-    "amount": "0USD",
-    "status": "ACCEPTED",
+    "amount": "3000NGN",
+    "status": "PENDING",
     "is_paid": false
   }
 ]
@@ -4268,6 +4268,66 @@ This API allows learners to pay for mentorship sessions using Stripe. N.B::The l
 {
   "session_id": "cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS",
   "url": "https://checkout.stripe.com/c/pay/cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS#fidkdWxOYHwnPyd1blpxYHZxWjA0VjVLS1FGSkBURkp8YXRkTz1zdlBNaHBiUkowSDZ9YDRIZnxJRk9XTTNDaW5GfG53Y0pnQDZANGdOZ2Rqc2hXdF9fUl1Cc0ZpYUkwNH1LdF1DZF1%2FVk40NTV3NlNNNkZKQycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Cancel Mentorship Session
+
+This API cancels a mentorship sessions. N.B:Only the session initiator (mentee) can cancel a mentorship session. Also, a session can only be canceled if it is yet to be paid for.
+
+**Endpoint:**`/mentor/session/cancel/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"session":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Success",
+  "message": "Cancelled Mentorship session"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Join Mentorship Session
+
+This API retrieves the room name of the mentorship session. N.B:The user must either be a learner(mentee) or the sessions mentor. Also, only paid sessions can be joined and also, the time set for the session must not be in the future.
+
+**Endpoint:**`/mentor/session/join/?session=13`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "session_id": 13,
+  "room_name": "Room_1_11_420b8956-49d4-4971-9a6c-a1759c0472ab"
 }
 ```
 

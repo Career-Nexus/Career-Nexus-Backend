@@ -144,12 +144,15 @@ class RetrieveMentorshipSessionsView(APIView):
                 return Response({"error":"Invalid query parameter. Paramter can only be requested,accepted,pending"},status=status.HTTP_400_BAD_REQUEST)
             else:
                 if param.lower() == "requested":
-                    sessions =models.Sessions.objects.filter(mentee=user,status="PENDING").select_related("mentee__profile","mentor__profile")
+                    if user.user_type != "mentor":
+                        sessions =models.Sessions.objects.filter(mentee=user,status="PENDING").select_related("mentee__profile","mentor__profile")
+                    else:
+                        sessions = models.Sessions.objects.filter(mentor=user,status="PENDING").select_related("mentee__profile","mentor__profile")
                 elif param.lower() == "scheduled":
                     #scheduled sessions can only be called by mentors.
                     if user.user_type != "mentor":
                         return Response({"error":"Scheduled sessions are only available to mentors"},status=status.HTTP_400_BAD_REQUEST)
-                    sessions = models.Sessions.objects.filter(mentor=user).select_related("mentee__profile","mentor__profile")
+                    sessions = models.Sessions.objects.filter(mentor=user,status="ACCEPTED").select_related("mentee__profile","mentor__profile")
                 elif param.lower() == "completed":
                     if user.user_type != "mentor":
                         sessions = models.Sessions.objects.filter(mentee=user,status="COMPLETED").select_related("mentee__profile")
@@ -213,6 +216,40 @@ class AnnotateMentorshipSessionView(APIView):
                     rate_instance = None
                 output = serializers.SessionRetrieveSerializer(output_instance,many=False,context={"user":user,"rate_instance":rate_instance}).data
                 return Response(output,status=status.HTTP_200_OK)
+
+
+class CancelSessionView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    def post(self,request):
+        user = request.user
+        serializer = serializers.CancelSessionSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response({"status":"Success","message":"Cancelled Mentorship session"},status=status.HTTP_200_OK)
+
+
+class JoinSessionView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        user = request.user
+        param = request.query_params.get("session")
+        if not param:
+            return Response({"error":"A session query parameter is required for this request"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            serializer = serializers.JoinSessionSerializer(data=request.query_params,context={"user":user})
+            if serializer.is_valid(raise_exception=True):
+                session = serializer.validated_data.get("session")
+                output = {
+                    'session_id':session.id,
+                    'room_name':session.room_name
+                }
+                return Response(output,status=status.HTTP_200_OK)
+
 
 
 

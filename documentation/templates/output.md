@@ -12,95 +12,97 @@
 5. [add experience](#add_experience)  
 6. [alter country permissions](#alter_country_permissions)  
 7. [book mentorship session](#book_mentorship_session)  
-8. [career nexus backend documentation](#career_nexus_backend_documentation)  
-9. [chat history](#chat_history)  
-10. [clear notifications](#clear_notifications)  
-11. [connection accept/reject](#connection_accept/reject)  
-12. [connection create](#connection_create)  
-13. [connection pending retrieve](#connection_pending_retrieve)  
-14. [connection recommendation](#connection_recommendation)  
-15. [connection requests sent](#connection_requests_sent)  
-16. [connection retrieve](#connection_retrieve)  
-17. [connections count](#connections_count)  
-18. [content management](#content_management)  
-19. [create a newsletter](#create_a_newsletter)  
-20. [create comment](#create_comment)  
-21. [create project catalogue](#create_project_catalogue)  
-22. [creating library content](#creating_library_content)  
-23. [delete certification](#delete_certification)  
-24. [delete education](#delete_education)  
-25. [delete experience](#delete_experience)  
-26. [delete library content](#delete_library_content)  
-27. [delete project catalogue](#delete_project_catalogue)  
-28. [follow user](#follow_user)  
-29. [followers count](#followers_count)  
-30. [following recommendation](#following_recommendation)  
-31. [followings count](#followings_count)  
-32. [forget password](#forget_password)  
-33. [general notifications](#general_notifications)  
-34. [get all notifications](#get_all_notifications)  
-35. [get chat sessions](#get_chat_sessions)  
-36. [get comment](#get_comment)  
-37. [get country phone codes](#get_country_phone_codes)  
-38. [get followings](#get_followings)  
-39. [get followings post](#get_followings_post)  
-40. [get job posts](#get_job_posts)  
-41. [get job preference](#get_job_preference)  
-42. [get newsletter](#get_newsletter)  
-43. [get other user post](#get_other_user_post)  
-44. [get own posts](#get_own_posts)  
-45. [get posts](#get_posts)  
-46. [get saved post](#get_saved_post)  
-47. [job create](#job_create)  
-48. [job notifications](#job_notifications)  
-49. [job preference](#job_preference)  
-50. [like comment/reply](#like_comment/reply)  
-51. [login api](#login_api)  
-52. [logout](#logout)  
-53. [mentor search/filter](#mentor_search/filter)  
-54. [mentors recommendation](#mentors_recommendation)  
-55. [mentorship session annotation.](#mentorship_session_annotation.)  
-56. [post create](#post_create)  
-57. [post like](#post_like)  
-58. [post retrieve](#post_retrieve)  
-59. [post save](#post_save)  
-60. [post share](#post_share)  
-61. [profile completion](#profile_completion)  
-62. [profile retrieve](#profile_retrieve)  
-63. [profile update](#profile_update)  
-64. [recommended job posts.](#recommended_job_posts.)  
-65. [reply comment](#reply_comment)  
-66. [reposting](#reposting)  
-67. [retrieve education api](#retrieve_education_api)  
-68. [retrieve library contents](#retrieve_library_contents)  
-69. [retrieve mentors posts](#retrieve_mentors_posts)  
-70. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-71. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-72. [retrieve saved jobs](#retrieve_saved_jobs)  
-73. [retrieve saved mentors](#retrieve_saved_mentors)  
-74. [retrieve user settings](#retrieve_user_settings)  
-75. [save a job](#save_a_job)  
-76. [save a mentor](#save_a_mentor)  
-77. [session payment with flutterwave](#session_payment_with_flutterwave)  
-78. [session payment with stripe](#session_payment_with_stripe)  
-79. [subscribe to newsletter](#subscribe_to_newsletter)  
-80. [unfollow user](#unfollow_user)  
-81. [unlike comment/reply](#unlike_comment/reply)  
-82. [unlike post](#unlike_post)  
-83. [unsave job](#unsave_job)  
-84. [unsave mentor](#unsave_mentor)  
-85. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-86. [update user account settings](#update_user_account_settings)  
-87. [updating user eperience](#updating_user_eperience)  
-88. [user analytics](#user_analytics)  
-89. [user followers](#user_followers)  
-90. [user registeration](#user_registeration)  
-91. [user search](#user_search)  
-92. [user-industry update](#user-industry_update)  
-93. [valid choice](#valid_choice)  
-94. [verify otp hash](#verify_otp_hash)  
-95. [view certification](#view_certification)  
-96. [view experience](#view_experience)  
+8. [cancel mentorship session](#cancel_mentorship_session)  
+9. [career nexus backend documentation](#career_nexus_backend_documentation)  
+10. [chat history](#chat_history)  
+11. [clear notifications](#clear_notifications)  
+12. [connection accept/reject](#connection_accept/reject)  
+13. [connection create](#connection_create)  
+14. [connection pending retrieve](#connection_pending_retrieve)  
+15. [connection recommendation](#connection_recommendation)  
+16. [connection requests sent](#connection_requests_sent)  
+17. [connection retrieve](#connection_retrieve)  
+18. [connections count](#connections_count)  
+19. [content management](#content_management)  
+20. [create a newsletter](#create_a_newsletter)  
+21. [create comment](#create_comment)  
+22. [create project catalogue](#create_project_catalogue)  
+23. [creating library content](#creating_library_content)  
+24. [delete certification](#delete_certification)  
+25. [delete education](#delete_education)  
+26. [delete experience](#delete_experience)  
+27. [delete library content](#delete_library_content)  
+28. [delete project catalogue](#delete_project_catalogue)  
+29. [follow user](#follow_user)  
+30. [followers count](#followers_count)  
+31. [following recommendation](#following_recommendation)  
+32. [followings count](#followings_count)  
+33. [forget password](#forget_password)  
+34. [general notifications](#general_notifications)  
+35. [get all notifications](#get_all_notifications)  
+36. [get chat sessions](#get_chat_sessions)  
+37. [get comment](#get_comment)  
+38. [get country phone codes](#get_country_phone_codes)  
+39. [get followings](#get_followings)  
+40. [get followings post](#get_followings_post)  
+41. [get job posts](#get_job_posts)  
+42. [get job preference](#get_job_preference)  
+43. [get newsletter](#get_newsletter)  
+44. [get other user post](#get_other_user_post)  
+45. [get own posts](#get_own_posts)  
+46. [get posts](#get_posts)  
+47. [get saved post](#get_saved_post)  
+48. [job create](#job_create)  
+49. [job notifications](#job_notifications)  
+50. [job preference](#job_preference)  
+51. [join mentorship session](#join_mentorship_session)  
+52. [like comment/reply](#like_comment/reply)  
+53. [login api](#login_api)  
+54. [logout](#logout)  
+55. [mentor search/filter](#mentor_search/filter)  
+56. [mentors recommendation](#mentors_recommendation)  
+57. [mentorship session annotation.](#mentorship_session_annotation.)  
+58. [post create](#post_create)  
+59. [post like](#post_like)  
+60. [post retrieve](#post_retrieve)  
+61. [post save](#post_save)  
+62. [post share](#post_share)  
+63. [profile completion](#profile_completion)  
+64. [profile retrieve](#profile_retrieve)  
+65. [profile update](#profile_update)  
+66. [recommended job posts.](#recommended_job_posts.)  
+67. [reply comment](#reply_comment)  
+68. [reposting](#reposting)  
+69. [retrieve education api](#retrieve_education_api)  
+70. [retrieve library contents](#retrieve_library_contents)  
+71. [retrieve mentors posts](#retrieve_mentors_posts)  
+72. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+73. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+74. [retrieve saved jobs](#retrieve_saved_jobs)  
+75. [retrieve saved mentors](#retrieve_saved_mentors)  
+76. [retrieve user settings](#retrieve_user_settings)  
+77. [save a job](#save_a_job)  
+78. [save a mentor](#save_a_mentor)  
+79. [session payment with flutterwave](#session_payment_with_flutterwave)  
+80. [session payment with stripe](#session_payment_with_stripe)  
+81. [subscribe to newsletter](#subscribe_to_newsletter)  
+82. [unfollow user](#unfollow_user)  
+83. [unlike comment/reply](#unlike_comment/reply)  
+84. [unlike post](#unlike_post)  
+85. [unsave job](#unsave_job)  
+86. [unsave mentor](#unsave_mentor)  
+87. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+88. [update user account settings](#update_user_account_settings)  
+89. [updating user eperience](#updating_user_eperience)  
+90. [user analytics](#user_analytics)  
+91. [user followers](#user_followers)  
+92. [user registeration](#user_registeration)  
+93. [user search](#user_search)  
+94. [user-industry update](#user-industry_update)  
+95. [valid choice](#valid_choice)  
+96. [verify otp hash](#verify_otp_hash)  
+97. [view certification](#view_certification)  
+98. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -3017,7 +3019,7 @@ discourse:*****
 
 # Retrieve Mentorship Sessions<a name='retrieve_mentorship_sessions'></a>
 
-This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:This retrieves all the mentorship sessions that was requested by the user but has not been accepted/rejected yet. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.
+This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:If this API is called by a learner, it retrieves all the sessions that has been requested by the user which are yet to be accepted by the mentor. However, if this API is called by a mentor, it retrieves all the mentorship booking requests made by other users towards himself. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.
 
 **Endpoint:**`/mentor/sessions/?status=requested`
 
@@ -3036,32 +3038,32 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
 ``` json
 [
   {
-    "id": 1,
+    "id": 17,
     "mentor": {
-      "id": 36,
-      "first_name": "Adedeji",
+      "id": 11,
+      "first_name": "Abdul Azeez",
       "last_name": "Balogun",
-      "middle_name": "Akanbi",
+      "middle_name": "Abiola",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
+      "qualification": "Bachelor of Engineering"
     },
     "mentee": {
       "id": 1,
       "first_name": "Opeyemi",
       "last_name": "Saliu",
-      "middle_name": "Abdul Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/cea6d01e-1264-4b44-b4e7-1b173ae24506Profile_Photo.jpg",
-      "qualification": "Backend Developer | Python Programmer"
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
     "join": false,
     "session_type": "individual",
     "session_at": {
-      "date": "2025-07-21",
-      "time": "08:00:00"
+      "date": "2025-08-30",
+      "time": "00:00:00"
     },
     "discourse": "Career Building",
-    "amount": "0USD",
-    "status": "ACCEPTED",
+    "amount": "3000NGN",
+    "status": "PENDING",
     "is_paid": false
   }
 ]
@@ -4364,6 +4366,66 @@ This API allows learners to pay for mentorship sessions using Stripe. N.B::The l
 {
   "session_id": "cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS",
   "url": "https://checkout.stripe.com/c/pay/cs_test_a1dI9QEtjX8x4MlZYjh0R3AT74XL1EbflEE0osclkyDUucfGOSDhptF1mS#fidkdWxOYHwnPyd1blpxYHZxWjA0VjVLS1FGSkBURkp8YXRkTz1zdlBNaHBiUkowSDZ9YDRIZnxJRk9XTTNDaW5GfG53Y0pnQDZANGdOZ2Rqc2hXdF9fUl1Cc0ZpYUkwNH1LdF1DZF1%2FVk40NTV3NlNNNkZKQycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Cancel Mentorship Session<a name='cancel_mentorship_session'></a>
+
+This API cancels a mentorship sessions. N.B:Only the session initiator (mentee) can cancel a mentorship session. Also, a session can only be canceled if it is yet to be paid for.
+
+**Endpoint:**`/mentor/session/cancel/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"session":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Success",
+  "message": "Cancelled Mentorship session"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Join Mentorship Session<a name='join_mentorship_session'></a>
+
+This API retrieves the room name of the mentorship session. N.B:The user must either be a learner(mentee) or the sessions mentor. Also, only paid sessions can be joined and also, the time set for the session must not be in the future.
+
+**Endpoint:**`/mentor/session/join/?session=13`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "session_id": 13,
+  "room_name": "Room_1_11_420b8956-49d4-4971-9a6c-a1759c0472ab"
 }
 ```
 

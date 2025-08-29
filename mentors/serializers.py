@@ -392,3 +392,41 @@ class AnnotateMentorshipSessionSerializer(serializers.Serializer):
         mentor_rating.ratings.append(rating)
         mentor_rating.save()
         return session
+
+
+
+class CancelSessionSerializer(serializers.Serializer):
+    session = serializers.PrimaryKeyRelatedField(queryset=models.Sessions.objects.all())
+
+    def validate_session(self,session):
+        user = self.context["user"]
+        if user != session.mentee:
+            raise serializers.ValidationError("Only this session's mentee can cancel this session.")
+        if session.is_paid:
+            raise serializers.ValidationError("Cannot cancel an already paid session.")
+        return session
+
+    def create(self,validated_data):
+        session =validated_data.get("session")
+        session.delete()
+        return True
+
+class JoinSessionSerializer(serializers.Serializer):
+    session = serializers.PrimaryKeyRelatedField(queryset=models.Sessions.objects.all())
+
+    def validate_session(self,session):
+        user = self.context["user"]
+        if (user != session.mentor) and (user != session.mentee):
+            raise serializers.ValidationError("You are not a participant in this session.")
+        if not session.is_paid:
+            raise serializers.ValidationError("This session has not yet been paid for.")
+        if session.status == "COMPLETED":
+            raise serializers.ValidationError("This session has already been completed.")
+        now = datetime.now()
+        timezone = pytz.timezone("UTC")
+        now = timezone.localize(now)
+        if now < session.session_at:
+            raise serializers.ValidationError("Not yet time for this session.")
+
+        return session
+

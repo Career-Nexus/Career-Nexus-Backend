@@ -9,6 +9,8 @@ urlpatterns = [
     path("sessions/accept-reject/",views.AcceptRejectMentorshipSessionsView.as_view(),name="Accept-Reject-Sessions"),
     path("save/",views.SaveMentorView.as_view(),name="Save-Mentor"),
     path("annotate/",views.AnnotateMentorshipSessionView.as_view(),name="Annotate-Sessions"),
+    path("session/cancel/",views.CancelSessionView.as_view(),name="Cancel-Session"),
+    path("session/join/",views.JoinSessionView.as_view(),name="Join-Session"),
 
 
     path("test/",views.TestView.as_view(),name="Test-View"),
