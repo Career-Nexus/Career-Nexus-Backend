@@ -188,7 +188,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_THROTTLE_RATES":{
         'user':"1000/hour",
-        "anon":"5/hour"
+        "anon":"20/hour"
     }
 
 }
@@ -280,6 +280,15 @@ FLUTTERWAVE_ENCRYPTION_KEY= os.getenv("FLUTTERWAVE_ENCRYPTION_KEY")
 FLUTTERWAVE_BASE_URL = os.getenv("FLUTTERWAVE_BASE_URL")
 
 HOST_URL = os.getenv("HOST_URL")
+
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+
+GOOGLE_REDIRECT_URL_SIGNUP = os.getenv("GOOGLE_REDIRECT_URL_SIGNUP")
+GOOGLE_REDIRECT_URL_SIGNIN = os.getenv("GOOGLE_REDIRECT_URL_SIGNIN")
+
+GOOGLE_AUTH_URI = "https://accounts.google.com/o/oauth2/v2/auth"
+GOOGLE_TOKEN_URI = "https://oauth2.googleapis.com/token"
 
 
 STRIPE_PUBLISHABLE_KEY=os.getenv("STRIPE_PUBLISHABLE_KEY")

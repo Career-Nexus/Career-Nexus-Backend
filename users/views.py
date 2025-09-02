@@ -4,7 +4,9 @@ from django.core.cache import cache
 from django.db.models import Q
 #import email
 import os
+import uuid
 from django.utils.html import strip_tags
+from django.conf import settings
 import requests
 
 from django.utils.ipv6 import is_valid_ipv6_address
@@ -16,6 +18,11 @@ from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.exceptions import ValidationError
+
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_request
+
+
 from drf_yasg.utils import swagger_auto_schema
 
 from networks.serializers import RetrieveRecommendationDetailSerializer
@@ -172,6 +179,66 @@ class RegisterView(APIView):
         except:
             return Response({"error":f"{email} not registered"},status=status.HTTP_404_NOT_FOUND)
 
+class GoogleSignupView(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+
+    def get(self,request):
+        code = request.GET.get("code")
+        if not code:
+            return Response({"error":"Missing Code"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            token_data = {
+                "code":code,
+                "client_id":settings.GOOGLE_CLIENT_ID,
+                "client_secret":settings.GOOGLE_CLIENT_SECRET,
+                "redirect_uri":settings.GOOGLE_REDIRECT_URL_SIGNUP,
+                "grant_type":"authorization_code"
+            }
+            token_response = requests.post(settings.GOOGLE_TOKEN_URI,data=token_data)
+            token_json = token_response.json()
+            if "id_token" not in token_json:
+                return Response({'error':"Failed to get ID token"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                try:
+                    id_info = id_token.verify_oauth2_token(
+                        token_json["id_token"],
+                        google_request.Request(),
+                        settings.GOOGLE_CLIENT_ID
+                    )
+                except Exception:
+                    return Response({"error":"Invalid Token"},status=status.HTTP_400_BAD_REQUEST)
+
+                email = id_info.get("email")
+                if models.Users.objects.filter(email=email).exists():
+                    return Response({"error":"An account with this email exists. Proceed to Login"},status=status.HTTP_400_BAD_REQUEST)
+
+                name = id_info.get("name").split()
+                if len(name) > 1:
+                    first_name = name[0]
+                else:
+                    first_name = "N/A"
+                if len(name) > 2:
+                    last_name = name[1]
+                else:
+                    last_name = "N/A"
+
+                new_user = models.Users.objects.create_user(username=str(uuid.uuid4()),email=email,first_name=first_name,last_name=last_name)
+                models.PersonalProfile.objects.create(user=new_user)
+
+                token =RefreshToken.for_user(new_user)
+                output = {
+                    "refresh":str(token),
+                    "access":str(token.access_token),
+                    "email":new_user.email,
+                    "status":"Success"
+                }
+                return Response(output,status=status.HTTP_200_OK)
+
+
+
+
 
 class VerifyHashView(APIView):
     permission_classes = [
@@ -228,6 +295,53 @@ class LoginView(APIView):
                     },
                 status=status.HTTP_200_OK
                 )
+
+
+class GoogleSignInView(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+    def get(self,request):
+        code = request.GET.get("code")
+        if not code:
+            return Response({"error":"Missing Code"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            token_data = {
+                "code":code,
+                "client_id":settings.GOOGLE_CLIENT_ID,
+                "client_secret":settings.GOOGLE_CLIENT_SECRET,
+                "redirect_uri":settings.GOOGLE_REDIRECT_URL_SIGNIN,
+                "grant_type":"authorization_code"
+            }
+            token_response = requests.post(settings.GOOGLE_TOKEN_URI,data=token_data)
+            token_json = token_response.json()
+            if "id_token" not in token_json:
+                return Response({'error':"Failed to get ID token"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                try:
+                    id_info = id_token.verify_oauth2_token(
+                        token_json["id_token"],
+                        google_request.Request(),
+                        settings.GOOGLE_CLIENT_ID
+                    )
+                except Exception:
+                    return Response({"error":"Invalid Token"},status=status.HTTP_400_BAD_REQUEST)
+
+            email = id_info.get("email")
+            user = models.Users.objects.filter(email=email).first()
+            if not user:
+                return Response({"error":"No account with this email exist. Signup to continue"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                token = RefreshToken.for_user(user)
+                output = {
+                    "refresh":str(token),
+                    "access":str(token.access_token),
+                    "email":user.email,
+                    "user_type":user.user_type,
+                    "id":user.id
+                }
+                return Response(output,status=status.HTTP_200_OK)
+
 
 
 

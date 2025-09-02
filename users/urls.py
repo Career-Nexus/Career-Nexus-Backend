@@ -43,6 +43,8 @@ urlpatterns = [
     path("completion/",views.WizardView.as_view(),name="wizard-view"),
     path("settings/",views.SettingsView.as_view(),name="Settings-View"),
     path("search/",views.UserSearchView.as_view(),name="User-Search-View"),
+    path("google/signup/",views.GoogleSignupView.as_view(),name="Google-Signup"),
+    path("google/signin/",views.GoogleSignInView.as_view(),name="Google-signin"),
 
 
 
