@@ -44,7 +44,7 @@ class MentorRecommendationView(APIView):
     def get(self,request):
         user = request.user
         industry = request.user.industry
-        mentors = PersonalProfile.objects.filter(user__user_type="mentor",user__industry=industry)
+        mentors = PersonalProfile.objects.filter(user__user_type="mentor",user__industry=industry).exclude(user=user)
         rate_instance = ExchangeRate.objects.filter(country__code=user.profile.country_code).first()
         if not rate_instance:
             rate_instance = None

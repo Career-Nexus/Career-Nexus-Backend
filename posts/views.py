@@ -99,6 +99,28 @@ class PostView(APIView):
                 return Response({"error":"Inexistent Post"},status=status.HTTP_404_NOT_FOUND)
 
 
+class DeletePostView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    def delete(self,request):
+        user = request.user
+        param = request.query_params.get("post_id")
+        if not param:
+            return Response({"error":"A post_id query parameter is required for this request"},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            post = models.Posts.objects.filter(id=param).first()
+            if not post:
+                return Response({"error":"Invalid Post ID"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                if post.profile != user.profile:
+                    return Response({"error":"Can't delete another users post"},status=status.HTTP_401_UNAUTHORIZED)
+                else:
+                    post.delete()
+                    #Avoid returning stale post data
+                    invalidate_post_cache(user_industry=user.industry,user_id=user.id)
+                    return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 class OtherUserPosts(APIView):

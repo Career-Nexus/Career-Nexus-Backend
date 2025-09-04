@@ -32,77 +32,80 @@
 25. [delete education](#delete_education)  
 26. [delete experience](#delete_experience)  
 27. [delete library content](#delete_library_content)  
-28. [delete project catalogue](#delete_project_catalogue)  
-29. [follow user](#follow_user)  
-30. [followers count](#followers_count)  
-31. [following recommendation](#following_recommendation)  
-32. [followings count](#followings_count)  
-33. [forget password](#forget_password)  
-34. [general notifications](#general_notifications)  
-35. [get all notifications](#get_all_notifications)  
-36. [get chat sessions](#get_chat_sessions)  
-37. [get comment](#get_comment)  
-38. [get country phone codes](#get_country_phone_codes)  
-39. [get followings](#get_followings)  
-40. [get followings post](#get_followings_post)  
-41. [get job posts](#get_job_posts)  
-42. [get job preference](#get_job_preference)  
-43. [get newsletter](#get_newsletter)  
-44. [get other user post](#get_other_user_post)  
-45. [get own posts](#get_own_posts)  
-46. [get posts](#get_posts)  
-47. [get saved post](#get_saved_post)  
-48. [job create](#job_create)  
-49. [job notifications](#job_notifications)  
-50. [job preference](#job_preference)  
-51. [join mentorship session](#join_mentorship_session)  
-52. [like comment/reply](#like_comment/reply)  
-53. [login api](#login_api)  
-54. [logout](#logout)  
-55. [mentor search/filter](#mentor_search/filter)  
-56. [mentors recommendation](#mentors_recommendation)  
-57. [mentorship session annotation.](#mentorship_session_annotation.)  
-58. [post create](#post_create)  
-59. [post like](#post_like)  
-60. [post retrieve](#post_retrieve)  
-61. [post save](#post_save)  
-62. [post share](#post_share)  
-63. [profile completion](#profile_completion)  
-64. [profile retrieve](#profile_retrieve)  
-65. [profile update](#profile_update)  
-66. [recommended job posts.](#recommended_job_posts.)  
-67. [reply comment](#reply_comment)  
-68. [reposting](#reposting)  
-69. [retrieve education api](#retrieve_education_api)  
-70. [retrieve library contents](#retrieve_library_contents)  
-71. [retrieve mentors posts](#retrieve_mentors_posts)  
-72. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-73. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-74. [retrieve saved jobs](#retrieve_saved_jobs)  
-75. [retrieve saved mentors](#retrieve_saved_mentors)  
-76. [retrieve user settings](#retrieve_user_settings)  
-77. [save a job](#save_a_job)  
-78. [save a mentor](#save_a_mentor)  
-79. [session payment with flutterwave](#session_payment_with_flutterwave)  
-80. [session payment with stripe](#session_payment_with_stripe)  
-81. [subscribe to newsletter](#subscribe_to_newsletter)  
-82. [unfollow user](#unfollow_user)  
-83. [unlike comment/reply](#unlike_comment/reply)  
-84. [unlike post](#unlike_post)  
-85. [unsave job](#unsave_job)  
-86. [unsave mentor](#unsave_mentor)  
-87. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-88. [update user account settings](#update_user_account_settings)  
-89. [updating user eperience](#updating_user_eperience)  
-90. [user analytics](#user_analytics)  
-91. [user followers](#user_followers)  
-92. [user registeration](#user_registeration)  
-93. [user search](#user_search)  
-94. [user-industry update](#user-industry_update)  
-95. [valid choice](#valid_choice)  
-96. [verify otp hash](#verify_otp_hash)  
-97. [view certification](#view_certification)  
-98. [view experience](#view_experience)  
+28. [delete post](#delete_post)  
+29. [delete project catalogue](#delete_project_catalogue)  
+30. [follow user](#follow_user)  
+31. [followers count](#followers_count)  
+32. [following recommendation](#following_recommendation)  
+33. [followings count](#followings_count)  
+34. [forget password](#forget_password)  
+35. [general notifications](#general_notifications)  
+36. [get all notifications](#get_all_notifications)  
+37. [get chat sessions](#get_chat_sessions)  
+38. [get comment](#get_comment)  
+39. [get country phone codes](#get_country_phone_codes)  
+40. [get followings](#get_followings)  
+41. [get followings post](#get_followings_post)  
+42. [get job posts](#get_job_posts)  
+43. [get job preference](#get_job_preference)  
+44. [get newsletter](#get_newsletter)  
+45. [get other user post](#get_other_user_post)  
+46. [get own posts](#get_own_posts)  
+47. [get posts](#get_posts)  
+48. [get saved post](#get_saved_post)  
+49. [google signin](#google_signin)  
+50. [job create](#job_create)  
+51. [job notifications](#job_notifications)  
+52. [job preference](#job_preference)  
+53. [join mentorship session](#join_mentorship_session)  
+54. [like comment/reply](#like_comment/reply)  
+55. [login api](#login_api)  
+56. [logout](#logout)  
+57. [mentor search/filter](#mentor_search/filter)  
+58. [mentors recommendation](#mentors_recommendation)  
+59. [mentorship session annotation.](#mentorship_session_annotation.)  
+60. [post create](#post_create)  
+61. [post like](#post_like)  
+62. [post retrieve](#post_retrieve)  
+63. [post save](#post_save)  
+64. [post share](#post_share)  
+65. [profile completion](#profile_completion)  
+66. [profile retrieve](#profile_retrieve)  
+67. [profile update](#profile_update)  
+68. [recommended job posts.](#recommended_job_posts.)  
+69. [reply comment](#reply_comment)  
+70. [reposting](#reposting)  
+71. [retrieve education api](#retrieve_education_api)  
+72. [retrieve library contents](#retrieve_library_contents)  
+73. [retrieve mentors posts](#retrieve_mentors_posts)  
+74. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+75. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+76. [retrieve saved jobs](#retrieve_saved_jobs)  
+77. [retrieve saved mentors](#retrieve_saved_mentors)  
+78. [retrieve user settings](#retrieve_user_settings)  
+79. [save a job](#save_a_job)  
+80. [save a mentor](#save_a_mentor)  
+81. [session payment with flutterwave](#session_payment_with_flutterwave)  
+82. [session payment with stripe](#session_payment_with_stripe)  
+83. [signup with google](#signup_with_google)  
+84. [subscribe to newsletter](#subscribe_to_newsletter)  
+85. [unfollow user](#unfollow_user)  
+86. [unlike comment/reply](#unlike_comment/reply)  
+87. [unlike post](#unlike_post)  
+88. [unsave job](#unsave_job)  
+89. [unsave mentor](#unsave_mentor)  
+90. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+91. [update user account settings](#update_user_account_settings)  
+92. [updating user eperience](#updating_user_eperience)  
+93. [user analytics](#user_analytics)  
+94. [user followers](#user_followers)  
+95. [user registeration](#user_registeration)  
+96. [user search](#user_search)  
+97. [user-industry update](#user-industry_update)  
+98. [valid choice](#valid_choice)  
+99. [verify otp hash](#verify_otp_hash)  
+100. [view certification](#view_certification)  
+101. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -4428,5 +4431,95 @@ This API retrieves the room name of the mentorship session. N.B:The user must ei
   "room_name": "Room_1_11_420b8956-49d4-4971-9a6c-a1759c0472ab"
 }
 ```
+
+[Table of contents](#toc)
+
+
+# Google Signin<a name='google_signin'></a>
+
+This API exchanges a google code for authentication details. N.B:A call to google's oauth2 API should have been previously made to obtain a valid code to be used for this request.
+
+**Endpoint:**`/user/google/signin/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"code":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1Njk5MDI4NSwiaWF0IjoxNzU2OTAzODg1LCJqdGkiOiI3M2ZmNGQxMmQ1NmM0ZTY3YWU2ODM4ZDk1NDE5NGUwYiIsInVzZXJfaWQiOjF9.YjOJm8AYgT0h39mdH27FF9goXOgvIIbvIEbsFjQGsMM",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2OTI1NDg1LCJpYXQiOjE3NTY5MDM4ODUsImp0aSI6IjQxZjhkZDhkY2RhNTQ2M2RhNGViNWRlMWViMzlmYzM0IiwidXNlcl9pZCI6MX0.MQwDkQZGzeP6h_3mTOeOMJYR5sbm39RzzuXbKzk51cE",
+  "email": "saliuoazeez@gmail.com",
+  "user_type": "learner",
+  "id": 1
+}
+```
+
+[Table of contents](#toc)
+
+
+# Signup with Google<a name='signup_with_google'></a>
+
+This API allows a google user to signup with their account. N.B:Request to goole's oauth2 should have been previously made to obtain a valid code. Also, Someone that registers via google account is setup to be passwordless. (They can only login via google or login normally after changing their password).
+
+**Endpoint:**`/user/google/signup/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"code":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MjEzMTY4MiwiaWF0IjoxNzUyMDQ1MjgyLCJqdGkiOiJlMmNjZmY0NTU5NjY0Njk0YmUzZDJhM2EzYjI5YzI1NyIsInVzZXJfaWQiOjExfQ.A6FBhNeJ3TZAP4vFOETfT1KgPxBh_6Joe2GAHeiYLWM",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUyMDY2ODgyLCJpYXQiOjE3NTIwNDUyODIsImp0aSI6IjI2YTRiZWYwZTBhOTQwMmRiM2U1YjExZjMzMzlkZDZmIiwidXNlcl9pZCI6MTF9.oq8ScALElAUkGUoAf3UfLyRSam94IXCjouHKrHd-MC8",
+  "user": "opeyemi_cn2@yopmail.com",
+  "status": "Success"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Delete Post<a name='delete_post'></a>
+
+This API deletes a post. N.B:A user can only delete their own post.
+
+**Endpoint:**`/post/delete/?post_id=23`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
 
 [Table of contents](#toc)

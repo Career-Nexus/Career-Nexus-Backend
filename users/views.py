@@ -184,8 +184,8 @@ class GoogleSignupView(APIView):
         AllowAny,
     ]
 
-    def get(self,request):
-        code = request.GET.get("code")
+    def post(self,request):
+        code = request.data.get("code")
         if not code:
             return Response({"error":"Missing Code"},status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -301,8 +301,8 @@ class GoogleSignInView(APIView):
     permission_classes = [
         AllowAny,
     ]
-    def get(self,request):
-        code = request.GET.get("code")
+    def post(self,request):
+        code = request.data.get("code")
         if not code:
             return Response({"error":"Missing Code"},status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -343,6 +343,14 @@ class GoogleSignInView(APIView):
                 return Response(output,status=status.HTTP_200_OK)
 
 
+
+class TestCallbackView(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+    def get(self,request):
+        code = request.query_params.get("code")
+        return Response({"Code":code},status=status.HTTP_200_OK)
 
 
 

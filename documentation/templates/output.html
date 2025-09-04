@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#delete_education">delete education</a></li>
 <li><a href="#delete_experience">delete experience</a></li>
 <li><a href="#delete_library_content">delete library content</a></li>
+<li><a href="#delete_post">delete post</a></li>
 <li><a href="#delete_project_catalogue">delete project catalogue</a></li>
 <li><a href="#follow_user">follow user</a></li>
 <li><a href="#followers_count">followers count</a></li>
@@ -101,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#get_own_posts">get own posts</a></li>
 <li><a href="#get_posts">get posts</a></li>
 <li><a href="#get_saved_post">get saved post</a></li>
+<li><a href="#google_signin">google signin</a></li>
 <li><a href="#job_create">job create</a></li>
 <li><a href="#job_notifications">job notifications</a></li>
 <li><a href="#job_preference">job preference</a></li>
@@ -134,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#save_a_mentor">save a mentor</a></li>
 <li><a href="#session_payment_with_flutterwave">session payment with flutterwave</a></li>
 <li><a href="#session_payment_with_stripe">session payment with stripe</a></li>
+<li><a href="#signup_with_google">signup with google</a></li>
 <li><a href="#subscribe_to_newsletter">subscribe to newsletter</a></li>
 <li><a href="#unfollow_user">unfollow user</a></li>
 <li><a href="#unlike_comment/reply">unlike comment/reply</a></li>
@@ -3348,6 +3351,62 @@ job:*****
   &quot;room_name&quot;: &quot;Room_1_11_420b8956-49d4-4971-9a6c-a1759c0472ab&quot;
 }
 </code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Google Signin<a name='google_signin'></a></h1>
+<p>This API exchanges a google code for authentication details. N.B:A call to google's oauth2 API should have been previously made to obtain a valid code to be used for this request.</p>
+<p><strong>Endpoint:</strong><code>/user/google/signin/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+&quot;code&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;refresh&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1Njk5MDI4NSwiaWF0IjoxNzU2OTAzODg1LCJqdGkiOiI3M2ZmNGQxMmQ1NmM0ZTY3YWU2ODM4ZDk1NDE5NGUwYiIsInVzZXJfaWQiOjF9.YjOJm8AYgT0h39mdH27FF9goXOgvIIbvIEbsFjQGsMM&quot;,
+  &quot;access&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2OTI1NDg1LCJpYXQiOjE3NTY5MDM4ODUsImp0aSI6IjQxZjhkZDhkY2RhNTQ2M2RhNGViNWRlMWViMzlmYzM0IiwidXNlcl9pZCI6MX0.MQwDkQZGzeP6h_3mTOeOMJYR5sbm39RzzuXbKzk51cE&quot;,
+  &quot;email&quot;: &quot;saliuoazeez@gmail.com&quot;,
+  &quot;user_type&quot;: &quot;learner&quot;,
+  &quot;id&quot;: 1
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Signup with Google<a name='signup_with_google'></a></h1>
+<p>This API allows a google user to signup with their account. N.B:Request to goole's oauth2 should have been previously made to obtain a valid code. Also, Someone that registers via google account is setup to be passwordless. (They can only login via google or login normally after changing their password).</p>
+<p><strong>Endpoint:</strong><code>/user/google/signup/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+&quot;code&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;refresh&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MjEzMTY4MiwiaWF0IjoxNzUyMDQ1MjgyLCJqdGkiOiJlMmNjZmY0NTU5NjY0Njk0YmUzZDJhM2EzYjI5YzI1NyIsInVzZXJfaWQiOjExfQ.A6FBhNeJ3TZAP4vFOETfT1KgPxBh_6Joe2GAHeiYLWM&quot;,
+  &quot;access&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUyMDY2ODgyLCJpYXQiOjE3NTIwNDUyODIsImp0aSI6IjI2YTRiZWYwZTBhOTQwMmRiM2U1YjExZjMzMzlkZDZmIiwidXNlcl9pZCI6MTF9.oq8ScALElAUkGUoAf3UfLyRSam94IXCjouHKrHd-MC8&quot;,
+  &quot;user&quot;: &quot;opeyemi_cn2@yopmail.com&quot;,
+  &quot;status&quot;: &quot;Success&quot;
+}
+</code></pre>
+<p><a href="#toc">Table of contents</a></p>
+<h1>Delete Post<a name='delete_post'></a></h1>
+<p>This API deletes a post. N.B:A user can only delete their own post.</p>
+<p><strong>Endpoint:</strong><code>/post/delete/?post_id=23</code></p>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:204</strong></p>
 <p><a href="#toc">Table of contents</a></p>
 
 </body>

@@ -4332,3 +4332,93 @@ This API retrieves the room name of the mentorship session. N.B:The user must ei
 ```
 
 [Table of contents](#toc)
+
+
+# Google Signin
+
+This API exchanges a google code for authentication details. N.B:A call to google's oauth2 API should have been previously made to obtain a valid code to be used for this request.
+
+**Endpoint:**`/user/google/signin/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"code":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1Njk5MDI4NSwiaWF0IjoxNzU2OTAzODg1LCJqdGkiOiI3M2ZmNGQxMmQ1NmM0ZTY3YWU2ODM4ZDk1NDE5NGUwYiIsInVzZXJfaWQiOjF9.YjOJm8AYgT0h39mdH27FF9goXOgvIIbvIEbsFjQGsMM",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU2OTI1NDg1LCJpYXQiOjE3NTY5MDM4ODUsImp0aSI6IjQxZjhkZDhkY2RhNTQ2M2RhNGViNWRlMWViMzlmYzM0IiwidXNlcl9pZCI6MX0.MQwDkQZGzeP6h_3mTOeOMJYR5sbm39RzzuXbKzk51cE",
+  "email": "saliuoazeez@gmail.com",
+  "user_type": "learner",
+  "id": 1
+}
+```
+
+[Table of contents](#toc)
+
+
+# Signup with Google
+
+This API allows a google user to signup with their account. N.B:Request to goole's oauth2 should have been previously made to obtain a valid code. Also, Someone that registers via google account is setup to be passwordless. (They can only login via google or login normally after changing their password).
+
+**Endpoint:**`/user/google/signup/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"code":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MjEzMTY4MiwiaWF0IjoxNzUyMDQ1MjgyLCJqdGkiOiJlMmNjZmY0NTU5NjY0Njk0YmUzZDJhM2EzYjI5YzI1NyIsInVzZXJfaWQiOjExfQ.A6FBhNeJ3TZAP4vFOETfT1KgPxBh_6Joe2GAHeiYLWM",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUyMDY2ODgyLCJpYXQiOjE3NTIwNDUyODIsImp0aSI6IjI2YTRiZWYwZTBhOTQwMmRiM2U1YjExZjMzMzlkZDZmIiwidXNlcl9pZCI6MTF9.oq8ScALElAUkGUoAf3UfLyRSam94IXCjouHKrHd-MC8",
+  "user": "opeyemi_cn2@yopmail.com",
+  "status": "Success"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Delete Post
+
+This API deletes a post. N.B:A user can only delete their own post.
+
+**Endpoint:**`/post/delete/?post_id=23`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[Table of contents](#toc)

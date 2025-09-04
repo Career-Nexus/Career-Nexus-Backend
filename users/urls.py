@@ -54,6 +54,6 @@ urlpatterns = [
 
 
 
-    #path('calltest/',views.CallTestView, name="call-test-view"),
+    path('callback/',views.TestCallbackView.as_view(), name="call-test-view"),
     #path('test/',views.TestView.as_view(), name="test-view")
 ]
