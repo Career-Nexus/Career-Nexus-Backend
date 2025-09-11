@@ -958,6 +958,40 @@ class RetrieveSettingsSerializer(serializers.ModelSerializer):
         fields = ["email_notify","push_notify","message_notify","weekly_summary","job_alerts","marketing","show_email","show_activity","show_location"]
 
 
+class CreateDisputeTicketSerializer(serializers.Serializer):
+    category = serializers.ChoiceField(choices=models.dispute_categories_options)
+    priority = serializers.ChoiceField(choices=models.dispute_priority_options)
+    message = serializers.CharField()
+
+    def create(self,validated_data):
+        validated_data["user"] = self.context["user"]
+        output_instance = models.DisputeTickets.objects.create(**validated_data)
+        return output_instance
+
+class DisputeTicketSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.DisputeTickets
+        fields = ["id","category","priority","message","status","admin_response","timestamp"]
+
+class AnnotateDisputeTicketSerializer(serializers.Serializer):
+    dispute = serializers.PrimaryKeyRelatedField(queryset=models.DisputeTickets.objects.all())
+    status = serializers.ChoiceField(choices=models.dispute_status_options,required=False)
+    response = serializers.CharField(required=False)
+
+    def update(self,instance,validated_data):
+        status = validated_data.get("status")
+        response = validated_data.get('response')
+        dispute = validated_data.get("dispute")
+        if status:
+            dispute.status = status
+        if response:
+            dispute.admin_response = response
+        dispute.save()
+        return dispute
+
+
+
+
 
 
 

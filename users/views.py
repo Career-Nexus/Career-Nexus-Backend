@@ -1,7 +1,9 @@
+from functools import partial
+from socket import timeout
 from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
-from django.db.models import Q
+from django.db.models import Q,Count
 #import email
 import os
 import uuid
@@ -12,7 +14,7 @@ import requests
 from django.utils.ipv6 import is_valid_ipv6_address
 from requests.api import delete
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -48,6 +50,11 @@ default_intro_video = ''
 def delete_cache(key):
     cache.delete(key)
 
+
+def invalidate_dispute_cache():
+    for page in list(range(1,10)):
+        cache_key = f"all_disputes_page_{page}"
+        cache.delete(cache_key)
 
 
 class UserPaginator(PageNumberPagination):
@@ -812,3 +819,93 @@ class SettingsView(APIView):
                 send_email.delay(template=settings_change_template,subject="Account Settings",container=container,recipient=user.email)
 
             return Response(output,status=status.HTTP_200_OK)
+
+class DisputeTicketsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    def post(self,request):
+        user = request.user
+        serializer = serializers.CreateDisputeTicketSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.DisputeTicketSerializer(output_instance,many=False).data
+            invalidate_dispute_cache()
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        user = request.user
+        status_param = request.query_params.get("status")
+        if not status_param:
+            all_disputes = models.DisputeTickets.objects.filter(user=user).order_by("-timestamp")
+        else:
+            valid_status_parameters = ["pending","in_progress","resolved","closed"]
+            if status_param not in valid_status_parameters:
+                return Response({"error":"Invalid status parameter"},status=status.HTTP_400_BAD_REQUEST)
+            else:
+                all_disputes = models.DisputeTickets.objects.filter(user=user,status=status_param).order_by("-timestamp")
+        paginator = ItemPagination()
+        paginated_items = paginator.paginate_queryset(all_disputes,request)
+        serialized_items = serializers.DisputeTicketSerializer(paginated_items,many=True).data
+        output = paginator.get_paginated_response(serialized_items).data
+        return Response(output,status=status.HTTP_200_OK)
+
+
+class AdminDisputeTicketView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsAdminUser,
+    ]
+
+    def put(self,request):
+        user = request.user
+        serializer = serializers.AnnotateDisputeTicketSerializer(data=request.data,instance=user)
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.DisputeTicketSerializer(output_instance,many=False).data
+            invalidate_dispute_cache()
+            return Response(output,status=status.HTTP_200_OK)
+
+    def get(self,request):
+        param_priority = request.query_params.get("priority")
+        param_category = request.query_params.get("category")
+        page = request.query_params.get("page",1)
+        if not param_priority and not param_category:
+            cache_key = f"all_disputes_page_{page}"
+            cached_data = cache.get(cache_key)
+            if not cached_data:
+                all_disputes = models.DisputeTickets.objects.all().order_by("-timestamp")
+                paginator = ItemPagination()
+                paginated_items = paginator.paginate_queryset(all_disputes,request)
+                serialized_items = serializers.DisputeTicketSerializer(paginated_items,many=True).data
+                output = paginator.get_paginated_response(serialized_items).data
+                cache.set(cache_key,output,timeout=3600)
+            else:
+                output = cached_data
+            return Response(output,status=status.HTTP_200_OK)
+        else:
+            if param_priority and param_category:
+                all_disputes = models.DisputeTickets.objects.filter(category=param_category,priority=param_priority).order_by("-timestamp")
+            elif param_priority:
+                all_disputes = models.DisputeTickets.objects.filter(priority=param_priority).order_by("-timestamp")
+            elif param_category:
+                all_disputes = models.DisputeTickets.objects.filter(category=param_category).order_by("-timestamp")
+            paginator = ItemPagination()
+            paginated_items = paginator.paginate_queryset(all_disputes,request)
+            serialized_items = serializers.DisputeTicketSerializer(paginated_items,many=True).data
+            output = paginator.get_paginated_response(serialized_items).data
+            return Response(output,status=status.HTTP_200_OK)
+
+class DisputeRetrieveSummaryView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsAdminUser
+    ]
+
+    def get(self,request):
+        summary = models.DisputeTickets.objects.all().values("category").annotate(count=Count("category"))
+        output_dict = {"technical":0,"payment":0,"account":0,"request":0,"others":0}
+        for item in summary:
+            category = item["category"]
+            output_dict[category] = item["count"]
+        return Response(output_dict,status=status.HTTP_200_OK)

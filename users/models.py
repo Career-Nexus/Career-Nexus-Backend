@@ -6,6 +6,28 @@ from django.contrib.auth import get_user_model
 #UserModel = get_user_model()
 
 
+dispute_categories_options = (
+    ("technical","technical"),
+    ("payment","payment"),
+    ("account","account"),
+    ('request','request'),
+    ("others","others")
+)
+
+dispute_priority_options = (
+    ("low","low"),
+    ("medium","medium"),
+    ("high","high"),
+    ("urgent","urgent")
+)
+
+dispute_status_options = (
+    ("pending","pending"),
+    ("in_progress","in_progress"),
+    ("resolved","resolved"),
+    ("closed","closed"),
+)
+
 # User Registration and authentication models ----------------------------
 
 class WaitList(models.Model):
@@ -127,7 +149,14 @@ class certification(models.Model):
 
 
 
-
+class DisputeTickets(models.Model):
+    user = models.ForeignKey(Users,on_delete=models.CASCADE)
+    category = models.CharField(choices=dispute_categories_options,max_length=50)
+    priority = models.CharField(choices=dispute_priority_options,max_length=50)
+    message = models.TextField()
+    status = models.CharField(max_length=50,choices=dispute_status_options,default="pending")
+    admin_response = models.TextField(null=True,default=None)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
 
 

@@ -4422,3 +4422,205 @@ This API deletes a post. N.B:A user can only delete their own post.
 **status code:204**
 
 [Table of contents](#toc)
+
+
+# Dispute Creation
+
+This API allows a user to create a dispute/request for the admin. N.B:The options of categories are (technical,payment,account,request,others). The options for priority are (low,medium,high,urgent).
+
+**Endpoint:**`/user/disputes/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"category":"*****"
+
+"priority":"*****"
+
+"message":"*****"
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 1,
+  "category": "request",
+  "priority": "low",
+  "message": "I just want to request for \na feature that would allow \nearning as a learner.",
+  "status": "pending",
+  "admin_response": null,
+  "timestamp": "2025-09-11T13:44:08.574258Z"
+}
+```
+
+[Table of contents](#toc)
+
+
+# User Retrieve Dispute
+
+This API allows users to retrieve disputes that has been created by them. N.B:Also by adding a status query parameter to the url, disputes could be filtered by status. (status is either pending,in_progress,resolved or closed).
+
+**Endpoint:**`/user/disputes/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 2,
+      "category": "account",
+      "priority": "high",
+      "message": "I can't log into my account.",
+      "status": "pending",
+      "admin_response": null,
+      "timestamp": "2025-09-11T13:55:26.575118Z"
+    },
+    {
+      "id": 1,
+      "category": "request",
+      "priority": "low",
+      "message": "I just want to request for \na feature that would allow \nearning as a learner.",
+      "status": "pending",
+      "admin_response": null,
+      "timestamp": "2025-09-11T13:44:08.574258Z"
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Dispute Ticket Resolution
+
+This API allows an admin to annotate a user dispute. This annotation can be either changing the status of the dispute and/or attaching an admin response to the dispute. N.B:Only an Admin is permitted for this operation.
+
+**Endpoint:**`/user/admin/disputes/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+"dispute":"*****"
+
+"status":"*****"
+
+"response":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "id": 1,
+  "category": "request",
+  "priority": "low",
+  "message": "I just want to request for \na feature that would allow \nearning as a learner.",
+  "status": "pending",
+  "admin_response": "We are working on it",
+  "timestamp": "2025-09-11T13:44:08.574258Z"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Admin Retrieve Dispute Tickets
+
+This API allows admins to retrieve dispute tickets created by users accross the system. N.B:By adding query parameters priority and/or category, ticket entries could be filtered.
+
+**Endpoint:**`/user/admin/disputes/`
+
+**Method:** `GEt`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 2,
+      "category": "account",
+      "priority": "high",
+      "message": "I can't log into my account.",
+      "status": "pending",
+      "admin_response": null,
+      "timestamp": "2025-09-11T13:55:26.575118Z"
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Dispute Summary
+
+This API retrieves and counts all disputes by categories.
+
+**Endpoint:**`/user/admin/disputes/summary/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "technical": 0,
+  "payment": 0,
+  "account": 1,
+  "request": 1,
+  "others": 0
+}
+```
+
+[Table of contents](#toc)

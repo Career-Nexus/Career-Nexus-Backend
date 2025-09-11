@@ -10,102 +10,107 @@
 3. [add certification](#add_certification)  
 4. [add education api](#add_education_api)  
 5. [add experience](#add_experience)  
-6. [alter country permissions](#alter_country_permissions)  
-7. [book mentorship session](#book_mentorship_session)  
-8. [cancel mentorship session](#cancel_mentorship_session)  
-9. [career nexus backend documentation](#career_nexus_backend_documentation)  
-10. [chat history](#chat_history)  
-11. [clear notifications](#clear_notifications)  
-12. [connection accept/reject](#connection_accept/reject)  
-13. [connection create](#connection_create)  
-14. [connection pending retrieve](#connection_pending_retrieve)  
-15. [connection recommendation](#connection_recommendation)  
-16. [connection requests sent](#connection_requests_sent)  
-17. [connection retrieve](#connection_retrieve)  
-18. [connections count](#connections_count)  
-19. [content management](#content_management)  
-20. [create a newsletter](#create_a_newsletter)  
-21. [create comment](#create_comment)  
-22. [create project catalogue](#create_project_catalogue)  
-23. [creating library content](#creating_library_content)  
-24. [delete certification](#delete_certification)  
-25. [delete education](#delete_education)  
-26. [delete experience](#delete_experience)  
-27. [delete library content](#delete_library_content)  
-28. [delete post](#delete_post)  
-29. [delete project catalogue](#delete_project_catalogue)  
-30. [follow user](#follow_user)  
-31. [followers count](#followers_count)  
-32. [following recommendation](#following_recommendation)  
-33. [followings count](#followings_count)  
-34. [forget password](#forget_password)  
-35. [general notifications](#general_notifications)  
-36. [get all notifications](#get_all_notifications)  
-37. [get chat sessions](#get_chat_sessions)  
-38. [get comment](#get_comment)  
-39. [get country phone codes](#get_country_phone_codes)  
-40. [get followings](#get_followings)  
-41. [get followings post](#get_followings_post)  
-42. [get job posts](#get_job_posts)  
-43. [get job preference](#get_job_preference)  
-44. [get newsletter](#get_newsletter)  
-45. [get other user post](#get_other_user_post)  
-46. [get own posts](#get_own_posts)  
-47. [get posts](#get_posts)  
-48. [get saved post](#get_saved_post)  
-49. [google signin](#google_signin)  
-50. [job create](#job_create)  
-51. [job notifications](#job_notifications)  
-52. [job preference](#job_preference)  
-53. [join mentorship session](#join_mentorship_session)  
-54. [like comment/reply](#like_comment/reply)  
-55. [login api](#login_api)  
-56. [logout](#logout)  
-57. [mentor search/filter](#mentor_search/filter)  
-58. [mentors recommendation](#mentors_recommendation)  
-59. [mentorship session annotation.](#mentorship_session_annotation.)  
-60. [post create](#post_create)  
-61. [post like](#post_like)  
-62. [post retrieve](#post_retrieve)  
-63. [post save](#post_save)  
-64. [post share](#post_share)  
-65. [profile completion](#profile_completion)  
-66. [profile retrieve](#profile_retrieve)  
-67. [profile update](#profile_update)  
-68. [recommended job posts.](#recommended_job_posts.)  
-69. [reply comment](#reply_comment)  
-70. [reposting](#reposting)  
-71. [retrieve education api](#retrieve_education_api)  
-72. [retrieve library contents](#retrieve_library_contents)  
-73. [retrieve mentors posts](#retrieve_mentors_posts)  
-74. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-75. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-76. [retrieve saved jobs](#retrieve_saved_jobs)  
-77. [retrieve saved mentors](#retrieve_saved_mentors)  
-78. [retrieve user settings](#retrieve_user_settings)  
-79. [save a job](#save_a_job)  
-80. [save a mentor](#save_a_mentor)  
-81. [session payment with flutterwave](#session_payment_with_flutterwave)  
-82. [session payment with stripe](#session_payment_with_stripe)  
-83. [signup with google](#signup_with_google)  
-84. [subscribe to newsletter](#subscribe_to_newsletter)  
-85. [unfollow user](#unfollow_user)  
-86. [unlike comment/reply](#unlike_comment/reply)  
-87. [unlike post](#unlike_post)  
-88. [unsave job](#unsave_job)  
-89. [unsave mentor](#unsave_mentor)  
-90. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-91. [update user account settings](#update_user_account_settings)  
-92. [updating user eperience](#updating_user_eperience)  
-93. [user analytics](#user_analytics)  
-94. [user followers](#user_followers)  
-95. [user registeration](#user_registeration)  
-96. [user search](#user_search)  
-97. [user-industry update](#user-industry_update)  
-98. [valid choice](#valid_choice)  
-99. [verify otp hash](#verify_otp_hash)  
-100. [view certification](#view_certification)  
-101. [view experience](#view_experience)  
+6. [admin retrieve dispute tickets](#admin_retrieve_dispute_tickets)  
+7. [alter country permissions](#alter_country_permissions)  
+8. [book mentorship session](#book_mentorship_session)  
+9. [cancel mentorship session](#cancel_mentorship_session)  
+10. [career nexus backend documentation](#career_nexus_backend_documentation)  
+11. [chat history](#chat_history)  
+12. [clear notifications](#clear_notifications)  
+13. [connection accept/reject](#connection_accept/reject)  
+14. [connection create](#connection_create)  
+15. [connection pending retrieve](#connection_pending_retrieve)  
+16. [connection recommendation](#connection_recommendation)  
+17. [connection requests sent](#connection_requests_sent)  
+18. [connection retrieve](#connection_retrieve)  
+19. [connections count](#connections_count)  
+20. [content management](#content_management)  
+21. [create a newsletter](#create_a_newsletter)  
+22. [create comment](#create_comment)  
+23. [create project catalogue](#create_project_catalogue)  
+24. [creating library content](#creating_library_content)  
+25. [delete certification](#delete_certification)  
+26. [delete education](#delete_education)  
+27. [delete experience](#delete_experience)  
+28. [delete library content](#delete_library_content)  
+29. [delete post](#delete_post)  
+30. [delete project catalogue](#delete_project_catalogue)  
+31. [dispute creation](#dispute_creation)  
+32. [dispute summary](#dispute_summary)  
+33. [dispute ticket resolution](#dispute_ticket_resolution)  
+34. [follow user](#follow_user)  
+35. [followers count](#followers_count)  
+36. [following recommendation](#following_recommendation)  
+37. [followings count](#followings_count)  
+38. [forget password](#forget_password)  
+39. [general notifications](#general_notifications)  
+40. [get all notifications](#get_all_notifications)  
+41. [get chat sessions](#get_chat_sessions)  
+42. [get comment](#get_comment)  
+43. [get country phone codes](#get_country_phone_codes)  
+44. [get followings](#get_followings)  
+45. [get followings post](#get_followings_post)  
+46. [get job posts](#get_job_posts)  
+47. [get job preference](#get_job_preference)  
+48. [get newsletter](#get_newsletter)  
+49. [get other user post](#get_other_user_post)  
+50. [get own posts](#get_own_posts)  
+51. [get posts](#get_posts)  
+52. [get saved post](#get_saved_post)  
+53. [google signin](#google_signin)  
+54. [job create](#job_create)  
+55. [job notifications](#job_notifications)  
+56. [job preference](#job_preference)  
+57. [join mentorship session](#join_mentorship_session)  
+58. [like comment/reply](#like_comment/reply)  
+59. [login api](#login_api)  
+60. [logout](#logout)  
+61. [mentor search/filter](#mentor_search/filter)  
+62. [mentors recommendation](#mentors_recommendation)  
+63. [mentorship session annotation.](#mentorship_session_annotation.)  
+64. [post create](#post_create)  
+65. [post like](#post_like)  
+66. [post retrieve](#post_retrieve)  
+67. [post save](#post_save)  
+68. [post share](#post_share)  
+69. [profile completion](#profile_completion)  
+70. [profile retrieve](#profile_retrieve)  
+71. [profile update](#profile_update)  
+72. [recommended job posts.](#recommended_job_posts.)  
+73. [reply comment](#reply_comment)  
+74. [reposting](#reposting)  
+75. [retrieve education api](#retrieve_education_api)  
+76. [retrieve library contents](#retrieve_library_contents)  
+77. [retrieve mentors posts](#retrieve_mentors_posts)  
+78. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+79. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+80. [retrieve saved jobs](#retrieve_saved_jobs)  
+81. [retrieve saved mentors](#retrieve_saved_mentors)  
+82. [retrieve user settings](#retrieve_user_settings)  
+83. [save a job](#save_a_job)  
+84. [save a mentor](#save_a_mentor)  
+85. [session payment with flutterwave](#session_payment_with_flutterwave)  
+86. [session payment with stripe](#session_payment_with_stripe)  
+87. [signup with google](#signup_with_google)  
+88. [subscribe to newsletter](#subscribe_to_newsletter)  
+89. [unfollow user](#unfollow_user)  
+90. [unlike comment/reply](#unlike_comment/reply)  
+91. [unlike post](#unlike_post)  
+92. [unsave job](#unsave_job)  
+93. [unsave mentor](#unsave_mentor)  
+94. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+95. [update user account settings](#update_user_account_settings)  
+96. [updating user eperience](#updating_user_eperience)  
+97. [user analytics](#user_analytics)  
+98. [user followers](#user_followers)  
+99. [user registeration](#user_registeration)  
+100. [user retrieve dispute](#user_retrieve_dispute)  
+101. [user search](#user_search)  
+102. [user-industry update](#user-industry_update)  
+103. [valid choice](#valid_choice)  
+104. [verify otp hash](#verify_otp_hash)  
+105. [view certification](#view_certification)  
+106. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -4521,5 +4526,207 @@ This API deletes a post. N.B:A user can only delete their own post.
 ## Response body
 
 **status code:204**
+
+[Table of contents](#toc)
+
+
+# Dispute Creation<a name='dispute_creation'></a>
+
+This API allows a user to create a dispute/request for the admin. N.B:The options of categories are (technical,payment,account,request,others). The options for priority are (low,medium,high,urgent).
+
+**Endpoint:**`/user/disputes/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"category":"*****"
+
+"priority":"*****"
+
+"message":"*****"
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 1,
+  "category": "request",
+  "priority": "low",
+  "message": "I just want to request for \na feature that would allow \nearning as a learner.",
+  "status": "pending",
+  "admin_response": null,
+  "timestamp": "2025-09-11T13:44:08.574258Z"
+}
+```
+
+[Table of contents](#toc)
+
+
+# User Retrieve Dispute<a name='user_retrieve_dispute'></a>
+
+This API allows users to retrieve disputes that has been created by them. N.B:Also by adding a status query parameter to the url, disputes could be filtered by status. (status is either pending,in_progress,resolved or closed).
+
+**Endpoint:**`/user/disputes/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 2,
+      "category": "account",
+      "priority": "high",
+      "message": "I can't log into my account.",
+      "status": "pending",
+      "admin_response": null,
+      "timestamp": "2025-09-11T13:55:26.575118Z"
+    },
+    {
+      "id": 1,
+      "category": "request",
+      "priority": "low",
+      "message": "I just want to request for \na feature that would allow \nearning as a learner.",
+      "status": "pending",
+      "admin_response": null,
+      "timestamp": "2025-09-11T13:44:08.574258Z"
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Dispute Ticket Resolution<a name='dispute_ticket_resolution'></a>
+
+This API allows an admin to annotate a user dispute. This annotation can be either changing the status of the dispute and/or attaching an admin response to the dispute. N.B:Only an Admin is permitted for this operation.
+
+**Endpoint:**`/user/admin/disputes/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+"dispute":"*****"
+
+"status":"*****"
+
+"response":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "id": 1,
+  "category": "request",
+  "priority": "low",
+  "message": "I just want to request for \na feature that would allow \nearning as a learner.",
+  "status": "pending",
+  "admin_response": "We are working on it",
+  "timestamp": "2025-09-11T13:44:08.574258Z"
+}
+```
+
+[Table of contents](#toc)
+
+
+# Admin Retrieve Dispute Tickets<a name='admin_retrieve_dispute_tickets'></a>
+
+This API allows admins to retrieve dispute tickets created by users accross the system. N.B:By adding query parameters priority and/or category, ticket entries could be filtered.
+
+**Endpoint:**`/user/admin/disputes/`
+
+**Method:** `GEt`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 2,
+      "category": "account",
+      "priority": "high",
+      "message": "I can't log into my account.",
+      "status": "pending",
+      "admin_response": null,
+      "timestamp": "2025-09-11T13:55:26.575118Z"
+    }
+  ]
+}
+```
+
+[Table of contents](#toc)
+
+
+# Dispute Summary<a name='dispute_summary'></a>
+
+This API retrieves and counts all disputes by categories.
+
+**Endpoint:**`/user/admin/disputes/summary/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "technical": 0,
+  "payment": 0,
+  "account": 1,
+  "request": 1,
+  "others": 0
+}
+```
 
 [Table of contents](#toc)

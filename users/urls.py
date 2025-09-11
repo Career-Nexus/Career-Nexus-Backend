@@ -45,8 +45,9 @@ urlpatterns = [
     path("search/",views.UserSearchView.as_view(),name="User-Search-View"),
     path("google/signup/",views.GoogleSignupView.as_view(),name="Google-Signup"),
     path("google/signin/",views.GoogleSignInView.as_view(),name="Google-signin"),
-
-
+    path("disputes/", views.DisputeTicketsView.as_view(),name="Dispute-View"),
+    path("admin/disputes/",views.AdminDisputeTicketView.as_view(),name="Admin-Dispute-View"),
+    path("admin/disputes/summary/",views.DisputeRetrieveSummaryView.as_view(),name="Dispute-Summary"),
 
 
 
