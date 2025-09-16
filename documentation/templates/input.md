@@ -4624,3 +4624,28 @@ This API retrieves and counts all disputes by categories.
 ```
 
 [Table of contents](#toc)
+
+
+# Delete User
+
+This is a temporary API that allows deletion of a user.
+
+**Endpoint:**`/user/delete/`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+{
+
+"email":"*****"
+
+}
+
+```
+## Response body
+
+**status code:204**
+
+[["/user/delete/","DELETE"]][Table of contents](#toc)

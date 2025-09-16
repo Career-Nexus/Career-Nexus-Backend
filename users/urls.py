@@ -31,7 +31,7 @@ urlpatterns = [
 
 	path("subscribe/",views.NewsLetterSubscribeView.as_view(), name="News-Letter-Subscribe"),
 	path("unsubscribe/",views.NewsLetterUnsubscribeView.as_view(), name="News-Letter-Unsubscribe"),
-	path("delete/",views.DeleteWaitListView.as_view(),name="Delete-Waitlist"),
+	path("delete/",views.DeleteUserView.as_view(),name="Delete-Waitlist"),
     #path('upload/',views.TestView.as_view(),name="Test-view"),
     path('profile-update/',views.PersonalProfileView.as_view(),name="Update-Personal-profile"),
     path('experience/',views.ExperienceView.as_view(),name="Add-and-view-experience"),

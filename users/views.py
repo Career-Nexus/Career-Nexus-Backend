@@ -376,8 +376,8 @@ class LogoutView(APIView):
 
 
 
-class DeleteWaitListView(APIView):
-    serializer_class = serializers.DeleteWaitListSerializer
+class DeleteUserView(APIView):
+    serializer_class = serializers.DeleteUserSerializer
     permission_classes= [
             AllowAny,
             ]
@@ -386,7 +386,7 @@ class DeleteWaitListView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
             email = serializer.validated_data.get("email")
-            models.WaitList.objects.get(email=email).delete()
+            models.Users.objects.get(email=email).delete()
             return Response({"Deleted Successfully"},status=status.HTTP_204_NO_CONTENT)
 
 

@@ -431,11 +431,11 @@ class LogoutSerializer(serializers.Serializer):
         except:
             raise serializers.ValidationError("Invalid Token")
 
-class DeleteWaitListSerializer(serializers.Serializer):
+class DeleteUserSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
     def validate_email(self,value):
-        if models.WaitList.objects.filter(email=value).exists():
+        if models.Users.objects.filter(email=value).exists():
             return value
         else:
             raise serializers.ValidationError("Unregistered User")
