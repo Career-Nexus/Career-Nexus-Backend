@@ -386,7 +386,7 @@ class DeleteUserView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid(raise_exception=True):
             email = serializer.validated_data.get("email")
-            models.Users.objects.get(email=email).delete()
+            models.Users.objects.filter(email=email).delete()
             return Response({"Deleted Successfully"},status=status.HTTP_204_NO_CONTENT)
 
 
