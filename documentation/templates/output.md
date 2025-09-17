@@ -27,91 +27,93 @@
 20. [content management](#content_management)  
 21. [create a newsletter](#create_a_newsletter)  
 22. [create comment](#create_comment)  
-23. [create project catalogue](#create_project_catalogue)  
-24. [creating library content](#creating_library_content)  
-25. [delete certification](#delete_certification)  
-26. [delete education](#delete_education)  
-27. [delete experience](#delete_experience)  
-28. [delete library content](#delete_library_content)  
-29. [delete post](#delete_post)  
-30. [delete project catalogue](#delete_project_catalogue)  
-31. [delete user](#delete_user)  
-32. [dispute creation](#dispute_creation)  
-33. [dispute summary](#dispute_summary)  
-34. [dispute ticket resolution](#dispute_ticket_resolution)  
-35. [follow user](#follow_user)  
-36. [followers count](#followers_count)  
-37. [following recommendation](#following_recommendation)  
-38. [followings count](#followings_count)  
-39. [forget password](#forget_password)  
-40. [general notifications](#general_notifications)  
-41. [get all notifications](#get_all_notifications)  
-42. [get chat sessions](#get_chat_sessions)  
-43. [get comment](#get_comment)  
-44. [get country phone codes](#get_country_phone_codes)  
-45. [get followings](#get_followings)  
-46. [get followings post](#get_followings_post)  
-47. [get job posts](#get_job_posts)  
-48. [get job preference](#get_job_preference)  
-49. [get newsletter](#get_newsletter)  
-50. [get other user post](#get_other_user_post)  
-51. [get own posts](#get_own_posts)  
-52. [get posts](#get_posts)  
-53. [get saved post](#get_saved_post)  
-54. [google signin](#google_signin)  
-55. [job create](#job_create)  
-56. [job notifications](#job_notifications)  
-57. [job preference](#job_preference)  
-58. [join mentorship session](#join_mentorship_session)  
-59. [like comment/reply](#like_comment/reply)  
-60. [login api](#login_api)  
-61. [logout](#logout)  
-62. [mentor search/filter](#mentor_search/filter)  
-63. [mentors recommendation](#mentors_recommendation)  
-64. [mentorship session annotation.](#mentorship_session_annotation.)  
-65. [post create](#post_create)  
-66. [post like](#post_like)  
-67. [post retrieve](#post_retrieve)  
-68. [post save](#post_save)  
-69. [post share](#post_share)  
-70. [profile completion](#profile_completion)  
-71. [profile retrieve](#profile_retrieve)  
-72. [profile update](#profile_update)  
-73. [recommended job posts.](#recommended_job_posts.)  
-74. [reply comment](#reply_comment)  
-75. [reposting](#reposting)  
-76. [retrieve education api](#retrieve_education_api)  
-77. [retrieve library contents](#retrieve_library_contents)  
-78. [retrieve mentors posts](#retrieve_mentors_posts)  
-79. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-80. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-81. [retrieve saved jobs](#retrieve_saved_jobs)  
-82. [retrieve saved mentors](#retrieve_saved_mentors)  
-83. [retrieve user settings](#retrieve_user_settings)  
-84. [save a job](#save_a_job)  
-85. [save a mentor](#save_a_mentor)  
-86. [session payment with flutterwave](#session_payment_with_flutterwave)  
-87. [session payment with stripe](#session_payment_with_stripe)  
-88. [signup with google](#signup_with_google)  
-89. [subscribe to newsletter](#subscribe_to_newsletter)  
-90. [unfollow user](#unfollow_user)  
-91. [unlike comment/reply](#unlike_comment/reply)  
-92. [unlike post](#unlike_post)  
-93. [unsave job](#unsave_job)  
-94. [unsave mentor](#unsave_mentor)  
-95. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-96. [update user account settings](#update_user_account_settings)  
-97. [updating user eperience](#updating_user_eperience)  
-98. [user analytics](#user_analytics)  
-99. [user followers](#user_followers)  
-100. [user registeration](#user_registeration)  
-101. [user retrieve dispute](#user_retrieve_dispute)  
-102. [user search](#user_search)  
-103. [user-industry update](#user-industry_update)  
-104. [valid choice](#valid_choice)  
-105. [verify otp hash](#verify_otp_hash)  
-106. [view certification](#view_certification)  
-107. [view experience](#view_experience)  
+23. [create corporate account](#create_corporate_account)  
+24. [create project catalogue](#create_project_catalogue)  
+25. [creating library content](#creating_library_content)  
+26. [delete certification](#delete_certification)  
+27. [delete education](#delete_education)  
+28. [delete experience](#delete_experience)  
+29. [delete library content](#delete_library_content)  
+30. [delete post](#delete_post)  
+31. [delete project catalogue](#delete_project_catalogue)  
+32. [delete user](#delete_user)  
+33. [dispute creation](#dispute_creation)  
+34. [dispute summary](#dispute_summary)  
+35. [dispute ticket resolution](#dispute_ticket_resolution)  
+36. [follow user](#follow_user)  
+37. [followers count](#followers_count)  
+38. [following recommendation](#following_recommendation)  
+39. [followings count](#followings_count)  
+40. [forget password](#forget_password)  
+41. [general notifications](#general_notifications)  
+42. [get all notifications](#get_all_notifications)  
+43. [get chat sessions](#get_chat_sessions)  
+44. [get comment](#get_comment)  
+45. [get country phone codes](#get_country_phone_codes)  
+46. [get followings](#get_followings)  
+47. [get followings post](#get_followings_post)  
+48. [get job posts](#get_job_posts)  
+49. [get job preference](#get_job_preference)  
+50. [get newsletter](#get_newsletter)  
+51. [get other user post](#get_other_user_post)  
+52. [get own posts](#get_own_posts)  
+53. [get posts](#get_posts)  
+54. [get saved post](#get_saved_post)  
+55. [google signin](#google_signin)  
+56. [job create](#job_create)  
+57. [job notifications](#job_notifications)  
+58. [job preference](#job_preference)  
+59. [join mentorship session](#join_mentorship_session)  
+60. [like comment/reply](#like_comment/reply)  
+61. [login api](#login_api)  
+62. [logout](#logout)  
+63. [mentor search/filter](#mentor_search/filter)  
+64. [mentors recommendation](#mentors_recommendation)  
+65. [mentorship session annotation.](#mentorship_session_annotation.)  
+66. [post create](#post_create)  
+67. [post like](#post_like)  
+68. [post retrieve](#post_retrieve)  
+69. [post save](#post_save)  
+70. [post share](#post_share)  
+71. [profile completion](#profile_completion)  
+72. [profile retrieve](#profile_retrieve)  
+73. [profile update](#profile_update)  
+74. [recommended job posts.](#recommended_job_posts.)  
+75. [reply comment](#reply_comment)  
+76. [reposting](#reposting)  
+77. [retrieve education api](#retrieve_education_api)  
+78. [retrieve library contents](#retrieve_library_contents)  
+79. [retrieve linked accounts](#retrieve_linked_accounts)  
+80. [retrieve mentors posts](#retrieve_mentors_posts)  
+81. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+82. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+83. [retrieve saved jobs](#retrieve_saved_jobs)  
+84. [retrieve saved mentors](#retrieve_saved_mentors)  
+85. [retrieve user settings](#retrieve_user_settings)  
+86. [save a job](#save_a_job)  
+87. [save a mentor](#save_a_mentor)  
+88. [session payment with flutterwave](#session_payment_with_flutterwave)  
+89. [session payment with stripe](#session_payment_with_stripe)  
+90. [signup with google](#signup_with_google)  
+91. [subscribe to newsletter](#subscribe_to_newsletter)  
+92. [unfollow user](#unfollow_user)  
+93. [unlike comment/reply](#unlike_comment/reply)  
+94. [unlike post](#unlike_post)  
+95. [unsave job](#unsave_job)  
+96. [unsave mentor](#unsave_mentor)  
+97. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+98. [update user account settings](#update_user_account_settings)  
+99. [updating user eperience](#updating_user_eperience)  
+100. [user analytics](#user_analytics)  
+101. [user followers](#user_followers)  
+102. [user registeration](#user_registeration)  
+103. [user retrieve dispute](#user_retrieve_dispute)  
+104. [user search](#user_search)  
+105. [user-industry update](#user-industry_update)  
+106. [valid choice](#valid_choice)  
+107. [verify otp hash](#verify_otp_hash)  
+108. [view certification](#view_certification)  
+109. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -4756,3 +4758,94 @@ This is a temporary API that allows deletion of a user.
 **status code:204**
 
 [["/user/delete/","DELETE"]][Table of contents](#toc)
+
+
+# Create Corporate Account<a name='create_corporate_account'></a>
+
+This API creates a corporate user account for a previously registered user and links it to the user's account. N.B:The main user must be logged in to create a corporate profile. Also, the logo field upload is optional.
+
+**Endpoint:**`/user/corporate/signup/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"company_name":"*****"
+
+"company_email":"*****"
+
+"company_type":"*****"
+
+"company_size":"*****"
+
+"industry":"*****"
+
+"website":"*****"
+
+"location":"*****"
+
+"tagline":"*****"
+
+"logo":"*****"
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 20,
+  "company_name": "Bojowa Ventures Limited",
+  "company_type": "private",
+  "company_size": "1-10",
+  "country_code": "+000",
+  "phone_number": "00000000000",
+  "location": "Lagos",
+  "website": "www.bojventltd.com",
+  "tagline": "Dealers in recycled wastes and compositions.",
+  "logo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg"
+}
+```
+
+[["/user/corporate/signup/","POST"]][Table of contents](#toc)
+
+
+# Retrieve Linked Accounts<a name='retrieve_linked_accounts'></a>
+
+This API retrieves all the accounts linked to currently logged in account.
+
+**Endpoint:**`/user/linked-accounts/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "account": {
+      "id": 21,
+      "name": "Bojowa Ventures Limited",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+      "extras": "Dealers in recycled wastes and compositions."
+    }
+  }
+]
+```
+
+[["/user/linked-accounts/","GET"]][Table of contents](#toc)

@@ -62,10 +62,19 @@ class Users(AbstractUser):
     show_location = models.BooleanField(default=False)
 
 
-
     def __str__(self):
         return f"{self.email}|{self.profile.profile_photo}"
-        
+
+
+class LinkedAccounts(models.Model):
+    main_account = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="linked_account")
+    child = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="child_account")
+
+
+
+
+
+
 class Otp(models.Model):
     otp = models.CharField(max_length=100)
     hash = models.CharField(max_length=300)
@@ -97,7 +106,8 @@ class PersonalProfile(models.Model):
     intro_video = models.CharField(max_length=300,default='')
     summary = models.CharField(max_length=5000,default='')
     resume = models.CharField(max_length=5000,default='')
-    #Extra properties for mentors
+
+    #Properties for mentors
     years_of_experience = models.IntegerField(null=True,blank=True)
     availability = models.CharField(null=True,blank=True)
     current_job = models.CharField(null=True,blank=True)
@@ -107,6 +117,15 @@ class PersonalProfile(models.Model):
     session_rate = models.IntegerField(default=0)
     timezone = models.CharField(default="UTC")
     linkedin_url = models.CharField(null=True,blank=True)
+
+    #Properties for Corporate Account.
+    company_name = models.CharField(max_length=500,null=True,blank=True)
+    company_type = models.CharField(max_length=100,null=True,blank=True)
+    company_size = models.CharField(max_length=50,null=True,blank=True)
+    website = models.CharField(max_length=250,null=True,blank=True)
+    logo = models.CharField(max_length=300,default="https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png")
+    tagline = models.CharField(max_length=1000,null=True,blank=True)
+
     
     #Ensuring that the user id is always the same as profile id
     @property

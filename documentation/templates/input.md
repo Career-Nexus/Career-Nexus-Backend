@@ -4649,3 +4649,94 @@ This is a temporary API that allows deletion of a user.
 **status code:204**
 
 [["/user/delete/","DELETE"]][Table of contents](#toc)
+
+
+# Create Corporate Account
+
+This API creates a corporate user account for a previously registered user and links it to the user's account. N.B:The main user must be logged in to create a corporate profile. Also, the logo field upload is optional.
+
+**Endpoint:**`/user/corporate/signup/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"company_name":"*****"
+
+"company_email":"*****"
+
+"company_type":"*****"
+
+"company_size":"*****"
+
+"industry":"*****"
+
+"website":"*****"
+
+"location":"*****"
+
+"tagline":"*****"
+
+"logo":"*****"
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "id": 20,
+  "company_name": "Bojowa Ventures Limited",
+  "company_type": "private",
+  "company_size": "1-10",
+  "country_code": "+000",
+  "phone_number": "00000000000",
+  "location": "Lagos",
+  "website": "www.bojventltd.com",
+  "tagline": "Dealers in recycled wastes and compositions.",
+  "logo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg"
+}
+```
+
+[["/user/corporate/signup/","POST"]][Table of contents](#toc)
+
+
+# Retrieve Linked Accounts
+
+This API retrieves all the accounts linked to currently logged in account.
+
+**Endpoint:**`/user/linked-accounts/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "account": {
+      "id": 21,
+      "name": "Bojowa Ventures Limited",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+      "extras": "Dealers in recycled wastes and compositions."
+    }
+  }
+]
+```
+
+[["/user/linked-accounts/","GET"]][Table of contents](#toc)

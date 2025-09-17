@@ -82,16 +82,16 @@ class FLWPaymentCallBack(APIView):
         container = [transact_status,transaction_id,tx_ref]
         for item in container:
             if not item:
-                return Response({"Error":"Invalid Payment References"},status=status.HTTP_400_BAD_REQUEST)
+                return redirect(settings.FLUTTERWAVE_FAILURE_URL)
 
         models.TransactionCallbacks.objects.create(tx_ref=tx_ref,transaction_id=transaction_id)
 
         if transact_status == "successful":
             verification = verify_payment(transaction_id,tx_ref)
             if verification:
-                return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-success/")
+                return redirect(settings.FLUTTERWAVE_SUCCESS_URL)
         
-        return redirect("https://master.dnoqikexgmm2j.amplifyapp.com/payment-failed/")
+        return redirect(settings.FLUTTERWAVE_FAILURE_URL)
 
 
 

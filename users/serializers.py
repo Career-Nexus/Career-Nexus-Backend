@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 
+from django.db import transaction
+
 
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
@@ -39,7 +41,6 @@ CHOICES = get_choices()
 
 user_options = CHOICES["user"]
 
-
 industry_options = CHOICES["industry"]
 
 employment_type_options = CHOICES["employment_type"]
@@ -47,6 +48,10 @@ employment_type_options = CHOICES["employment_type"]
 availability_options = CHOICES["availability"]
 
 timezones_choices = CHOICES["timezones"]
+
+company_type_options = CHOICES["company_type"]
+
+company_size = CHOICES["company_size"]
 
 
 
@@ -275,15 +280,58 @@ class VerifyHashSerializer(serializers.Serializer):
         email = validated_data.get("email")
         password = validated_data.get("password")
         username = validated_data.get("username")
-        user = models.Users.objects.create_user(email=email.lower(),password=password,username=username)
-        models.PersonalProfile.objects.create(user=user)
+        with transaction.atomic():
+            user = models.Users.objects.create_user(email=email.lower(),password=password,username=username)
+            models.PersonalProfile.objects.create(user=user)
         return user
+
+
+class CreateCorporateAccountSerializer(serializers.Serializer):
+    company_name = serializers.CharField(max_length=500)
+    company_email = serializers.EmailField()
+    company_type = serializers.ChoiceField(choices=company_type_options)
+    company_size = serializers.ChoiceField(choices=company_size)
+    industry = serializers.ChoiceField(choices=industry_options)
+    website = serializers.CharField()
+    location = serializers.CharField()
+    logo = serializers.ImageField(required=False)
+    tagline = serializers.CharField()
+
+    def validate_company_email(self,value):
+        if models.Users.objects.filter(email=value).exists():
+            raise serializers.ValidationError("An account with this email already exists.")
+        return value
+
+    def validate_logo(self,file):
+        if not file.name.endswith((".png",".jpeg",".jpg")):
+            raise serializers.ValidationError("Invalid File format")
+        if file.size/1000000 > 2:
+            raise serializers.ValidationError("File too large")
+        return file
+
+    def create(self,validated_data):
+        user = self.context["user"]
+        email = validated_data.pop("company_email")
+        industry = validated_data.pop("industry")
+
+        logo = validated_data.get("logo")
+        if logo:
+            file_name = f"profile_photo/company_logo/{uuid.uuid4()}{logo.name}"
+            file_path = default_storage.save(file_name,ContentFile(logo.read()))
+            validated_data["logo"] = default_storage.url(file_path)
+
+        with transaction.atomic():
+            account = models.Users.objects.create_user(username=str(uuid.uuid4()),email=email,industry=industry,user_type="employer")
+            validated_data["user"] = account
+            models.PersonalProfile.objects.create(**validated_data)
+            models.LinkedAccounts.objects.create(main_account=user,child=account)
+        return account
 
 
 
     #email only --> sends otp
     #otp/hash only --> verifies request validity and sets database parameters accordingly.
-    #email and password1 and password2 --> Attempts to change password while carrying out time and status verification
+#email and password1 and password2 --> Attempts to change password while carrying out time and status verification
 
 class ForgetPasswordSerializer(serializers.Serializer):
     email = serializers.EmailField(required=False)
@@ -427,7 +475,7 @@ class LogoutSerializer(serializers.Serializer):
         try:
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return refresh
+            return refresh_token
         except:
             raise serializers.ValidationError("Invalid Token")
 
@@ -467,6 +515,13 @@ class PersonalProfileSerializer(serializers.Serializer):
     mentorship_styles = serializers.JSONField(required=False)
     session_rate = serializers.IntegerField(required=False)
     linkedin_url = serializers.CharField(max_length=500,required=False)
+
+    def validate_profile_photo(self,file):
+        if not file.name.endswith((".png",".jpg",".jpeg")):
+            raise serializers.ValidationError("Invalid file format")
+        if (file.size/1000000) > 2:
+            raise serializers.ValidationError("File too large.")
+        return file
 
     def validate_session_rate(self,value):
         session_rates = list(range(1,11))
@@ -713,6 +768,53 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
         data = CertificationSerializer(certifications,many=True).data
         return data
 
+
+class RetrieveCorporateUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.PersonalProfile
+        fields = ["id","company_name","company_type","company_size","country_code","phone_number","location","website","tagline","logo","cover_photo"]
+
+
+class MiniUserSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    profile_photo = serializers.SerializerMethodField()
+    extras = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Users
+        fields = ["id","name","profile_photo","extras"]
+
+    def get_name(self,obj):
+        if obj.user_type == "employer":
+            return obj.profile.company_name
+        return f"{obj.profile.first_name} {obj.profile.middle_name} {obj.profile.last_name}"
+
+    def get_profile_photo(self,obj):
+        if obj.user_type == "employer":
+            return obj.profile.logo
+        return obj.profile.profile_photo
+
+    def get_extras(self,obj):
+        if obj.user_type == "employer":
+            return obj.profile.tagline
+        return obj.profile.qualification
+
+
+class LinkedAccountsSerializer(serializers.Serializer):
+    account = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.LinkedAccounts
+        fields = ["account"]
+
+    def get_account(self,obj):
+        user = self.context["user"]
+        if obj.main_account == user:
+            output = MiniUserSerializer(obj.child,many=False).data
+        else:
+            output = MiniUserSerializer(obj.main_account,many=False).data
+        return output
 
 
 

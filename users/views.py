@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
 from django.db.models import Q,Count
+from django.db import transaction
 #import email
 import os
 import uuid
@@ -230,9 +231,9 @@ class GoogleSignupView(APIView):
                     last_name = name[1]
                 else:
                     last_name = "N/A"
-
-                new_user = models.Users.objects.create_user(username=str(uuid.uuid4()),email=email,first_name=first_name,last_name=last_name)
-                models.PersonalProfile.objects.create(user=new_user)
+                with transaction.atomic():
+                    new_user = models.Users.objects.create_user(username=str(uuid.uuid4()),email=email)
+                    models.PersonalProfile.objects.create(user=new_user,first_name=first_name,last_name=last_name)
 
                 token =RefreshToken.for_user(new_user)
                 output = {
@@ -243,6 +244,33 @@ class GoogleSignupView(APIView):
                 }
                 return Response(output,status=status.HTTP_200_OK)
 
+
+class CreateCorporateAccountView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    def post(self,request):
+        user = request.user
+        serializer = serializers.CreateCorporateAccountSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.RetrieveCorporateUserSerializer(output_instance.profile,many=False).data
+            return Response(output,status=status.HTTP_201_CREATED)
+
+
+class LinkedAccountsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        user = request.user
+        linked_accounts = models.LinkedAccounts.objects.filter(
+            Q(main_account=user)|
+            Q(child=user)
+        )
+        output = serializers.LinkedAccountsSerializer(linked_accounts,many=True,context={"user":user}).data
+        return Response(output,status=status.HTTP_200_OK)
 
 
 
@@ -387,7 +415,7 @@ class DeleteUserView(APIView):
         if serializer.is_valid(raise_exception=True):
             email = serializer.validated_data.get("email")
             models.Users.objects.filter(email=email).delete()
-            return Response({"Deleted Successfully"},status=status.HTTP_204_NO_CONTENT)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -458,7 +486,8 @@ class RetreiveProfileView(APIView):
                 profile = models.PersonalProfile.objects.get(user=user)
                 if user.user_type == "learner":
                     output = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
-                #TODO establish serializer for user_type=employer
+                elif user.user_type == "employer":
+                    output = serializers.RetrieveCorporateUserSerializer(profile,many=False).data
                 else:
                     output = serializers.RetrieveMentorProfileSerializer(profile,many=False,context={"user":user}).data
                 cache.set(cache_key,output,timeout=7200)
@@ -479,7 +508,8 @@ class RetreiveProfileView(APIView):
                 models.ProfileView.objects.get_or_create(viewer=request.user,viewed=user)
                 if user.user_type == "learner":
                     profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
-                #TODO establish serializer for user_type=employer
+                elif user.user_type == "employer":
+                    profile_data = serializers.RetrieveCorporateUserSerializer(profile,many=False).data
                 else:
                     profile_data = serializers.RetrieveMentorProfileSerializer(profile,many=False,context={"user":request.user}).data
                 cache.set(cache_key,profile_data,timeout=7200)                   
@@ -819,6 +849,12 @@ class SettingsView(APIView):
                 send_email.delay(template=settings_change_template,subject="Account Settings",container=container,recipient=user.email)
 
             return Response(output,status=status.HTTP_200_OK)
+
+
+
+
+
+
 
 class DisputeTicketsView(APIView):
     permission_classes = [

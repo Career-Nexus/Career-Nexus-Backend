@@ -1,52 +1,52 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Documentation</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-            <style>
-                body {
-                    box-sizing: border-box;
-                    min-width: 200px;
-                    max-width: 980px;
-                    margin: 0 auto;
-                    padding: 45px;
-                }
-            </style>
-        </head>
-        <body class="markdown-body">
-            <input type="text" id="searchBox" placeholder="Search index..." />
-                <ul id="searchResults"></ul>
-            
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            const searchBox = document.getElementById('searchBox');
-            const indexLinks = document.querySelectorAll('#index li a');
-            const resultsList = document.getElementById('searchResults');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <input type="text" id="searchBox" placeholder="Search index..." />
+    <ul id="searchResults"></ul>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchBox = document.getElementById('searchBox');
+  const indexLinks = document.querySelectorAll('#index li a');
+  const resultsList = document.getElementById('searchResults');
 
-            searchBox.addEventListener('input', function () {
-                const query = searchBox.value.toLowerCase();
-                resultsList.innerHTML = ''; // Clear previous results
+  searchBox.addEventListener('input', function () {
+    const query = searchBox.value.toLowerCase();
+    resultsList.innerHTML = ''; // Clear previous results
 
-                if (!query) return;
+    if (!query) return;
 
-                indexLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = link.href;
-                    a.textContent = link.textContent;
-                    li.appendChild(a);
-                    resultsList.appendChild(li);
-                }
-                });
-            });
-            });
+    indexLinks.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      if (text.includes(query)) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.textContent;
+        li.appendChild(a);
+        resultsList.appendChild(li);
+      }
+    });
+  });
+});
 
-            let currentEndpoint = '';
+        let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,11 +87,12 @@
             }
 
         }
-        </script>
-                    
+
+</script>
 
 
-        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+    
+<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -118,6 +119,7 @@
 <li><a href="#content_management">content management</a></li>
 <li><a href="#create_a_newsletter">create a newsletter</a></li>
 <li><a href="#create_comment">create comment</a></li>
+<li><a href="#create_corporate_account">create corporate account</a></li>
 <li><a href="#create_project_catalogue">create project catalogue</a></li>
 <li><a href="#creating_library_content">creating library content</a></li>
 <li><a href="#delete_certification">delete certification</a></li>
@@ -173,6 +175,7 @@
 <li><a href="#reposting">reposting</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
 <li><a href="#retrieve_library_contents">retrieve library contents</a></li>
+<li><a href="#retrieve_linked_accounts">retrieve linked accounts</a></li>
 <li><a href="#retrieve_mentors_posts">retrieve mentors posts</a></li>
 <li><a href="#retrieve_mentorship_sessions">retrieve mentorship sessions</a></li>
 <li><a href="#retrieve_portfolio_projects">retrieve portfolio projects</a></li>
@@ -3613,8 +3616,75 @@ job:*****
 <h2>Response body</h2>
 <p><strong>status code:204</strong></p>
 <p><button onclick="openApiTester('/user/delete/','DELETE')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Create Corporate Account<a name='create_corporate_account'></a></h1>
+<p>This API creates a corporate user account for a previously registered user and links it to the user's account. N.B:The main user must be logged in to create a corporate profile. Also, the logo field upload is optional.</p>
+<p><strong>Endpoint:</strong><code>/user/corporate/signup/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
 
-        
+&quot;company_name&quot;:&quot;*****&quot;
+
+&quot;company_email&quot;:&quot;*****&quot;
+
+&quot;company_type&quot;:&quot;*****&quot;
+
+&quot;company_size&quot;:&quot;*****&quot;
+
+&quot;industry&quot;:&quot;*****&quot;
+
+&quot;website&quot;:&quot;*****&quot;
+
+&quot;location&quot;:&quot;*****&quot;
+
+&quot;tagline&quot;:&quot;*****&quot;
+
+&quot;logo&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 20,
+  &quot;company_name&quot;: &quot;Bojowa Ventures Limited&quot;,
+  &quot;company_type&quot;: &quot;private&quot;,
+  &quot;company_size&quot;: &quot;1-10&quot;,
+  &quot;country_code&quot;: &quot;+000&quot;,
+  &quot;phone_number&quot;: &quot;00000000000&quot;,
+  &quot;location&quot;: &quot;Lagos&quot;,
+  &quot;website&quot;: &quot;www.bojventltd.com&quot;,
+  &quot;tagline&quot;: &quot;Dealers in recycled wastes and compositions.&quot;,
+  &quot;logo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png&quot;,
+  &quot;cover_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg&quot;
+}
+</code></pre>
+<p><button onclick="openApiTester('/user/corporate/signup/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Linked Accounts<a name='retrieve_linked_accounts'></a></h1>
+<p>This API retrieves all the accounts linked to currently logged in account.</p>
+<p><strong>Endpoint:</strong><code>/user/linked-accounts/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;account&quot;: {
+      &quot;id&quot;: 21,
+      &quot;name&quot;: &quot;Bojowa Ventures Limited&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png&quot;,
+      &quot;extras&quot;: &quot;Dealers in recycled wastes and compositions.&quot;
+    }
+  }
+]
+</code></pre>
+<p><button onclick="openApiTester('/user/linked-accounts/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+
+
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -3648,6 +3718,5 @@ job:*****
     </div>
 
 
-        </body>
-        </html>
-        
+</body>
+</html>
