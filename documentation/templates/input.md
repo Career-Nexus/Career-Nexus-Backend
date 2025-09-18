@@ -4371,7 +4371,7 @@ This API exchanges a google code for authentication details. N.B:A call to googl
 
 # Signup with Google
 
-This API allows a google user to signup with their account. N.B:Request to goole's oauth2 should have been previously made to obtain a valid code. Also, Someone that registers via google account is setup to be passwordless. (They can only login via google or login normally after changing their password).
+This API allows a google user to signup with their account. N.B:Request to goole's oauth2 should have been previously made to obtain a valid code. Also, Someone that registers via google account is setup to be passwordless. (They can only login via google or login normally after changing their password). Also, If a user_type extra payload is passed with a value of mentor, A mentor use is signed up.
 
 **Endpoint:**`/user/google/signup/`
 
@@ -4384,12 +4384,14 @@ This API allows a google user to signup with their account. N.B:Request to goole
 
 "code":"*****"
 
+"user_type(optional)":"*****"
+
 }
 
 ```
 ## Response body
 
-**status code:200**
+**status code:201**
 
 ``` json
 {
@@ -4400,7 +4402,7 @@ This API allows a google user to signup with their account. N.B:Request to goole
 }
 ```
 
-[Table of contents](#toc)
+[["/user/google/signup/","POST"]][Table of contents](#toc)
 
 
 # Delete Post

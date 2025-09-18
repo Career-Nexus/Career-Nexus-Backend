@@ -1,52 +1,52 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
 
-        let currentEndpoint = '';
+            let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,12 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
+        </script>
+                    
 
-</script>
 
-
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -3428,7 +3427,7 @@ job:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Signup with Google<a name='signup_with_google'></a></h1>
-<p>This API allows a google user to signup with their account. N.B:Request to goole's oauth2 should have been previously made to obtain a valid code. Also, Someone that registers via google account is setup to be passwordless. (They can only login via google or login normally after changing their password).</p>
+<p>This API allows a google user to signup with their account. N.B:Request to goole's oauth2 should have been previously made to obtain a valid code. Also, Someone that registers via google account is setup to be passwordless. (They can only login via google or login normally after changing their password). Also, If a user_type extra payload is passed with a value of mentor, A mentor use is signed up.</p>
 <p><strong>Endpoint:</strong><code>/user/google/signup/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
@@ -3436,11 +3435,13 @@ job:*****
 
 &quot;code&quot;:&quot;*****&quot;
 
+&quot;user_type(optional)&quot;:&quot;*****&quot;
+
 }
 
 </code></pre>
 <h2>Response body</h2>
-<p><strong>status code:200</strong></p>
+<p><strong>status code:201</strong></p>
 <pre><code class="language-json">{
   &quot;refresh&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1MjEzMTY4MiwiaWF0IjoxNzUyMDQ1MjgyLCJqdGkiOiJlMmNjZmY0NTU5NjY0Njk0YmUzZDJhM2EzYjI5YzI1NyIsInVzZXJfaWQiOjExfQ.A6FBhNeJ3TZAP4vFOETfT1KgPxBh_6Joe2GAHeiYLWM&quot;,
   &quot;access&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUyMDY2ODgyLCJpYXQiOjE3NTIwNDUyODIsImp0aSI6IjI2YTRiZWYwZTBhOTQwMmRiM2U1YjExZjMzMzlkZDZmIiwidXNlcl9pZCI6MTF9.oq8ScALElAUkGUoAf3UfLyRSam94IXCjouHKrHd-MC8&quot;,
@@ -3448,7 +3449,7 @@ job:*****
   &quot;status&quot;: &quot;Success&quot;
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/user/google/signup/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Delete Post<a name='delete_post'></a></h1>
 <p>This API deletes a post. N.B:A user can only delete their own post.</p>
 <p><strong>Endpoint:</strong><code>/post/delete/?post_id=23</code></p>
@@ -3708,7 +3709,7 @@ job:*****
 </code></pre>
 <p><button onclick="openApiTester('/user/switch-account/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
 
-
+        
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -3742,5 +3743,6 @@ job:*****
     </div>
 
 
-</body>
-</html>
+        </body>
+        </html>
+        

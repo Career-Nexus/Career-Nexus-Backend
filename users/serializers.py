@@ -1,3 +1,4 @@
+from random import choice
 from time import timezone
 from django.utils.timezone import make_aware
 from django.contrib.auth import get_user_model
@@ -247,6 +248,8 @@ class RegisterSerializer(serializers.Serializer):
                     return output
             else:
                 raise serializers.ValidationError({"OTP Error":"Invalid OTP"})
+
+
 
 class PostRegistrationSerializer(serializers.ModelSerializer):
     #user_type = serializers.ChoiceField(choices=user_options)

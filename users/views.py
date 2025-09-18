@@ -194,6 +194,7 @@ class GoogleSignupView(APIView):
 
     def post(self,request):
         code = request.data.get("code")
+        user_type = request.data.get("user_type","None")
         if not code:
             return Response({"error":"Missing Code"},status=status.HTTP_400_BAD_REQUEST)
         else:
@@ -232,7 +233,10 @@ class GoogleSignupView(APIView):
                 else:
                     last_name = "N/A"
                 with transaction.atomic():
-                    new_user = models.Users.objects.create_user(username=str(uuid.uuid4()),email=email)
+                    if user_type == "mentor":
+                        new_user = models.Users.objects.create_user(username=str(uuid.uuid4()),email=email,user_type="mentor")
+                    else:
+                        new_user = models.Users.objects.create_user(username=str(uuid.uuid4()),email=email)
                     models.PersonalProfile.objects.create(user=new_user,first_name=first_name,last_name=last_name)
 
                 token =RefreshToken.for_user(new_user)
