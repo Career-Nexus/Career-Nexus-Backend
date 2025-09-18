@@ -3,6 +3,7 @@ from django.utils.timezone import make_aware
 from django.contrib.auth import get_user_model
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.db.models import Q
 
 from django.db import transaction
 
@@ -225,22 +226,23 @@ class RegisterSerializer(serializers.Serializer):
                 else:
                     models.Otp.objects.filter(email=email).delete()
                     #If industry is not specified at registeration, default user_type to learner
-                    if not industry:
-                        user_obj = models.Users.objects.create_user(
-                                email= email.lower(),
+                    with transaction.atomic():
+                        if not industry:
+                            user_obj = models.Users.objects.create_user(
+                                    email= email.lower(),
+                                    username = str(username),
+                                    password = password1
+                                    )
+                        else:
+                            #If industry is specified at registeration, create user as a mentor.
+                            user_obj = models.Users.objects.create_user(
+                                email=email.lower(),
                                 username = str(username),
-                                password = password1
-                                )
-                    else:
-                        #If industry is specified at registeration, create user as a mentor.
-                        user_obj = models.Users.objects.create_user(
-                            email=email.lower(),
-                            username = str(username),
-                            password = password1,
-                            user_type = "mentor",
-                            industry = industry
-                        )
-                    models.PersonalProfile.objects.create(user=user_obj)
+                                password = password1,
+                                user_type = "mentor",
+                                industry = industry
+                            )
+                        models.PersonalProfile.objects.create(user=user_obj)
                     output = user_obj
                     return output
             else:
@@ -326,6 +328,21 @@ class CreateCorporateAccountSerializer(serializers.Serializer):
             models.PersonalProfile.objects.create(**validated_data)
             models.LinkedAccounts.objects.create(main_account=user,child=account)
         return account
+
+
+class SwitchAccountSerializer(serializers.Serializer):
+    account = serializers.PrimaryKeyRelatedField(queryset=models.Users.objects.all())
+
+    def validate_account(self,value):
+        user = self.context["user"]
+        if user == value:
+            raise serializers.ValidationError("You are currently logged in as this user.")
+        if not models.LinkedAccounts.objects.filter(
+            Q(main_account=user,child=value)|
+            Q(main_account=value,child=user)
+        ).exists():
+            raise serializers.ValidationError("This account is not linked to your profile.")
+        return value
 
 
 

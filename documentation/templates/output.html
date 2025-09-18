@@ -188,6 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#session_payment_with_stripe">session payment with stripe</a></li>
 <li><a href="#signup_with_google">signup with google</a></li>
 <li><a href="#subscribe_to_newsletter">subscribe to newsletter</a></li>
+<li><a href="#switch_account">switch account</a></li>
 <li><a href="#unfollow_user">unfollow user</a></li>
 <li><a href="#unlike_comment/reply">unlike comment/reply</a></li>
 <li><a href="#unlike_post">unlike post</a></li>
@@ -3683,6 +3684,29 @@ job:*****
 ]
 </code></pre>
 <p><button onclick="openApiTester('/user/linked-accounts/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Switch Account<a name='switch_account'></a></h1>
+<p>This API enables a user to switch between accounts. N.B:Both accounts must be previously linked to enable account switching.</p>
+<p><strong>Endpoint:</strong><code>/user/switch-account/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+&quot;account&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;refresh&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1ODI1MTUwMiwiaWF0IjoxNzU4MTY1MTAyLCJqdGkiOiI0YjY2ZTkxN2I0Nzc0YjRjYThjMWNiOTE2OWRmN2M4OSIsInVzZXJfaWQiOjIxfQ.ccoUF4tiNdayPvo9pLN9YpUiJJXNIVbrMLSxhsiR9OU&quot;,
+  &quot;access&quot;: &quot;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg2NzAyLCJpYXQiOjE3NTgxNjUxMDIsImp0aSI6Ijg1NTc2MTI4YWJmNzQwYWFhZDRiMjVjOGIwNmNmOTRjIiwidXNlcl9pZCI6MjF9.BTJcI2rPMO39UlQ5KvuCYSuYO9Klypf_BEGqKgqUqEo&quot;,
+  &quot;user_id&quot;: 21,
+  &quot;email&quot;: &quot;bojvent@yahoo.com&quot;,
+  &quot;user_type&quot;: &quot;employer&quot;
+}
+</code></pre>
+<p><button onclick="openApiTester('/user/switch-account/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
 
 
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 

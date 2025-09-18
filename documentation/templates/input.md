@@ -4740,3 +4740,38 @@ This API retrieves all the accounts linked to currently logged in account.
 ```
 
 [["/user/linked-accounts/","GET"]][Table of contents](#toc)
+
+
+# Switch Account
+
+This API enables a user to switch between accounts. N.B:Both accounts must be previously linked to enable account switching.
+
+**Endpoint:**`/user/switch-account/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"account":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1ODI1MTUwMiwiaWF0IjoxNzU4MTY1MTAyLCJqdGkiOiI0YjY2ZTkxN2I0Nzc0YjRjYThjMWNiOTE2OWRmN2M4OSIsInVzZXJfaWQiOjIxfQ.ccoUF4tiNdayPvo9pLN9YpUiJJXNIVbrMLSxhsiR9OU",
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU4MTg2NzAyLCJpYXQiOjE3NTgxNjUxMDIsImp0aSI6Ijg1NTc2MTI4YWJmNzQwYWFhZDRiMjVjOGIwNmNmOTRjIiwidXNlcl9pZCI6MjF9.BTJcI2rPMO39UlQ5KvuCYSuYO9Klypf_BEGqKgqUqEo",
+  "user_id": 21,
+  "email": "bojvent@yahoo.com",
+  "user_type": "employer"
+}
+```
+
+[["/user/switch-account/","POST"]][Table of contents](#toc)

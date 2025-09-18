@@ -255,6 +255,8 @@ class CreateCorporateAccountView(APIView):
         if serializer.is_valid(raise_exception=True):
             output_instance = serializer.save()
             output = serializers.RetrieveCorporateUserSerializer(output_instance.profile,many=False).data
+            #Invalidate linked account cache
+            delete_cache(f"user_{user.id}_linked_accounts")
             return Response(output,status=status.HTTP_201_CREATED)
 
 
@@ -265,12 +267,41 @@ class LinkedAccountsView(APIView):
 
     def get(self,request):
         user = request.user
-        linked_accounts = models.LinkedAccounts.objects.filter(
-            Q(main_account=user)|
-            Q(child=user)
-        )
-        output = serializers.LinkedAccountsSerializer(linked_accounts,many=True,context={"user":user}).data
+        cache_key = f"user_{user.id}_linked_accounts"
+        cached_data = cache.get(cache_key)
+        if not cached_data:
+            linked_accounts = models.LinkedAccounts.objects.filter(
+                Q(main_account=user)|
+                Q(child=user)
+            )
+            output = serializers.LinkedAccountsSerializer(linked_accounts,many=True,context={"user":user}).data
+            cache.set(cache_key,output,timeout=60*60*24)
+        else:
+            output = cached_data
         return Response(output,status=status.HTTP_200_OK)
+
+
+class SwitchAccountView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+    def post(self,request):
+        user = request.user
+        serializer = serializers.SwitchAccountSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            account = serializer.validated_data.get("account")
+            refresh = RefreshToken.for_user(account)
+            return Response(
+                {
+                    "refresh":str(refresh),
+                    "access":str(refresh.access_token),
+                    "user_id":account.id,
+                    "email":account.email,
+                    "user_type":account.user_type
+                },status=status.HTTP_200_OK
+            )
+
+
 
 
 
@@ -325,6 +356,7 @@ class LoginView(APIView):
                 {
                     "refresh":str(refresh),
                     "access":str(refresh.access_token),
+                    "user_id":user.id,
                     "user":user.email,
                     "user_type":user.user_type
                     },
@@ -809,7 +841,8 @@ class UserSearchView(APIView):
             Q(profile__middle_name__icontains= param) |
             Q(profile__qualification__icontains=param) |
             Q(profile__bio__icontains=param) |
-            Q(profile__summary__icontains=param)
+            Q(profile__summary__icontains=param)|
+            Q(profile__company_name__icontains=param)
         )
         paginator = UserPaginator()
         paginated_items = paginator.paginate_queryset(user_result_instances,request)

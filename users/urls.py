@@ -26,6 +26,7 @@ urlpatterns = [
 	path("signup/",views.RegisterView.as_view(),name="User_Register"),
     path("corporate/signup/",views.CreateCorporateAccountView.as_view(),name="Corporate-User-Register"),
     path("linked-accounts/",views.LinkedAccountsView.as_view(),name="Linked-Accounts"),
+    path("switch-account/",views.SwitchAccountView.as_view(),name="Switch-Accounts"),
 
     path("hash/verify/",views.VerifyHashView.as_view(),name="Verify-hash"),
     path("signin/",views.LoginView.as_view(),name="User Login"),

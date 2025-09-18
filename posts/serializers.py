@@ -134,9 +134,41 @@ class PostSerializer(serializers.Serializer):
         return output
 
 class PersonalProfileSerializer(serializers.ModelSerializer):
+    first_name = serializers.SerializerMethodField()
+    last_name = serializers.SerializerMethodField()
+    middle_name = serializers.SerializerMethodField()
+    profile_photo = serializers.SerializerMethodField()
+    qualification = serializers.SerializerMethodField()
+
     class Meta:
         model = PersonalProfile
         fields = ["id","first_name","last_name","middle_name","profile_photo","qualification"]
+
+    def get_first_name(self,obj):
+        if obj.user.user_type == "employer":
+            return obj.company_name
+        return obj.first_name
+
+    def get_last_name(self,obj):
+        if obj.user.user_type == "employer":
+            return ""
+        return obj.last_name
+
+    def get_middle_name(self,obj):
+        if obj.user.user_type == "employer":
+            return ""
+        return obj.middle_name
+
+    def get_profile_photo(self,obj):
+        if obj.user.user_type == "employer":
+            return obj.logo 
+        return obj.profile_photo
+
+    def get_qualification(self,obj):
+        if obj.user.user_type == "employer":
+            return obj.tagline 
+        return obj.qualification
+
 
 class ParentPostSerializer(serializers.ModelSerializer):
     profile = PersonalProfileSerializer()

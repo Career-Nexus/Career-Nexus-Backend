@@ -112,11 +112,18 @@ class RetrieveRecommendationDetailSerializer(serializers.ModelSerializer):
         return followers_count
 
     def get_profile_photo(self,obj):
-        return obj.profile.profile_photo
+        if obj.user_type != "employer":
+            return obj.profile.profile_photo
+        return obj.profile.logo
 
     def get_name(self,obj):
-        return f"{obj.profile.first_name} {obj.profile.last_name}"
+        if obj.user_type != "employer":
+            return f"{obj.profile.first_name} {obj.profile.last_name}"
+        return f"{obj.profile.company_name}"
 
     def get_qualification(self,obj):
-        qualification = obj.profile.qualification
+        if obj.user_type != "employer":
+            qualification = obj.profile.qualification
+        else:
+            qualification = obj.profile.tagline
         return qualification
