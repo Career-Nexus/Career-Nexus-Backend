@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 from notifications.utils import jobnotify
 
+
 from . import serializers
 from . import models
 

@@ -1748,7 +1748,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
 ``` json
 [
   {
-    "initiator": {
+    "contributor": {
       "id": 3,
       "first_name": "N/A",
       "last_name": "N/A",
@@ -1756,39 +1756,23 @@ This endpoint gets all chat sessions that had been initiated by or with the user
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
       "qualification": "Bachelor of Education (English)"
     },
-    "contributor": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
     "chat_id": 2
   },
   {
-    "initiator": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
     "contributor": {
       "id": 2,
-      "first_name": "N/A",
-      "last_name": "N/A",
-      "middle_name": "N/A",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-      "qualification": "Bachelor of Science"
+      "first_name": null,
+      "last_name": "",
+      "middle_name": "",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+      "qualification": null
     },
     "chat_id": 1
   }
 ]
 ```
 
-[Table of contents](#toc)
+[["/notification-chat/chats/","GET"]][Table of contents](#toc)
 
 
 # Chat History
@@ -4777,3 +4761,24 @@ This API enables a user to switch between accounts. N.B:Both accounts must be pr
 ```
 
 [["/user/switch-account/","POST"]][Table of contents](#toc)
+
+
+# Chat Websockets
+
+This API connects a user to a chatroom shared with another user. N.B:The user id of the second user should be provided in the url along with a valid token.
+
+**Endpoint:**`/ws/chat/<user_id>/?token=**********`
+
+**Method:** `NONE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:NONE**
+
+[["/ws/chat/<user_id>/?token=**********","NONE"]][Table of contents](#toc)

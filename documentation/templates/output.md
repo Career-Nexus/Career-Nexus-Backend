@@ -16,105 +16,106 @@
 9. [cancel mentorship session](#cancel_mentorship_session)  
 10. [career nexus backend documentation](#career_nexus_backend_documentation)  
 11. [chat history](#chat_history)  
-12. [clear notifications](#clear_notifications)  
-13. [connection accept/reject](#connection_accept/reject)  
-14. [connection create](#connection_create)  
-15. [connection pending retrieve](#connection_pending_retrieve)  
-16. [connection recommendation](#connection_recommendation)  
-17. [connection requests sent](#connection_requests_sent)  
-18. [connection retrieve](#connection_retrieve)  
-19. [connections count](#connections_count)  
-20. [content management](#content_management)  
-21. [create a newsletter](#create_a_newsletter)  
-22. [create comment](#create_comment)  
-23. [create corporate account](#create_corporate_account)  
-24. [create project catalogue](#create_project_catalogue)  
-25. [creating library content](#creating_library_content)  
-26. [delete certification](#delete_certification)  
-27. [delete education](#delete_education)  
-28. [delete experience](#delete_experience)  
-29. [delete library content](#delete_library_content)  
-30. [delete post](#delete_post)  
-31. [delete project catalogue](#delete_project_catalogue)  
-32. [delete user](#delete_user)  
-33. [dispute creation](#dispute_creation)  
-34. [dispute summary](#dispute_summary)  
-35. [dispute ticket resolution](#dispute_ticket_resolution)  
-36. [follow user](#follow_user)  
-37. [followers count](#followers_count)  
-38. [following recommendation](#following_recommendation)  
-39. [followings count](#followings_count)  
-40. [forget password](#forget_password)  
-41. [general notifications](#general_notifications)  
-42. [get all notifications](#get_all_notifications)  
-43. [get chat sessions](#get_chat_sessions)  
-44. [get comment](#get_comment)  
-45. [get country phone codes](#get_country_phone_codes)  
-46. [get followings](#get_followings)  
-47. [get followings post](#get_followings_post)  
-48. [get job posts](#get_job_posts)  
-49. [get job preference](#get_job_preference)  
-50. [get newsletter](#get_newsletter)  
-51. [get other user post](#get_other_user_post)  
-52. [get own posts](#get_own_posts)  
-53. [get posts](#get_posts)  
-54. [get saved post](#get_saved_post)  
-55. [google signin](#google_signin)  
-56. [job create](#job_create)  
-57. [job notifications](#job_notifications)  
-58. [job preference](#job_preference)  
-59. [join mentorship session](#join_mentorship_session)  
-60. [like comment/reply](#like_comment/reply)  
-61. [login api](#login_api)  
-62. [logout](#logout)  
-63. [mentor search/filter](#mentor_search/filter)  
-64. [mentors recommendation](#mentors_recommendation)  
-65. [mentorship session annotation.](#mentorship_session_annotation.)  
-66. [post create](#post_create)  
-67. [post like](#post_like)  
-68. [post retrieve](#post_retrieve)  
-69. [post save](#post_save)  
-70. [post share](#post_share)  
-71. [profile completion](#profile_completion)  
-72. [profile retrieve](#profile_retrieve)  
-73. [profile update](#profile_update)  
-74. [recommended job posts.](#recommended_job_posts.)  
-75. [reply comment](#reply_comment)  
-76. [reposting](#reposting)  
-77. [retrieve education api](#retrieve_education_api)  
-78. [retrieve library contents](#retrieve_library_contents)  
-79. [retrieve linked accounts](#retrieve_linked_accounts)  
-80. [retrieve mentors posts](#retrieve_mentors_posts)  
-81. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-82. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-83. [retrieve saved jobs](#retrieve_saved_jobs)  
-84. [retrieve saved mentors](#retrieve_saved_mentors)  
-85. [retrieve user settings](#retrieve_user_settings)  
-86. [save a job](#save_a_job)  
-87. [save a mentor](#save_a_mentor)  
-88. [session payment with flutterwave](#session_payment_with_flutterwave)  
-89. [session payment with stripe](#session_payment_with_stripe)  
-90. [signup with google](#signup_with_google)  
-91. [subscribe to newsletter](#subscribe_to_newsletter)  
-92. [switch account](#switch_account)  
-93. [unfollow user](#unfollow_user)  
-94. [unlike comment/reply](#unlike_comment/reply)  
-95. [unlike post](#unlike_post)  
-96. [unsave job](#unsave_job)  
-97. [unsave mentor](#unsave_mentor)  
-98. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-99. [update user account settings](#update_user_account_settings)  
-100. [updating user eperience](#updating_user_eperience)  
-101. [user analytics](#user_analytics)  
-102. [user followers](#user_followers)  
-103. [user registeration](#user_registeration)  
-104. [user retrieve dispute](#user_retrieve_dispute)  
-105. [user search](#user_search)  
-106. [user-industry update](#user-industry_update)  
-107. [valid choice](#valid_choice)  
-108. [verify otp hash](#verify_otp_hash)  
-109. [view certification](#view_certification)  
-110. [view experience](#view_experience)  
+12. [chat websockets](#chat_websockets)  
+13. [clear notifications](#clear_notifications)  
+14. [connection accept/reject](#connection_accept/reject)  
+15. [connection create](#connection_create)  
+16. [connection pending retrieve](#connection_pending_retrieve)  
+17. [connection recommendation](#connection_recommendation)  
+18. [connection requests sent](#connection_requests_sent)  
+19. [connection retrieve](#connection_retrieve)  
+20. [connections count](#connections_count)  
+21. [content management](#content_management)  
+22. [create a newsletter](#create_a_newsletter)  
+23. [create comment](#create_comment)  
+24. [create corporate account](#create_corporate_account)  
+25. [create project catalogue](#create_project_catalogue)  
+26. [creating library content](#creating_library_content)  
+27. [delete certification](#delete_certification)  
+28. [delete education](#delete_education)  
+29. [delete experience](#delete_experience)  
+30. [delete library content](#delete_library_content)  
+31. [delete post](#delete_post)  
+32. [delete project catalogue](#delete_project_catalogue)  
+33. [delete user](#delete_user)  
+34. [dispute creation](#dispute_creation)  
+35. [dispute summary](#dispute_summary)  
+36. [dispute ticket resolution](#dispute_ticket_resolution)  
+37. [follow user](#follow_user)  
+38. [followers count](#followers_count)  
+39. [following recommendation](#following_recommendation)  
+40. [followings count](#followings_count)  
+41. [forget password](#forget_password)  
+42. [general notifications](#general_notifications)  
+43. [get all notifications](#get_all_notifications)  
+44. [get chat sessions](#get_chat_sessions)  
+45. [get comment](#get_comment)  
+46. [get country phone codes](#get_country_phone_codes)  
+47. [get followings](#get_followings)  
+48. [get followings post](#get_followings_post)  
+49. [get job posts](#get_job_posts)  
+50. [get job preference](#get_job_preference)  
+51. [get newsletter](#get_newsletter)  
+52. [get other user post](#get_other_user_post)  
+53. [get own posts](#get_own_posts)  
+54. [get posts](#get_posts)  
+55. [get saved post](#get_saved_post)  
+56. [google signin](#google_signin)  
+57. [job create](#job_create)  
+58. [job notifications](#job_notifications)  
+59. [job preference](#job_preference)  
+60. [join mentorship session](#join_mentorship_session)  
+61. [like comment/reply](#like_comment/reply)  
+62. [login api](#login_api)  
+63. [logout](#logout)  
+64. [mentor search/filter](#mentor_search/filter)  
+65. [mentors recommendation](#mentors_recommendation)  
+66. [mentorship session annotation.](#mentorship_session_annotation.)  
+67. [post create](#post_create)  
+68. [post like](#post_like)  
+69. [post retrieve](#post_retrieve)  
+70. [post save](#post_save)  
+71. [post share](#post_share)  
+72. [profile completion](#profile_completion)  
+73. [profile retrieve](#profile_retrieve)  
+74. [profile update](#profile_update)  
+75. [recommended job posts.](#recommended_job_posts.)  
+76. [reply comment](#reply_comment)  
+77. [reposting](#reposting)  
+78. [retrieve education api](#retrieve_education_api)  
+79. [retrieve library contents](#retrieve_library_contents)  
+80. [retrieve linked accounts](#retrieve_linked_accounts)  
+81. [retrieve mentors posts](#retrieve_mentors_posts)  
+82. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+83. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+84. [retrieve saved jobs](#retrieve_saved_jobs)  
+85. [retrieve saved mentors](#retrieve_saved_mentors)  
+86. [retrieve user settings](#retrieve_user_settings)  
+87. [save a job](#save_a_job)  
+88. [save a mentor](#save_a_mentor)  
+89. [session payment with flutterwave](#session_payment_with_flutterwave)  
+90. [session payment with stripe](#session_payment_with_stripe)  
+91. [signup with google](#signup_with_google)  
+92. [subscribe to newsletter](#subscribe_to_newsletter)  
+93. [switch account](#switch_account)  
+94. [unfollow user](#unfollow_user)  
+95. [unlike comment/reply](#unlike_comment/reply)  
+96. [unlike post](#unlike_post)  
+97. [unsave job](#unsave_job)  
+98. [unsave mentor](#unsave_mentor)  
+99. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+100. [update user account settings](#update_user_account_settings)  
+101. [updating user eperience](#updating_user_eperience)  
+102. [user analytics](#user_analytics)  
+103. [user followers](#user_followers)  
+104. [user registeration](#user_registeration)  
+105. [user retrieve dispute](#user_retrieve_dispute)  
+106. [user search](#user_search)  
+107. [user-industry update](#user-industry_update)  
+108. [valid choice](#valid_choice)  
+109. [verify otp hash](#verify_otp_hash)  
+110. [view certification](#view_certification)  
+111. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -1858,7 +1859,7 @@ This endpoint gets all chat sessions that had been initiated by or with the user
 ``` json
 [
   {
-    "initiator": {
+    "contributor": {
       "id": 3,
       "first_name": "N/A",
       "last_name": "N/A",
@@ -1866,39 +1867,23 @@ This endpoint gets all chat sessions that had been initiated by or with the user
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
       "qualification": "Bachelor of Education (English)"
     },
-    "contributor": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
     "chat_id": 2
   },
   {
-    "initiator": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
     "contributor": {
       "id": 2,
-      "first_name": "N/A",
-      "last_name": "N/A",
-      "middle_name": "N/A",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-      "qualification": "Bachelor of Science"
+      "first_name": null,
+      "last_name": "",
+      "middle_name": "",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+      "qualification": null
     },
     "chat_id": 1
   }
 ]
 ```
 
-[Table of contents](#toc)
+[["/notification-chat/chats/","GET"]][Table of contents](#toc)
 
 
 # Chat History<a name='chat_history'></a>
@@ -4887,3 +4872,24 @@ This API enables a user to switch between accounts. N.B:Both accounts must be pr
 ```
 
 [["/user/switch-account/","POST"]][Table of contents](#toc)
+
+
+# Chat Websockets<a name='chat_websockets'></a>
+
+This API connects a user to a chatroom shared with another user. N.B:The user id of the second user should be provided in the url along with a valid token.
+
+**Endpoint:**`/ws/chat/<user_id>/?token=**********`
+
+**Method:** `NONE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:NONE**
+
+[["/ws/chat/<user_id>/?token=**********","NONE"]][Table of contents](#toc)

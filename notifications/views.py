@@ -26,8 +26,9 @@ class ChatView(APIView):
     serializer_class = serializers.ChatSerializer
 
     def get(self,request):
+        user = request.user
         chatrooms = models.Chatroom.objects.filter(Q(initiator=request.user) | Q(contributor=request.user)).order_by("-created")
-        serialized_data = serializers.ChatSerializer(chatrooms,many=True).data
+        serialized_data = serializers.ChatSerializer(chatrooms,many=True,context={"user":user}).data
         return Response(serialized_data,status=status.HTTP_200_OK)
 
 

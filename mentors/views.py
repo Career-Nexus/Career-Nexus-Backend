@@ -6,6 +6,8 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 
+from notifications.utils import send_notification
+
 from users.models import PersonalProfile
 from info.models import ExchangeRate
 

@@ -9,20 +9,18 @@ from users.models import Users
 
 
 class ChatSerializer(serializers.ModelSerializer):
-    initiator = serializers.SerializerMethodField()
     contributor = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Chatroom
-        fields = ["id","initiator","contributor"]
-
-    def get_initiator(self,obj):
-        initiator_profile = obj.initiator.profile 
-        data = PersonalProfileSerializer(initiator_profile,many=False).data
-        return data
+        fields = ["id","contributor"]
 
     def get_contributor(self,obj):
-        contributor_profile = obj.contributor.profile
+        user = self.context["user"]
+        if obj.initiator == user:
+            contributor_profile = obj.contributor.profile
+        else:
+            contributor_profile = obj.initiator.profile
         data = PersonalProfileSerializer(contributor_profile,many=False).data
         return data
 
