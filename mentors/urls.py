@@ -11,6 +11,8 @@ urlpatterns = [
     path("annotate/",views.AnnotateMentorshipSessionView.as_view(),name="Annotate-Sessions"),
     path("session/cancel/",views.CancelSessionView.as_view(),name="Cancel-Session"),
     path("session/join/",views.JoinSessionView.as_view(),name="Join-Session"),
+    path("vault/",views.MentorVaultView.as_view(),name="Mentors-Vault"),
+    path("vault/transactions/",views.RetrieveMentorVaultTransactionsView.as_view(),name="Vault-Transactions"),
 
 
     path("test/",views.TestView.as_view(),name="Test-View"),

@@ -2,6 +2,11 @@ from django.db import models
 from users.models import Users
 
 
+VAULT_TRANSACTION_CHOICES = (
+    ("EARN","EARN"),
+    ("WITHDRAW","WITHDRAW")
+)
+
 
 class Sessions(models.Model):
     mentor = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor")
@@ -21,3 +26,15 @@ class SavedMentors(models.Model):
 class MentorRating(models.Model):
     mentor = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="rating")
     ratings = models.JSONField(default=list)
+
+class MentorVault(models.Model):
+    mentor = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="vault")
+    amount = models.IntegerField(default=0)
+    last_updated = models.DateTimeField(auto_now_add=True)
+
+class VaultTransactions(models.Model):
+    mentor = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="vault_transactions")
+    action = models.CharField(max_length=20,choices=VAULT_TRANSACTION_CHOICES)
+    amount = models.IntegerField()
+    extra_data = models.JSONField(default=dict)
+    timestamp = models.DateTimeField(auto_now=True)

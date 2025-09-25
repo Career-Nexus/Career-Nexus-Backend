@@ -85,37 +85,39 @@
 78. [retrieve education api](#retrieve_education_api)  
 79. [retrieve library contents](#retrieve_library_contents)  
 80. [retrieve linked accounts](#retrieve_linked_accounts)  
-81. [retrieve mentors posts](#retrieve_mentors_posts)  
-82. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-83. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-84. [retrieve saved jobs](#retrieve_saved_jobs)  
-85. [retrieve saved mentors](#retrieve_saved_mentors)  
-86. [retrieve user settings](#retrieve_user_settings)  
-87. [save a job](#save_a_job)  
-88. [save a mentor](#save_a_mentor)  
-89. [session payment with flutterwave](#session_payment_with_flutterwave)  
-90. [session payment with stripe](#session_payment_with_stripe)  
-91. [signup with google](#signup_with_google)  
-92. [subscribe to newsletter](#subscribe_to_newsletter)  
-93. [switch account](#switch_account)  
-94. [unfollow user](#unfollow_user)  
-95. [unlike comment/reply](#unlike_comment/reply)  
-96. [unlike post](#unlike_post)  
-97. [unsave job](#unsave_job)  
-98. [unsave mentor](#unsave_mentor)  
-99. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-100. [update user account settings](#update_user_account_settings)  
-101. [updating user eperience](#updating_user_eperience)  
-102. [user analytics](#user_analytics)  
-103. [user followers](#user_followers)  
-104. [user registeration](#user_registeration)  
-105. [user retrieve dispute](#user_retrieve_dispute)  
-106. [user search](#user_search)  
-107. [user-industry update](#user-industry_update)  
-108. [valid choice](#valid_choice)  
-109. [verify otp hash](#verify_otp_hash)  
-110. [view certification](#view_certification)  
-111. [view experience](#view_experience)  
+81. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+82. [retrieve mentors posts](#retrieve_mentors_posts)  
+83. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+84. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+85. [retrieve saved jobs](#retrieve_saved_jobs)  
+86. [retrieve saved mentors](#retrieve_saved_mentors)  
+87. [retrieve user settings](#retrieve_user_settings)  
+88. [retrieve vault transactions](#retrieve_vault_transactions)  
+89. [save a job](#save_a_job)  
+90. [save a mentor](#save_a_mentor)  
+91. [session payment with flutterwave](#session_payment_with_flutterwave)  
+92. [session payment with stripe](#session_payment_with_stripe)  
+93. [signup with google](#signup_with_google)  
+94. [subscribe to newsletter](#subscribe_to_newsletter)  
+95. [switch account](#switch_account)  
+96. [unfollow user](#unfollow_user)  
+97. [unlike comment/reply](#unlike_comment/reply)  
+98. [unlike post](#unlike_post)  
+99. [unsave job](#unsave_job)  
+100. [unsave mentor](#unsave_mentor)  
+101. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+102. [update user account settings](#update_user_account_settings)  
+103. [updating user eperience](#updating_user_eperience)  
+104. [user analytics](#user_analytics)  
+105. [user followers](#user_followers)  
+106. [user registeration](#user_registeration)  
+107. [user retrieve dispute](#user_retrieve_dispute)  
+108. [user search](#user_search)  
+109. [user-industry update](#user-industry_update)  
+110. [valid choice](#valid_choice)  
+111. [verify otp hash](#verify_otp_hash)  
+112. [view certification](#view_certification)  
+113. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -4893,3 +4895,87 @@ This API connects a user to a chatroom shared with another user. N.B:The user id
 **status code:NONE**
 
 [["/ws/chat/<user_id>/?token=**********","NONE"]][Table of contents](#toc)
+
+
+# Retrieve Mentor Vault Data<a name='retrieve_mentor_vault_data'></a>
+
+This API retrieves the current vault balance of a mentor and also the 10 most recent transactions made within the vault. N.B:Transaction action is either EARN (+) or WITHDRAW (-).
+
+**Endpoint:**`/mentor/vault/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "amount": {
+    "amount": 3000,
+    "currency": "NGN"
+  },
+  "recent_transaction_history": [
+    {
+      "id": 1,
+      "action": "EARN",
+      "amount": {
+        "value": 3000,
+        "currency": "NGN"
+      },
+      "extra_data": {
+        "session_id": 13,
+        "session_type": "individual"
+      },
+      "timestamp": "2025-09-25T06:33:04.576684Z"
+    }
+  ]
+}
+```
+
+[["/mentor/vault/","GET"]][Table of contents](#toc)
+
+
+# Retrieve Vault Transactions<a name='retrieve_vault_transactions'></a>
+
+This API retrieves all the Vault transactions (earnings and withdrawals) of a mentor.
+
+**Endpoint:**`/mentor/vault/transactions/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "action": "EARN",
+    "amount": {
+      "value": 3000,
+      "currency": "NGN"
+    },
+    "extra_data": {
+      "session_id": 13,
+      "session_type": "individual"
+    },
+    "timestamp": "2025-09-25T06:33:04.576684Z"
+  }
+]
+```
+
+[["/mentor/vault/transactions/","GET"]][Table of contents](#toc)

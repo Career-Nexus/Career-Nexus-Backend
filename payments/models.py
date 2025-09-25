@@ -18,6 +18,7 @@ class SessionTransactions(models.Model):
     mentor = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="concerned_mentor")
     amount = models.IntegerField()
     currency = models.CharField()
+    central_amount = models.IntegerField()
     status = models.CharField(choices=transaction_statuses)
     initiated_at = models.DateTimeField(auto_now=True)
 

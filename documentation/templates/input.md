@@ -4782,3 +4782,87 @@ This API connects a user to a chatroom shared with another user. N.B:The user id
 **status code:NONE**
 
 [["/ws/chat/<user_id>/?token=**********","NONE"]][Table of contents](#toc)
+
+
+# Retrieve Mentor Vault Data
+
+This API retrieves the current vault balance of a mentor and also the 10 most recent transactions made within the vault. N.B:Transaction action is either EARN (+) or WITHDRAW (-).
+
+**Endpoint:**`/mentor/vault/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "amount": {
+    "amount": 3000,
+    "currency": "NGN"
+  },
+  "recent_transaction_history": [
+    {
+      "id": 1,
+      "action": "EARN",
+      "amount": {
+        "value": 3000,
+        "currency": "NGN"
+      },
+      "extra_data": {
+        "session_id": 13,
+        "session_type": "individual"
+      },
+      "timestamp": "2025-09-25T06:33:04.576684Z"
+    }
+  ]
+}
+```
+
+[["/mentor/vault/","GET"]][Table of contents](#toc)
+
+
+# Retrieve Vault Transactions
+
+This API retrieves all the Vault transactions (earnings and withdrawals) of a mentor.
+
+**Endpoint:**`/mentor/vault/transactions/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "action": "EARN",
+    "amount": {
+      "value": 3000,
+      "currency": "NGN"
+    },
+    "extra_data": {
+      "session_id": 13,
+      "session_type": "individual"
+    },
+    "timestamp": "2025-09-25T06:33:04.576684Z"
+  }
+]
+```
+
+[["/mentor/vault/transactions/","GET"]][Table of contents](#toc)

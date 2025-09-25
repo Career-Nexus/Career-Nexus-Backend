@@ -13,6 +13,7 @@ from info.models import ExchangeRate
 
 from . import serializers,models
 from users.models import Users
+from utilities.permissions import IsMentor
 
 import uuid
 
@@ -122,6 +123,7 @@ class CreateMentorshipSessionView(APIView):
 class AcceptRejectMentorshipSessionsView(APIView):
     permission_classes = [
         IsAuthenticated,
+        IsMentor,
     ]
     def post(self,request):
         serializer = serializers.AcceptRejectMentorshipSessionSerializer(data=request.data,context={"user":request.user})
@@ -252,6 +254,38 @@ class JoinSessionView(APIView):
                 }
                 return Response(output,status=status.HTTP_200_OK)
 
+
+class MentorVaultView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsMentor,
+    ]
+
+    def get(self,request):
+        user = request.user
+        vault, _ = models.MentorVault.objects.get_or_create(mentor=user)
+        output = serializers.MentorVaultSerializer(vault,many=False).data
+        return Response(output,status=status.HTTP_200_OK)
+
+class RetrieveMentorVaultTransactionsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsMentor,
+    ]
+
+    def get(self,request):
+        user = request.user
+        country_code = user.profile.country_code
+        currency=None
+        rate = ExchangeRate.objects.filter(country__code=country_code).first()
+        if rate:
+            currency = rate.currency_initials
+            rate = rate.exchange_rate
+
+
+        all_transactions = user.vault_transactions.all().order_by("-timestamp")
+        output = serializers.VaultTransactionsSerializer(all_transactions,many=True,context={"rate":rate,"currency":currency}).data
+        return Response(output,status=status.HTTP_200_OK)
 
 
 

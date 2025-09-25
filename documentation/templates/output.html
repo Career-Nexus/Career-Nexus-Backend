@@ -177,12 +177,14 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
 <li><a href="#retrieve_library_contents">retrieve library contents</a></li>
 <li><a href="#retrieve_linked_accounts">retrieve linked accounts</a></li>
+<li><a href="#retrieve_mentor_vault_data">retrieve mentor vault data</a></li>
 <li><a href="#retrieve_mentors_posts">retrieve mentors posts</a></li>
 <li><a href="#retrieve_mentorship_sessions">retrieve mentorship sessions</a></li>
 <li><a href="#retrieve_portfolio_projects">retrieve portfolio projects</a></li>
 <li><a href="#retrieve_saved_jobs">retrieve saved jobs</a></li>
 <li><a href="#retrieve_saved_mentors">retrieve saved mentors</a></li>
 <li><a href="#retrieve_user_settings">retrieve user settings</a></li>
+<li><a href="#retrieve_vault_transactions">retrieve vault transactions</a></li>
 <li><a href="#save_a_job">save a job</a></li>
 <li><a href="#save_a_mentor">save a mentor</a></li>
 <li><a href="#session_payment_with_flutterwave">session payment with flutterwave</a></li>
@@ -3705,6 +3707,66 @@ job:*****
 <h2>Response body</h2>
 <p><strong>status code:NONE</strong></p>
 <p><button onclick="openApiTester('/ws/chat/&lt;user_id&gt;/?token=**********','NONE')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Mentor Vault Data<a name='retrieve_mentor_vault_data'></a></h1>
+<p>This API retrieves the current vault balance of a mentor and also the 10 most recent transactions made within the vault. N.B:Transaction action is either EARN (+) or WITHDRAW (-).</p>
+<p><strong>Endpoint:</strong><code>/mentor/vault/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;amount&quot;: {
+    &quot;amount&quot;: 3000,
+    &quot;currency&quot;: &quot;NGN&quot;
+  },
+  &quot;recent_transaction_history&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;action&quot;: &quot;EARN&quot;,
+      &quot;amount&quot;: {
+        &quot;value&quot;: 3000,
+        &quot;currency&quot;: &quot;NGN&quot;
+      },
+      &quot;extra_data&quot;: {
+        &quot;session_id&quot;: 13,
+        &quot;session_type&quot;: &quot;individual&quot;
+      },
+      &quot;timestamp&quot;: &quot;2025-09-25T06:33:04.576684Z&quot;
+    }
+  ]
+}
+</code></pre>
+<p><button onclick="openApiTester('/mentor/vault/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Vault Transactions<a name='retrieve_vault_transactions'></a></h1>
+<p>This API retrieves all the Vault transactions (earnings and withdrawals) of a mentor.</p>
+<p><strong>Endpoint:</strong><code>/mentor/vault/transactions/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 1,
+    &quot;action&quot;: &quot;EARN&quot;,
+    &quot;amount&quot;: {
+      &quot;value&quot;: 3000,
+      &quot;currency&quot;: &quot;NGN&quot;
+    },
+    &quot;extra_data&quot;: {
+      &quot;session_id&quot;: 13,
+      &quot;session_type&quot;: &quot;individual&quot;
+    },
+    &quot;timestamp&quot;: &quot;2025-09-25T06:33:04.576684Z&quot;
+  }
+]
+</code></pre>
+<p><button onclick="openApiTester('/mentor/vault/transactions/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 
 
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 

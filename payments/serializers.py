@@ -29,16 +29,19 @@ class InitializePaymentSerializer(serializers.Serializer):
         transaction_id = f"{session_prefix}{uuid.uuid4()}{session_suffix}"
 
         initiator = self.context["user"]
+        #Uncomment and swap the code block below to make user_country dynamic when Stripe and other means of payment becomes available.
         #user_country = initiator.profile.country_code
         user_country = "+234"
 
         rate = ExchangeRate.objects.filter(country__code=user_country).first()
         if not rate:
-            transaction = models.SessionTransactions.objects.create(transaction_id=transaction_id,session=session,initiator=initiator,mentor=session.mentor,amount=session.mentor.profile.session_rate,currency="USD",status="pending")
+            amount = session.mentor.profile.session_rate
+            transaction = models.SessionTransactions.objects.create(transaction_id=transaction_id,session=session,initiator=initiator,mentor=session.mentor,amount=amount,central_amount=amount,currency="USD",status="pending")
         else:
-            amount = int(session.mentor.profile.session_rate*rate.exchange_rate)
+            base_amount = session.mentor.profile.session_rate
+            amount = int(base_amount*rate.exchange_rate)
             currency = "NGN"
-            transaction = models.SessionTransactions.objects.create(transaction_id=transaction_id,session=session,initiator=initiator,mentor=session.mentor,amount=amount,currency=currency,status="pending")
+            transaction = models.SessionTransactions.objects.create(transaction_id=transaction_id,session=session,initiator=initiator,mentor=session.mentor,amount=amount,central_amount=base_amount,currency=currency,status="pending")
         return transaction
 
 class StripeInitializePaymentSerializer(serializers.Serializer):

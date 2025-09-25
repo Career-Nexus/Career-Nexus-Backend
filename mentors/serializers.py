@@ -1,8 +1,6 @@
-from shutil import register_unpack_format
-from django.utils.timezone import make_aware
-from rest_framework import serializers
-from rest_framework.response import Serializer
+from rest_framework import serializers, status
 
+from django.db import transaction
 
 from users.options import get_choices
 from users.models import PersonalProfile,Users
@@ -12,7 +10,7 @@ from notifications.utils import send_notification
 
 from . import models
 
-from datetime import datetime,timedelta,date,time
+from datetime import datetime
 import pytz
 import uuid
 
@@ -382,10 +380,23 @@ class AnnotateMentorshipSessionSerializer(serializers.Serializer):
 
     def create(self,validated_data):
         session = validated_data.get("session")
-        session.status = "COMPLETED"
-        session.save()
-
         mentor = session.mentor
+
+        with transaction.atomic():
+            #Mark session as completed
+            session.status = "COMPLETED"
+            session.save()
+            
+            #Update the amount earned by mentor
+            transaction_instance = session.sessiontransactions_set.filter(status="successful").first()
+            paid_amount = transaction_instance.central_amount
+            mentor.vault.amount += paid_amount
+            mentor.vault.save()
+
+            #Update vault transaction 
+            models.VaultTransactions.objects.create(mentor=mentor,action="EARN",amount=paid_amount,extra_data={"session_id":session.id,"session_type":session.session_type})
+
+
         rating = validated_data.get("rating")
 
         mentor_rating, created = models.MentorRating.objects.get_or_create(mentor=mentor)
@@ -430,3 +441,58 @@ class JoinSessionSerializer(serializers.Serializer):
 
         return session
 
+class MentorVaultSerializer(serializers.ModelSerializer):
+    amount = serializers.SerializerMethodField()
+    recent_transaction_history = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.MentorVault
+        fields = ["amount","recent_transaction_history"]
+
+    def get_amount(self,obj):
+        central_amount = obj.amount
+        country_code = obj.mentor.profile.country_code
+        rate = ExchangeRate.objects.filter(country__code=country_code).first()
+        if not rate:
+            return {
+                "amount":central_amount,
+                "currency":"USD"
+            }
+        else:
+            return {
+                "amount":central_amount*rate.exchange_rate,
+                "currency":rate.currency_initials
+            }
+
+    def get_recent_transaction_history(self,obj):
+        mentor = obj.mentor
+        country_code = mentor.profile.country_code
+        rate = ExchangeRate.objects.filter(country__code=country_code).first()
+        recent_transactions = models.VaultTransactions.objects.filter(mentor=mentor).order_by("-timestamp")[0:11]
+        if not rate:
+            output = VaultTransactionsSerializer(recent_transactions,many=True,context={"rate":None,"currency":None}).data
+        else:
+            output = VaultTransactionsSerializer(recent_transactions,many=True,context={"rate":rate.exchange_rate,"currency":rate.currency_initials}).data
+        return output
+
+
+class VaultTransactionsSerializer(serializers.ModelSerializer):
+    amount = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.VaultTransactions
+        fields = ["id","action","amount","extra_data","timestamp"]
+
+    def get_amount(self,obj):
+        rate = self.context["rate"]
+        currency = self.context["currency"]
+        if not rate:
+            return {
+                "value":obj.amount,
+                "currency":"USD"
+            }
+        else:
+            return {
+                "value":rate*obj.amount,
+                "currency":currency
+            }
