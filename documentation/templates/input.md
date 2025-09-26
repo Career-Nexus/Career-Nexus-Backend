@@ -209,7 +209,8 @@ MENTORS
   "session_rate": "3000NGN",
   "rating": 0,
   "user_type": "mentor",
-  "industry": "technology"
+  "industry": "technology",
+  "can_message": false
 }
 
 LEARNERS
@@ -284,11 +285,12 @@ LEARNERS
   "resume": "https://careernexus-storage1.s3.amazonaws.com/resumes/51b434ab-441f-4ab1-ab72-a58c91ac7172Resume_080525.pdf",
   "timezone": "Africa/Lagos",
   "user_type": "learner",
-  "industry": "technology"
+  "industry": "technology",
+  "can_message": false
 }
 ```
 
-[Table of contents](#toc) 
+[["/user/retrieve-profile/","GET"]][Table of contents](#toc) 
 
 # Profile Update
 
@@ -3466,24 +3468,25 @@ This API retrieves user settings parameters.
 
 ``` json
 {
-  "email_notify": true,
-  "push_notify": true,
+  "email_notify": false,
+  "push_notify": false,
   "message_notify": false,
   "weekly_summary": false,
-  "job_alerts": true,
+  "job_alerts": false,
   "marketing": false,
-  "show_email": true,
+  "show_email": false,
   "show_activity": false,
-  "show_location": false
+  "show_location": false,
+  "timezone": "Africa/Tunis"
 }
 ```
 
-[Table of contents](#toc)
+[["/user/settings/","GET"]][Table of contents](#toc)
 
 
 # Update User Account Settings
 
-This API updates user account settings parameters. N.B:All fields are Boolean (True/False).
+This API updates user account settings parameters. N.B:All fields (except timezone) are Boolean.(True/False).
 
 **Endpoint:**`/user/settings/`
 
@@ -3512,6 +3515,8 @@ show_activity:*****
 
 show_location:*****
 
+timezone:*****
+
 }
 
 ```
@@ -3522,18 +3527,19 @@ show_location:*****
 ``` json
 {
   "email_notify": true,
-  "push_notify": true,
+  "push_notify": false,
   "message_notify": false,
   "weekly_summary": false,
-  "job_alerts": true,
+  "job_alerts": false,
   "marketing": false,
-  "show_email": true,
+  "show_email": false,
   "show_activity": false,
-  "show_location": false
+  "show_location": false,
+  "timezone": "Africa/Lagos"
 }
 ```
 
-[Table of contents](#toc)
+[["/user/settings/","PUT"]][Table of contents](#toc)
 
 
 # User Search

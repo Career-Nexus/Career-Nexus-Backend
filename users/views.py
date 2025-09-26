@@ -1,5 +1,4 @@
-from functools import partial
-from socket import timeout
+from amqp import connection
 from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
@@ -8,12 +7,11 @@ from django.db import transaction
 #import email
 import os
 import uuid
-from django.utils.html import strip_tags
+
 from django.conf import settings
 import requests
 
-from django.utils.ipv6 import is_valid_ipv6_address
-from requests.api import delete
+
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.views import APIView
@@ -29,6 +27,7 @@ from google.auth.transport import requests as google_request
 from drf_yasg.utils import swagger_auto_schema
 
 from networks.serializers import RetrieveRecommendationDetailSerializer
+from networks.models import Connection
 
 
 from . import serializers
@@ -46,6 +45,21 @@ agent = Agent()
 default_profile_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
 default_cover_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
 default_intro_video = ''
+
+
+def check_connection_status(user,other_id):
+    other_user = models.Users.objects.filter(id=other_id).first()
+    if not other_user:
+        return None
+    else:
+        if Connection.objects.filter(
+            Q(user=user,connection=other_user,status="CONFIRMED") |
+            Q(user=other_user,connection=user,status="CONFIRMED")
+        ).exists():
+            return True
+        else:
+            return False
+
 
 
 def delete_cache(key):
@@ -521,14 +535,18 @@ class RetreiveProfileView(APIView):
                 user = self.get_user(request)
                 profile = models.PersonalProfile.objects.get(user=user)
                 if user.user_type == "learner":
-                    output = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
+                    output = serializers.RetrieveAnotherProfileSerializer(profile,many=False,context={"user":user}).data
                 elif user.user_type == "employer":
-                    output = serializers.RetrieveCorporateUserSerializer(profile,many=False).data
+                    output = serializers.RetrieveCorporateUserSerializer(profile,many=False,context={"user":user}).data
                 else:
                     output = serializers.RetrieveMentorProfileSerializer(profile,many=False,context={"user":user}).data
                 cache.set(cache_key,output,timeout=7200)
+                #Injecting can_message boolean into response
+                output["can_message"] = False
                 return Response(output,status=status.HTTP_200_OK)
             else:
+                #Injecting can_message boolean into response
+                cached_data["can_message"] = False
                 return Response(cached_data,status=status.HTTP_200_OK)
         else:
             try:
@@ -543,14 +561,18 @@ class RetreiveProfileView(APIView):
                 #Implementation profile viewing counter 
                 models.ProfileView.objects.get_or_create(viewer=request.user,viewed=user)
                 if user.user_type == "learner":
-                    profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False).data
+                    profile_data = serializers.RetrieveAnotherProfileSerializer(profile,many=False,context={"user":request.user}).data
                 elif user.user_type == "employer":
-                    profile_data = serializers.RetrieveCorporateUserSerializer(profile,many=False).data
+                    profile_data = serializers.RetrieveCorporateUserSerializer(profile,many=False,context={"user":request.user}).data
                 else:
                     profile_data = serializers.RetrieveMentorProfileSerializer(profile,many=False,context={"user":request.user}).data
-                cache.set(cache_key,profile_data,timeout=7200)                   
+                cache.set(cache_key,profile_data,timeout=7200)
+                #Injecting can_message boolean into response
+                profile_data["can_message"] = check_connection_status(request.user,param)
                 return Response(profile_data,status=status.HTTP_200_OK)
             else:
+                #Injecting can_message boolean into response
+                cached_data["can_message"] = check_connection_status(request.user,param)
                 return Response(cached_data,status=status.HTTP_200_OK)
 
 
@@ -982,3 +1004,5 @@ class DisputeRetrieveSummaryView(APIView):
             category = item["category"]
             output_dict[category] = item["count"]
         return Response(output_dict,status=status.HTTP_200_OK)
+
+

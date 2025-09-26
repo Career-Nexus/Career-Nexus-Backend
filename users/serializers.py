@@ -1,5 +1,3 @@
-from random import choice
-from time import timezone
 from django.utils.timezone import make_aware
 from django.contrib.auth import get_user_model
 from django.core.files.storage import default_storage
@@ -691,6 +689,7 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
         model = models.PersonalProfile
         fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings","resume","timezone","user_type","industry"]
 
+
     def get_industry(self,obj):
         return obj.user.industry
 
@@ -1057,6 +1056,7 @@ class SettingsSerializer(serializers.Serializer):
     show_email = serializers.BooleanField(required=False)
     show_activity = serializers.BooleanField(required=False)
     show_location = serializers.BooleanField(required=False)
+    timezone = serializers.ChoiceField(choices=timezones_choices,required=False)
 
     def update(self,instance,validated_data):
         instance.email_notify = validated_data.get("email_notify",instance.email_notify)
@@ -1069,15 +1069,22 @@ class SettingsSerializer(serializers.Serializer):
         instance.show_activity = validated_data.get("show_activity",instance.show_activity)
         instance.show_location = validated_data.get("show_location",instance.show_location)
 
+        instance.profile.timezone = validated_data.get("timezone",instance.profile.timezone)
+
         instance.save()
+        instance.profile.save()
         return instance
 
 
 class RetrieveSettingsSerializer(serializers.ModelSerializer):
+    timezone = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Users
-        fields = ["email_notify","push_notify","message_notify","weekly_summary","job_alerts","marketing","show_email","show_activity","show_location"]
+        fields = ["email_notify","push_notify","message_notify","weekly_summary","job_alerts","marketing","show_email","show_activity","show_location","timezone"]
+
+    def get_timezone(self,obj):
+        return obj.profile.timezone
 
 
 class CreateDisputeTicketSerializer(serializers.Serializer):

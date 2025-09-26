@@ -1,52 +1,52 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
 
-        let currentEndpoint = '';
+            let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,12 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
+        </script>
+                    
 
-</script>
 
-
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -358,7 +357,8 @@ password:*****
   &quot;session_rate&quot;: &quot;3000NGN&quot;,
   &quot;rating&quot;: 0,
   &quot;user_type&quot;: &quot;mentor&quot;,
-  &quot;industry&quot;: &quot;technology&quot;
+  &quot;industry&quot;: &quot;technology&quot;,
+  &quot;can_message&quot;: false
 }
 
 LEARNERS
@@ -433,10 +433,11 @@ LEARNERS
   &quot;resume&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/resumes/51b434ab-441f-4ab1-ab72-a58c91ac7172Resume_080525.pdf&quot;,
   &quot;timezone&quot;: &quot;Africa/Lagos&quot;,
   &quot;user_type&quot;: &quot;learner&quot;,
-  &quot;industry&quot;: &quot;technology&quot;
+  &quot;industry&quot;: &quot;technology&quot;,
+  &quot;can_message&quot;: false
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/user/retrieve-profile/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Profile Update<a name='profile_update'></a></h1>
 <p>This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.</p>
 <p><strong>Endpoint:</strong><code>/user/profile-update/</code></p>
@@ -2806,20 +2807,21 @@ image (.png,.jpg,.jpeg):*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;email_notify&quot;: true,
-  &quot;push_notify&quot;: true,
+  &quot;email_notify&quot;: false,
+  &quot;push_notify&quot;: false,
   &quot;message_notify&quot;: false,
   &quot;weekly_summary&quot;: false,
-  &quot;job_alerts&quot;: true,
+  &quot;job_alerts&quot;: false,
   &quot;marketing&quot;: false,
-  &quot;show_email&quot;: true,
+  &quot;show_email&quot;: false,
   &quot;show_activity&quot;: false,
-  &quot;show_location&quot;: false
+  &quot;show_location&quot;: false,
+  &quot;timezone&quot;: &quot;Africa/Tunis&quot;
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/user/settings/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Update User Account Settings<a name='update_user_account_settings'></a></h1>
-<p>This API updates user account settings parameters. N.B:All fields are Boolean (True/False).</p>
+<p>This API updates user account settings parameters. N.B:All fields (except timezone) are Boolean.(True/False).</p>
 <p><strong>Endpoint:</strong><code>/user/settings/</code></p>
 <p><strong>Method:</strong> <code>PUT</code></p>
 <h2>Payload</h2>
@@ -2843,6 +2845,8 @@ show_activity:*****
 
 show_location:*****
 
+timezone:*****
+
 }
 
 </code></pre>
@@ -2850,17 +2854,18 @@ show_location:*****
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
   &quot;email_notify&quot;: true,
-  &quot;push_notify&quot;: true,
+  &quot;push_notify&quot;: false,
   &quot;message_notify&quot;: false,
   &quot;weekly_summary&quot;: false,
-  &quot;job_alerts&quot;: true,
+  &quot;job_alerts&quot;: false,
   &quot;marketing&quot;: false,
-  &quot;show_email&quot;: true,
+  &quot;show_email&quot;: false,
   &quot;show_activity&quot;: false,
-  &quot;show_location&quot;: false
+  &quot;show_location&quot;: false,
+  &quot;timezone&quot;: &quot;Africa/Lagos&quot;
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/user/settings/','PUT')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>User Search<a name='user_search'></a></h1>
 <p>This API searches for users based on a keyword query.</p>
 <p><strong>Endpoint:</strong><code>/user/search/?keyword=backend developer</code></p>
@@ -3768,7 +3773,7 @@ job:*****
 </code></pre>
 <p><button onclick="openApiTester('/mentor/vault/transactions/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 
-
+        
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -3802,5 +3807,6 @@ job:*****
     </div>
 
 
-</body>
-</html>
+        </body>
+        </html>
+        
