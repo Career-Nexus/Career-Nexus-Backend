@@ -54,7 +54,7 @@ class ChatMessageView(APIView):
             return Response({"error":"No chat_id provided"})
         else:
             chatroom = self.get_chatroom(chat_id=params,user=request.user)
-            messages = models.Message.objects.filter(room=chatroom).order_by("-timestamp")
+            messages = models.Message.objects.filter(room=chatroom).order_by("timestamp")
             serialized_data = self.serializer_class(messages,many=True).data
             return Response(serialized_data,status=status.HTTP_200_OK)
 
