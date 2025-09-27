@@ -1,6 +1,7 @@
 from rest_framework import serializers, status
 
 from django.db import transaction
+from decimal import Decimal
 
 from users.options import get_choices
 from users.models import PersonalProfile,Users
@@ -389,7 +390,8 @@ class AnnotateMentorshipSessionSerializer(serializers.Serializer):
             
             #Update the amount earned by mentor
             transaction_instance = session.sessiontransactions_set.filter(status="successful").first()
-            paid_amount = transaction_instance.central_amount
+            #The platform keeps 20% of mentor earnings && Decimal converts from float
+            paid_amount = Decimal((transaction_instance.central_amount * 0.8))
             mentor.vault.amount += paid_amount
             mentor.vault.save()
 

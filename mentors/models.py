@@ -29,12 +29,12 @@ class MentorRating(models.Model):
 
 class MentorVault(models.Model):
     mentor = models.OneToOneField(Users,on_delete=models.CASCADE,related_name="vault")
-    amount = models.IntegerField(default=0)
+    amount = models.DecimalField(default=0.00,decimal_places=2,max_digits=10)
     last_updated = models.DateTimeField(auto_now_add=True)
 
 class VaultTransactions(models.Model):
     mentor = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="vault_transactions")
     action = models.CharField(max_length=20,choices=VAULT_TRANSACTION_CHOICES)
-    amount = models.IntegerField()
+    amount = models.DecimalField(decimal_places=2,max_digits=10)
     extra_data = models.JSONField(default=dict)
     timestamp = models.DateTimeField(auto_now=True)
