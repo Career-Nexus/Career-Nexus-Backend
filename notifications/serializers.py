@@ -8,6 +8,7 @@ from posts.serializers import PersonalProfileSerializer
 from .utils import notify
 
 from users.models import Users
+from networks.models import Connection
 
 
 class ChatSerializer(serializers.ModelSerializer):
@@ -57,6 +58,13 @@ class InitiateChatSessionSerializer(serializers.Serializer):
         user = self.context["user"]
         if user.id == value.id:
             raise serializers.ValidationError("Cannot initiate chat session with self.")
+        #Ensuring connection before initiating chat
+        connection = Connection.objects.filter(
+            Q(user=user,connection=value,status="CONFIRMED") |
+            Q(user=value,connection=user,status="CONFIRMED")
+        )
+        if not connection.exists():
+            raise serializers.ValidationError("You are yet to connect with this user.")
         return value
 
     def create(self,validated_data):
