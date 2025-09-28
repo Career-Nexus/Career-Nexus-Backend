@@ -4,7 +4,7 @@ from users.models import Users
 class Chatroom(models.Model):
     initiator = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="user1")
     contributor = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="user2")
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now=True)
 
 class Message(models.Model):
     room = models.ForeignKey(Chatroom,on_delete=models.CASCADE)

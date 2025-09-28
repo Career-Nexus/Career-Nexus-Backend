@@ -4872,3 +4872,42 @@ This API retrieves all the Vault transactions (earnings and withdrawals) of a me
 ```
 
 [["/mentor/vault/transactions/","GET"]][Table of contents](#toc)
+
+
+# Initiate Chat Session
+
+This API initiates a chatsession with another user or retrieves it if a session already exists. N.B:You cannot initiate a chat session with yourself.
+
+**Endpoint:**`/notification-chat/chats/initiate/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"user":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "contributor": {
+    "id": 3,
+    "first_name": "N/A",
+    "last_name": "N/A",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+    "qualification": "Bachelor of Education (English)"
+  },
+  "chat_id": 2
+}
+```
+
+[["/notification-chat/chats/initiate/","POST"]][Table of contents](#toc)

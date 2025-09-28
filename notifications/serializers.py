@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from rest_framework import serializers
 
 from . import models
@@ -46,6 +48,30 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Notification
         fields = ["id","text","timestamp"]
+
+
+class InitiateChatSessionSerializer(serializers.Serializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())
+
+    def validate_user(self,value):
+        user = self.context["user"]
+        if user.id == value.id:
+            raise serializers.ValidationError("Cannot initiate chat session with self.")
+        return value
+
+    def create(self,validated_data):
+        user = self.context["user"]
+        other_user = validated_data.get("user")
+        session = models.Chatroom.objects.filter(
+            Q(initiator=user,contributor=other_user) |
+            Q(initiator=other_user,contributor=user)
+        ).first()
+        if not session:
+            session = models.Chatroom.objects.create(initiator=user,contributor=other_user)
+        session.save()
+        return session
+
+
 
 class TestNotificationSerializer(serializers.Serializer):
     user = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())

@@ -61,63 +61,64 @@
 54. [get posts](#get_posts)  
 55. [get saved post](#get_saved_post)  
 56. [google signin](#google_signin)  
-57. [job create](#job_create)  
-58. [job notifications](#job_notifications)  
-59. [job preference](#job_preference)  
-60. [join mentorship session](#join_mentorship_session)  
-61. [like comment/reply](#like_comment/reply)  
-62. [login api](#login_api)  
-63. [logout](#logout)  
-64. [mentor search/filter](#mentor_search/filter)  
-65. [mentors recommendation](#mentors_recommendation)  
-66. [mentorship session annotation.](#mentorship_session_annotation.)  
-67. [post create](#post_create)  
-68. [post like](#post_like)  
-69. [post retrieve](#post_retrieve)  
-70. [post save](#post_save)  
-71. [post share](#post_share)  
-72. [profile completion](#profile_completion)  
-73. [profile retrieve](#profile_retrieve)  
-74. [profile update](#profile_update)  
-75. [recommended job posts.](#recommended_job_posts.)  
-76. [reply comment](#reply_comment)  
-77. [reposting](#reposting)  
-78. [retrieve education api](#retrieve_education_api)  
-79. [retrieve library contents](#retrieve_library_contents)  
-80. [retrieve linked accounts](#retrieve_linked_accounts)  
-81. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
-82. [retrieve mentors posts](#retrieve_mentors_posts)  
-83. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-84. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-85. [retrieve saved jobs](#retrieve_saved_jobs)  
-86. [retrieve saved mentors](#retrieve_saved_mentors)  
-87. [retrieve user settings](#retrieve_user_settings)  
-88. [retrieve vault transactions](#retrieve_vault_transactions)  
-89. [save a job](#save_a_job)  
-90. [save a mentor](#save_a_mentor)  
-91. [session payment with flutterwave](#session_payment_with_flutterwave)  
-92. [session payment with stripe](#session_payment_with_stripe)  
-93. [signup with google](#signup_with_google)  
-94. [subscribe to newsletter](#subscribe_to_newsletter)  
-95. [switch account](#switch_account)  
-96. [unfollow user](#unfollow_user)  
-97. [unlike comment/reply](#unlike_comment/reply)  
-98. [unlike post](#unlike_post)  
-99. [unsave job](#unsave_job)  
-100. [unsave mentor](#unsave_mentor)  
-101. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-102. [update user account settings](#update_user_account_settings)  
-103. [updating user eperience](#updating_user_eperience)  
-104. [user analytics](#user_analytics)  
-105. [user followers](#user_followers)  
-106. [user registeration](#user_registeration)  
-107. [user retrieve dispute](#user_retrieve_dispute)  
-108. [user search](#user_search)  
-109. [user-industry update](#user-industry_update)  
-110. [valid choice](#valid_choice)  
-111. [verify otp hash](#verify_otp_hash)  
-112. [view certification](#view_certification)  
-113. [view experience](#view_experience)  
+57. [initiate chat session](#initiate_chat_session)  
+58. [job create](#job_create)  
+59. [job notifications](#job_notifications)  
+60. [job preference](#job_preference)  
+61. [join mentorship session](#join_mentorship_session)  
+62. [like comment/reply](#like_comment/reply)  
+63. [login api](#login_api)  
+64. [logout](#logout)  
+65. [mentor search/filter](#mentor_search/filter)  
+66. [mentors recommendation](#mentors_recommendation)  
+67. [mentorship session annotation.](#mentorship_session_annotation.)  
+68. [post create](#post_create)  
+69. [post like](#post_like)  
+70. [post retrieve](#post_retrieve)  
+71. [post save](#post_save)  
+72. [post share](#post_share)  
+73. [profile completion](#profile_completion)  
+74. [profile retrieve](#profile_retrieve)  
+75. [profile update](#profile_update)  
+76. [recommended job posts.](#recommended_job_posts.)  
+77. [reply comment](#reply_comment)  
+78. [reposting](#reposting)  
+79. [retrieve education api](#retrieve_education_api)  
+80. [retrieve library contents](#retrieve_library_contents)  
+81. [retrieve linked accounts](#retrieve_linked_accounts)  
+82. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+83. [retrieve mentors posts](#retrieve_mentors_posts)  
+84. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+85. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+86. [retrieve saved jobs](#retrieve_saved_jobs)  
+87. [retrieve saved mentors](#retrieve_saved_mentors)  
+88. [retrieve user settings](#retrieve_user_settings)  
+89. [retrieve vault transactions](#retrieve_vault_transactions)  
+90. [save a job](#save_a_job)  
+91. [save a mentor](#save_a_mentor)  
+92. [session payment with flutterwave](#session_payment_with_flutterwave)  
+93. [session payment with stripe](#session_payment_with_stripe)  
+94. [signup with google](#signup_with_google)  
+95. [subscribe to newsletter](#subscribe_to_newsletter)  
+96. [switch account](#switch_account)  
+97. [unfollow user](#unfollow_user)  
+98. [unlike comment/reply](#unlike_comment/reply)  
+99. [unlike post](#unlike_post)  
+100. [unsave job](#unsave_job)  
+101. [unsave mentor](#unsave_mentor)  
+102. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+103. [update user account settings](#update_user_account_settings)  
+104. [updating user eperience](#updating_user_eperience)  
+105. [user analytics](#user_analytics)  
+106. [user followers](#user_followers)  
+107. [user registeration](#user_registeration)  
+108. [user retrieve dispute](#user_retrieve_dispute)  
+109. [user search](#user_search)  
+110. [user-industry update](#user-industry_update)  
+111. [valid choice](#valid_choice)  
+112. [verify otp hash](#verify_otp_hash)  
+113. [view certification](#view_certification)  
+114. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -4985,3 +4986,42 @@ This API retrieves all the Vault transactions (earnings and withdrawals) of a me
 ```
 
 [["/mentor/vault/transactions/","GET"]][Table of contents](#toc)
+
+
+# Initiate Chat Session<a name='initiate_chat_session'></a>
+
+This API initiates a chatsession with another user or retrieves it if a session already exists. N.B:You cannot initiate a chat session with yourself.
+
+**Endpoint:**`/notification-chat/chats/initiate/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"user":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "contributor": {
+    "id": 3,
+    "first_name": "N/A",
+    "last_name": "N/A",
+    "middle_name": "N/A",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+    "qualification": "Bachelor of Education (English)"
+  },
+  "chat_id": 2
+}
+```
+
+[["/notification-chat/chats/initiate/","POST"]][Table of contents](#toc)

@@ -81,6 +81,21 @@ class NotificationView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class InitiateChatSessionView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        user = request.user
+        serializer = serializers.InitiateChatSessionSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.ChatSerializer(output_instance,many=False,context={"user":user}).data
+            return Response(output,status=status.HTTP_200_OK)
+
+
+
 class TestNotificationView(APIView):
     permission_classes = [
         IsAuthenticated,
