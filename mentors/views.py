@@ -256,7 +256,7 @@ class JoinSessionView(APIView):
                 jitsi_app_id = settings.JITSI_APP_ID
                 jitsi_key_id = settings.JITSI_KEY_ID 
                 private_key = open(f"{settings.BASE_DIR}/utilities/jaas_key.key","r").read()
-                now = time()
+                now = int(time())
                 payload = {
                     "aud":"jitsi",
                     "iss":jitsi_app_id,
