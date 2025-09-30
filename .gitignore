@@ -27,3 +27,6 @@ posts/migrations/__pycache__/*
 users/resources/mail_otp.html.bak
 .celery_logs.txt
 boot.sh
+utilities/jaas_key.key
+utilities/jaas_key.key.pub
+utilities/jaas_public.pub

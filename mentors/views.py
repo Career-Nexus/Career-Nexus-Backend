@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.conf import settings
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -16,6 +17,9 @@ from users.models import Users
 from utilities.permissions import IsMentor
 
 import uuid
+from pathlib import Path
+from time import time
+import jwt
 
 
 
@@ -145,7 +149,7 @@ class RetrieveMentorshipSessionsView(APIView):
         else:
             valid_parameters = ["requested","accepted","scheduled","completed"]
             if param.lower() not in valid_parameters:
-                return Response({"error":"Invalid query parameter. Paramter can only be requested,accepted,pending"},status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error":f"Invalid query parameter. Parameter can only be {valid_parameters}"},status=status.HTTP_400_BAD_REQUEST)
             else:
                 if param.lower() == "requested":
                     if user.user_type != "mentor":
@@ -248,9 +252,42 @@ class JoinSessionView(APIView):
             serializer = serializers.JoinSessionSerializer(data=request.query_params,context={"user":user})
             if serializer.is_valid(raise_exception=True):
                 session = serializer.validated_data.get("session")
+                #Constructing Jitsi Payload and jwt
+                jitsi_app_id = settings.JITSI_APP_ID
+                jitsi_key_id = settings.JITSI_KEY_ID 
+                private_key = open(f"{settings.BASE_DIR}/utilities/jaas_key.key","r").read()
+                now = time()
+                payload = {
+                    "aud":"jitsi",
+                    "iss":jitsi_app_id,
+                    "sub":"meet.jitsi",
+                    "room":session.room_name,
+                    "nbf":now,
+                    "exp":now + 3600,
+                    "context":{
+                        "user":{
+                            "id":str(user.id),
+                            "name":f"{user.profile.first_name} {user.profile.last_name}",
+                            "email":user.email,
+                            "avatar":user.profile.profile_photo
+                        },
+                        "features":{
+                            "recording": True,
+                            "livestreaming": True,
+                            "screen-sharing": True
+                        }
+                    }
+                }
+                
+                header = {
+                    "alg": "RS256",
+                    "kid":jitsi_key_id
+                }
+                token = jwt.encode(payload,private_key,algorithm="RS256",headers=header)
+
                 output = {
                     'session_id':session.id,
-                    'room_name':session.room_name
+                    'token':token
                 }
                 return Response(output,status=status.HTTP_200_OK)
 

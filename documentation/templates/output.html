@@ -1,52 +1,52 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
 
-        let currentEndpoint = '';
+            let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,12 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
+        </script>
+                    
 
-</script>
 
-
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -3383,7 +3382,7 @@ job:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Join Mentorship Session<a name='join_mentorship_session'></a></h1>
-<p>This API retrieves the room name of the mentorship session. N.B:The user must either be a learner(mentee) or the sessions mentor. Also, only paid sessions can be joined and also, the time set for the session must not be in the future.</p>
+<p>This API retrieves the session id and the jwt token to authenticate Jitsi as a Service. N.B:The user must either be a learner(mentee) or the sessions mentor. Also, only paid sessions can be joined and also, the time set for the session must not be in the future.</p>
 <p><strong>Endpoint:</strong><code>/mentor/session/join/?session=13</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -3393,11 +3392,11 @@ job:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;session_id&quot;: 13,
-  &quot;room_name&quot;: &quot;Room_1_11_420b8956-49d4-4971-9a6c-a1759c0472ab&quot;
+  &quot;session_id&quot;: 21,
+  &quot;token&quot;: &quot;eyJhbGciOiJSUzI1NiIsImtpZCI6InZwYWFzLW1hZ2ljLWNvb2tpZS01NjQwNmY0ODFkODU0NmI2OTE1OGU1MjQyZmEzZTk3Mi8xMzljNTkiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJqaXRzaSIsImlzcyI6InZwYWFzLW1hZ2ljLWNvb2tpZS01NjQwNmY0ODFkODU0NmI2OTE1OGU1MjQyZmEzZTk3MiIsInN1YiI6Im1lZXQuaml0c2kiLCJyb29tIjoiUm9vbV8xXzExX2EyZWIwNDBkLWIwMDUtNDlmYy04ZmE2LTZiOWUwMjhmYzgyNSIsIm5iZiI6MTc1OTIzNTg5MS44NTc0ODcyLCJleHAiOjE3NTkyMzk0OTEuODU3NDg3MiwiY29udGV4dCI6eyJ1c2VyIjp7ImlkIjoiMSIsIm5hbWUiOiJPcGV5ZW1pIFNhbGl1IiwiZW1haWwiOiJzYWxpdW9hemVlekBnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL2NhcmVlcm5leHVzLXN0b3JhZ2UxLnMzLmFtYXpvbmF3cy5jb20vcHJvZmlsZV9waWN0dXJlcy84MjhiZmU0Yy00OGRjLTQ3ZDctODJmOS00NmVhYmI3MDE5N2RMYXB0b3AxLmpwZyJ9LCJmZWF0dXJlcyI6eyJyZWNvcmRpbmciOnRydWUsImxpdmVzdHJlYW1pbmciOnRydWUsInNjcmVlbi1zaGFyaW5nIjp0cnVlfX19.HIVtG05_dZ5bwjOyWLRp0_hhBoEQZk9YpCT9ilfAzp80520dAyAyR3h06NMuJ5QVSyLspeV_oPQWF9BtD01MTIkX8EIdKFJpWrQfFycb_6NZgb6n54U6wHT2e5mkO_NCkFlHWTr7EsHHACvuO_rLgtkgkkrws5RokwO76_nrG1GLITS3OSk1CXOQTzn6gaILtSGpavG5b6i06xyNbpxhk-mF0RqTCIg7QDuUGmt-lVgrY6Roujk41Isw8Ipki7vYWu1nnUaXgvC_po43ngcKBX8WjjnP3RCCwTjm7AwvkptBeYLq9AKzKSi_rxB6_WgeERjch-9hVcxwQ_B914nVFQywxdFhWDw_pyi13ugh9vWwe1m6M3e9YZjWjOkouS0cmgLpjAn5de0GsXTJ_nSVB_yL3nxyfb91vmJ0V9nxGyVTHe2Kw7TyUF61DeQoPXVwnjwSwt4SQ0Xizt4aOVmdgn1VOn8On5jrD-gDrWfd573B4oLz8iXqkKeFvNhGUh5foJ3yIH44efnRF0tZ8FQqUDsQR8UBNF6YitIHYpH_yQ6l2ZmziVt-Tay5qcODvQiWJtmnSFo7dUEPEKiFAH3mmJ2NRnjksHp7F0l3MY71bCDuN5WNLgIP--C_yUPy5nR1aziedVQZrnN2eQlPeXhg_OMOckfbdTQy7g1wunNad_s&quot;
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/mentor/session/join/?session=13','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Google Signin<a name='google_signin'></a></h1>
 <p>This API exchanges a google code for authentication details. N.B:A call to google's oauth2 API should have been previously made to obtain a valid code to be used for this request.</p>
 <p><strong>Endpoint:</strong><code>/user/google/signin/</code></p>
@@ -3802,7 +3801,7 @@ job:*****
 </code></pre>
 <p><button onclick="openApiTester('/notification-chat/chats/initiate/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
 
-
+        
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -3836,5 +3835,6 @@ job:*****
     </div>
 
 
-</body>
-</html>
+        </body>
+        </html>
+        

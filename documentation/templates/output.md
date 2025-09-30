@@ -4412,7 +4412,7 @@ This API cancels a mentorship sessions. N.B:Only the session initiator (mentee) 
 
 # Join Mentorship Session<a name='join_mentorship_session'></a>
 
-This API retrieves the room name of the mentorship session. N.B:The user must either be a learner(mentee) or the sessions mentor. Also, only paid sessions can be joined and also, the time set for the session must not be in the future.
+This API retrieves the session id and the jwt token to authenticate Jitsi as a Service. N.B:The user must either be a learner(mentee) or the sessions mentor. Also, only paid sessions can be joined and also, the time set for the session must not be in the future.
 
 **Endpoint:**`/mentor/session/join/?session=13`
 
@@ -4430,12 +4430,12 @@ This API retrieves the room name of the mentorship session. N.B:The user must ei
 
 ``` json
 {
-  "session_id": 13,
-  "room_name": "Room_1_11_420b8956-49d4-4971-9a6c-a1759c0472ab"
+  "session_id": 21,
+  "token": "eyJhbGciOiJSUzI1NiIsImtpZCI6InZwYWFzLW1hZ2ljLWNvb2tpZS01NjQwNmY0ODFkODU0NmI2OTE1OGU1MjQyZmEzZTk3Mi8xMzljNTkiLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJqaXRzaSIsImlzcyI6InZwYWFzLW1hZ2ljLWNvb2tpZS01NjQwNmY0ODFkODU0NmI2OTE1OGU1MjQyZmEzZTk3MiIsInN1YiI6Im1lZXQuaml0c2kiLCJyb29tIjoiUm9vbV8xXzExX2EyZWIwNDBkLWIwMDUtNDlmYy04ZmE2LTZiOWUwMjhmYzgyNSIsIm5iZiI6MTc1OTIzNTg5MS44NTc0ODcyLCJleHAiOjE3NTkyMzk0OTEuODU3NDg3MiwiY29udGV4dCI6eyJ1c2VyIjp7ImlkIjoiMSIsIm5hbWUiOiJPcGV5ZW1pIFNhbGl1IiwiZW1haWwiOiJzYWxpdW9hemVlekBnbWFpbC5jb20iLCJhdmF0YXIiOiJodHRwczovL2NhcmVlcm5leHVzLXN0b3JhZ2UxLnMzLmFtYXpvbmF3cy5jb20vcHJvZmlsZV9waWN0dXJlcy84MjhiZmU0Yy00OGRjLTQ3ZDctODJmOS00NmVhYmI3MDE5N2RMYXB0b3AxLmpwZyJ9LCJmZWF0dXJlcyI6eyJyZWNvcmRpbmciOnRydWUsImxpdmVzdHJlYW1pbmciOnRydWUsInNjcmVlbi1zaGFyaW5nIjp0cnVlfX19.HIVtG05_dZ5bwjOyWLRp0_hhBoEQZk9YpCT9ilfAzp80520dAyAyR3h06NMuJ5QVSyLspeV_oPQWF9BtD01MTIkX8EIdKFJpWrQfFycb_6NZgb6n54U6wHT2e5mkO_NCkFlHWTr7EsHHACvuO_rLgtkgkkrws5RokwO76_nrG1GLITS3OSk1CXOQTzn6gaILtSGpavG5b6i06xyNbpxhk-mF0RqTCIg7QDuUGmt-lVgrY6Roujk41Isw8Ipki7vYWu1nnUaXgvC_po43ngcKBX8WjjnP3RCCwTjm7AwvkptBeYLq9AKzKSi_rxB6_WgeERjch-9hVcxwQ_B914nVFQywxdFhWDw_pyi13ugh9vWwe1m6M3e9YZjWjOkouS0cmgLpjAn5de0GsXTJ_nSVB_yL3nxyfb91vmJ0V9nxGyVTHe2Kw7TyUF61DeQoPXVwnjwSwt4SQ0Xizt4aOVmdgn1VOn8On5jrD-gDrWfd573B4oLz8iXqkKeFvNhGUh5foJ3yIH44efnRF0tZ8FQqUDsQR8UBNF6YitIHYpH_yQ6l2ZmziVt-Tay5qcODvQiWJtmnSFo7dUEPEKiFAH3mmJ2NRnjksHp7F0l3MY71bCDuN5WNLgIP--C_yUPy5nR1aziedVQZrnN2eQlPeXhg_OMOckfbdTQy7g1wunNad_s"
 }
 ```
 
-[Table of contents](#toc)
+[["/mentor/session/join/?session=13","GET"]][Table of contents](#toc)
 
 
 # Google Signin<a name='google_signin'></a>
