@@ -266,7 +266,7 @@ class JoinSessionView(APIView):
                     "exp":now + 3600,
                     "context":{
                         "user":{
-                            "id":str(user.id),
+                            "id":f"User_{str(user.id)}",
                             "name":f"{user.profile.first_name} {user.profile.last_name}",
                             "email":user.email,
                             "avatar":user.profile.profile_photo
