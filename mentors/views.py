@@ -296,6 +296,7 @@ class JoinSessionView(APIView):
 
                 output = {
                     'session_id':session.id,
+                    'room_name':session.room_name,
                     'token':token
                 }
                 return Response(output,status=status.HTTP_200_OK)
