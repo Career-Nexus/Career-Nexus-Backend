@@ -252,36 +252,45 @@ class JoinSessionView(APIView):
             serializer = serializers.JoinSessionSerializer(data=request.query_params,context={"user":user})
             if serializer.is_valid(raise_exception=True):
                 session = serializer.validated_data.get("session")
+                moderator_status = session.mentor == user
+
                 #Constructing Jitsi Payload and jwt
                 jitsi_app_id = settings.JITSI_APP_ID
                 jitsi_key_id = settings.JITSI_KEY_ID 
                 private_key = open(f"{settings.BASE_DIR}/utilities/jaas_key.key","r").read()
                 now = int(time())
+
                 payload = {
-                    "aud":"jitsi",
-                    "iss":jitsi_app_id,
-                    "sub":"meet.jitsi",
-                    "room":session.room_name,
-                    "nbf":now,
-                    "exp":now + 3600,
-                    "context":{
-                        "user":{
-                            "id":f"User_{str(user.id)}",
-                            "name":f"{user.profile.first_name} {user.profile.last_name}",
-                            "email":user.email,
-                            "avatar":user.profile.profile_photo
+                    "aud": "jitsi",
+                    "context": {
+                        "user": {
+                        "id": f"User_{str(user.id)}",
+                        "name": f"{user.profile.first_name} {user.profile.last_name}",
+                        "avatar": user.profile.profile_photo,
+                        "email": user.email,
+                        "moderator": moderator_status
                         },
-                        "features":{
-                            "recording": True,
-                            "livestreaming": True,
-                            "screen-sharing": True
+                        "features": {
+                        "livestreaming": False,
+                        "outbound-call": False,
+                        "transcription": False,
+                        "recording": False
+                        },
+                        "room": {
+                        "regex": False
                         }
+                    },
+                    "exp": now + 3600,
+                    "iss": "chat",
+                    "nbf": now,
+                    "room": "*",
+                    "sub": jitsi_app_id
                     }
-                }
                 
                 header = {
                     "alg": "RS256",
-                    "kid":jitsi_key_id
+                    "kid":jitsi_key_id,
+                    "typ":"JWT"
                 }
                 token = jwt.encode(payload,private_key,algorithm="RS256",headers=header)
 
