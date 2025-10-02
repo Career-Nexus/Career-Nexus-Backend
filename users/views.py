@@ -28,6 +28,7 @@ from drf_yasg.utils import swagger_auto_schema
 
 from networks.serializers import RetrieveRecommendationDetailSerializer
 from networks.models import Connection
+from follows.models import UserFollow
 
 
 from . import serializers
@@ -59,6 +60,15 @@ def check_connection_status(user,other_id):
             return True
         else:
             return False
+
+def check_following_status(user,other_id):
+    other_user = models.Users.objects.filter(id=other_id).first()
+    if not other_id:
+        return None
+    else:
+        if UserFollow.objects.filter(user_follower=user,user_following=other_user).exists():
+            return False
+        return True
 
 
 
@@ -543,10 +553,12 @@ class RetreiveProfileView(APIView):
                 cache.set(cache_key,output,timeout=7200)
                 #Injecting can_message boolean into response
                 output["can_message"] = False
+                output["can_follow"] = False
                 return Response(output,status=status.HTTP_200_OK)
             else:
                 #Injecting can_message boolean into response
                 cached_data["can_message"] = False
+                cached_data["can_follow"] = False
                 return Response(cached_data,status=status.HTTP_200_OK)
         else:
             try:
@@ -569,10 +581,12 @@ class RetreiveProfileView(APIView):
                 cache.set(cache_key,profile_data,timeout=7200)
                 #Injecting can_message boolean into response
                 profile_data["can_message"] = check_connection_status(request.user,param)
+                profile_data["can_follow"] = check_following_status(request.user,param)
                 return Response(profile_data,status=status.HTTP_200_OK)
             else:
                 #Injecting can_message boolean into response
                 cached_data["can_message"] = check_connection_status(request.user,param)
+                cached_data["can_follow"] = check_following_status(request.user,param)
                 return Response(cached_data,status=status.HTTP_200_OK)
 
 

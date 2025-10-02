@@ -324,7 +324,8 @@ MENTORS
   "rating": 0,
   "user_type": "mentor",
   "industry": "technology",
-  "can_message": false
+  "can_message": false,
+  "can_follow": true
 }
 
 LEARNERS
@@ -400,7 +401,8 @@ LEARNERS
   "timezone": "Africa/Lagos",
   "user_type": "learner",
   "industry": "technology",
-  "can_message": false
+  "can_message": false,
+  "can_follow": true
 }
 ```
 
@@ -3021,9 +3023,9 @@ discourse:*****
 
 # Retrieve Mentorship Sessions<a name='retrieve_mentorship_sessions'></a>
 
-This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:If this API is called by a learner, it retrieves all the sessions that has been requested by the user which are yet to be accepted by the mentor. However, if this API is called by a mentor, it retrieves all the mentorship booking requests made by other users towards himself. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor.
+This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:If this API is called by a learner, it retrieves all the sessions that has been requested by the user which are yet to be accepted by the mentor. However, if this API is called by a mentor, it retrieves all the mentorship booking requests made by other users towards himself. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor. ?status=completed:This retrieves all the completed sessions that the user (mentor or learner) participated in.
 
-**Endpoint:**`/mentor/sessions/?status=requested`
+**Endpoint:**`/mentor/sessions/?status=completed`
 
 **Method:** `GET`
 
@@ -3040,7 +3042,7 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
 ``` json
 [
   {
-    "id": 17,
+    "id": 11,
     "mentor": {
       "id": 11,
       "first_name": "Abdul Azeez",
@@ -3057,21 +3059,142 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
       "qualification": "Bachelor of Engineering (Civil Engineering)"
     },
-    "join": false,
+    "join": true,
     "session_type": "individual",
     "session_at": {
-      "date": "2025-08-30",
+      "date": "2025-07-21",
       "time": "00:00:00"
     },
     "discourse": "Career Building",
-    "amount": "3000NGN",
-    "status": "PENDING",
-    "is_paid": false
+    "amount": "1500NGN",
+    "rating": 0,
+    "status": "COMPLETED",
+    "is_paid": true
+  },
+  {
+    "id": 13,
+    "mentor": {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "join": true,
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-07-31",
+      "time": "07:36:00"
+    },
+    "discourse": "Career Building",
+    "amount": "1500NGN",
+    "rating": 0,
+    "status": "COMPLETED",
+    "is_paid": true
+  },
+  {
+    "id": 21,
+    "mentor": {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "join": true,
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-09-30",
+      "time": "09:50:00"
+    },
+    "discourse": "Career Coaching",
+    "amount": "1500NGN",
+    "rating": 4,
+    "status": "COMPLETED",
+    "is_paid": true
+  },
+  {
+    "id": 19,
+    "mentor": {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "join": true,
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-09-18",
+      "time": "10:00:00"
+    },
+    "discourse": "Career Advice and Education",
+    "amount": "1500NGN",
+    "rating": 0,
+    "status": "COMPLETED",
+    "is_paid": true
+  },
+  {
+    "id": 20,
+    "mentor": {
+      "id": 11,
+      "first_name": "Abdul Azeez",
+      "last_name": "Balogun",
+      "middle_name": "Abiola",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+      "qualification": "Bachelor of Engineering"
+    },
+    "mentee": {
+      "id": 1,
+      "first_name": "Opeyemi",
+      "last_name": "Saliu",
+      "middle_name": "Abdul-Azeez",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+      "qualification": "Bachelor of Engineering (Civil Engineering)"
+    },
+    "join": true,
+    "session_type": "individual",
+    "session_at": {
+      "date": "2025-09-27",
+      "time": "09:50:00"
+    },
+    "discourse": "Career Coaching",
+    "amount": "1500NGN",
+    "rating": 0,
+    "status": "COMPLETED",
+    "is_paid": true
   }
 ]
 ```
 
-[Table of contents](#toc)
+[["/mentor/sessions/?status=completed","GET"]][Table of contents](#toc)
 
 
 # Accept/Reject Mentorship Session Request<a name='accept/reject_mentorship_session_request'></a>

@@ -15,6 +15,7 @@ class Sessions(models.Model):
     room_name = models.CharField()
     session_at = models.DateTimeField()
     discourse = models.TextField()
+    rating = models.IntegerField(default=0)
     status = models.CharField(max_length=20,default="PENDING")
     is_paid = models.BooleanField(default=False)
 

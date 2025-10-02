@@ -10,6 +10,7 @@ from django.db import transaction
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import serializers
 from . import models
+from follows.models import UserFollow
 from info.models import ExchangeRate
 
 
@@ -694,7 +695,6 @@ class RetrieveAnotherProfileSerializer(serializers.ModelSerializer):
         model = models.PersonalProfile
         fields = ["first_name","last_name","middle_name","country_code","phone_number","cover_photo","profile_photo","location","position","bio","qualification","intro_video","summary","experience","education","certification","followers","followings","resume","timezone","user_type","industry"]
 
-
     def get_industry(self,obj):
         return obj.user.industry
 
@@ -744,7 +744,7 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
         try:
             mentor_rating = user.rating
             ratings = mentor_rating.ratings
-            average_rating = sum(ratings)/len(ratings)
+            average_rating = sum(ratings)//len(ratings)
             return average_rating
         except:
             return 0

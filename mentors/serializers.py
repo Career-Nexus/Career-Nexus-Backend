@@ -211,6 +211,7 @@ class SessionRetrieveSerializer(serializers.Serializer):
     session_at = serializers.SerializerMethodField()
     discourse = serializers.CharField()
     amount = serializers.SerializerMethodField()
+    rating = serializers.IntegerField()
     status = serializers.CharField()
     is_paid = serializers.BooleanField()
 
@@ -401,9 +402,13 @@ class AnnotateMentorshipSessionSerializer(serializers.Serializer):
 
         rating = validated_data.get("rating")
 
+        session.rating = rating
+        session.save()
+
         mentor_rating, created = models.MentorRating.objects.get_or_create(mentor=mentor)
         mentor_rating.ratings.append(rating)
         mentor_rating.save()
+
         return session
 
 
