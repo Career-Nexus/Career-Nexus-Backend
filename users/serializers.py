@@ -541,11 +541,6 @@ class PersonalProfileSerializer(serializers.Serializer):
             raise serializers.ValidationError("File too large.")
         return file
 
-    def validate_session_rate(self,value):
-        session_rates = list(range(1,11))
-        if value not in session_rates:
-            raise serializers.ValidationError("This session rate is not within the allowed rates.")
-        return value
 
     def validate(self,data):
         areas_of_expertise = data.get("areas_of_expertise")
@@ -584,6 +579,17 @@ class PersonalProfileSerializer(serializers.Serializer):
 
         #Extra updates if instance is a mentor.
         if instance.user.user_type == "mentor":
+            #Inferring the session rate currency from the user's phone country code
+            session_rate = validated_data.get("session_rate",instance.session_rate)
+            country_code = instance.country_code
+            rate_instance = ExchangeRate.objects.filter(country__code=country_code).first()
+            if not rate_instance:
+                pass
+            else:
+                #Convert session rate to central value (dollars)
+                session_rate = session_rate // rate_instance.exchange_rate
+
+
             years_of_experience = validated_data.get("years_of_experience",instance.years_of_experience)
             availability = validated_data.get("availability",instance.availability)
             current_job = validated_data.get("current_job",instance.current_job)
@@ -591,7 +597,6 @@ class PersonalProfileSerializer(serializers.Serializer):
             technical_skills = validated_data.get("technical_skills",instance.technical_skills)
             mentorship_styles = validated_data.get("mentorship_styles",instance.mentorship_styles)
             linkedin_url = validated_data.get("linkedin_url",instance.linkedin_url)
-            session_rate = validated_data.get("session_rate",instance.session_rate)
 
 
             instance.years_of_experience = years_of_experience
