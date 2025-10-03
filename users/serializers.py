@@ -525,6 +525,7 @@ class PersonalProfileSerializer(serializers.Serializer):
     bio = serializers.CharField(max_length=4000,required=False)
     resume = serializers.FileField(required=False)
     timezone = serializers.ChoiceField(choices=timezones_choices,required=False)
+    industry = serializers.ChoiceField(choices=industry_options,required=False)
     #Field options for mentors.
     years_of_experience = serializers.IntegerField(required=False)
     availability = serializers.ChoiceField(choices=availability_options,required=False)
@@ -577,6 +578,12 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.country_code = validated_data.get("country_code",instance.country_code)
         instance.phone_number = validated_data.get("phone_number",instance.phone_number)
         instance.timezone = validated_data.get("timezone",instance.timezone)
+        
+        #Make user industry updateable via PUT while also avoiding always calling save when other data are updated
+        selected_industry = validated_data.get("industry")
+        if selected_industry:
+            instance.user.industry = selected_industry
+            instance.user.save()
 
         #Extra updates if instance is a mentor.
         if instance.user.user_type == "mentor":
