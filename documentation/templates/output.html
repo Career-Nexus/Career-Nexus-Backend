@@ -1,52 +1,52 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Documentation</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-            <style>
-                body {
-                    box-sizing: border-box;
-                    min-width: 200px;
-                    max-width: 980px;
-                    margin: 0 auto;
-                    padding: 45px;
-                }
-            </style>
-        </head>
-        <body class="markdown-body">
-            <input type="text" id="searchBox" placeholder="Search index..." />
-                <ul id="searchResults"></ul>
-            
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            const searchBox = document.getElementById('searchBox');
-            const indexLinks = document.querySelectorAll('#index li a');
-            const resultsList = document.getElementById('searchResults');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <input type="text" id="searchBox" placeholder="Search index..." />
+    <ul id="searchResults"></ul>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchBox = document.getElementById('searchBox');
+  const indexLinks = document.querySelectorAll('#index li a');
+  const resultsList = document.getElementById('searchResults');
 
-            searchBox.addEventListener('input', function () {
-                const query = searchBox.value.toLowerCase();
-                resultsList.innerHTML = ''; // Clear previous results
+  searchBox.addEventListener('input', function () {
+    const query = searchBox.value.toLowerCase();
+    resultsList.innerHTML = ''; // Clear previous results
 
-                if (!query) return;
+    if (!query) return;
 
-                indexLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = link.href;
-                    a.textContent = link.textContent;
-                    li.appendChild(a);
-                    resultsList.appendChild(li);
-                }
-                });
-            });
-            });
+    indexLinks.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      if (text.includes(query)) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.textContent;
+        li.appendChild(a);
+        resultsList.appendChild(li);
+      }
+    });
+  });
+});
 
-            let currentEndpoint = '';
+        let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,11 +87,12 @@
             }
 
         }
-        </script>
-                    
+
+</script>
 
 
-        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+    
+<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -183,6 +184,7 @@
 <li><a href="#retrieve_portfolio_projects">retrieve portfolio projects</a></li>
 <li><a href="#retrieve_saved_jobs">retrieve saved jobs</a></li>
 <li><a href="#retrieve_saved_mentors">retrieve saved mentors</a></li>
+<li><a href="#retrieve_shared_post">retrieve shared post</a></li>
 <li><a href="#retrieve_user_settings">retrieve user settings</a></li>
 <li><a href="#retrieve_vault_transactions">retrieve vault transactions</a></li>
 <li><a href="#save_a_job">save a job</a></li>
@@ -1320,23 +1322,24 @@ Technology isn’t just changing how we move—it’s changing what’s possible
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Post Share<a name='post_share'></a></h1>
-<p>This endpoint is designed to create a link particular to a post which could be called to retrieve the details of the post from external sources. Currently, it saves the post and associates it with the user and adds to the share count data which can be retrieved from the get posts API.</p>
+<p>This endpoint is designed to create a link particular to a post which could be called to retrieve the details of the post from external sources.</p>
 <p><strong>Endpoint:</strong><code>/post/share/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">{
 
-post:*****
+&quot;post&quot;:&quot;*****&quot;
 
 }
+
 </code></pre>
 <h2>Response body</h2>
-<p><strong>status code:201</strong></p>
+<p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;post_id&quot;: 7
+  &quot;post_hash&quot;: &quot;8ca6d40e-aa6d-4188-b079-fa8a7aacce57&quot;
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/post/share/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Get Followings Post<a name='get_followings_post'></a></h1>
 <p>This endpoint retrieves the posts of users the logged in user is currently following</p>
 <p><strong>Endpoint:</strong><code>/post/following/</code></p>
@@ -3924,8 +3927,50 @@ job:*****
 }
 </code></pre>
 <p><button onclick="openApiTester('/notification-chat/chats/initiate/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Shared Post<a name='retrieve_shared_post'></a></h1>
+<p>This API retrieves all the contents of a shared post. N.B:An Unregistered/Logged out user can call this API to retrieve post details.</p>
+<p><strong>Endpoint:</strong><code>/post/share/?hash=542c2550-7f38-4c42-b059-c6d72e299d97</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
 
-        
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;shared_by&quot;: {
+    &quot;id&quot;: 1,
+    &quot;first_name&quot;: &quot;Opeyemi&quot;,
+    &quot;last_name&quot;: &quot;Saliu&quot;,
+    &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+    &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+    &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+  },
+  &quot;post&quot;: {
+    &quot;profile&quot;: {
+      &quot;id&quot;: 21,
+      &quot;first_name&quot;: &quot;Bojowa Ventures Limited&quot;,
+      &quot;last_name&quot;: &quot;&quot;,
+      &quot;middle_name&quot;: &quot;&quot;,
+      &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png&quot;,
+      &quot;qualification&quot;: &quot;Dealers in recycled wastes and compositions.&quot;
+    },
+    &quot;body&quot;: &quot;Technology isn’t just about gadgets and apps — it’s the invisible force shaping how we live, work, and connect. From cloud systems powering businesses to AI assisting in everyday tasks, it keeps pushing boundaries of speed, scale, and creativity.\n\nBut here’s the thing: technology is only as impactful as the minds behind it. The real breakthrough happens when curiosity meets code, when ideas turn into solutions.\n\nIn a world moving faster than ever, the question is no longer “What can technology do?” but “What will we choose to build with it?” 🚀&quot;,
+    &quot;pic1&quot;: &quot;N/A&quot;,
+    &quot;pic2&quot;: &quot;N/A&quot;,
+    &quot;pic3&quot;: &quot;N/A&quot;,
+    &quot;video&quot;: &quot;N/A&quot;,
+    &quot;parent&quot;: null,
+    &quot;like_count&quot;: 0,
+    &quot;comment_count&quot;: 0,
+    &quot;share_count&quot;: 2,
+    &quot;time_stamp&quot;: &quot;2025-09-18T03:44:39.929867Z&quot;
+  }
+}
+</code></pre>
+<p><button onclick="openApiTester('/post/share/?hash=542c2550-7f38-4c42-b059-c6d72e299d97','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+
+
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -3959,6 +4004,5 @@ job:*****
     </div>
 
 
-        </body>
-        </html>
-        
+</body>
+</html>

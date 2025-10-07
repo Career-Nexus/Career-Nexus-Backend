@@ -37,6 +37,7 @@ class CommentLike(models.Model):
 class Share(models.Model):
     post = models.ForeignKey(Posts,on_delete=models.CASCADE)
     user = models.ForeignKey(Users,on_delete=models.CASCADE)
+    hash = models.CharField()
 
 class PostSave(models.Model):
     user = models.ForeignKey(Users,on_delete=models.CASCADE)

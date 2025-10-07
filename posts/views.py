@@ -9,7 +9,7 @@ from follows.models import UserFollow
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.pagination import PageNumberPagination
 
 from django.http import Http404
@@ -381,9 +381,16 @@ class SavePostView(APIView):
 
 
 class ShareView(APIView):
-    permission_classes = [
-                IsAuthenticated,
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [
+                IsAuthenticated(),
             ]
+        elif self.request.method == "GET":
+            return [
+                AllowAny(),
+            ]
+
     serializer_class = serializers.ShareSerializer
 
     @swagger_auto_schema(request_body=serializer_class,operation_description="Allows recording of the number of shares of a post.")
@@ -391,5 +398,23 @@ class ShareView(APIView):
         serializer = self.serializer_class(data=request.data,context={"user":request.user})
         if serializer.is_valid(raise_exception=True):
             output = serializer.save()
-            return Response(output,status=status.HTTP_201_CREATED)
+            return Response(output,status=status.HTTP_200_OK)
+
+    def get(self,request):
+        param = request.query_params.get("hash")
+        if not param:
+            return Response({"error":"A hash query parameter is required for this request."},status=status.HTTP_400_BAD_REQUEST)
+        else:
+            cache_key = f"post_hash_{param}"
+            cached_data = cache.get(cache_key)
+            if not cached_data:
+                shared_content = models.Share.objects.filter(hash=param).first()
+                if not shared_content:
+                    return Response({"error":"Invalid Share Hash"},status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    output = serializers.RetrieveSharedPostSerializer(shared_content,many=False).data
+                    cache.set(cache_key,output,timeout=60*60*24)
+            else:
+                output = cached_data
+            return Response(output,status=status.HTTP_200_OK)
 

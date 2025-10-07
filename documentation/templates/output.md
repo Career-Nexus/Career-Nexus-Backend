@@ -92,33 +92,34 @@
 85. [retrieve portfolio projects](#retrieve_portfolio_projects)  
 86. [retrieve saved jobs](#retrieve_saved_jobs)  
 87. [retrieve saved mentors](#retrieve_saved_mentors)  
-88. [retrieve user settings](#retrieve_user_settings)  
-89. [retrieve vault transactions](#retrieve_vault_transactions)  
-90. [save a job](#save_a_job)  
-91. [save a mentor](#save_a_mentor)  
-92. [session payment with flutterwave](#session_payment_with_flutterwave)  
-93. [session payment with stripe](#session_payment_with_stripe)  
-94. [signup with google](#signup_with_google)  
-95. [subscribe to newsletter](#subscribe_to_newsletter)  
-96. [switch account](#switch_account)  
-97. [unfollow user](#unfollow_user)  
-98. [unlike comment/reply](#unlike_comment/reply)  
-99. [unlike post](#unlike_post)  
-100. [unsave job](#unsave_job)  
-101. [unsave mentor](#unsave_mentor)  
-102. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-103. [update user account settings](#update_user_account_settings)  
-104. [updating user eperience](#updating_user_eperience)  
-105. [user analytics](#user_analytics)  
-106. [user followers](#user_followers)  
-107. [user registeration](#user_registeration)  
-108. [user retrieve dispute](#user_retrieve_dispute)  
-109. [user search](#user_search)  
-110. [user-industry update](#user-industry_update)  
-111. [valid choice](#valid_choice)  
-112. [verify otp hash](#verify_otp_hash)  
-113. [view certification](#view_certification)  
-114. [view experience](#view_experience)  
+88. [retrieve shared post](#retrieve_shared_post)  
+89. [retrieve user settings](#retrieve_user_settings)  
+90. [retrieve vault transactions](#retrieve_vault_transactions)  
+91. [save a job](#save_a_job)  
+92. [save a mentor](#save_a_mentor)  
+93. [session payment with flutterwave](#session_payment_with_flutterwave)  
+94. [session payment with stripe](#session_payment_with_stripe)  
+95. [signup with google](#signup_with_google)  
+96. [subscribe to newsletter](#subscribe_to_newsletter)  
+97. [switch account](#switch_account)  
+98. [unfollow user](#unfollow_user)  
+99. [unlike comment/reply](#unlike_comment/reply)  
+100. [unlike post](#unlike_post)  
+101. [unsave job](#unsave_job)  
+102. [unsave mentor](#unsave_mentor)  
+103. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+104. [update user account settings](#update_user_account_settings)  
+105. [updating user eperience](#updating_user_eperience)  
+106. [user analytics](#user_analytics)  
+107. [user followers](#user_followers)  
+108. [user registeration](#user_registeration)  
+109. [user retrieve dispute](#user_retrieve_dispute)  
+110. [user search](#user_search)  
+111. [user-industry update](#user-industry_update)  
+112. [valid choice](#valid_choice)  
+113. [verify otp hash](#verify_otp_hash)  
+114. [view certification](#view_certification)  
+115. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -1563,7 +1564,7 @@ Technology isn’t just changing how we move—it’s changing what’s possible
 
 # Post Share<a name='post_share'></a>
 
-This endpoint is designed to create a link particular to a post which could be called to retrieve the details of the post from external sources. Currently, it saves the post and associates it with the user and adds to the share count data which can be retrieved from the get posts API.
+This endpoint is designed to create a link particular to a post which could be called to retrieve the details of the post from external sources.
 
 **Endpoint:**`/post/share/`
 
@@ -1571,25 +1572,25 @@ This endpoint is designed to create a link particular to a post which could be c
 
 ## Payload
 
-```json
+``` json
 {
 
-post:*****
+"post":"*****"
 
 }
-```
 
+```
 ## Response body
 
-**status code:201**
+**status code:200**
 
-```json
+``` json
 {
-  "post_id": 7
+  "post_hash": "8ca6d40e-aa6d-4188-b079-fa8a7aacce57"
 }
 ```
 
-[Table of contents](#toc) 
+[["/post/share/","POST"]][Table of contents](#toc) 
 
 # Get Followings Post<a name='get_followings_post'></a>
 
@@ -5149,3 +5150,57 @@ This API initiates a chatsession with another user or retrieves it if a session 
 ```
 
 [["/notification-chat/chats/initiate/","POST"]][Table of contents](#toc)
+
+
+# Retrieve Shared Post<a name='retrieve_shared_post'></a>
+
+This API retrieves all the contents of a shared post. N.B:An Unregistered/Logged out user can call this API to retrieve post details.
+
+**Endpoint:**`/post/share/?hash=542c2550-7f38-4c42-b059-c6d72e299d97`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "shared_by": {
+    "id": 1,
+    "first_name": "Opeyemi",
+    "last_name": "Saliu",
+    "middle_name": "Abdul-Azeez",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+    "qualification": "Bachelor of Engineering (Civil Engineering)"
+  },
+  "post": {
+    "profile": {
+      "id": 21,
+      "first_name": "Bojowa Ventures Limited",
+      "last_name": "",
+      "middle_name": "",
+      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+      "qualification": "Dealers in recycled wastes and compositions."
+    },
+    "body": "Technology isn’t just about gadgets and apps — it’s the invisible force shaping how we live, work, and connect. From cloud systems powering businesses to AI assisting in everyday tasks, it keeps pushing boundaries of speed, scale, and creativity.\n\nBut here’s the thing: technology is only as impactful as the minds behind it. The real breakthrough happens when curiosity meets code, when ideas turn into solutions.\n\nIn a world moving faster than ever, the question is no longer “What can technology do?” but “What will we choose to build with it?” 🚀",
+    "pic1": "N/A",
+    "pic2": "N/A",
+    "pic3": "N/A",
+    "video": "N/A",
+    "parent": null,
+    "like_count": 0,
+    "comment_count": 0,
+    "share_count": 2,
+    "time_stamp": "2025-09-18T03:44:39.929867Z"
+  }
+}
+```
+
+[["/post/share/?hash=542c2550-7f38-4c42-b059-c6d72e299d97","GET"]][Table of contents](#toc)

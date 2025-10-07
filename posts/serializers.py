@@ -484,8 +484,44 @@ class ShareSerializer(serializers.ModelSerializer):
 
     def create(self,validated_data):
         validated_data["user"] = self.context["user"]
-        models.Share.objects.create(**validated_data)
+        validated_data["hash"] = str(uuid.uuid4())
+        shared_post = models.Share.objects.create(**validated_data)
         return {
-                "post_id":validated_data["post"].id
-                }
+            "post_hash":shared_post.hash
+        }
 
+class SharedPostSerializer(serializers.ModelSerializer):
+    profile = PersonalProfileSerializer()
+    parent = ParentPostSerializer()
+    like_count = serializers.SerializerMethodField()
+    comment_count = serializers.SerializerMethodField()
+    share_count = serializers.SerializerMethodField()
+
+
+    class Meta:
+        model = models.Posts
+        fields = ["profile","body","pic1","pic2","pic3","video","parent","like_count","comment_count","share_count","time_stamp"]
+
+    def get_comment_count(self,obj):
+        comments = models.Comment.objects.filter(post=obj,parent__isnull=True)
+        return len(comments)
+    def get_like_count(self,obj):
+        likes = obj.like_set.all()
+        return len(likes)
+    def get_share_count(self,obj):
+        shares = obj.share_set.all()
+        return len(shares)
+
+
+
+class RetrieveSharedPostSerializer(serializers.Serializer):
+    shared_by = serializers.SerializerMethodField()
+    post = SharedPostSerializer()
+
+    class Meta:
+        model = models.Share
+        fields = ["shared_by","post"]
+
+    def get_shared_by(self,obj):
+        output = PersonalProfileSerializer(obj.user.profile,many=False).data
+        return output
