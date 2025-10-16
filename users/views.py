@@ -174,10 +174,41 @@ class NewsLetterUnsubscribeView(APIView):
             return Response({"Status":"Unsubscribed Successfully"},status=status.HTTP_200_OK)
 
 
+class CorporateLeadsView(APIView):
+    def get_permissions(self):
+        if self.request.method == "POST":
+            return [
+                AllowAny(),
+            ]
+        elif self.request.method == "GET":
+            return [
+                IsAuthenticated(),
+                IsAdminUser()
+            ]
+
+        return super().get_permissions()
+
+    def post(self,request):
+        serializer = serializers.CorporateLeadsSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            output_instance = serializer.save()
+            output = serializers.CorporateLeadsSerializer(output_instance,many=False).data
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def get(self,request):
+        all_leads = models.CorporateLeads.objects.all()
+        paginator = ItemPagination()
+        paginated_items = paginator.paginate_queryset(all_leads,request)
+        serialized_items = serializers.CorporateLeadsSerializer(paginated_items,many=True).data
+        output = paginator.get_paginated_response(serialized_items).data
+        return Response(output,status=status.HTTP_200_OK)
 
 
 
 
+
+
+#Main App Begins Here
 class RegisterView(APIView):
     serializer_class=serializers.RegisterSerializer
     permission_classes=[

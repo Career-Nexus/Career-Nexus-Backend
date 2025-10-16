@@ -21,8 +21,9 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("docs/",schema_view.with_ui("swagger", cache_timeout=0), name="User API Documentation"),
 
-	# path("",views.TestView.as_view(),name="Test-view"),
 	path("join/",views.WaitListView.as_view(),name="Add-waitlist"),
+    path("lead/register/",views.CorporateLeadsView.as_view(),name="Corporate-Leads"),
+
 	path("signup/",views.RegisterView.as_view(),name="User_Register"),
     path("corporate/signup/",views.CreateCorporateAccountView.as_view(),name="Corporate-User-Register"),
     path("linked-accounts/",views.LinkedAccountsView.as_view(),name="Linked-Accounts"),

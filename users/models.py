@@ -28,7 +28,30 @@ dispute_status_options = (
     ("closed","closed"),
 )
 
-# User Registration and authentication models ----------------------------
+
+dispute_status_options = (
+    ("pending","pending"),
+    ("in_progress","in_progress"),
+    ("resolved","resolved"),
+    ("closed","closed"),
+)
+
+interested_services_options = (
+    ("hr_solutions","hr_solutions"),
+    ("corporate_training","corporate_training"),
+    ("L&D","L&D"),
+    ("organizational_development","organizational_development")
+)
+
+packages_options = (
+    ("basic","basic"),
+    ("premium","premium"),
+    ("inclusive","inclusive")
+)
+
+
+
+
 
 class WaitList(models.Model):
     name = models.CharField(max_length=5000)
@@ -42,8 +65,19 @@ class WaitList(models.Model):
         return f"{self.name} with email {self.email} interested in {self.industry}"
 
 
+class CorporateLeads(models.Model):
+    full_name = models.CharField(max_length=200)
+    company_name = models.CharField(max_length=200)
+    email_address = models.EmailField()
+    phone_number = models.CharField()
+    interested_services = models.CharField(choices=interested_services_options)
+    package = models.CharField(choices=packages_options)
+    message = models.TextField()
 
 
+
+
+# User Registration and authentication models ----------------------------
 class Users(AbstractUser):
     user_type = models.CharField(max_length=20,default="learner")
     industry = models.CharField(max_length=100,default="others")

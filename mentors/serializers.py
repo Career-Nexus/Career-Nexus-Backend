@@ -162,6 +162,9 @@ class CreateMentorshipSessionSerializer(serializers.Serializer):
         mentor = validated_data.get("mentor")
         validated_data["room_name"] = f"Room_{mentee.id}_{mentor.id}_{uuid.uuid4()}"
 
+        if mentor.profile.session_rate == 0:
+            validated_data["is_paid"] = True
+
         session_instance = models.Sessions.objects.create(**validated_data)
 
         send_notification(session_instance.mentor, f"{session_instance.mentee.profile.first_name} {session_instance.mentee.profile.last_name} requested a mentorship session from you.")

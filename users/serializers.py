@@ -169,6 +169,30 @@ class NewsLetterUnsubscribeSerializer(serializers.Serializer):
         return instance
 
 
+class CorporateLeadsSerializer(serializers.Serializer):
+    full_name = serializers.CharField()
+    company_name = serializers.CharField()
+    email_address = serializers.EmailField()
+    phone_number = serializers.CharField()
+    interested_services = serializers.ChoiceField(choices=models.interested_services_options)
+    package = serializers.ChoiceField(choices=models.packages_options)
+    message = serializers.CharField()
+
+    def validate_email_address(self,value):
+        if models.CorporateLeads.objects.filter(email_address=value).exists():
+            raise serializers.ValidationError("This email already exists")
+        return value
+
+    def create(self,validated_data):
+        output_instance = models.CorporateLeads.objects.create(**validated_data)
+        return output_instance
+
+
+
+
+
+
+#Main App Serializers begins here
 class RegisterSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=300)
     industry = serializers.ChoiceField(choices=industry_options,required=False)

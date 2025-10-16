@@ -66,60 +66,62 @@
 59. [job notifications](#job_notifications)  
 60. [job preference](#job_preference)  
 61. [join mentorship session](#join_mentorship_session)  
-62. [like comment/reply](#like_comment/reply)  
-63. [login api](#login_api)  
-64. [logout](#logout)  
-65. [mentor search/filter](#mentor_search/filter)  
-66. [mentors recommendation](#mentors_recommendation)  
-67. [mentorship session annotation.](#mentorship_session_annotation.)  
-68. [post create](#post_create)  
-69. [post like](#post_like)  
-70. [post retrieve](#post_retrieve)  
-71. [post save](#post_save)  
-72. [post share](#post_share)  
-73. [profile completion](#profile_completion)  
-74. [profile retrieve](#profile_retrieve)  
-75. [profile update](#profile_update)  
-76. [recommended job posts.](#recommended_job_posts.)  
-77. [reply comment](#reply_comment)  
-78. [reposting](#reposting)  
-79. [retrieve education api](#retrieve_education_api)  
-80. [retrieve library contents](#retrieve_library_contents)  
-81. [retrieve linked accounts](#retrieve_linked_accounts)  
-82. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
-83. [retrieve mentors posts](#retrieve_mentors_posts)  
-84. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-85. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-86. [retrieve saved jobs](#retrieve_saved_jobs)  
-87. [retrieve saved mentors](#retrieve_saved_mentors)  
-88. [retrieve shared post](#retrieve_shared_post)  
-89. [retrieve user settings](#retrieve_user_settings)  
-90. [retrieve vault transactions](#retrieve_vault_transactions)  
-91. [save a job](#save_a_job)  
-92. [save a mentor](#save_a_mentor)  
-93. [session payment with flutterwave](#session_payment_with_flutterwave)  
-94. [session payment with stripe](#session_payment_with_stripe)  
-95. [signup with google](#signup_with_google)  
-96. [subscribe to newsletter](#subscribe_to_newsletter)  
-97. [switch account](#switch_account)  
-98. [unfollow user](#unfollow_user)  
-99. [unlike comment/reply](#unlike_comment/reply)  
-100. [unlike post](#unlike_post)  
-101. [unsave job](#unsave_job)  
-102. [unsave mentor](#unsave_mentor)  
-103. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-104. [update user account settings](#update_user_account_settings)  
-105. [updating user eperience](#updating_user_eperience)  
-106. [user analytics](#user_analytics)  
-107. [user followers](#user_followers)  
-108. [user registeration](#user_registeration)  
-109. [user retrieve dispute](#user_retrieve_dispute)  
-110. [user search](#user_search)  
-111. [user-industry update](#user-industry_update)  
-112. [valid choice](#valid_choice)  
-113. [verify otp hash](#verify_otp_hash)  
-114. [view certification](#view_certification)  
-115. [view experience](#view_experience)  
+62. [lead register](#lead_register)  
+63. [like comment/reply](#like_comment/reply)  
+64. [login api](#login_api)  
+65. [logout](#logout)  
+66. [mentor search/filter](#mentor_search/filter)  
+67. [mentors recommendation](#mentors_recommendation)  
+68. [mentorship session annotation.](#mentorship_session_annotation.)  
+69. [post create](#post_create)  
+70. [post like](#post_like)  
+71. [post retrieve](#post_retrieve)  
+72. [post save](#post_save)  
+73. [post share](#post_share)  
+74. [profile completion](#profile_completion)  
+75. [profile retrieve](#profile_retrieve)  
+76. [profile update](#profile_update)  
+77. [recommended job posts.](#recommended_job_posts.)  
+78. [reply comment](#reply_comment)  
+79. [reposting](#reposting)  
+80. [retrieve corporate leads](#retrieve_corporate_leads)  
+81. [retrieve education api](#retrieve_education_api)  
+82. [retrieve library contents](#retrieve_library_contents)  
+83. [retrieve linked accounts](#retrieve_linked_accounts)  
+84. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+85. [retrieve mentors posts](#retrieve_mentors_posts)  
+86. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+87. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+88. [retrieve saved jobs](#retrieve_saved_jobs)  
+89. [retrieve saved mentors](#retrieve_saved_mentors)  
+90. [retrieve shared post](#retrieve_shared_post)  
+91. [retrieve user settings](#retrieve_user_settings)  
+92. [retrieve vault transactions](#retrieve_vault_transactions)  
+93. [save a job](#save_a_job)  
+94. [save a mentor](#save_a_mentor)  
+95. [session payment with flutterwave](#session_payment_with_flutterwave)  
+96. [session payment with stripe](#session_payment_with_stripe)  
+97. [signup with google](#signup_with_google)  
+98. [subscribe to newsletter](#subscribe_to_newsletter)  
+99. [switch account](#switch_account)  
+100. [unfollow user](#unfollow_user)  
+101. [unlike comment/reply](#unlike_comment/reply)  
+102. [unlike post](#unlike_post)  
+103. [unsave job](#unsave_job)  
+104. [unsave mentor](#unsave_mentor)  
+105. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+106. [update user account settings](#update_user_account_settings)  
+107. [updating user eperience](#updating_user_eperience)  
+108. [user analytics](#user_analytics)  
+109. [user followers](#user_followers)  
+110. [user registeration](#user_registeration)  
+111. [user retrieve dispute](#user_retrieve_dispute)  
+112. [user search](#user_search)  
+113. [user-industry update](#user-industry_update)  
+114. [valid choice](#valid_choice)  
+115. [verify otp hash](#verify_otp_hash)  
+116. [view certification](#view_certification)  
+117. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -5204,3 +5206,101 @@ This API retrieves all the contents of a shared post. N.B:An Unregistered/Logged
 ```
 
 [["/post/share/?hash=542c2550-7f38-4c42-b059-c6d72e299d97","GET"]][Table of contents](#toc)
+
+
+# Lead Register<a name='lead_register'></a>
+
+This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&D and organizational_development. Also valid options for package are basic,premium,inclusive. Also, leads are not allowed to register multiple times with the same email address.
+
+**Endpoint:**`/user/lead/register/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"full_name":"*****"
+
+"company_name":"*****"
+
+"email_address":"*****"
+
+"phone_number":"*****"
+
+"interested_services":"*****"
+
+"package":"*****"
+
+"message":"*****"
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "full_name": "Opeyemi Abdul",
+  "company_name": "Bojowa Ventures Limited",
+  "email_address": "bojvent@yahoo.com",
+  "phone_number": "08037107686",
+  "interested_services": "L&D",
+  "package": "basic",
+  "message": "Need careernexus for Learning and Development."
+}
+```
+
+[["/user/lead/register/","POST"]][Table of contents](#toc)
+
+
+# Retrieve Corporate Leads<a name='retrieve_corporate_leads'></a>
+
+This API retrieves all the data of corporate leads registered on the system. N.B:This API is only accessible to users with Admin privileges.
+
+**Endpoint:**`/user/lead/register/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "full_name": "Opeyemi Abdul",
+      "company_name": "Bojowa Ventures Limited",
+      "email_address": "bojvent@yahoo.com",
+      "phone_number": "08037107686",
+      "interested_services": "L&D",
+      "package": "basic",
+      "message": "Need careernexus for Learning and Development."
+    },
+    {
+      "full_name": "Opeyemi Abdul",
+      "company_name": "Bojowa Ventures PLC",
+      "email_address": "bojvent2@yahoo.com",
+      "phone_number": "08056430145",
+      "interested_services": "L&D",
+      "package": "premium",
+      "message": "Need careernexus for Learning and Development."
+    }
+  ]
+}
+```
+
+[["/user/lead/register/","GET"]][Table of contents](#toc)
