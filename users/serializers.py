@@ -171,12 +171,9 @@ class NewsLetterUnsubscribeSerializer(serializers.Serializer):
 
 class CorporateLeadsSerializer(serializers.Serializer):
     full_name = serializers.CharField()
-    company_name = serializers.CharField()
     email_address = serializers.EmailField()
     phone_number = serializers.CharField()
     interested_services = serializers.ChoiceField(choices=models.interested_services_options)
-    package = serializers.ChoiceField(choices=models.packages_options)
-    message = serializers.CharField()
 
     def validate_email_address(self,value):
         if models.CorporateLeads.objects.filter(email_address=value).exists():

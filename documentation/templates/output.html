@@ -1,52 +1,52 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
 
-        let currentEndpoint = '';
+            let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,12 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
+        </script>
+                    
 
-</script>
 
-
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -3972,7 +3971,7 @@ job:*****
 </code></pre>
 <p><button onclick="openApiTester('/post/share/?hash=542c2550-7f38-4c42-b059-c6d72e299d97','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Lead Register<a name='lead_register'></a></h1>
-<p>This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&amp;D and organizational_development. Also valid options for package are basic,premium,inclusive. Also, leads are not allowed to register multiple times with the same email address.</p>
+<p>This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&amp;D and organizational_development. Also, leads are not allowed to register multiple times with the same email address.</p>
 <p><strong>Endpoint:</strong><code>/user/lead/register/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
@@ -3980,17 +3979,11 @@ job:*****
 
 &quot;full_name&quot;:&quot;*****&quot;
 
-&quot;company_name&quot;:&quot;*****&quot;
-
 &quot;email_address&quot;:&quot;*****&quot;
 
 &quot;phone_number&quot;:&quot;*****&quot;
 
 &quot;interested_services&quot;:&quot;*****&quot;
-
-&quot;package&quot;:&quot;*****&quot;
-
-&quot;message&quot;:&quot;*****&quot;
 
 }
 
@@ -3999,17 +3992,14 @@ job:*****
 <p><strong>status code:201</strong></p>
 <pre><code class="language-json">{
   &quot;full_name&quot;: &quot;Opeyemi Abdul&quot;,
-  &quot;company_name&quot;: &quot;Bojowa Ventures Limited&quot;,
-  &quot;email_address&quot;: &quot;bojvent@yahoo.com&quot;,
-  &quot;phone_number&quot;: &quot;08037107686&quot;,
-  &quot;interested_services&quot;: &quot;L&amp;D&quot;,
-  &quot;package&quot;: &quot;basic&quot;,
-  &quot;message&quot;: &quot;Need careernexus for Learning and Development.&quot;
+  &quot;email_address&quot;: &quot;bojvent2@yahoo.com&quot;,
+  &quot;phone_number&quot;: &quot;08056430145&quot;,
+  &quot;interested_services&quot;: &quot;L&amp;D&quot;
 }
 </code></pre>
 <p><button onclick="openApiTester('/user/lead/register/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Retrieve Corporate Leads<a name='retrieve_corporate_leads'></a></h1>
-<p>This API retrieves all the data of corporate leads registered on the system. N.B:This API is only accessible to users with Admin privileges.</p>
+<p>This API retrieves all the data of corporate leads registered on the system. N.B:This API isonly accessible to users with Admin privileges.</p>
 <p><strong>Endpoint:</strong><code>/user/lead/register/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -4025,28 +4015,22 @@ job:*****
   &quot;results&quot;: [
     {
       &quot;full_name&quot;: &quot;Opeyemi Abdul&quot;,
-      &quot;company_name&quot;: &quot;Bojowa Ventures Limited&quot;,
-      &quot;email_address&quot;: &quot;bojvent@yahoo.com&quot;,
-      &quot;phone_number&quot;: &quot;08037107686&quot;,
-      &quot;interested_services&quot;: &quot;L&amp;D&quot;,
-      &quot;package&quot;: &quot;basic&quot;,
-      &quot;message&quot;: &quot;Need careernexus for Learning and Development.&quot;
+      &quot;email_address&quot;: &quot;bojvent2@yahoo.com&quot;,
+      &quot;phone_number&quot;: &quot;08056430145&quot;,
+      &quot;interested_services&quot;: &quot;L&amp;D&quot;
     },
     {
       &quot;full_name&quot;: &quot;Opeyemi Abdul&quot;,
-      &quot;company_name&quot;: &quot;Bojowa Ventures PLC&quot;,
-      &quot;email_address&quot;: &quot;bojvent2@yahoo.com&quot;,
+      &quot;email_address&quot;: &quot;bojvent@yahoo.com&quot;,
       &quot;phone_number&quot;: &quot;08056430145&quot;,
-      &quot;interested_services&quot;: &quot;L&amp;D&quot;,
-      &quot;package&quot;: &quot;premium&quot;,
-      &quot;message&quot;: &quot;Need careernexus for Learning and Development.&quot;
+      &quot;interested_services&quot;: &quot;L&amp;D&quot;
     }
   ]
 }
 </code></pre>
 <p><button onclick="openApiTester('/user/lead/register/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 
-
+        
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -4080,5 +4064,6 @@ job:*****
     </div>
 
 
-</body>
-</html>
+        </body>
+        </html>
+        

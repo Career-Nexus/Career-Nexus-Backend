@@ -5093,7 +5093,7 @@ This API retrieves all the contents of a shared post. N.B:An Unregistered/Logged
 
 # Lead Register
 
-This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&D and organizational_development. Also valid options for package are basic,premium,inclusive. Also, leads are not allowed to register multiple times with the same email address.
+This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&D and organizational_development. Also, leads are not allowed to register multiple times with the same email address.
 
 **Endpoint:**`/user/lead/register/`
 
@@ -5106,17 +5106,11 @@ This API collects and stores the data of corporate leads that provide their info
 
 "full_name":"*****"
 
-"company_name":"*****"
-
 "email_address":"*****"
 
 "phone_number":"*****"
 
 "interested_services":"*****"
-
-"package":"*****"
-
-"message":"*****"
 
 }
 
@@ -5128,12 +5122,9 @@ This API collects and stores the data of corporate leads that provide their info
 ``` json
 {
   "full_name": "Opeyemi Abdul",
-  "company_name": "Bojowa Ventures Limited",
-  "email_address": "bojvent@yahoo.com",
-  "phone_number": "08037107686",
-  "interested_services": "L&D",
-  "package": "basic",
-  "message": "Need careernexus for Learning and Development."
+  "email_address": "bojvent2@yahoo.com",
+  "phone_number": "08056430145",
+  "interested_services": "L&D"
 }
 ```
 
@@ -5142,7 +5133,7 @@ This API collects and stores the data of corporate leads that provide their info
 
 # Retrieve Corporate Leads
 
-This API retrieves all the data of corporate leads registered on the system. N.B:This API is only accessible to users with Admin privileges.
+This API retrieves all the data of corporate leads registered on the system. N.B:This API isonly accessible to users with Admin privileges.
 
 **Endpoint:**`/user/lead/register/`
 
@@ -5166,21 +5157,15 @@ This API retrieves all the data of corporate leads registered on the system. N.B
   "results": [
     {
       "full_name": "Opeyemi Abdul",
-      "company_name": "Bojowa Ventures Limited",
-      "email_address": "bojvent@yahoo.com",
-      "phone_number": "08037107686",
-      "interested_services": "L&D",
-      "package": "basic",
-      "message": "Need careernexus for Learning and Development."
+      "email_address": "bojvent2@yahoo.com",
+      "phone_number": "08056430145",
+      "interested_services": "L&D"
     },
     {
       "full_name": "Opeyemi Abdul",
-      "company_name": "Bojowa Ventures PLC",
-      "email_address": "bojvent2@yahoo.com",
+      "email_address": "bojvent@yahoo.com",
       "phone_number": "08056430145",
-      "interested_services": "L&D",
-      "package": "premium",
-      "message": "Need careernexus for Learning and Development."
+      "interested_services": "L&D"
     }
   ]
 }
