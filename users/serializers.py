@@ -1,3 +1,4 @@
+from random import choice
 from django.utils.timezone import make_aware
 from django.contrib.auth import get_user_model
 from django.core.files.storage import default_storage
@@ -174,6 +175,7 @@ class CorporateLeadsSerializer(serializers.Serializer):
     email_address = serializers.EmailField()
     phone_number = serializers.CharField()
     interested_services = serializers.JSONField()
+    package = serializers.ChoiceField(choices=models.packages_options,required=False)
 
     def validate_email_address(self,value):
         if models.CorporateLeads.objects.filter(email_address=value).exists():

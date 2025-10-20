@@ -5210,7 +5210,7 @@ This API retrieves all the contents of a shared post. N.B:An Unregistered/Logged
 
 # Lead Register<a name='lead_register'></a>
 
-This API collects and stores the data of corporate leads that provide their information. N.B:email_address cannot be duplicated. Also, interested services is a list of texts.
+This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&D and organizational_development. Also, leads are not allowed to register multiple times with the same email address. Also, there is an optional field package valid options which include basic,premium,inclusive.
 
 **Endpoint:**`/user/lead/register/`
 
@@ -5229,6 +5229,8 @@ This API collects and stores the data of corporate leads that provide their info
 
 "interested_services":"*****"
 
+"package":"*****"
+
 }
 
 ```
@@ -5239,11 +5241,13 @@ This API collects and stores the data of corporate leads that provide their info
 ``` json
 {
   "full_name": "Opeyemi Abdul",
-  "email_address": "bojvent1@yahoo.com",
+  "email_address": "bojvent2@yahoo.com",
   "phone_number": "08056430145",
   "interested_services": [
-    "Technology"
-  ]
+    "Technology",
+    "L&D"
+  ],
+  "package": "basic"
 }
 ```
 
@@ -5270,7 +5274,7 @@ This API retrieves all the data of corporate leads registered on the system. N.B
 
 ``` json
 {
-  "count": 2,
+  "count": 3,
   "next": null,
   "previous": null,
   "results": [
@@ -5280,7 +5284,8 @@ This API retrieves all the data of corporate leads registered on the system. N.B
       "phone_number": "08056430145",
       "interested_services": [
         "Technology"
-      ]
+      ],
+      "package": null
     },
     {
       "full_name": "Opeyemi Abdul",
@@ -5289,7 +5294,18 @@ This API retrieves all the data of corporate leads registered on the system. N.B
       "interested_services": [
         "Technology",
         "L&D"
-      ]
+      ],
+      "package": null
+    },
+    {
+      "full_name": "Opeyemi Abdul",
+      "email_address": "bojvent2@yahoo.com",
+      "phone_number": "08056430145",
+      "interested_services": [
+        "Technology",
+        "L&D"
+      ],
+      "package": "basic"
     }
   ]
 }

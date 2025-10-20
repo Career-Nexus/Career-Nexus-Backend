@@ -70,6 +70,7 @@ class CorporateLeads(models.Model):
     email_address = models.EmailField()
     phone_number = models.CharField()
     interested_services = models.JSONField()
+    package = models.CharField(choices=packages_options,null=True,blank=True)
 
 
 
