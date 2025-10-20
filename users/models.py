@@ -69,7 +69,7 @@ class CorporateLeads(models.Model):
     full_name = models.CharField(max_length=200)
     email_address = models.EmailField()
     phone_number = models.CharField()
-    interested_services = models.CharField(choices=interested_services_options)
+    interested_services = models.JSONField()
 
 
 

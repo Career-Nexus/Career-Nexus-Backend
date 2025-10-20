@@ -5093,7 +5093,7 @@ This API retrieves all the contents of a shared post. N.B:An Unregistered/Logged
 
 # Lead Register
 
-This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&D and organizational_development. Also, leads are not allowed to register multiple times with the same email address.
+This API collects and stores the data of corporate leads that provide their information. N.B:email_address cannot be duplicated. Also, interested services is a list of texts.
 
 **Endpoint:**`/user/lead/register/`
 
@@ -5122,9 +5122,11 @@ This API collects and stores the data of corporate leads that provide their info
 ``` json
 {
   "full_name": "Opeyemi Abdul",
-  "email_address": "bojvent2@yahoo.com",
+  "email_address": "bojvent1@yahoo.com",
   "phone_number": "08056430145",
-  "interested_services": "L&D"
+  "interested_services": [
+    "Technology"
+  ]
 }
 ```
 
@@ -5157,15 +5159,20 @@ This API retrieves all the data of corporate leads registered on the system. N.B
   "results": [
     {
       "full_name": "Opeyemi Abdul",
-      "email_address": "bojvent2@yahoo.com",
+      "email_address": "bojvent1@yahoo.com",
       "phone_number": "08056430145",
-      "interested_services": "L&D"
+      "interested_services": [
+        "Technology"
+      ]
     },
     {
       "full_name": "Opeyemi Abdul",
       "email_address": "bojvent@yahoo.com",
       "phone_number": "08056430145",
-      "interested_services": "L&D"
+      "interested_services": [
+        "Technology",
+        "L&D"
+      ]
     }
   ]
 }

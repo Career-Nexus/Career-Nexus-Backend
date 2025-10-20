@@ -3971,7 +3971,7 @@ job:*****
 </code></pre>
 <p><button onclick="openApiTester('/post/share/?hash=542c2550-7f38-4c42-b059-c6d72e299d97','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Lead Register<a name='lead_register'></a></h1>
-<p>This API collects and stores the data of corporate leads that provide their information. N.B: interested_services options include hr_solutions,corporate_training,L&amp;D and organizational_development. Also, leads are not allowed to register multiple times with the same email address.</p>
+<p>This API collects and stores the data of corporate leads that provide their information. N.B:email_address cannot be duplicated. Also, interested services is a list of texts.</p>
 <p><strong>Endpoint:</strong><code>/user/lead/register/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
@@ -3992,9 +3992,11 @@ job:*****
 <p><strong>status code:201</strong></p>
 <pre><code class="language-json">{
   &quot;full_name&quot;: &quot;Opeyemi Abdul&quot;,
-  &quot;email_address&quot;: &quot;bojvent2@yahoo.com&quot;,
+  &quot;email_address&quot;: &quot;bojvent1@yahoo.com&quot;,
   &quot;phone_number&quot;: &quot;08056430145&quot;,
-  &quot;interested_services&quot;: &quot;L&amp;D&quot;
+  &quot;interested_services&quot;: [
+    &quot;Technology&quot;
+  ]
 }
 </code></pre>
 <p><button onclick="openApiTester('/user/lead/register/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
@@ -4015,15 +4017,20 @@ job:*****
   &quot;results&quot;: [
     {
       &quot;full_name&quot;: &quot;Opeyemi Abdul&quot;,
-      &quot;email_address&quot;: &quot;bojvent2@yahoo.com&quot;,
+      &quot;email_address&quot;: &quot;bojvent1@yahoo.com&quot;,
       &quot;phone_number&quot;: &quot;08056430145&quot;,
-      &quot;interested_services&quot;: &quot;L&amp;D&quot;
+      &quot;interested_services&quot;: [
+        &quot;Technology&quot;
+      ]
     },
     {
       &quot;full_name&quot;: &quot;Opeyemi Abdul&quot;,
       &quot;email_address&quot;: &quot;bojvent@yahoo.com&quot;,
       &quot;phone_number&quot;: &quot;08056430145&quot;,
-      &quot;interested_services&quot;: &quot;L&amp;D&quot;
+      &quot;interested_services&quot;: [
+        &quot;Technology&quot;,
+        &quot;L&amp;D&quot;
+      ]
     }
   ]
 }

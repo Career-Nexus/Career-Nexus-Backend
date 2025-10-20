@@ -173,11 +173,16 @@ class CorporateLeadsSerializer(serializers.Serializer):
     full_name = serializers.CharField()
     email_address = serializers.EmailField()
     phone_number = serializers.CharField()
-    interested_services = serializers.ChoiceField(choices=models.interested_services_options)
+    interested_services = serializers.JSONField()
 
     def validate_email_address(self,value):
         if models.CorporateLeads.objects.filter(email_address=value).exists():
             raise serializers.ValidationError("This email already exists")
+        return value
+
+    def validate_interested_services(self,value):
+        if not isinstance(value,list):
+            raise serializers.ValidationError("Interested services must be a list")
         return value
 
     def create(self,validated_data):
