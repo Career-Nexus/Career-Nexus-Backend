@@ -7,4 +7,5 @@ urlpatterns = [
     path("preference/",views.JobPreferenceView.as_view(),name="Job-Preference"),
     path("save/",views.SaveJobView.as_view(),name="Save-Job"),
     path("unsave/",views.UnsaveJobView.as_view(),name="Unsave-Job"),
+    path("status/update/",views.JobStatusUpdateView.as_view(),name="Update-Job-Status"),
 ]

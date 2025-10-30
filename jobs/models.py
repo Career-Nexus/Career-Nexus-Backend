@@ -1,6 +1,13 @@
 from django.db import models
 from users.models import Users
 
+JOB_STATUS = (
+    ("active","active"),
+    ("draft","draft"),
+    ("closed","closed")
+)
+
+
 
 class Jobs(models.Model):
     poster = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="poster")
@@ -15,6 +22,7 @@ class Jobs(models.Model):
     industry = models.TextField()
     experience_level = models.CharField(max_length=20)
     time_stamp = models.DateField(auto_now_add=True)
+    status = models.CharField(choices=JOB_STATUS,max_length=15,default="active")
 
 class JobPreference(models.Model):
     user = models.OneToOneField(Users,on_delete=models.CASCADE)

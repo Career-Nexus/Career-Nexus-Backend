@@ -39,16 +39,16 @@ experience_level = CHOICES["experience_level"]
 
 
 
-
 class JobsSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     employment_type = serializers.ChoiceField(choices=employment_type)
     work_type = serializers.ChoiceField(choices=work_type)
     experience_level = serializers.ChoiceField(choices=experience_level)
+    status = serializers.ChoiceField(choices=models.JOB_STATUS,default="active",required=False)
 
     class Meta:
         model = models.Jobs
-        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level"]
+        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level","status"]
 
     def create(self,validated_data):
         validated_data["poster"] = self.context["user"]
@@ -147,3 +147,19 @@ class RetrieveSavedJobSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.SavedJobs
         fields = ["job"]
+
+class JobStatusUpdateSerializer(serializers.Serializer):
+    job = serializers.PrimaryKeyRelatedField(queryset=models.Jobs.objects.all(),required=True)
+    status = serializers.ChoiceField(choices=models.JOB_STATUS,required=True)
+
+    def validate_job(self,value):
+        user = self.context["user"]
+        if value.poster != user:
+            raise serializers.ValidationError("Job Posting belongs to another user.")
+        return value
+
+    def update(self,instance,validated_data):
+        job = validated_data.get("job")
+        job.status = validated_data.get("status")
+        job.save()
+        return job

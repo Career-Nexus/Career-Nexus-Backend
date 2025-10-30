@@ -1829,9 +1829,9 @@ This endpoint gets all the previous chat messages of a particular chat session.
 [Table of contents](#toc)
 
 
-# job Create
+# Job Create
 
-This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid).
+This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid). Also, an optional status can be provided in the payload to specify the status of the job being created. N.B:status can either be active,draft or closed. If no status payload is provided, the job post defaults to active status.
 
 **Endpoint:**`/job/`
 
@@ -1842,23 +1842,25 @@ This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_ty
 ``` json
 {
 
-title:*****
+"title":"*****"
 
-organization:*****
+"organization":"*****"
 
-employment_type:*****
+"employment_type":"*****"
 
-work_type:*****
+"work_type":"*****"
 
-country:*****
+"country":"*****"
 
-salary:*****
+"salary":"*****"
 
-overview:*****
+"overview":"*****"
 
-description:*****
+"description":"*****"
 
-experience_level:*****
+"experience_level":"*****"
+
+"status (**optional)":"*****"
 
 }
 
@@ -1882,12 +1884,12 @@ experience_level:*****
 }
 ```
 
-[Table of contents](#toc)
+[["/job/","POST"]][Table of contents](#toc)
 
 
-# Get Job Posts
+# Retrieve Job Posts
 
-This endpoint retrieves all the jobs posted the logged in user.
+This API retrieves all the job posts of the logged in user. N.B:Also, a query parameter status can be passed in the url to retrieve jobs by status. Valid options for status include active, draft and closed.
 
 **Endpoint:**`/job/`
 
@@ -1905,43 +1907,30 @@ This endpoint retrieves all the jobs posted the logged in user.
 
 ``` json
 {
-  "count": 2,
+  "count": 1,
   "next": null,
   "previous": null,
   "results": [
     {
-      "id": 2,
-      "title": "Backend Developer",
-      "organization": "Career Nexus Ltd",
+      "id": 10,
+      "title": "Frontend Developer",
+      "organization": "TechExperts",
       "employment_type": "full_time",
-      "work_type": "hybrid",
+      "work_type": "remote",
       "country": "Nigeria",
-      "salary": "350,000NGN",
-      "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
-      "experience_level": "entry",
-      "time_stamp": "2025-06-11",
-      "is_saved": false
-    },
-    {
-      "id": 3,
-      "title": "Backend Developer",
-      "organization": "Career Nexus Ltd",
-      "employment_type": "full_time",
-      "work_type": "hybrid",
-      "country": "Nigeria",
-      "salary": "350,000NGN",
-      "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
-      "experience_level": "entry",
-      "time_stamp": "2025-06-11",
+      "salary": "150,000NGN",
+      "overview": "A skilled frontend developer aith at least 
+5 years of experience",
+      "description": "As a Frontend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-10-30",
       "is_saved": false
     }
   ]
 }
 ```
 
-[Table of contents](#toc)
+[["/job/","GET"]][Table of contents](#toc)
 
 
 # Recommended Job Posts.
@@ -5195,3 +5184,47 @@ This API retrieves all the data of corporate leads registered on the system. N.B
 ```
 
 [["/user/lead/register/","GET"]][Table of contents](#toc)
+
+
+# Update Job Status
+
+This API updates a job status which can either be active,draft or closed. N.B:Only jobs posted by the logged in user can have their status updated.
+
+**Endpoint:**`/job/status/update/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+"job":"*****"
+
+"status":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "id": 11,
+  "title": "Backend Developer",
+  "organization": "Sterling Technologies",
+  "employment_type": "full_time",
+  "work_type": "hybrid",
+  "country": "Nigeria",
+  "salary": "350,000NGN",
+  "overview": "A skilled backend developer aith at least \n5 years of experience",
+  "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+  "experience_level": "senior",
+  "time_stamp": "2025-10-30",
+  "is_saved": false
+}
+```
+
+[["/job/status/update/","PUT"]][Table of contents](#toc)

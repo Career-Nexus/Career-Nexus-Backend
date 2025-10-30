@@ -1,52 +1,52 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Documentation</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-            <style>
-                body {
-                    box-sizing: border-box;
-                    min-width: 200px;
-                    max-width: 980px;
-                    margin: 0 auto;
-                    padding: 45px;
-                }
-            </style>
-        </head>
-        <body class="markdown-body">
-            <input type="text" id="searchBox" placeholder="Search index..." />
-                <ul id="searchResults"></ul>
-            
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            const searchBox = document.getElementById('searchBox');
-            const indexLinks = document.querySelectorAll('#index li a');
-            const resultsList = document.getElementById('searchResults');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <input type="text" id="searchBox" placeholder="Search index..." />
+    <ul id="searchResults"></ul>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchBox = document.getElementById('searchBox');
+  const indexLinks = document.querySelectorAll('#index li a');
+  const resultsList = document.getElementById('searchResults');
 
-            searchBox.addEventListener('input', function () {
-                const query = searchBox.value.toLowerCase();
-                resultsList.innerHTML = ''; // Clear previous results
+  searchBox.addEventListener('input', function () {
+    const query = searchBox.value.toLowerCase();
+    resultsList.innerHTML = ''; // Clear previous results
 
-                if (!query) return;
+    if (!query) return;
 
-                indexLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = link.href;
-                    a.textContent = link.textContent;
-                    li.appendChild(a);
-                    resultsList.appendChild(li);
-                }
-                });
-            });
-            });
+    indexLinks.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      if (text.includes(query)) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.textContent;
+        li.appendChild(a);
+        resultsList.appendChild(li);
+      }
+    });
+  });
+});
 
-            let currentEndpoint = '';
+        let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,11 +87,12 @@
             }
 
         }
-        </script>
-                    
+
+</script>
 
 
-        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+    
+<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -144,7 +145,6 @@
 <li><a href="#get_country_phone_codes">get country phone codes</a></li>
 <li><a href="#get_followings">get followings</a></li>
 <li><a href="#get_followings_post">get followings post</a></li>
-<li><a href="#get_job_posts">get job posts</a></li>
 <li><a href="#get_job_preference">get job preference</a></li>
 <li><a href="#get_newsletter">get newsletter</a></li>
 <li><a href="#get_other_user_post">get other user post</a></li>
@@ -177,6 +177,7 @@
 <li><a href="#reposting">reposting</a></li>
 <li><a href="#retrieve_corporate_leads">retrieve corporate leads</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
+<li><a href="#retrieve_job_posts">retrieve job posts</a></li>
 <li><a href="#retrieve_library_contents">retrieve library contents</a></li>
 <li><a href="#retrieve_linked_accounts">retrieve linked accounts</a></li>
 <li><a href="#retrieve_mentor_vault_data">retrieve mentor vault data</a></li>
@@ -201,6 +202,7 @@
 <li><a href="#unsave_job">unsave job</a></li>
 <li><a href="#unsave_mentor">unsave mentor</a></li>
 <li><a href="#unsubscribe_from_newsletter">unsubscribe from newsletter</a></li>
+<li><a href="#update_job_status">update job status</a></li>
 <li><a href="#update_user_account_settings">update user account settings</a></li>
 <li><a href="#updating_user_eperience">updating user eperience</a></li>
 <li><a href="#user_analytics">user analytics</a></li>
@@ -1607,30 +1609,32 @@ status:*****
 ]
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
-<h1>job Create<a name='job_create'></a></h1>
-<p>This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid).</p>
+<h1>Job Create<a name='job_create'></a></h1>
+<p>This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid). Also, an optional status can be provided in the payload to specify the status of the job being created. N.B:status can either be active,draft or closed. If no status payload is provided, the job post defaults to active status.</p>
 <p><strong>Endpoint:</strong><code>/job/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">{
 
-title:*****
+&quot;title&quot;:&quot;*****&quot;
 
-organization:*****
+&quot;organization&quot;:&quot;*****&quot;
 
-employment_type:*****
+&quot;employment_type&quot;:&quot;*****&quot;
 
-work_type:*****
+&quot;work_type&quot;:&quot;*****&quot;
 
-country:*****
+&quot;country&quot;:&quot;*****&quot;
 
-salary:*****
+&quot;salary&quot;:&quot;*****&quot;
 
-overview:*****
+&quot;overview&quot;:&quot;*****&quot;
 
-description:*****
+&quot;description&quot;:&quot;*****&quot;
 
-experience_level:*****
+&quot;experience_level&quot;:&quot;*****&quot;
+
+&quot;status (**optional)&quot;:&quot;*****&quot;
 
 }
 
@@ -1650,9 +1654,9 @@ experience_level:*****
   &quot;experience_level&quot;: &quot;senior&quot;
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
-<h1>Get Job Posts<a name='get_job_posts'></a></h1>
-<p>This endpoint retrieves all the jobs posted the logged in user.</p>
+<p><button onclick="openApiTester('/job/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Job Posts<a name='retrieve_job_posts'></a></h1>
+<p>This API retrieves all the job posts of the logged in user. N.B:Also, a query parameter status can be passed in the url to retrieve jobs by status. Valid options for status include active, draft and closed.</p>
 <p><strong>Endpoint:</strong><code>/job/</code></p>
 <p><strong>Method:</strong> <code>GET</code></p>
 <h2>Payload</h2>
@@ -1662,42 +1666,29 @@ experience_level:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;count&quot;: 2,
+  &quot;count&quot;: 1,
   &quot;next&quot;: null,
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
-      &quot;id&quot;: 2,
-      &quot;title&quot;: &quot;Backend Developer&quot;,
-      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+      &quot;id&quot;: 10,
+      &quot;title&quot;: &quot;Frontend Developer&quot;,
+      &quot;organization&quot;: &quot;TechExperts&quot;,
       &quot;employment_type&quot;: &quot;full_time&quot;,
-      &quot;work_type&quot;: &quot;hybrid&quot;,
+      &quot;work_type&quot;: &quot;remote&quot;,
       &quot;country&quot;: &quot;Nigeria&quot;,
-      &quot;salary&quot;: &quot;350,000NGN&quot;,
-      &quot;overview&quot;: &quot;We are looking&quot;,
-      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
-      &quot;experience_level&quot;: &quot;entry&quot;,
-      &quot;time_stamp&quot;: &quot;2025-06-11&quot;,
-      &quot;is_saved&quot;: false
-    },
-    {
-      &quot;id&quot;: 3,
-      &quot;title&quot;: &quot;Backend Developer&quot;,
-      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
-      &quot;employment_type&quot;: &quot;full_time&quot;,
-      &quot;work_type&quot;: &quot;hybrid&quot;,
-      &quot;country&quot;: &quot;Nigeria&quot;,
-      &quot;salary&quot;: &quot;350,000NGN&quot;,
-      &quot;overview&quot;: &quot;We are looking&quot;,
-      &quot;description&quot;: &quot;You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.&quot;,
-      &quot;experience_level&quot;: &quot;entry&quot;,
-      &quot;time_stamp&quot;: &quot;2025-06-11&quot;,
+      &quot;salary&quot;: &quot;150,000NGN&quot;,
+      &quot;overview&quot;: &quot;A skilled frontend developer aith at least 
+5 years of experience&quot;,
+      &quot;description&quot;: &quot;As a Frontend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.&quot;,
+      &quot;experience_level&quot;: &quot;senior&quot;,
+      &quot;time_stamp&quot;: &quot;2025-10-30&quot;,
       &quot;is_saved&quot;: false
     }
   ]
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/job/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Recommended Job Posts.<a name='recommended_job_posts.'></a></h1>
 <p>This endpoint retrieves job posts related to the user based on their selected industry.</p>
 <p><strong>Endpoint:</strong><code>/job/recommend/</code></p>
@@ -4052,8 +4043,40 @@ job:*****
 }
 </code></pre>
 <p><button onclick="openApiTester('/user/lead/register/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Update Job Status<a name='update_job_status'></a></h1>
+<p>This API updates a job status which can either be active,draft or closed. N.B:Only jobs posted by the logged in user can have their status updated.</p>
+<p><strong>Endpoint:</strong><code>/job/status/update/</code></p>
+<p><strong>Method:</strong> <code>PUT</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
 
-        
+&quot;job&quot;:&quot;*****&quot;
+
+&quot;status&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 11,
+  &quot;title&quot;: &quot;Backend Developer&quot;,
+  &quot;organization&quot;: &quot;Sterling Technologies&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;work_type&quot;: &quot;hybrid&quot;,
+  &quot;country&quot;: &quot;Nigeria&quot;,
+  &quot;salary&quot;: &quot;350,000NGN&quot;,
+  &quot;overview&quot;: &quot;A skilled backend developer aith at least \n5 years of experience&quot;,
+  &quot;description&quot;: &quot;As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.&quot;,
+  &quot;experience_level&quot;: &quot;senior&quot;,
+  &quot;time_stamp&quot;: &quot;2025-10-30&quot;,
+  &quot;is_saved&quot;: false
+}
+</code></pre>
+<p><button onclick="openApiTester('/job/status/update/','PUT')">Run Test</button><a href="#toc">Table of contents</a></p>
+
+
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -4087,6 +4110,5 @@ job:*****
     </div>
 
 
-        </body>
-        </html>
-        
+</body>
+</html>

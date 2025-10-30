@@ -53,39 +53,39 @@
 46. [get country phone codes](#get_country_phone_codes)  
 47. [get followings](#get_followings)  
 48. [get followings post](#get_followings_post)  
-49. [get job posts](#get_job_posts)  
-50. [get job preference](#get_job_preference)  
-51. [get newsletter](#get_newsletter)  
-52. [get other user post](#get_other_user_post)  
-53. [get own posts](#get_own_posts)  
-54. [get posts](#get_posts)  
-55. [get saved post](#get_saved_post)  
-56. [google signin](#google_signin)  
-57. [initiate chat session](#initiate_chat_session)  
-58. [job create](#job_create)  
-59. [job notifications](#job_notifications)  
-60. [job preference](#job_preference)  
-61. [join mentorship session](#join_mentorship_session)  
-62. [lead register](#lead_register)  
-63. [like comment/reply](#like_comment/reply)  
-64. [login api](#login_api)  
-65. [logout](#logout)  
-66. [mentor search/filter](#mentor_search/filter)  
-67. [mentors recommendation](#mentors_recommendation)  
-68. [mentorship session annotation.](#mentorship_session_annotation.)  
-69. [post create](#post_create)  
-70. [post like](#post_like)  
-71. [post retrieve](#post_retrieve)  
-72. [post save](#post_save)  
-73. [post share](#post_share)  
-74. [profile completion](#profile_completion)  
-75. [profile retrieve](#profile_retrieve)  
-76. [profile update](#profile_update)  
-77. [recommended job posts.](#recommended_job_posts.)  
-78. [reply comment](#reply_comment)  
-79. [reposting](#reposting)  
-80. [retrieve corporate leads](#retrieve_corporate_leads)  
-81. [retrieve education api](#retrieve_education_api)  
+49. [get job preference](#get_job_preference)  
+50. [get newsletter](#get_newsletter)  
+51. [get other user post](#get_other_user_post)  
+52. [get own posts](#get_own_posts)  
+53. [get posts](#get_posts)  
+54. [get saved post](#get_saved_post)  
+55. [google signin](#google_signin)  
+56. [initiate chat session](#initiate_chat_session)  
+57. [job create](#job_create)  
+58. [job notifications](#job_notifications)  
+59. [job preference](#job_preference)  
+60. [join mentorship session](#join_mentorship_session)  
+61. [lead register](#lead_register)  
+62. [like comment/reply](#like_comment/reply)  
+63. [login api](#login_api)  
+64. [logout](#logout)  
+65. [mentor search/filter](#mentor_search/filter)  
+66. [mentors recommendation](#mentors_recommendation)  
+67. [mentorship session annotation.](#mentorship_session_annotation.)  
+68. [post create](#post_create)  
+69. [post like](#post_like)  
+70. [post retrieve](#post_retrieve)  
+71. [post save](#post_save)  
+72. [post share](#post_share)  
+73. [profile completion](#profile_completion)  
+74. [profile retrieve](#profile_retrieve)  
+75. [profile update](#profile_update)  
+76. [recommended job posts.](#recommended_job_posts.)  
+77. [reply comment](#reply_comment)  
+78. [reposting](#reposting)  
+79. [retrieve corporate leads](#retrieve_corporate_leads)  
+80. [retrieve education api](#retrieve_education_api)  
+81. [retrieve job posts](#retrieve_job_posts)  
 82. [retrieve library contents](#retrieve_library_contents)  
 83. [retrieve linked accounts](#retrieve_linked_accounts)  
 84. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
@@ -110,18 +110,19 @@
 103. [unsave job](#unsave_job)  
 104. [unsave mentor](#unsave_mentor)  
 105. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-106. [update user account settings](#update_user_account_settings)  
-107. [updating user eperience](#updating_user_eperience)  
-108. [user analytics](#user_analytics)  
-109. [user followers](#user_followers)  
-110. [user registeration](#user_registeration)  
-111. [user retrieve dispute](#user_retrieve_dispute)  
-112. [user search](#user_search)  
-113. [user-industry update](#user-industry_update)  
-114. [valid choice](#valid_choice)  
-115. [verify otp hash](#verify_otp_hash)  
-116. [view certification](#view_certification)  
-117. [view experience](#view_experience)  
+106. [update job status](#update_job_status)  
+107. [update user account settings](#update_user_account_settings)  
+108. [updating user eperience](#updating_user_eperience)  
+109. [user analytics](#user_analytics)  
+110. [user followers](#user_followers)  
+111. [user registeration](#user_registeration)  
+112. [user retrieve dispute](#user_retrieve_dispute)  
+113. [user search](#user_search)  
+114. [user-industry update](#user-industry_update)  
+115. [valid choice](#valid_choice)  
+116. [verify otp hash](#verify_otp_hash)  
+117. [view certification](#view_certification)  
+118. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -1946,9 +1947,9 @@ This endpoint gets all the previous chat messages of a particular chat session.
 [Table of contents](#toc)
 
 
-# job Create<a name='job_create'></a>
+# Job Create<a name='job_create'></a>
 
-This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid).
+This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_type(full_time,part_time,internship,freelance,contract), work_type(remote,onsite,hybrid). Also, an optional status can be provided in the payload to specify the status of the job being created. N.B:status can either be active,draft or closed. If no status payload is provided, the job post defaults to active status.
 
 **Endpoint:**`/job/`
 
@@ -1959,23 +1960,25 @@ This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_ty
 ``` json
 {
 
-title:*****
+"title":"*****"
 
-organization:*****
+"organization":"*****"
 
-employment_type:*****
+"employment_type":"*****"
 
-work_type:*****
+"work_type":"*****"
 
-country:*****
+"country":"*****"
 
-salary:*****
+"salary":"*****"
 
-overview:*****
+"overview":"*****"
 
-description:*****
+"description":"*****"
 
-experience_level:*****
+"experience_level":"*****"
+
+"status (**optional)":"*****"
 
 }
 
@@ -1999,12 +2002,12 @@ experience_level:*****
 }
 ```
 
-[Table of contents](#toc)
+[["/job/","POST"]][Table of contents](#toc)
 
 
-# Get Job Posts<a name='get_job_posts'></a>
+# Retrieve Job Posts<a name='retrieve_job_posts'></a>
 
-This endpoint retrieves all the jobs posted the logged in user.
+This API retrieves all the job posts of the logged in user. N.B:Also, a query parameter status can be passed in the url to retrieve jobs by status. Valid options for status include active, draft and closed.
 
 **Endpoint:**`/job/`
 
@@ -2022,43 +2025,30 @@ This endpoint retrieves all the jobs posted the logged in user.
 
 ``` json
 {
-  "count": 2,
+  "count": 1,
   "next": null,
   "previous": null,
   "results": [
     {
-      "id": 2,
-      "title": "Backend Developer",
-      "organization": "Career Nexus Ltd",
+      "id": 10,
+      "title": "Frontend Developer",
+      "organization": "TechExperts",
       "employment_type": "full_time",
-      "work_type": "hybrid",
+      "work_type": "remote",
       "country": "Nigeria",
-      "salary": "350,000NGN",
-      "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
-      "experience_level": "entry",
-      "time_stamp": "2025-06-11",
-      "is_saved": false
-    },
-    {
-      "id": 3,
-      "title": "Backend Developer",
-      "organization": "Career Nexus Ltd",
-      "employment_type": "full_time",
-      "work_type": "hybrid",
-      "country": "Nigeria",
-      "salary": "350,000NGN",
-      "overview": "We are looking",
-      "description": "You'll be responsible for turning user needs into elegant, intuitive interfaces for both web and mobile applications.",
-      "experience_level": "entry",
-      "time_stamp": "2025-06-11",
+      "salary": "150,000NGN",
+      "overview": "A skilled frontend developer aith at least 
+5 years of experience",
+      "description": "As a Frontend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-10-30",
       "is_saved": false
     }
   ]
 }
 ```
 
-[Table of contents](#toc)
+[["/job/","GET"]][Table of contents](#toc)
 
 
 # Recommended Job Posts.<a name='recommended_job_posts.'></a>
@@ -5312,3 +5302,47 @@ This API retrieves all the data of corporate leads registered on the system. N.B
 ```
 
 [["/user/lead/register/","GET"]][Table of contents](#toc)
+
+
+# Update Job Status<a name='update_job_status'></a>
+
+This API updates a job status which can either be active,draft or closed. N.B:Only jobs posted by the logged in user can have their status updated.
+
+**Endpoint:**`/job/status/update/`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+"job":"*****"
+
+"status":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "id": 11,
+  "title": "Backend Developer",
+  "organization": "Sterling Technologies",
+  "employment_type": "full_time",
+  "work_type": "hybrid",
+  "country": "Nigeria",
+  "salary": "350,000NGN",
+  "overview": "A skilled backend developer aith at least \n5 years of experience",
+  "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+  "experience_level": "senior",
+  "time_stamp": "2025-10-30",
+  "is_saved": false
+}
+```
+
+[["/job/status/update/","PUT"]][Table of contents](#toc)
