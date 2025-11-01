@@ -12,117 +12,119 @@
 5. [add experience](#add_experience)  
 6. [admin retrieve dispute tickets](#admin_retrieve_dispute_tickets)  
 7. [alter country permissions](#alter_country_permissions)  
-8. [book mentorship session](#book_mentorship_session)  
-9. [cancel mentorship session](#cancel_mentorship_session)  
-10. [career nexus backend documentation](#career_nexus_backend_documentation)  
-11. [chat history](#chat_history)  
-12. [chat websockets](#chat_websockets)  
-13. [clear notifications](#clear_notifications)  
-14. [connection accept/reject](#connection_accept/reject)  
-15. [connection create](#connection_create)  
-16. [connection pending retrieve](#connection_pending_retrieve)  
-17. [connection recommendation](#connection_recommendation)  
-18. [connection requests sent](#connection_requests_sent)  
-19. [connection retrieve](#connection_retrieve)  
-20. [connections count](#connections_count)  
-21. [content management](#content_management)  
-22. [create a newsletter](#create_a_newsletter)  
-23. [create comment](#create_comment)  
-24. [create corporate account](#create_corporate_account)  
-25. [create project catalogue](#create_project_catalogue)  
-26. [creating library content](#creating_library_content)  
-27. [delete certification](#delete_certification)  
-28. [delete education](#delete_education)  
-29. [delete experience](#delete_experience)  
-30. [delete library content](#delete_library_content)  
-31. [delete post](#delete_post)  
-32. [delete project catalogue](#delete_project_catalogue)  
-33. [delete user](#delete_user)  
-34. [dispute creation](#dispute_creation)  
-35. [dispute summary](#dispute_summary)  
-36. [dispute ticket resolution](#dispute_ticket_resolution)  
-37. [follow user](#follow_user)  
-38. [followers count](#followers_count)  
-39. [following recommendation](#following_recommendation)  
-40. [followings count](#followings_count)  
-41. [forget password](#forget_password)  
-42. [general notifications](#general_notifications)  
-43. [get all notifications](#get_all_notifications)  
-44. [get chat sessions](#get_chat_sessions)  
-45. [get comment](#get_comment)  
-46. [get country phone codes](#get_country_phone_codes)  
-47. [get followings](#get_followings)  
-48. [get followings post](#get_followings_post)  
-49. [get job preference](#get_job_preference)  
-50. [get newsletter](#get_newsletter)  
-51. [get other user post](#get_other_user_post)  
-52. [get own posts](#get_own_posts)  
-53. [get posts](#get_posts)  
-54. [get saved post](#get_saved_post)  
-55. [google signin](#google_signin)  
-56. [initiate chat session](#initiate_chat_session)  
-57. [job create](#job_create)  
-58. [job notifications](#job_notifications)  
-59. [job preference](#job_preference)  
-60. [join mentorship session](#join_mentorship_session)  
-61. [lead register](#lead_register)  
-62. [like comment/reply](#like_comment/reply)  
-63. [login api](#login_api)  
-64. [logout](#logout)  
-65. [mentor search/filter](#mentor_search/filter)  
-66. [mentors recommendation](#mentors_recommendation)  
-67. [mentorship session annotation.](#mentorship_session_annotation.)  
-68. [post create](#post_create)  
-69. [post like](#post_like)  
-70. [post retrieve](#post_retrieve)  
-71. [post save](#post_save)  
-72. [post share](#post_share)  
-73. [profile completion](#profile_completion)  
-74. [profile retrieve](#profile_retrieve)  
-75. [profile update](#profile_update)  
-76. [recommended job posts.](#recommended_job_posts.)  
-77. [reply comment](#reply_comment)  
-78. [reposting](#reposting)  
-79. [retrieve corporate leads](#retrieve_corporate_leads)  
-80. [retrieve education api](#retrieve_education_api)  
-81. [retrieve job posts](#retrieve_job_posts)  
-82. [retrieve library contents](#retrieve_library_contents)  
-83. [retrieve linked accounts](#retrieve_linked_accounts)  
-84. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
-85. [retrieve mentors posts](#retrieve_mentors_posts)  
-86. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-87. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-88. [retrieve saved jobs](#retrieve_saved_jobs)  
-89. [retrieve saved mentors](#retrieve_saved_mentors)  
-90. [retrieve shared post](#retrieve_shared_post)  
-91. [retrieve user settings](#retrieve_user_settings)  
-92. [retrieve vault transactions](#retrieve_vault_transactions)  
-93. [save a job](#save_a_job)  
-94. [save a mentor](#save_a_mentor)  
-95. [session payment with flutterwave](#session_payment_with_flutterwave)  
-96. [session payment with stripe](#session_payment_with_stripe)  
-97. [signup with google](#signup_with_google)  
-98. [subscribe to newsletter](#subscribe_to_newsletter)  
-99. [switch account](#switch_account)  
-100. [unfollow user](#unfollow_user)  
-101. [unlike comment/reply](#unlike_comment/reply)  
-102. [unlike post](#unlike_post)  
-103. [unsave job](#unsave_job)  
-104. [unsave mentor](#unsave_mentor)  
-105. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-106. [update job status](#update_job_status)  
-107. [update user account settings](#update_user_account_settings)  
-108. [updating user eperience](#updating_user_eperience)  
-109. [user analytics](#user_analytics)  
-110. [user followers](#user_followers)  
-111. [user registeration](#user_registeration)  
-112. [user retrieve dispute](#user_retrieve_dispute)  
-113. [user search](#user_search)  
-114. [user-industry update](#user-industry_update)  
-115. [valid choice](#valid_choice)  
-116. [verify otp hash](#verify_otp_hash)  
-117. [view certification](#view_certification)  
-118. [view experience](#view_experience)  
+8. [apply for job](#apply_for_job)  
+9. [book mentorship session](#book_mentorship_session)  
+10. [cancel mentorship session](#cancel_mentorship_session)  
+11. [career nexus backend documentation](#career_nexus_backend_documentation)  
+12. [chat history](#chat_history)  
+13. [chat websockets](#chat_websockets)  
+14. [clear notifications](#clear_notifications)  
+15. [connection accept/reject](#connection_accept/reject)  
+16. [connection create](#connection_create)  
+17. [connection pending retrieve](#connection_pending_retrieve)  
+18. [connection recommendation](#connection_recommendation)  
+19. [connection requests sent](#connection_requests_sent)  
+20. [connection retrieve](#connection_retrieve)  
+21. [connections count](#connections_count)  
+22. [content management](#content_management)  
+23. [create a newsletter](#create_a_newsletter)  
+24. [create comment](#create_comment)  
+25. [create corporate account](#create_corporate_account)  
+26. [create project catalogue](#create_project_catalogue)  
+27. [creating library content](#creating_library_content)  
+28. [delete certification](#delete_certification)  
+29. [delete education](#delete_education)  
+30. [delete experience](#delete_experience)  
+31. [delete library content](#delete_library_content)  
+32. [delete post](#delete_post)  
+33. [delete project catalogue](#delete_project_catalogue)  
+34. [delete user](#delete_user)  
+35. [dispute creation](#dispute_creation)  
+36. [dispute summary](#dispute_summary)  
+37. [dispute ticket resolution](#dispute_ticket_resolution)  
+38. [follow user](#follow_user)  
+39. [followers count](#followers_count)  
+40. [following recommendation](#following_recommendation)  
+41. [followings count](#followings_count)  
+42. [forget password](#forget_password)  
+43. [general notifications](#general_notifications)  
+44. [get all notifications](#get_all_notifications)  
+45. [get chat sessions](#get_chat_sessions)  
+46. [get comment](#get_comment)  
+47. [get country phone codes](#get_country_phone_codes)  
+48. [get followings](#get_followings)  
+49. [get followings post](#get_followings_post)  
+50. [get job preference](#get_job_preference)  
+51. [get newsletter](#get_newsletter)  
+52. [get other user post](#get_other_user_post)  
+53. [get own posts](#get_own_posts)  
+54. [get posts](#get_posts)  
+55. [get saved post](#get_saved_post)  
+56. [google signin](#google_signin)  
+57. [initiate chat session](#initiate_chat_session)  
+58. [job create](#job_create)  
+59. [job notifications](#job_notifications)  
+60. [job preference](#job_preference)  
+61. [join mentorship session](#join_mentorship_session)  
+62. [lead register](#lead_register)  
+63. [like comment/reply](#like_comment/reply)  
+64. [login api](#login_api)  
+65. [logout](#logout)  
+66. [mentor search/filter](#mentor_search/filter)  
+67. [mentors recommendation](#mentors_recommendation)  
+68. [mentorship session annotation.](#mentorship_session_annotation.)  
+69. [post create](#post_create)  
+70. [post like](#post_like)  
+71. [post retrieve](#post_retrieve)  
+72. [post save](#post_save)  
+73. [post share](#post_share)  
+74. [profile completion](#profile_completion)  
+75. [profile retrieve](#profile_retrieve)  
+76. [profile update](#profile_update)  
+77. [recommended job posts.](#recommended_job_posts.)  
+78. [reply comment](#reply_comment)  
+79. [reposting](#reposting)  
+80. [retrieve corporate leads](#retrieve_corporate_leads)  
+81. [retrieve education api](#retrieve_education_api)  
+82. [retrieve job applications](#retrieve_job_applications)  
+83. [retrieve job posts](#retrieve_job_posts)  
+84. [retrieve library contents](#retrieve_library_contents)  
+85. [retrieve linked accounts](#retrieve_linked_accounts)  
+86. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+87. [retrieve mentors posts](#retrieve_mentors_posts)  
+88. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+89. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+90. [retrieve saved jobs](#retrieve_saved_jobs)  
+91. [retrieve saved mentors](#retrieve_saved_mentors)  
+92. [retrieve shared post](#retrieve_shared_post)  
+93. [retrieve user settings](#retrieve_user_settings)  
+94. [retrieve vault transactions](#retrieve_vault_transactions)  
+95. [save a job](#save_a_job)  
+96. [save a mentor](#save_a_mentor)  
+97. [session payment with flutterwave](#session_payment_with_flutterwave)  
+98. [session payment with stripe](#session_payment_with_stripe)  
+99. [signup with google](#signup_with_google)  
+100. [subscribe to newsletter](#subscribe_to_newsletter)  
+101. [switch account](#switch_account)  
+102. [unfollow user](#unfollow_user)  
+103. [unlike comment/reply](#unlike_comment/reply)  
+104. [unlike post](#unlike_post)  
+105. [unsave job](#unsave_job)  
+106. [unsave mentor](#unsave_mentor)  
+107. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+108. [update job status](#update_job_status)  
+109. [update user account settings](#update_user_account_settings)  
+110. [updating user eperience](#updating_user_eperience)  
+111. [user analytics](#user_analytics)  
+112. [user followers](#user_followers)  
+113. [user registeration](#user_registeration)  
+114. [user retrieve dispute](#user_retrieve_dispute)  
+115. [user search](#user_search)  
+116. [user-industry update](#user-industry_update)  
+117. [valid choice](#valid_choice)  
+118. [verify otp hash](#verify_otp_hash)  
+119. [view certification](#view_certification)  
+120. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -5346,3 +5348,77 @@ This API updates a job status which can either be active,draft or closed. N.B:On
 ```
 
 [["/job/status/update/","PUT"]][Table of contents](#toc)
+
+
+# Apply for Job<a name='apply_for_job'></a>
+
+This API allows a user to apply for a Job. N.B: Job can only be applied to once.
+
+**Endpoint:**`/job/apply/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"job":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "application_status": "Success"
+}
+```
+
+[["/job/apply/","POST"]][Table of contents](#toc)
+
+
+# Retrieve Job Applications<a name='retrieve_job_applications'></a>
+
+This API allows an Employer to retrieve all the applications for a particular job. N.B:A job_id query parameter is required for this request. Also. the user must be the poster of the job to be able to view it's applications.
+
+**Endpoint:**`/job/application/?job_id=2`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "applicant": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "resume": "https://careernexus-storage1.s3.amazonaws.com/resumes/51b434ab-441f-4ab1-ab72-a58c91ac7172Resume_080525.pdf"
+      }
+    }
+  ]
+}
+```
+
+[["/job/application/?job_id=2","GET"]][Table of contents](#toc)

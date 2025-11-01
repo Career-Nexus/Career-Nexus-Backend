@@ -24,6 +24,14 @@ class Jobs(models.Model):
     time_stamp = models.DateField(auto_now_add=True)
     status = models.CharField(choices=JOB_STATUS,max_length=15,default="active")
 
+
+class JobApplication(models.Model):
+    job = models.ForeignKey(Jobs,on_delete=models.CASCADE,related_name="application")
+    applicant = models.ForeignKey(Users,on_delete=models.CASCADE)
+    applied_on = models.DateTimeField(auto_now_add=True)
+
+
+
 class JobPreference(models.Model):
     user = models.OneToOneField(Users,on_delete=models.CASCADE)
     title = models.CharField(max_length=250,null=True)

@@ -5228,3 +5228,77 @@ This API updates a job status which can either be active,draft or closed. N.B:On
 ```
 
 [["/job/status/update/","PUT"]][Table of contents](#toc)
+
+
+# Apply for Job
+
+This API allows a user to apply for a Job. N.B: Job can only be applied to once.
+
+**Endpoint:**`/job/apply/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"job":"*****"
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "application_status": "Success"
+}
+```
+
+[["/job/apply/","POST"]][Table of contents](#toc)
+
+
+# Retrieve Job Applications
+
+This API allows an Employer to retrieve all the applications for a particular job. N.B:A job_id query parameter is required for this request. Also. the user must be the poster of the job to be able to view it's applications.
+
+**Endpoint:**`/job/application/?job_id=2`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "count": 1,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "id": 1,
+      "applicant": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "resume": "https://careernexus-storage1.s3.amazonaws.com/resumes/51b434ab-441f-4ab1-ab72-a58c91ac7172Resume_080525.pdf"
+      }
+    }
+  ]
+}
+```
+
+[["/job/application/?job_id=2","GET"]][Table of contents](#toc)

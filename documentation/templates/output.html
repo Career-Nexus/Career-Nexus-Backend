@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#add_experience">add experience</a></li>
 <li><a href="#admin_retrieve_dispute_tickets">admin retrieve dispute tickets</a></li>
 <li><a href="#alter_country_permissions">alter country permissions</a></li>
+<li><a href="#apply_for_job">apply for job</a></li>
 <li><a href="#book_mentorship_session">book mentorship session</a></li>
 <li><a href="#cancel_mentorship_session">cancel mentorship session</a></li>
 <li><a href="#career_nexus_backend_documentation">career nexus backend documentation</a></li>
@@ -177,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#reposting">reposting</a></li>
 <li><a href="#retrieve_corporate_leads">retrieve corporate leads</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
+<li><a href="#retrieve_job_applications">retrieve job applications</a></li>
 <li><a href="#retrieve_job_posts">retrieve job posts</a></li>
 <li><a href="#retrieve_library_contents">retrieve library contents</a></li>
 <li><a href="#retrieve_linked_accounts">retrieve linked accounts</a></li>
@@ -4075,6 +4077,56 @@ job:*****
 }
 </code></pre>
 <p><button onclick="openApiTester('/job/status/update/','PUT')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Apply for Job<a name='apply_for_job'></a></h1>
+<p>This API allows a user to apply for a Job. N.B: Job can only be applied to once.</p>
+<p><strong>Endpoint:</strong><code>/job/apply/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+&quot;job&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;application_status&quot;: &quot;Success&quot;
+}
+</code></pre>
+<p><button onclick="openApiTester('/job/apply/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Job Applications<a name='retrieve_job_applications'></a></h1>
+<p>This API allows an Employer to retrieve all the applications for a particular job. N.B:A job_id query parameter is required for this request. Also. the user must be the poster of the job to be able to view it's applications.</p>
+<p><strong>Endpoint:</strong><code>/job/application/?job_id=2</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">{
+  &quot;count&quot;: 1,
+  &quot;next&quot;: null,
+  &quot;previous&quot;: null,
+  &quot;results&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;applicant&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;,
+        &quot;resume&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/resumes/51b434ab-441f-4ab1-ab72-a58c91ac7172Resume_080525.pdf&quot;
+      }
+    }
+  ]
+}
+</code></pre>
+<p><button onclick="openApiTester('/job/application/?job_id=2','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 
 
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 

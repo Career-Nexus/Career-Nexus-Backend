@@ -31,6 +31,9 @@ def no_object_fails(message):
 class JobPagination(PageNumberPagination):
     page_size = 5
 
+class JobApplicationPagination(PageNumberPagination):
+    page_size=10
+
 
 class JobsView(APIView):
     permission_classes = [
@@ -84,6 +87,49 @@ class JobsView(APIView):
         serialized_data = serializers.RetrieveJobSerializer(paginated_items,context={"user":user},many=True).data
         response = paginator.get_paginated_response(serialized_data).data
         return Response(response,status=status.HTTP_200_OK)
+
+
+
+class JobApplicationView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def post(self,request):
+        user = request.user
+        serializer = serializers.JobApplicationSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            output = {
+                "application_status":"Success"
+            }
+            return Response(output,status=status.HTTP_200_OK)
+
+
+
+class RetrieveJobApplicationView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsEmployer,
+    ]
+
+    def get(self,request):
+        user = request.user
+        job = request.query_params.get("job_id")
+        if not job:
+            return Response({"error":"A job_id query parameter is required for this request"},status=status.HTTP_400_BAD_REQUEST)
+        job_instance = models.Jobs.objects.filter(id=job).first()
+        if not job_instance:
+            return Response({"error":"Invalid Job ID"},status=status.HTTP_400_BAD_REQUEST)
+        if job_instance.poster == user:
+            return Response({"error":"This job was posted by another user."},status=status.HTTP_401_UNAUTHORIZED)
+        all_applicants = job_instance.application.all().order_by("-applied_on")
+        paginator = JobApplicationPagination()
+        paginated_items = paginator.paginate_queryset(all_applicants,request)
+        serialized_items = serializers.RetrieveJobApplicationSerializer(paginated_items,many=True).data
+        output = paginator.get_paginated_response(serialized_items).data
+        return Response(output,status=status.HTTP_200_OK)
+
 
 
 class RecommendJobView(APIView):

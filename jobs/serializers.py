@@ -1,8 +1,10 @@
+from django.forms import fields
 from rest_framework import serializers
 from django.conf import settings
 
 from . import models
 from users.options import get_choices
+from users.models import PersonalProfile
 
 from users.serializers import industry_options
 
@@ -85,6 +87,43 @@ class RetrieveJobSerializer(serializers.ModelSerializer):
         else:
             return False
 
+
+class JobApplicantSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = PersonalProfile
+        fields = ["id","first_name","last_name","middle_name","profile_photo","qualification","resume"]
+
+
+class JobApplicationSerializer(serializers.Serializer):
+    job = serializers.PrimaryKeyRelatedField(queryset=models.Jobs.objects.all())
+
+    def validate_job(self,value):
+        user = self.context["user"]
+        if user.user_type == "employer":
+            raise serializers.ValidationError("Employers are not allowed to apply for a job.")
+        if value.status == "closed":
+            raise serializers.ValidationError("This job has been closed")
+        if models.JobApplication.objects.filter(job=value,applicant=user).exists():
+            raise serializers.ValidationError("You have already applied for this job.")
+        return value
+
+    def create(self,validated_data):
+        validated_data["applicant"] = self.context["user"]
+        application = models.JobApplication.objects.create(**validated_data)
+        return application
+
+
+class RetrieveJobApplicationSerializer(serializers.ModelSerializer):
+    applicant = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.JobApplication
+        fields = ["id","applicant"]
+
+    def get_applicant(self,obj):
+        output = JobApplicantSerializer(obj.applicant.profile,many=False).data
+        return output
 
 
 class JobPreferenceSerializer(serializers.Serializer):
