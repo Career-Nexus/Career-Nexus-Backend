@@ -1,52 +1,52 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
 
-        let currentEndpoint = '';
+            let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,12 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
+        </script>
+                    
 
-</script>
 
-
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -449,64 +448,79 @@ LEARNERS
 </code></pre>
 <p><button onclick="openApiTester('/user/retrieve-profile/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Profile Update<a name='profile_update'></a></h1>
-<p>This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.</p>
+<p>This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format. company_size options include (&quot;1-10&quot;,&quot;11-50&quot;,&quot;51-200&quot;,&quot;201-500&quot;,&quot;501-1000&quot;,&quot;1001-5000&quot;,&quot;+5000&quot;).</p>
 <p><strong>Endpoint:</strong><code>/user/profile-update/</code></p>
 <p><strong>Method:</strong> <code>PUT</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">{
 
-&quot;first_name&quot;:&quot;*****&quot;
+first_name:*****
 
-&quot;last_name&quot;:&quot;*****&quot;
+last_name:*****
 
-&quot;middle_name&quot;:&quot;*****&quot;
+middle_name:*****
 
-&quot;country_code&quot;:&quot;*****&quot;
+country_code:*****
 
-&quot;phone_number&quot;:&quot;*****&quot;
+phone_number:*****
 
-&quot;availability&quot;:&quot;*****&quot;
+availability:*****
 
-&quot;qualification&quot;:&quot;*****&quot;
+qualification:*****
 
-&quot;location&quot;:&quot;*****&quot;
+location:*****
 
-&quot;resume&quot;:&quot;*****&quot;
+resume:*****
 
-&quot;areas_of_expertise&quot;:&quot;*****&quot;
+areas_of_expertise:*****
 
-&quot;years_of_experience&quot;:&quot;*****&quot;
+years_of_experience:*****
 
-&quot;current_job&quot;:&quot;*****&quot;
+current_job:*****
 
-&quot;technical_skills&quot;:&quot;*****&quot;
+technical_skills:*****
 
-&quot;mentorship_styles&quot;:&quot;*****&quot;
+mentorship_styles:*****
 
-&quot;profile_photo&quot;:&quot;*****&quot;
+profile_photo:*****
 
-&quot;cover_photo&quot;:&quot;*****&quot;
+cover_photo:*****
 
-&quot;summary&quot;:&quot;*****&quot;
+summary:*****
 
-&quot;position&quot;:&quot;*****&quot;
+position:*****
 
-&quot;bio&quot;:&quot;*****&quot;
+bio:*****
 
-&quot;intro_video&quot;:&quot;*****&quot;
+intro_video:*****
 
-&quot;timezone&quot;:&quot;*****&quot;
+timezone:*****
 
-&quot;linkedin_url&quot;:&quot;*****&quot;
+linkedin_url:*****
 
-&quot;session_rate&quot;:&quot;*****&quot;
+session_rate:*****
+
+company_name:*****
+
+company_type:*****
+
+company_size:*****
+
+industry:*****
+
+website:*****
+
+logo:*****
+
+tagline:*****
 
 }
 
 </code></pre>
 <h2>Response body</h2>
 <p><strong>status code:201</strong></p>
-<pre><code class="language-json">{
+<pre><code class="language-json">Similar Response for Learners and Mentors
+{
   &quot;first_name&quot;: &quot;Abdul Azeez&quot;,
   &quot;last_name&quot;: &quot;Balogun&quot;,
   &quot;middle_name&quot;: &quot;Abiola&quot;,
@@ -538,8 +552,23 @@ LEARNERS
   &quot;linkedin_url&quot;: null,
   &quot;session_rate&quot;: 2
 }
+
+Response for corporate
+{
+  &quot;id&quot;: 21,
+  &quot;company_name&quot;: &quot;Bojvent LTD&quot;,
+  &quot;company_type&quot;: &quot;private&quot;,
+  &quot;company_size&quot;: &quot;1-10&quot;,
+  &quot;country_code&quot;: &quot;+000&quot;,
+  &quot;phone_number&quot;: &quot;00000000000&quot;,
+  &quot;location&quot;: &quot;Lagos&quot;,
+  &quot;website&quot;: &quot;www.bojventltd.com&quot;,
+  &quot;tagline&quot;: &quot;Dealers in recycled wastes and compositions.&quot;,
+  &quot;logo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png&quot;,
+  &quot;cover_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg&quot;
+}
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/user/profile-update/','PUT')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>User-industry Update<a name='user-industry_update'></a></h1>
 <p>Updates the user type and industry of the user</p>
 <p><strong>Endpoint:</strong><code>/user/profile-update/</code></p>
@@ -4128,7 +4157,7 @@ job:*****
 </code></pre>
 <p><button onclick="openApiTester('/job/application/?job_id=2','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 
-
+        
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -4162,5 +4191,6 @@ job:*****
     </div>
 
 
-</body>
-</html>
+        </body>
+        </html>
+        

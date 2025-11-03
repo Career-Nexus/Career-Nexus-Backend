@@ -416,7 +416,7 @@ LEARNERS
 
 # Profile Update<a name='profile_update'></a>
 
-This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format.
+This endpoint updates the profile data of a user. N.B:Some field updates such as years_of_experience, areas_of_expertise,availability,current_job,technical_skills,mentorship_styles and linkedin_url are only available to mentors and can only be updated by this user type. Also fields like areas_of_expertise,mentorship_styles and technical_skills properties must be a list of strings as their request format. company_size options include ("1-10","11-50","51-200","201-500","501-1000","1001-5000","+5000").
 
 **Endpoint:**`/user/profile-update/`
 
@@ -427,51 +427,65 @@ This endpoint updates the profile data of a user. N.B:Some field updates such as
 ``` json
 {
 
-"first_name":"*****"
+first_name:*****
 
-"last_name":"*****"
+last_name:*****
 
-"middle_name":"*****"
+middle_name:*****
 
-"country_code":"*****"
+country_code:*****
 
-"phone_number":"*****"
+phone_number:*****
 
-"availability":"*****"
+availability:*****
 
-"qualification":"*****"
+qualification:*****
 
-"location":"*****"
+location:*****
 
-"resume":"*****"
+resume:*****
 
-"areas_of_expertise":"*****"
+areas_of_expertise:*****
 
-"years_of_experience":"*****"
+years_of_experience:*****
 
-"current_job":"*****"
+current_job:*****
 
-"technical_skills":"*****"
+technical_skills:*****
 
-"mentorship_styles":"*****"
+mentorship_styles:*****
 
-"profile_photo":"*****"
+profile_photo:*****
 
-"cover_photo":"*****"
+cover_photo:*****
 
-"summary":"*****"
+summary:*****
 
-"position":"*****"
+position:*****
 
-"bio":"*****"
+bio:*****
 
-"intro_video":"*****"
+intro_video:*****
 
-"timezone":"*****"
+timezone:*****
 
-"linkedin_url":"*****"
+linkedin_url:*****
 
-"session_rate":"*****"
+session_rate:*****
+
+company_name:*****
+
+company_type:*****
+
+company_size:*****
+
+industry:*****
+
+website:*****
+
+logo:*****
+
+tagline:*****
 
 }
 
@@ -481,6 +495,7 @@ This endpoint updates the profile data of a user. N.B:Some field updates such as
 **status code:201**
 
 ``` json
+Similar Response for Learners and Mentors
 {
   "first_name": "Abdul Azeez",
   "last_name": "Balogun",
@@ -513,9 +528,24 @@ This endpoint updates the profile data of a user. N.B:Some field updates such as
   "linkedin_url": null,
   "session_rate": 2
 }
+
+Response for corporate
+{
+  "id": 21,
+  "company_name": "Bojvent LTD",
+  "company_type": "private",
+  "company_size": "1-10",
+  "country_code": "+000",
+  "phone_number": "00000000000",
+  "location": "Lagos",
+  "website": "www.bojventltd.com",
+  "tagline": "Dealers in recycled wastes and compositions.",
+  "logo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg"
+}
 ```
 
-[Table of contents](#toc) 
+[["/user/profile-update/","PUT"]][Table of contents](#toc) 
 
 # User-industry Update<a name='user-industry_update'></a>
 

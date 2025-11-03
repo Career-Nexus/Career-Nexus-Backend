@@ -563,6 +563,15 @@ class PersonalProfileSerializer(serializers.Serializer):
     mentorship_styles = serializers.JSONField(required=False)
     session_rate = serializers.IntegerField(required=False)
     linkedin_url = serializers.CharField(max_length=500,required=False)
+    #Field options for corporate
+    company_name = serializers.CharField(max_length=500,required=False)
+    company_type = serializers.ChoiceField(required=False,choices=company_type_options)
+    company_size = serializers.ChoiceField(choices=company_size,required=False)
+    industry = serializers.ChoiceField(choices=industry_options,required=False)
+    website = serializers.CharField(required=False)
+    logo = serializers.ImageField(required=False)
+    tagline = serializers.CharField(required=False)
+
 
     def validate_profile_photo(self,file):
         if not file.name.endswith((".png",".jpg",".jpeg")):
@@ -571,6 +580,12 @@ class PersonalProfileSerializer(serializers.Serializer):
             raise serializers.ValidationError("File too large.")
         return file
 
+    def validate_logo(self,file):
+        if not file.name.endswith((".png",".jpeg",".jpg")):
+            raise serializers.ValidationError("Invalid File format")
+        if file.size/1000000 > 2:
+            raise serializers.ValidationError("File too large")
+        return file
 
     def validate(self,data):
         areas_of_expertise = data.get("areas_of_expertise")
@@ -644,7 +659,22 @@ class PersonalProfileSerializer(serializers.Serializer):
             instance.session_rate = session_rate
 
             instance.linkedin_url = linkedin_url
-        
+
+        elif instance.user.user_type == "employer":
+            instance.company_name = validated_data.get("company_name",instance.company_name)
+            instance.company_type = validated_data.get("company_type",instance.company_type)
+            instance.company_size = validated_data.get("company_size",instance.company_size)
+            instance.user.industry = validated_data.get("industry",instance.user.industry)
+            instance.website = validated_data.get("website",instance.website)
+            instance.location = validated_data.get("location",instance.location)
+            instance.tagline = validated_data.get("tagline",instance.tagline)
+
+            logo = validated_data.get("logo")
+            if logo:
+                file_name = f"profile_photo/company_logo/{uuid.uuid4()}{logo.name}"
+                file_path = default_storage.save(file_name,ContentFile(logo.read()))
+                validated_data["logo"] = default_storage.url(file_path)
+
 
         if resume != '':
             file_name = f"resumes/{uuid.uuid4()}{resume.name}"
@@ -657,7 +687,6 @@ class PersonalProfileSerializer(serializers.Serializer):
 
         if profile_photo != '':
             #TODO create auto-cleaning logic for profile photo that has been changed
-
             file_name = f"profile_pictures/{uuid.uuid4()}{profile_photo.name}"
             file_path = default_storage.save(file_name,ContentFile(profile_photo.read()))
             url = default_storage.url(file_path)
@@ -666,7 +695,6 @@ class PersonalProfileSerializer(serializers.Serializer):
         else:
             profile_photo = instance.profile_photo
 
-
         if cover_photo != '':
             file_name = f"cover_photos/{uuid.uuid4()}{cover_photo.name}"
             file_path = default_storage.save(file_name,ContentFile(cover_photo.read()))
@@ -674,7 +702,6 @@ class PersonalProfileSerializer(serializers.Serializer):
             cover_photo = url
         else:
             cover_photo = instance.cover_photo
-
 
         if intro_video != '':
             #TODO Create auto-cleaning logic for intro-videos that has been changed
@@ -695,6 +722,8 @@ class PersonalProfileSerializer(serializers.Serializer):
         instance.save()
         if instance.user.user_type == "learner":
             output = LearnerUpdateOutputSerializer(instance,many=False).data
+        elif instance.user.user_type == "employer":
+            output = RetrieveCorporateUserSerializer(instance,many=False).data
         else:
             output = MentorUpdateOutputSerializer(instance,many=False).data
         return output
