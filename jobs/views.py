@@ -105,6 +105,26 @@ class JobApplicationView(APIView):
             }
             return Response(output,status=status.HTTP_200_OK)
 
+    def get(self,request):
+        user = request.user
+        all_applied_jobs = user.jobapplication_set.all()
+        output = serializers.RetrieveAppliedJobs(all_applied_jobs,many=True).data
+        return Response(output,status=status.HTTP_200_OK)
+
+
+class RetrieveRecentJobApplicationsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsEmployer
+    ]
+
+    def get(self,request):
+        user = request.user
+        recently_applied = models.JobApplication.objects.filter(job__poster=user).order_by("-applied_on")[:5]
+        output = serializers.RetrieveRecentJobApplicantsSerializer(recently_applied,many=True).data
+        return Response(output,status=status.HTTP_200_OK)
+
+
 
 
 class RetrieveJobApplicationView(APIView):

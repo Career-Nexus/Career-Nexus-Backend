@@ -10,4 +10,5 @@ urlpatterns = [
     path("status/update/",views.JobStatusUpdateView.as_view(),name="Update-Job-Status"),
     path("apply/",views.JobApplicationView.as_view(),name="Apply-For-Job"),
     path("application/",views.RetrieveJobApplicationView.as_view(),name="View-Job_applications"),
+    path("application/recent/",views.RetrieveRecentJobApplicationsView.as_view(),name="Retrieve-Recent-Job-Applications"),
 ]

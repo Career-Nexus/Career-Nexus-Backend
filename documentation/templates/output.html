@@ -1,52 +1,52 @@
 
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Documentation</title>
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-            <style>
-                body {
-                    box-sizing: border-box;
-                    min-width: 200px;
-                    max-width: 980px;
-                    margin: 0 auto;
-                    padding: 45px;
-                }
-            </style>
-        </head>
-        <body class="markdown-body">
-            <input type="text" id="searchBox" placeholder="Search index..." />
-                <ul id="searchResults"></ul>
-            
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-            const searchBox = document.getElementById('searchBox');
-            const indexLinks = document.querySelectorAll('#index li a');
-            const resultsList = document.getElementById('searchResults');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+    <style>
+        body {
+            box-sizing: border-box;
+            min-width: 200px;
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 45px;
+        }
+    </style>
+</head>
+<body class="markdown-body">
+    <input type="text" id="searchBox" placeholder="Search index..." />
+    <ul id="searchResults"></ul>
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const searchBox = document.getElementById('searchBox');
+  const indexLinks = document.querySelectorAll('#index li a');
+  const resultsList = document.getElementById('searchResults');
 
-            searchBox.addEventListener('input', function () {
-                const query = searchBox.value.toLowerCase();
-                resultsList.innerHTML = ''; // Clear previous results
+  searchBox.addEventListener('input', function () {
+    const query = searchBox.value.toLowerCase();
+    resultsList.innerHTML = ''; // Clear previous results
 
-                if (!query) return;
+    if (!query) return;
 
-                indexLinks.forEach(link => {
-                const text = link.textContent.toLowerCase();
-                if (text.includes(query)) {
-                    const li = document.createElement('li');
-                    const a = document.createElement('a');
-                    a.href = link.href;
-                    a.textContent = link.textContent;
-                    li.appendChild(a);
-                    resultsList.appendChild(li);
-                }
-                });
-            });
-            });
+    indexLinks.forEach(link => {
+      const text = link.textContent.toLowerCase();
+      if (text.includes(query)) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.textContent;
+        li.appendChild(a);
+        resultsList.appendChild(li);
+      }
+    });
+  });
+});
 
-            let currentEndpoint = '';
+        let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,11 +87,12 @@
             }
 
         }
-        </script>
-                    
+
+</script>
 
 
-        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+    
+<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -175,6 +176,7 @@
 <li><a href="#recommended_job_posts.">recommended job posts.</a></li>
 <li><a href="#reply_comment">reply comment</a></li>
 <li><a href="#reposting">reposting</a></li>
+<li><a href="#retrieve_applied_jobs">retrieve applied jobs</a></li>
 <li><a href="#retrieve_corporate_leads">retrieve corporate leads</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
 <li><a href="#retrieve_job_applications">retrieve job applications</a></li>
@@ -185,6 +187,7 @@
 <li><a href="#retrieve_mentors_posts">retrieve mentors posts</a></li>
 <li><a href="#retrieve_mentorship_sessions">retrieve mentorship sessions</a></li>
 <li><a href="#retrieve_portfolio_projects">retrieve portfolio projects</a></li>
+<li><a href="#retrieve_recent_applicants">retrieve recent applicants</a></li>
 <li><a href="#retrieve_saved_jobs">retrieve saved jobs</a></li>
 <li><a href="#retrieve_saved_mentors">retrieve saved mentors</a></li>
 <li><a href="#retrieve_shared_post">retrieve shared post</a></li>
@@ -4156,8 +4159,65 @@ job:*****
 }
 </code></pre>
 <p><button onclick="openApiTester('/job/application/?job_id=2','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Applied Jobs<a name='retrieve_applied_jobs'></a></h1>
+<p>This API retrieves all the jobs that a user has applied for.</p>
+<p><strong>Endpoint:</strong><code>/job/apply/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
 
-        
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 1,
+    &quot;job&quot;: {
+      &quot;id&quot;: 2,
+      &quot;title&quot;: &quot;Backend Developer&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;salary&quot;: &quot;350,000NGN&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;organization&quot;: &quot;Career Nexus Ltd&quot;,
+      &quot;posted_on&quot;: &quot;2025-06-11&quot;
+    }
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;job&quot;: {
+      &quot;id&quot;: 10,
+      &quot;title&quot;: &quot;Frontend Developer&quot;,
+      &quot;employment_type&quot;: &quot;full_time&quot;,
+      &quot;salary&quot;: &quot;150,000NGN&quot;,
+      &quot;country&quot;: &quot;Nigeria&quot;,
+      &quot;organization&quot;: &quot;TechExperts&quot;,
+      &quot;posted_on&quot;: &quot;2025-10-30&quot;
+    }
+  }
+]
+</code></pre>
+<p><button onclick="openApiTester('/job/apply/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Recent Applicants<a name='retrieve_recent_applicants'></a></h1>
+<p>This API retrieves the 5 most recent job applications.</p>
+<p><strong>Endpoint:</strong><code>/job/application/recent/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 2,
+    &quot;applicant&quot;: &quot;Opeyemi Saliu&quot;,
+    &quot;job_name&quot;: &quot;Frontend Developer&quot;
+  }
+]
+</code></pre>
+<p><button onclick="openApiTester('/job/application/recent/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+
+
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -4191,6 +4251,5 @@ job:*****
     </div>
 
 
-        </body>
-        </html>
-        
+</body>
+</html>

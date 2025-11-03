@@ -84,47 +84,49 @@
 77. [recommended job posts.](#recommended_job_posts.)  
 78. [reply comment](#reply_comment)  
 79. [reposting](#reposting)  
-80. [retrieve corporate leads](#retrieve_corporate_leads)  
-81. [retrieve education api](#retrieve_education_api)  
-82. [retrieve job applications](#retrieve_job_applications)  
-83. [retrieve job posts](#retrieve_job_posts)  
-84. [retrieve library contents](#retrieve_library_contents)  
-85. [retrieve linked accounts](#retrieve_linked_accounts)  
-86. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
-87. [retrieve mentors posts](#retrieve_mentors_posts)  
-88. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-89. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-90. [retrieve saved jobs](#retrieve_saved_jobs)  
-91. [retrieve saved mentors](#retrieve_saved_mentors)  
-92. [retrieve shared post](#retrieve_shared_post)  
-93. [retrieve user settings](#retrieve_user_settings)  
-94. [retrieve vault transactions](#retrieve_vault_transactions)  
-95. [save a job](#save_a_job)  
-96. [save a mentor](#save_a_mentor)  
-97. [session payment with flutterwave](#session_payment_with_flutterwave)  
-98. [session payment with stripe](#session_payment_with_stripe)  
-99. [signup with google](#signup_with_google)  
-100. [subscribe to newsletter](#subscribe_to_newsletter)  
-101. [switch account](#switch_account)  
-102. [unfollow user](#unfollow_user)  
-103. [unlike comment/reply](#unlike_comment/reply)  
-104. [unlike post](#unlike_post)  
-105. [unsave job](#unsave_job)  
-106. [unsave mentor](#unsave_mentor)  
-107. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-108. [update job status](#update_job_status)  
-109. [update user account settings](#update_user_account_settings)  
-110. [updating user eperience](#updating_user_eperience)  
-111. [user analytics](#user_analytics)  
-112. [user followers](#user_followers)  
-113. [user registeration](#user_registeration)  
-114. [user retrieve dispute](#user_retrieve_dispute)  
-115. [user search](#user_search)  
-116. [user-industry update](#user-industry_update)  
-117. [valid choice](#valid_choice)  
-118. [verify otp hash](#verify_otp_hash)  
-119. [view certification](#view_certification)  
-120. [view experience](#view_experience)  
+80. [retrieve applied jobs](#retrieve_applied_jobs)  
+81. [retrieve corporate leads](#retrieve_corporate_leads)  
+82. [retrieve education api](#retrieve_education_api)  
+83. [retrieve job applications](#retrieve_job_applications)  
+84. [retrieve job posts](#retrieve_job_posts)  
+85. [retrieve library contents](#retrieve_library_contents)  
+86. [retrieve linked accounts](#retrieve_linked_accounts)  
+87. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+88. [retrieve mentors posts](#retrieve_mentors_posts)  
+89. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+90. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+91. [retrieve recent applicants](#retrieve_recent_applicants)  
+92. [retrieve saved jobs](#retrieve_saved_jobs)  
+93. [retrieve saved mentors](#retrieve_saved_mentors)  
+94. [retrieve shared post](#retrieve_shared_post)  
+95. [retrieve user settings](#retrieve_user_settings)  
+96. [retrieve vault transactions](#retrieve_vault_transactions)  
+97. [save a job](#save_a_job)  
+98. [save a mentor](#save_a_mentor)  
+99. [session payment with flutterwave](#session_payment_with_flutterwave)  
+100. [session payment with stripe](#session_payment_with_stripe)  
+101. [signup with google](#signup_with_google)  
+102. [subscribe to newsletter](#subscribe_to_newsletter)  
+103. [switch account](#switch_account)  
+104. [unfollow user](#unfollow_user)  
+105. [unlike comment/reply](#unlike_comment/reply)  
+106. [unlike post](#unlike_post)  
+107. [unsave job](#unsave_job)  
+108. [unsave mentor](#unsave_mentor)  
+109. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+110. [update job status](#update_job_status)  
+111. [update user account settings](#update_user_account_settings)  
+112. [updating user eperience](#updating_user_eperience)  
+113. [user analytics](#user_analytics)  
+114. [user followers](#user_followers)  
+115. [user registeration](#user_registeration)  
+116. [user retrieve dispute](#user_retrieve_dispute)  
+117. [user search](#user_search)  
+118. [user-industry update](#user-industry_update)  
+119. [valid choice](#valid_choice)  
+120. [verify otp hash](#verify_otp_hash)  
+121. [view certification](#view_certification)  
+122. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -5452,3 +5454,84 @@ This API allows an Employer to retrieve all the applications for a particular jo
 ```
 
 [["/job/application/?job_id=2","GET"]][Table of contents](#toc)
+
+
+# Retrieve Applied Jobs<a name='retrieve_applied_jobs'></a>
+
+This API retrieves all the jobs that a user has applied for.
+
+**Endpoint:**`/job/apply/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "job": {
+      "id": 2,
+      "title": "Backend Developer",
+      "employment_type": "full_time",
+      "salary": "350,000NGN",
+      "country": "Nigeria",
+      "organization": "Career Nexus Ltd",
+      "posted_on": "2025-06-11"
+    }
+  },
+  {
+    "id": 2,
+    "job": {
+      "id": 10,
+      "title": "Frontend Developer",
+      "employment_type": "full_time",
+      "salary": "150,000NGN",
+      "country": "Nigeria",
+      "organization": "TechExperts",
+      "posted_on": "2025-10-30"
+    }
+  }
+]
+```
+
+[["/job/apply/","GET"]][Table of contents](#toc)
+
+
+# Retrieve Recent Applicants<a name='retrieve_recent_applicants'></a>
+
+This API retrieves the 5 most recent job applications.
+
+**Endpoint:**`/job/application/recent/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 2,
+    "applicant": "Opeyemi Saliu",
+    "job_name": "Frontend Developer"
+  }
+]
+```
+
+[["/job/application/recent/","GET"]][Table of contents](#toc)

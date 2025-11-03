@@ -87,12 +87,45 @@ class RetrieveJobSerializer(serializers.ModelSerializer):
         else:
             return False
 
+class RetrieveJobMiniSerializer(serializers.ModelSerializer):
+    posted_on = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Jobs
+        fields = ["id","title","employment_type","salary","country","organization","posted_on"]
+
+    def get_posted_on(self,obj):
+        return obj.time_stamp
+
+
+class RetrieveAppliedJobs(serializers.ModelSerializer):
+    job = RetrieveJobMiniSerializer()
+
+    class Meta:
+        model = models.JobApplication
+        fields = ["id","job"]
+
 
 class JobApplicantSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PersonalProfile
         fields = ["id","first_name","last_name","middle_name","profile_photo","qualification","resume"]
+
+class RetrieveRecentJobApplicantsSerializer(serializers.ModelSerializer):
+    applicant = serializers.SerializerMethodField()
+    job_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.JobApplication
+        fields = ["id","applicant","job_name"]
+
+    def get_applicant(self,obj):
+        name = f"{obj.applicant.profile.first_name} {obj.applicant.profile.last_name}"
+        return name
+
+    def get_job_name(self,obj):
+        return obj.job.title
 
 
 class JobApplicationSerializer(serializers.Serializer):

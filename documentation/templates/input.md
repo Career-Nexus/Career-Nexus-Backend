@@ -5332,3 +5332,84 @@ This API allows an Employer to retrieve all the applications for a particular jo
 ```
 
 [["/job/application/?job_id=2","GET"]][Table of contents](#toc)
+
+
+# Retrieve Applied Jobs
+
+This API retrieves all the jobs that a user has applied for.
+
+**Endpoint:**`/job/apply/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "job": {
+      "id": 2,
+      "title": "Backend Developer",
+      "employment_type": "full_time",
+      "salary": "350,000NGN",
+      "country": "Nigeria",
+      "organization": "Career Nexus Ltd",
+      "posted_on": "2025-06-11"
+    }
+  },
+  {
+    "id": 2,
+    "job": {
+      "id": 10,
+      "title": "Frontend Developer",
+      "employment_type": "full_time",
+      "salary": "150,000NGN",
+      "country": "Nigeria",
+      "organization": "TechExperts",
+      "posted_on": "2025-10-30"
+    }
+  }
+]
+```
+
+[["/job/apply/","GET"]][Table of contents](#toc)
+
+
+# Retrieve Recent Applicants
+
+This API retrieves the 5 most recent job applications.
+
+**Endpoint:**`/job/application/recent/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 2,
+    "applicant": "Opeyemi Saliu",
+    "job_name": "Frontend Developer"
+  }
+]
+```
+
+[["/job/application/recent/","GET"]][Table of contents](#toc)
