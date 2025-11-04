@@ -673,7 +673,7 @@ class PersonalProfileSerializer(serializers.Serializer):
             if logo:
                 file_name = f"profile_photo/company_logo/{uuid.uuid4()}{logo.name}"
                 file_path = default_storage.save(file_name,ContentFile(logo.read()))
-                validated_data["logo"] = default_storage.url(file_path)
+                instance.logo = default_storage.url(file_path)
 
 
         if resume != '':
