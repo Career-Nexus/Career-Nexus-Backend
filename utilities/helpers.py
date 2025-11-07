@@ -7,3 +7,11 @@ def retrieve_object(id,db_model,fail_function,fail_message=None):
     return obj
 
 
+
+def retrieve_query_parameter(request,parameter,fail_function,fail_message=None):
+    parameter = request.query_params.get(parameter)
+    if not parameter:
+        if not fail_message:
+            fail_message = "A query parameter is required for this request"
+        fail_function(fail_message)
+    return parameter

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 from django.contrib.auth import get_user_model
+from django.db.models.fields import related
+from django.core.exceptions import ValidationError
 
 #UserModel = get_user_model()
 
@@ -102,6 +104,17 @@ class LinkedAccounts(models.Model):
     child = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="child_account")
 
 
+class OrganizationMembers(models.Model):
+    organization = models.ForeignKey("users.Users",on_delete=models.CASCADE,related_name="member")
+    member = models.ForeignKey("users.Users",on_delete=models.CASCADE,related_name="organization_member")
+
+    def clean(self):
+        if self.organization.user_type != "employer":
+            raise ValidationError("Only Corprate accounts can have organization members.")
+
+    def save(self,*args,**kwargs):
+        self.full_clean()
+        super().save(*args,**kwargs)
 
 
 

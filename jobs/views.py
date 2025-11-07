@@ -1,7 +1,9 @@
 #from django.shortcuts import render
-from django.core import paginator
+from functools import partial
+
 from django.db.models.query import InstanceCheckMeta
-from django.http import Http404
+from django.http import Http404,HttpResponseBadRequest
+from django.core.exceptions import BadRequest
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -14,7 +16,8 @@ from notifications.utils import jobnotify
 from . import serializers
 from . import models
 from .permissions import IsEmployer
-from utilities.helpers import retrieve_object
+from utilities.helpers import retrieve_object,retrieve_query_parameter
+
 
 import uuid
 
@@ -22,6 +25,10 @@ import uuid
 
 def no_object_fails(message):
     raise Http404(message)
+
+def no_parameter_fails(message):
+    raise Http404(message)
+
 
 
 
@@ -87,6 +94,21 @@ class JobsView(APIView):
         serialized_data = serializers.RetrieveJobSerializer(paginated_items,context={"user":user},many=True).data
         response = paginator.get_paginated_response(serialized_data).data
         return Response(response,status=status.HTTP_200_OK)
+
+    def put(self,request):
+        user = request.user
+        job_id = retrieve_query_parameter(request,"job_id",no_parameter_fails,"A job_id query parameter is required.")
+        job = retrieve_object(job_id,models.Jobs,no_object_fails,"Invalid job id")
+
+        if job.status != "draft":
+            return Response({"error":"Only Draft jobs can be edited"},status=status.HTTP_403_FORBIDDEN)
+
+        serializer = serializers.JobsSerializer(data=request.data,instance=job,context={"user":user},partial=True)
+        if serializer.is_valid(raise_exception=True):
+            job_instance = serializer.save()
+            output = serializers.RetrieveJobSerializer(job_instance,many=False,context={"user":user}).data
+            return Response(output,status=status.HTTP_206_PARTIAL_CONTENT)
+
 
 
 

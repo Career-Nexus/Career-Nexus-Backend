@@ -5413,3 +5413,120 @@ This API retrieves the 5 most recent job applications.
 ```
 
 [["/job/application/recent/","GET"]][Table of contents](#toc)
+
+
+# Edit Job
+
+This API allows a user to edit their draft jobs.
+
+**Endpoint:**`/job/?job_id=11`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+"title":"*****"
+
+"organization":"*****"
+
+"employment_type":"*****"
+
+"work_type":"*****"
+
+"country":"*****"
+
+"salary":"*****"
+
+"overview":"*****"
+
+"description":"*****"
+
+"experience_level":"*****"
+
+"status (**optional)":"*****"
+
+}
+
+```
+## Response body
+
+**status code:206**
+
+``` json
+{
+  "id": 11,
+  "title": "Backend Developer",
+  "organization": "Sterling Technologies",
+  "employment_type": "full_time",
+  "work_type": "remote",
+  "country": "Nigeria",
+  "salary": "350,000NGN",
+  "overview": "A skilled backend developer aith at least \n5 years of experience",
+  "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+  "experience_level": "senior",
+  "time_stamp": "2025-10-30",
+  "is_saved": false
+}
+```
+
+[["/job/?job_id=11","PUT"]][Table of contents](#toc)
+
+
+# Add Organization Members
+
+This API adds other users as members of a corporate account (Organization). N.B:other corporate accounts cannot be added as members of an organization.
+
+**Endpoint:**`/user/organization-members/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"member":"*****"
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "member": {
+    "id": 1,
+    "name": "Opeyemi Abdul-Azeez Saliu",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+    "extras": "Bachelor of Engineering (Civil Engineering)"
+  }
+}
+```
+
+[["/user/organization-members/","POST"]][Table of contents](#toc)
+
+
+# Remove Organization Member
+
+This API removes a member from a corporate account (organization). N.B:The member should have been previously enrolled. Also, a member_id is required for this request.
+
+**Endpoint:**`/user/organization-members/?member_id=1`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[["/user/organization-members/?member_id=1","DELETE"]][Table of contents](#toc)

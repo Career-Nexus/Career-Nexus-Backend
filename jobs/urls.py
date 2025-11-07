@@ -1,3 +1,4 @@
+from django.conf.urls import handler400
 from django.urls import path
 from . import views
 
@@ -12,3 +13,4 @@ urlpatterns = [
     path("application/",views.RetrieveJobApplicationView.as_view(),name="View-Job_applications"),
     path("application/recent/",views.RetrieveRecentJobApplicationsView.as_view(),name="Retrieve-Recent-Job-Applications"),
 ]
+

@@ -64,6 +64,33 @@ Users = get_user_model()
 
 
 
+class MiniUserSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    profile_photo = serializers.SerializerMethodField()
+    extras = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.Users
+        fields = ["id","name","profile_photo","extras"]
+
+    def get_name(self,obj):
+        if obj.user_type == "employer":
+            return obj.profile.company_name
+        return f"{obj.profile.first_name} {obj.profile.middle_name} {obj.profile.last_name}"
+
+    def get_profile_photo(self,obj):
+        if obj.user_type == "employer":
+            return obj.profile.logo
+        return obj.profile.profile_photo
+
+    def get_extras(self,obj):
+        if obj.user_type == "employer":
+            return obj.profile.tagline
+        return obj.profile.qualification
+
+
+
+
 #REGISTRATION AND AUTHENTICATION SERIALIZERS --------------------------
 class WaitListSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=200)
@@ -373,6 +400,33 @@ class SwitchAccountSerializer(serializers.Serializer):
         ).exists():
             raise serializers.ValidationError("This account is not linked to your profile.")
         return value
+
+
+class OrganizationMembersSerializer(serializers.Serializer):
+    member = serializers.PrimaryKeyRelatedField(queryset=models.Users.objects.all())
+
+    def validate_member(self,value):
+        user = self.context["user"]
+
+        if value.user_type == "employer":
+            raise serializers.ValidationError("Another employer cannot be a member of an organization.")
+        if models.OrganizationMembers.objects.filter(organization=user,member=value).exists():
+            raise serializers.ValidationError("This user is already a member.")
+        return value
+
+    def create(self,validated_data):
+        validated_data["organization"] = self.context["user"]
+        member_instance = models.OrganizationMembers.objects.create(**validated_data)
+        return member_instance
+
+
+class RetrieveOrganizationMemberSerializer(serializers.ModelSerializer):
+    member = MiniUserSerializer()
+
+    class Meta:
+        model = models.OrganizationMembers
+        fields = ["member"]
+
 
 
 
@@ -858,35 +912,17 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
 
 
 class RetrieveCorporateUserSerializer(serializers.ModelSerializer):
+    members = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["id","company_name","company_type","company_size","country_code","phone_number","location","website","tagline","logo","cover_photo"]
+        fields = ["id","company_name","company_type","company_size","country_code","phone_number","location","website","tagline","logo","cover_photo","members"]
 
-
-class MiniUserSerializer(serializers.ModelSerializer):
-    name = serializers.SerializerMethodField()
-    profile_photo = serializers.SerializerMethodField()
-    extras = serializers.SerializerMethodField()
-
-    class Meta:
-        model = models.Users
-        fields = ["id","name","profile_photo","extras"]
-
-    def get_name(self,obj):
-        if obj.user_type == "employer":
-            return obj.profile.company_name
-        return f"{obj.profile.first_name} {obj.profile.middle_name} {obj.profile.last_name}"
-
-    def get_profile_photo(self,obj):
-        if obj.user_type == "employer":
-            return obj.profile.logo
-        return obj.profile.profile_photo
-
-    def get_extras(self,obj):
-        if obj.user_type == "employer":
-            return obj.profile.tagline
-        return obj.profile.qualification
+    def get_members(self,obj):
+        all_members = obj.user.member.all()
+        print(all_members)
+        output = RetrieveOrganizationMemberSerializer(all_members,many=True).data
+        return output
 
 
 class LinkedAccountsSerializer(serializers.Serializer):

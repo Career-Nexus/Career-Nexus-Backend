@@ -72,6 +72,15 @@ class JobsSerializer(serializers.ModelSerializer):
         }
         return output
 
+    def update(self,instance,validated_data):
+        all_attr = validated_data.keys()
+        for attr in all_attr:
+            value = validated_data.get(attr)
+            setattr(instance,attr,value)
+        return instance
+
+
+
 
 class RetrieveJobSerializer(serializers.ModelSerializer):
     is_saved = serializers.SerializerMethodField()

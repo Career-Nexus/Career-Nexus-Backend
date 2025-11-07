@@ -102,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#add_certification">add certification</a></li>
 <li><a href="#add_education_api">add education api</a></li>
 <li><a href="#add_experience">add experience</a></li>
+<li><a href="#add_organization_members">add organization members</a></li>
 <li><a href="#admin_retrieve_dispute_tickets">admin retrieve dispute tickets</a></li>
 <li><a href="#alter_country_permissions">alter country permissions</a></li>
 <li><a href="#apply_for_job">apply for job</a></li>
@@ -134,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#dispute_creation">dispute creation</a></li>
 <li><a href="#dispute_summary">dispute summary</a></li>
 <li><a href="#dispute_ticket_resolution">dispute ticket resolution</a></li>
+<li><a href="#edit_job">edit job</a></li>
 <li><a href="#follow_user">follow user</a></li>
 <li><a href="#followers_count">followers count</a></li>
 <li><a href="#following_recommendation">following recommendation</a></li>
@@ -174,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#profile_retrieve">profile retrieve</a></li>
 <li><a href="#profile_update">profile update</a></li>
 <li><a href="#recommended_job_posts.">recommended job posts.</a></li>
+<li><a href="#remove_organization_member">remove organization member</a></li>
 <li><a href="#reply_comment">reply comment</a></li>
 <li><a href="#reposting">reposting</a></li>
 <li><a href="#retrieve_applied_jobs">retrieve applied jobs</a></li>
@@ -4216,6 +4219,89 @@ job:*****
 ]
 </code></pre>
 <p><button onclick="openApiTester('/job/application/recent/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Edit Job<a name='edit_job'></a></h1>
+<p>This API allows a user to edit their draft jobs.</p>
+<p><strong>Endpoint:</strong><code>/job/?job_id=11</code></p>
+<p><strong>Method:</strong> <code>PUT</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+&quot;title&quot;:&quot;*****&quot;
+
+&quot;organization&quot;:&quot;*****&quot;
+
+&quot;employment_type&quot;:&quot;*****&quot;
+
+&quot;work_type&quot;:&quot;*****&quot;
+
+&quot;country&quot;:&quot;*****&quot;
+
+&quot;salary&quot;:&quot;*****&quot;
+
+&quot;overview&quot;:&quot;*****&quot;
+
+&quot;description&quot;:&quot;*****&quot;
+
+&quot;experience_level&quot;:&quot;*****&quot;
+
+&quot;status (**optional)&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:206</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: 11,
+  &quot;title&quot;: &quot;Backend Developer&quot;,
+  &quot;organization&quot;: &quot;Sterling Technologies&quot;,
+  &quot;employment_type&quot;: &quot;full_time&quot;,
+  &quot;work_type&quot;: &quot;remote&quot;,
+  &quot;country&quot;: &quot;Nigeria&quot;,
+  &quot;salary&quot;: &quot;350,000NGN&quot;,
+  &quot;overview&quot;: &quot;A skilled backend developer aith at least \n5 years of experience&quot;,
+  &quot;description&quot;: &quot;As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.&quot;,
+  &quot;experience_level&quot;: &quot;senior&quot;,
+  &quot;time_stamp&quot;: &quot;2025-10-30&quot;,
+  &quot;is_saved&quot;: false
+}
+</code></pre>
+<p><button onclick="openApiTester('/job/?job_id=11','PUT')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Add Organization Members<a name='add_organization_members'></a></h1>
+<p>This API adds other users as members of a corporate account (Organization). N.B:other corporate accounts cannot be added as members of an organization.</p>
+<p><strong>Endpoint:</strong><code>/user/organization-members/</code></p>
+<p><strong>Method:</strong> <code>POST</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">{
+
+&quot;member&quot;:&quot;*****&quot;
+
+}
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:201</strong></p>
+<pre><code class="language-json">{
+  &quot;member&quot;: {
+    &quot;id&quot;: 1,
+    &quot;name&quot;: &quot;Opeyemi Abdul-Azeez Saliu&quot;,
+    &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+    &quot;extras&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+  }
+}
+</code></pre>
+<p><button onclick="openApiTester('/user/organization-members/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Remove Organization Member<a name='remove_organization_member'></a></h1>
+<p>This API removes a member from a corporate account (organization). N.B:The member should have been previously enrolled. Also, a member_id is required for this request.</p>
+<p><strong>Endpoint:</strong><code>/user/organization-members/?member_id=1</code></p>
+<p><strong>Method:</strong> <code>DELETE</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
+
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:204</strong></p>
+<p><button onclick="openApiTester('/user/organization-members/?member_id=1','DELETE')">Run Test</button><a href="#toc">Table of contents</a></p>
 
 
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 

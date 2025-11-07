@@ -36,6 +36,8 @@ from . import models
 from .mmail import Agent
 from notifications.utils import notify
 from .tasks import send_email
+from jobs.permissions import IsEmployer
+from utilities.helpers import retrieve_object,retrieve_query_parameter
 
 from django.contrib.auth import get_user_model
 
@@ -46,6 +48,15 @@ agent = Agent()
 default_profile_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
 default_cover_photo = "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png"
 default_intro_video = ''
+
+
+
+
+def no_object_fails(message):
+    raise Http404(message)
+
+def no_parameter_fails(message):
+    raise Http404(message)
 
 
 def check_connection_status(user,other_id):
@@ -361,6 +372,35 @@ class SwitchAccountView(APIView):
             )
 
 
+class OrganizationMembersView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+        IsEmployer,
+    ]
+
+    def post(self,request):
+        user = request.user
+        serializer = serializers.OrganizationMembersSerializer(data=request.data,context={"user":user})
+        if serializer.is_valid(raise_exception=True):
+            member_instance = serializer.save()
+            output = serializers.RetrieveOrganizationMemberSerializer(member_instance,many=False).data
+            cache_key = f"{request.user.id}_profile"
+            delete_cache(cache_key)
+            return Response(output,status=status.HTTP_201_CREATED)
+
+    def delete(self,request):
+        user = request.user
+        member_id = retrieve_query_parameter(request,"member_id",no_parameter_fails,"A member_id is required for this request")
+        member = retrieve_object(member_id,models.Users,no_object_fails,"Invalid member_id")
+        membership_instance = models.OrganizationMembers.objects.filter(organization=user,member=member).first()
+        if not membership_instance:
+            return Response({"error":"This user is not a member."},status=status.HTTP_400_BAD_REQUEST)
+        membership_instance.delete()
+
+        cache_key = f"{request.user.id}_profile"
+        delete_cache(cache_key)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
@@ -953,9 +993,6 @@ class SettingsView(APIView):
                 send_email.delay(template=settings_change_template,subject="Account Settings",container=container,recipient=user.email)
 
             return Response(output,status=status.HTTP_200_OK)
-
-
-
 
 
 

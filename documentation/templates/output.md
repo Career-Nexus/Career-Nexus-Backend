@@ -10,123 +10,126 @@
 3. [add certification](#add_certification)  
 4. [add education api](#add_education_api)  
 5. [add experience](#add_experience)  
-6. [admin retrieve dispute tickets](#admin_retrieve_dispute_tickets)  
-7. [alter country permissions](#alter_country_permissions)  
-8. [apply for job](#apply_for_job)  
-9. [book mentorship session](#book_mentorship_session)  
-10. [cancel mentorship session](#cancel_mentorship_session)  
-11. [career nexus backend documentation](#career_nexus_backend_documentation)  
-12. [chat history](#chat_history)  
-13. [chat websockets](#chat_websockets)  
-14. [clear notifications](#clear_notifications)  
-15. [connection accept/reject](#connection_accept/reject)  
-16. [connection create](#connection_create)  
-17. [connection pending retrieve](#connection_pending_retrieve)  
-18. [connection recommendation](#connection_recommendation)  
-19. [connection requests sent](#connection_requests_sent)  
-20. [connection retrieve](#connection_retrieve)  
-21. [connections count](#connections_count)  
-22. [content management](#content_management)  
-23. [create a newsletter](#create_a_newsletter)  
-24. [create comment](#create_comment)  
-25. [create corporate account](#create_corporate_account)  
-26. [create project catalogue](#create_project_catalogue)  
-27. [creating library content](#creating_library_content)  
-28. [delete certification](#delete_certification)  
-29. [delete education](#delete_education)  
-30. [delete experience](#delete_experience)  
-31. [delete library content](#delete_library_content)  
-32. [delete post](#delete_post)  
-33. [delete project catalogue](#delete_project_catalogue)  
-34. [delete user](#delete_user)  
-35. [dispute creation](#dispute_creation)  
-36. [dispute summary](#dispute_summary)  
-37. [dispute ticket resolution](#dispute_ticket_resolution)  
-38. [follow user](#follow_user)  
-39. [followers count](#followers_count)  
-40. [following recommendation](#following_recommendation)  
-41. [followings count](#followings_count)  
-42. [forget password](#forget_password)  
-43. [general notifications](#general_notifications)  
-44. [get all notifications](#get_all_notifications)  
-45. [get chat sessions](#get_chat_sessions)  
-46. [get comment](#get_comment)  
-47. [get country phone codes](#get_country_phone_codes)  
-48. [get followings](#get_followings)  
-49. [get followings post](#get_followings_post)  
-50. [get job preference](#get_job_preference)  
-51. [get newsletter](#get_newsletter)  
-52. [get other user post](#get_other_user_post)  
-53. [get own posts](#get_own_posts)  
-54. [get posts](#get_posts)  
-55. [get saved post](#get_saved_post)  
-56. [google signin](#google_signin)  
-57. [initiate chat session](#initiate_chat_session)  
-58. [job create](#job_create)  
-59. [job notifications](#job_notifications)  
-60. [job preference](#job_preference)  
-61. [join mentorship session](#join_mentorship_session)  
-62. [lead register](#lead_register)  
-63. [like comment/reply](#like_comment/reply)  
-64. [login api](#login_api)  
-65. [logout](#logout)  
-66. [mentor search/filter](#mentor_search/filter)  
-67. [mentors recommendation](#mentors_recommendation)  
-68. [mentorship session annotation.](#mentorship_session_annotation.)  
-69. [post create](#post_create)  
-70. [post like](#post_like)  
-71. [post retrieve](#post_retrieve)  
-72. [post save](#post_save)  
-73. [post share](#post_share)  
-74. [profile completion](#profile_completion)  
-75. [profile retrieve](#profile_retrieve)  
-76. [profile update](#profile_update)  
-77. [recommended job posts.](#recommended_job_posts.)  
-78. [reply comment](#reply_comment)  
-79. [reposting](#reposting)  
-80. [retrieve applied jobs](#retrieve_applied_jobs)  
-81. [retrieve corporate leads](#retrieve_corporate_leads)  
-82. [retrieve education api](#retrieve_education_api)  
-83. [retrieve job applications](#retrieve_job_applications)  
-84. [retrieve job posts](#retrieve_job_posts)  
-85. [retrieve library contents](#retrieve_library_contents)  
-86. [retrieve linked accounts](#retrieve_linked_accounts)  
-87. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
-88. [retrieve mentors posts](#retrieve_mentors_posts)  
-89. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-90. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-91. [retrieve recent applicants](#retrieve_recent_applicants)  
-92. [retrieve saved jobs](#retrieve_saved_jobs)  
-93. [retrieve saved mentors](#retrieve_saved_mentors)  
-94. [retrieve shared post](#retrieve_shared_post)  
-95. [retrieve user settings](#retrieve_user_settings)  
-96. [retrieve vault transactions](#retrieve_vault_transactions)  
-97. [save a job](#save_a_job)  
-98. [save a mentor](#save_a_mentor)  
-99. [session payment with flutterwave](#session_payment_with_flutterwave)  
-100. [session payment with stripe](#session_payment_with_stripe)  
-101. [signup with google](#signup_with_google)  
-102. [subscribe to newsletter](#subscribe_to_newsletter)  
-103. [switch account](#switch_account)  
-104. [unfollow user](#unfollow_user)  
-105. [unlike comment/reply](#unlike_comment/reply)  
-106. [unlike post](#unlike_post)  
-107. [unsave job](#unsave_job)  
-108. [unsave mentor](#unsave_mentor)  
-109. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-110. [update job status](#update_job_status)  
-111. [update user account settings](#update_user_account_settings)  
-112. [updating user eperience](#updating_user_eperience)  
-113. [user analytics](#user_analytics)  
-114. [user followers](#user_followers)  
-115. [user registeration](#user_registeration)  
-116. [user retrieve dispute](#user_retrieve_dispute)  
-117. [user search](#user_search)  
-118. [user-industry update](#user-industry_update)  
-119. [valid choice](#valid_choice)  
-120. [verify otp hash](#verify_otp_hash)  
-121. [view certification](#view_certification)  
-122. [view experience](#view_experience)  
+6. [add organization members](#add_organization_members)  
+7. [admin retrieve dispute tickets](#admin_retrieve_dispute_tickets)  
+8. [alter country permissions](#alter_country_permissions)  
+9. [apply for job](#apply_for_job)  
+10. [book mentorship session](#book_mentorship_session)  
+11. [cancel mentorship session](#cancel_mentorship_session)  
+12. [career nexus backend documentation](#career_nexus_backend_documentation)  
+13. [chat history](#chat_history)  
+14. [chat websockets](#chat_websockets)  
+15. [clear notifications](#clear_notifications)  
+16. [connection accept/reject](#connection_accept/reject)  
+17. [connection create](#connection_create)  
+18. [connection pending retrieve](#connection_pending_retrieve)  
+19. [connection recommendation](#connection_recommendation)  
+20. [connection requests sent](#connection_requests_sent)  
+21. [connection retrieve](#connection_retrieve)  
+22. [connections count](#connections_count)  
+23. [content management](#content_management)  
+24. [create a newsletter](#create_a_newsletter)  
+25. [create comment](#create_comment)  
+26. [create corporate account](#create_corporate_account)  
+27. [create project catalogue](#create_project_catalogue)  
+28. [creating library content](#creating_library_content)  
+29. [delete certification](#delete_certification)  
+30. [delete education](#delete_education)  
+31. [delete experience](#delete_experience)  
+32. [delete library content](#delete_library_content)  
+33. [delete post](#delete_post)  
+34. [delete project catalogue](#delete_project_catalogue)  
+35. [delete user](#delete_user)  
+36. [dispute creation](#dispute_creation)  
+37. [dispute summary](#dispute_summary)  
+38. [dispute ticket resolution](#dispute_ticket_resolution)  
+39. [edit job](#edit_job)  
+40. [follow user](#follow_user)  
+41. [followers count](#followers_count)  
+42. [following recommendation](#following_recommendation)  
+43. [followings count](#followings_count)  
+44. [forget password](#forget_password)  
+45. [general notifications](#general_notifications)  
+46. [get all notifications](#get_all_notifications)  
+47. [get chat sessions](#get_chat_sessions)  
+48. [get comment](#get_comment)  
+49. [get country phone codes](#get_country_phone_codes)  
+50. [get followings](#get_followings)  
+51. [get followings post](#get_followings_post)  
+52. [get job preference](#get_job_preference)  
+53. [get newsletter](#get_newsletter)  
+54. [get other user post](#get_other_user_post)  
+55. [get own posts](#get_own_posts)  
+56. [get posts](#get_posts)  
+57. [get saved post](#get_saved_post)  
+58. [google signin](#google_signin)  
+59. [initiate chat session](#initiate_chat_session)  
+60. [job create](#job_create)  
+61. [job notifications](#job_notifications)  
+62. [job preference](#job_preference)  
+63. [join mentorship session](#join_mentorship_session)  
+64. [lead register](#lead_register)  
+65. [like comment/reply](#like_comment/reply)  
+66. [login api](#login_api)  
+67. [logout](#logout)  
+68. [mentor search/filter](#mentor_search/filter)  
+69. [mentors recommendation](#mentors_recommendation)  
+70. [mentorship session annotation.](#mentorship_session_annotation.)  
+71. [post create](#post_create)  
+72. [post like](#post_like)  
+73. [post retrieve](#post_retrieve)  
+74. [post save](#post_save)  
+75. [post share](#post_share)  
+76. [profile completion](#profile_completion)  
+77. [profile retrieve](#profile_retrieve)  
+78. [profile update](#profile_update)  
+79. [recommended job posts.](#recommended_job_posts.)  
+80. [remove organization member](#remove_organization_member)  
+81. [reply comment](#reply_comment)  
+82. [reposting](#reposting)  
+83. [retrieve applied jobs](#retrieve_applied_jobs)  
+84. [retrieve corporate leads](#retrieve_corporate_leads)  
+85. [retrieve education api](#retrieve_education_api)  
+86. [retrieve job applications](#retrieve_job_applications)  
+87. [retrieve job posts](#retrieve_job_posts)  
+88. [retrieve library contents](#retrieve_library_contents)  
+89. [retrieve linked accounts](#retrieve_linked_accounts)  
+90. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+91. [retrieve mentors posts](#retrieve_mentors_posts)  
+92. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+93. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+94. [retrieve recent applicants](#retrieve_recent_applicants)  
+95. [retrieve saved jobs](#retrieve_saved_jobs)  
+96. [retrieve saved mentors](#retrieve_saved_mentors)  
+97. [retrieve shared post](#retrieve_shared_post)  
+98. [retrieve user settings](#retrieve_user_settings)  
+99. [retrieve vault transactions](#retrieve_vault_transactions)  
+100. [save a job](#save_a_job)  
+101. [save a mentor](#save_a_mentor)  
+102. [session payment with flutterwave](#session_payment_with_flutterwave)  
+103. [session payment with stripe](#session_payment_with_stripe)  
+104. [signup with google](#signup_with_google)  
+105. [subscribe to newsletter](#subscribe_to_newsletter)  
+106. [switch account](#switch_account)  
+107. [unfollow user](#unfollow_user)  
+108. [unlike comment/reply](#unlike_comment/reply)  
+109. [unlike post](#unlike_post)  
+110. [unsave job](#unsave_job)  
+111. [unsave mentor](#unsave_mentor)  
+112. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+113. [update job status](#update_job_status)  
+114. [update user account settings](#update_user_account_settings)  
+115. [updating user eperience](#updating_user_eperience)  
+116. [user analytics](#user_analytics)  
+117. [user followers](#user_followers)  
+118. [user registeration](#user_registeration)  
+119. [user retrieve dispute](#user_retrieve_dispute)  
+120. [user search](#user_search)  
+121. [user-industry update](#user-industry_update)  
+122. [valid choice](#valid_choice)  
+123. [verify otp hash](#verify_otp_hash)  
+124. [view certification](#view_certification)  
+125. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -5535,3 +5538,120 @@ This API retrieves the 5 most recent job applications.
 ```
 
 [["/job/application/recent/","GET"]][Table of contents](#toc)
+
+
+# Edit Job<a name='edit_job'></a>
+
+This API allows a user to edit their draft jobs.
+
+**Endpoint:**`/job/?job_id=11`
+
+**Method:** `PUT`
+
+## Payload
+
+``` json
+{
+
+"title":"*****"
+
+"organization":"*****"
+
+"employment_type":"*****"
+
+"work_type":"*****"
+
+"country":"*****"
+
+"salary":"*****"
+
+"overview":"*****"
+
+"description":"*****"
+
+"experience_level":"*****"
+
+"status (**optional)":"*****"
+
+}
+
+```
+## Response body
+
+**status code:206**
+
+``` json
+{
+  "id": 11,
+  "title": "Backend Developer",
+  "organization": "Sterling Technologies",
+  "employment_type": "full_time",
+  "work_type": "remote",
+  "country": "Nigeria",
+  "salary": "350,000NGN",
+  "overview": "A skilled backend developer aith at least \n5 years of experience",
+  "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+  "experience_level": "senior",
+  "time_stamp": "2025-10-30",
+  "is_saved": false
+}
+```
+
+[["/job/?job_id=11","PUT"]][Table of contents](#toc)
+
+
+# Add Organization Members<a name='add_organization_members'></a>
+
+This API adds other users as members of a corporate account (Organization). N.B:other corporate accounts cannot be added as members of an organization.
+
+**Endpoint:**`/user/organization-members/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"member":"*****"
+
+}
+
+```
+## Response body
+
+**status code:201**
+
+``` json
+{
+  "member": {
+    "id": 1,
+    "name": "Opeyemi Abdul-Azeez Saliu",
+    "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+    "extras": "Bachelor of Engineering (Civil Engineering)"
+  }
+}
+```
+
+[["/user/organization-members/","POST"]][Table of contents](#toc)
+
+
+# Remove Organization Member<a name='remove_organization_member'></a>
+
+This API removes a member from a corporate account (organization). N.B:The member should have been previously enrolled. Also, a member_id is required for this request.
+
+**Endpoint:**`/user/organization-members/?member_id=1`
+
+**Method:** `DELETE`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:204**
+
+[["/user/organization-members/?member_id=1","DELETE"]][Table of contents](#toc)
