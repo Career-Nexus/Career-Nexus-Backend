@@ -163,7 +163,7 @@ class RetrieveJobApplicationView(APIView):
         job_instance = models.Jobs.objects.filter(id=job).first()
         if not job_instance:
             return Response({"error":"Invalid Job ID"},status=status.HTTP_400_BAD_REQUEST)
-        if job_instance.poster == user:
+        if job_instance.poster != user:
             return Response({"error":"This job was posted by another user."},status=status.HTTP_401_UNAUTHORIZED)
         all_applicants = job_instance.application.all().order_by("-applied_on")
         paginator = JobApplicationPagination()
