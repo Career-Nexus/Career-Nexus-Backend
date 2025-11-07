@@ -920,7 +920,6 @@ class RetrieveCorporateUserSerializer(serializers.ModelSerializer):
 
     def get_members(self,obj):
         all_members = obj.user.member.all()
-        print(all_members)
         output = RetrieveOrganizationMemberSerializer(all_members,many=True).data
         return output
 
