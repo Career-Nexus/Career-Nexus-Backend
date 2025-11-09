@@ -395,12 +395,13 @@ class AnnotateMentorshipSessionSerializer(serializers.Serializer):
             #Update the amount earned by mentor
             transaction_instance = session.sessiontransactions_set.filter(status="successful").first()
             #The platform keeps 20% of mentor earnings && Decimal converts from float
-            paid_amount = Decimal((transaction_instance.central_amount * 0.8))
-            mentor.vault.amount += paid_amount
-            mentor.vault.save()
+            if transaction_instance:
+                paid_amount = Decimal((transaction_instance.central_amount * 0.8))
+                mentor.vault.amount += paid_amount
+                mentor.vault.save()
 
-            #Update vault transaction 
-            models.VaultTransactions.objects.create(mentor=mentor,action="EARN",amount=paid_amount,extra_data={"session_id":session.id,"session_type":session.session_type})
+                #Update vault transaction 
+                models.VaultTransactions.objects.create(mentor=mentor,action="EARN",amount=paid_amount,extra_data={"session_id":session.id,"session_type":session.session_type})
 
 
         rating = validated_data.get("rating")
