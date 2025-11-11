@@ -90,46 +90,47 @@
 83. [retrieve applied jobs](#retrieve_applied_jobs)  
 84. [retrieve corporate leads](#retrieve_corporate_leads)  
 85. [retrieve education api](#retrieve_education_api)  
-86. [retrieve job applications](#retrieve_job_applications)  
-87. [retrieve job posts](#retrieve_job_posts)  
-88. [retrieve library contents](#retrieve_library_contents)  
-89. [retrieve linked accounts](#retrieve_linked_accounts)  
-90. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
-91. [retrieve mentors posts](#retrieve_mentors_posts)  
-92. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-93. [retrieve portfolio projects](#retrieve_portfolio_projects)  
-94. [retrieve recent applicants](#retrieve_recent_applicants)  
-95. [retrieve saved jobs](#retrieve_saved_jobs)  
-96. [retrieve saved mentors](#retrieve_saved_mentors)  
-97. [retrieve shared post](#retrieve_shared_post)  
-98. [retrieve user settings](#retrieve_user_settings)  
-99. [retrieve vault transactions](#retrieve_vault_transactions)  
-100. [save a job](#save_a_job)  
-101. [save a mentor](#save_a_mentor)  
-102. [session payment with flutterwave](#session_payment_with_flutterwave)  
-103. [session payment with stripe](#session_payment_with_stripe)  
-104. [signup with google](#signup_with_google)  
-105. [subscribe to newsletter](#subscribe_to_newsletter)  
-106. [switch account](#switch_account)  
-107. [unfollow user](#unfollow_user)  
-108. [unlike comment/reply](#unlike_comment/reply)  
-109. [unlike post](#unlike_post)  
-110. [unsave job](#unsave_job)  
-111. [unsave mentor](#unsave_mentor)  
-112. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-113. [update job status](#update_job_status)  
-114. [update user account settings](#update_user_account_settings)  
-115. [updating user eperience](#updating_user_eperience)  
-116. [user analytics](#user_analytics)  
-117. [user followers](#user_followers)  
-118. [user registeration](#user_registeration)  
-119. [user retrieve dispute](#user_retrieve_dispute)  
-120. [user search](#user_search)  
-121. [user-industry update](#user-industry_update)  
-122. [valid choice](#valid_choice)  
-123. [verify otp hash](#verify_otp_hash)  
-124. [view certification](#view_certification)  
-125. [view experience](#view_experience)  
+86. [retrieve invited sessions](#retrieve_invited_sessions)  
+87. [retrieve job applications](#retrieve_job_applications)  
+88. [retrieve job posts](#retrieve_job_posts)  
+89. [retrieve library contents](#retrieve_library_contents)  
+90. [retrieve linked accounts](#retrieve_linked_accounts)  
+91. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+92. [retrieve mentors posts](#retrieve_mentors_posts)  
+93. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+94. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+95. [retrieve recent applicants](#retrieve_recent_applicants)  
+96. [retrieve saved jobs](#retrieve_saved_jobs)  
+97. [retrieve saved mentors](#retrieve_saved_mentors)  
+98. [retrieve shared post](#retrieve_shared_post)  
+99. [retrieve user settings](#retrieve_user_settings)  
+100. [retrieve vault transactions](#retrieve_vault_transactions)  
+101. [save a job](#save_a_job)  
+102. [save a mentor](#save_a_mentor)  
+103. [session payment with flutterwave](#session_payment_with_flutterwave)  
+104. [session payment with stripe](#session_payment_with_stripe)  
+105. [signup with google](#signup_with_google)  
+106. [subscribe to newsletter](#subscribe_to_newsletter)  
+107. [switch account](#switch_account)  
+108. [unfollow user](#unfollow_user)  
+109. [unlike comment/reply](#unlike_comment/reply)  
+110. [unlike post](#unlike_post)  
+111. [unsave job](#unsave_job)  
+112. [unsave mentor](#unsave_mentor)  
+113. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+114. [update job status](#update_job_status)  
+115. [update user account settings](#update_user_account_settings)  
+116. [updating user eperience](#updating_user_eperience)  
+117. [user analytics](#user_analytics)  
+118. [user followers](#user_followers)  
+119. [user registeration](#user_registeration)  
+120. [user retrieve dispute](#user_retrieve_dispute)  
+121. [user search](#user_search)  
+122. [user-industry update](#user-industry_update)  
+123. [valid choice](#valid_choice)  
+124. [verify otp hash](#verify_otp_hash)  
+125. [view certification](#view_certification)  
+126. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -2992,7 +2993,7 @@ This API searches for mentors based on query parameters. The query parameters al
 
 # Book Mentorship Session<a name='book_mentorship_session'></a>
 
-This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual.
+This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual. If the sesion_type selected is group, an invitees payload containing a list of all user invitees ids. Also, Invitees cannot be more than 10. Any extras would not be invited.
 
 **Endpoint:**`/mentor/sessions/book/`
 
@@ -3003,15 +3004,17 @@ This API enables mentees to book a mentorship session with a mentor. N.B: sessio
 ``` json
 {
 
-mentor:*****
+"mentor":"*****"
 
-session_type:*****
+"session_type":"*****"
 
-date:*****
+"invitees (**optional)":"*****"
 
-time:*****
+"date":"*****"
 
-discourse:*****
+"time":"*****"
+
+"discourse":"*****"
 
 }
 
@@ -3022,11 +3025,12 @@ discourse:*****
 
 ``` json
 {
+  "id": 26,
   "mentor": {
     "id": 11,
-    "first_name": "Opeyemi",
-    "last_name": "Saliu",
-    "middle_name": "Abdul-Azeez",
+    "first_name": "Abdul Azeez",
+    "last_name": "Balogun",
+    "middle_name": "Abiola",
     "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
     "qualification": "Bachelor of Engineering"
   },
@@ -3038,17 +3042,21 @@ discourse:*****
     "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
     "qualification": "Bachelor of Engineering (Civil Engineering)"
   },
-  "session_type": "individual",
+  "join": false,
+  "session_type": "group",
   "session_at": {
-    "date": "2025-07-21",
-    "time": "00:00:00"
+    "date": "2025-11-11",
+    "time": "16:35:00"
   },
-  "discourse": "Career Building",
-  "status": "PENDING"
+  "discourse": "Career Coaching",
+  "amount": "1500NGN",
+  "rating": 0,
+  "status": "PENDING",
+  "is_paid": false
 }
 ```
 
-[Table of contents](#toc)
+[["/mentor/sessions/book/","POST"]][Table of contents](#toc)
 
 
 # Retrieve Mentorship Sessions<a name='retrieve_mentorship_sessions'></a>
@@ -5655,3 +5663,62 @@ This API removes a member from a corporate account (organization). N.B:The membe
 **status code:204**
 
 [["/user/organization-members/?member_id=1","DELETE"]][Table of contents](#toc)
+
+
+# Retrieve Invited Sessions<a name='retrieve_invited_sessions'></a>
+
+This API retrieves all sessions a user has been invited to.
+
+**Endpoint:**`/mentor/sessions/invited/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "session": {
+      "id": 26,
+      "mentor": {
+        "id": 11,
+        "first_name": "Abdul Azeez",
+        "last_name": "Balogun",
+        "middle_name": "Abiola",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering"
+      },
+      "mentee": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "join": false,
+      "session_type": "group",
+      "session_at": {
+        "date": "2025-11-11",
+        "time": "16:35:00"
+      },
+      "discourse": "Career Coaching",
+      "amount": "1USD",
+      "rating": 0,
+      "status": "PENDING",
+      "is_paid": false
+    }
+  }
+]
+```
+
+[["/mentor/sessions/invited/","GET"]][Table of contents](#toc)

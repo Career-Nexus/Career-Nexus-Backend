@@ -175,6 +175,21 @@ class RetrieveMentorshipSessionsView(APIView):
                 
                 return Response(output,status=status.HTTP_200_OK)
 
+class RetrieveInvitedSessionsView(APIView):
+    permission_classes = [
+        IsAuthenticated,
+    ]
+
+    def get(self,request):
+        user = request.user
+        invited_sessions = user.invited_sessions.filter(
+            Q(session__status="ACCEPTED") |
+            Q(session__status="PENDING")
+        )
+        output = serializers.RetrieveInvitedSessionsSerializer(invited_sessions,many=True,context={"user":user}).data
+        return Response(output,status=status.HTTP_200_OK)
+
+
 
 class SaveMentorView(APIView):
     permission_classes=[

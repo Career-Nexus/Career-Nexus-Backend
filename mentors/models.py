@@ -20,6 +20,13 @@ class Sessions(models.Model):
     is_paid = models.BooleanField(default=False)
 
 
+class InvitedSessions(models.Model):
+    session = models.ForeignKey(Sessions,on_delete=models.CASCADE)
+    invitee = models.ForeignKey("users.Users",on_delete=models.CASCADE,related_name="invited_sessions")
+    timestamp = models.DateTimeField(auto_now=True)
+
+
+
 class SavedMentors(models.Model):
     saver = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor_saver")
     saved = models.ForeignKey(Users,on_delete=models.CASCADE,related_name="mentor_saved")

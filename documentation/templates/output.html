@@ -1,52 +1,52 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Documentation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
-    <style>
-        body {
-            box-sizing: border-box;
-            min-width: 200px;
-            max-width: 980px;
-            margin: 0 auto;
-            padding: 45px;
-        }
-    </style>
-</head>
-<body class="markdown-body">
-    <input type="text" id="searchBox" placeholder="Search index..." />
-    <ul id="searchResults"></ul>
-    
-    <script>
-document.addEventListener('DOMContentLoaded', function () {
-  const searchBox = document.getElementById('searchBox');
-  const indexLinks = document.querySelectorAll('#index li a');
-  const resultsList = document.getElementById('searchResults');
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Documentation</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pygments/2.16.1/styles/monokai.min.css">
+            <style>
+                body {
+                    box-sizing: border-box;
+                    min-width: 200px;
+                    max-width: 980px;
+                    margin: 0 auto;
+                    padding: 45px;
+                }
+            </style>
+        </head>
+        <body class="markdown-body">
+            <input type="text" id="searchBox" placeholder="Search index..." />
+                <ul id="searchResults"></ul>
+            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const searchBox = document.getElementById('searchBox');
+            const indexLinks = document.querySelectorAll('#index li a');
+            const resultsList = document.getElementById('searchResults');
 
-  searchBox.addEventListener('input', function () {
-    const query = searchBox.value.toLowerCase();
-    resultsList.innerHTML = ''; // Clear previous results
+            searchBox.addEventListener('input', function () {
+                const query = searchBox.value.toLowerCase();
+                resultsList.innerHTML = ''; // Clear previous results
 
-    if (!query) return;
+                if (!query) return;
 
-    indexLinks.forEach(link => {
-      const text = link.textContent.toLowerCase();
-      if (text.includes(query)) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = link.href;
-        a.textContent = link.textContent;
-        li.appendChild(a);
-        resultsList.appendChild(li);
-      }
-    });
-  });
-});
+                indexLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(query)) {
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = link.href;
+                    a.textContent = link.textContent;
+                    li.appendChild(a);
+                    resultsList.appendChild(li);
+                }
+                });
+            });
+            });
 
-        let currentEndpoint = '';
+            let currentEndpoint = '';
         let currentMethod = 'GET';
 
         function openApiTester(endpoint, method) {
@@ -87,12 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
         }
+        </script>
+                    
 
-</script>
 
-
-    
-<h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
+        <h1>Career Nexus Backend Documentation<a name='career_nexus_backend_documentation'></a></h1>
 <hr />
 <h2>Index<a name='toc'></a></h2>
 <h2></h2>
@@ -182,6 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="#retrieve_applied_jobs">retrieve applied jobs</a></li>
 <li><a href="#retrieve_corporate_leads">retrieve corporate leads</a></li>
 <li><a href="#retrieve_education_api">retrieve education api</a></li>
+<li><a href="#retrieve_invited_sessions">retrieve invited sessions</a></li>
 <li><a href="#retrieve_job_applications">retrieve job applications</a></li>
 <li><a href="#retrieve_job_posts">retrieve job posts</a></li>
 <li><a href="#retrieve_library_contents">retrieve library contents</a></li>
@@ -2372,21 +2372,23 @@ comment:*****
 </code></pre>
 <p><a href="#toc">Table of contents</a></p>
 <h1>Book Mentorship Session<a name='book_mentorship_session'></a></h1>
-<p>This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual.</p>
+<p>This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual. If the sesion_type selected is group, an invitees payload containing a list of all user invitees ids. Also, Invitees cannot be more than 10. Any extras would not be invited.</p>
 <p><strong>Endpoint:</strong><code>/mentor/sessions/book/</code></p>
 <p><strong>Method:</strong> <code>POST</code></p>
 <h2>Payload</h2>
 <pre><code class="language-json">{
 
-mentor:*****
+&quot;mentor&quot;:&quot;*****&quot;
 
-session_type:*****
+&quot;session_type&quot;:&quot;*****&quot;
 
-date:*****
+&quot;invitees (**optional)&quot;:&quot;*****&quot;
 
-time:*****
+&quot;date&quot;:&quot;*****&quot;
 
-discourse:*****
+&quot;time&quot;:&quot;*****&quot;
+
+&quot;discourse&quot;:&quot;*****&quot;
 
 }
 
@@ -2394,11 +2396,12 @@ discourse:*****
 <h2>Response body</h2>
 <p><strong>status code:201</strong></p>
 <pre><code class="language-json">{
+  &quot;id&quot;: 26,
   &quot;mentor&quot;: {
     &quot;id&quot;: 11,
-    &quot;first_name&quot;: &quot;Opeyemi&quot;,
-    &quot;last_name&quot;: &quot;Saliu&quot;,
-    &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+    &quot;first_name&quot;: &quot;Abdul Azeez&quot;,
+    &quot;last_name&quot;: &quot;Balogun&quot;,
+    &quot;middle_name&quot;: &quot;Abiola&quot;,
     &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
     &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;
   },
@@ -2410,16 +2413,20 @@ discourse:*****
     &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
     &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
   },
-  &quot;session_type&quot;: &quot;individual&quot;,
+  &quot;join&quot;: false,
+  &quot;session_type&quot;: &quot;group&quot;,
   &quot;session_at&quot;: {
-    &quot;date&quot;: &quot;2025-07-21&quot;,
-    &quot;time&quot;: &quot;00:00:00&quot;
+    &quot;date&quot;: &quot;2025-11-11&quot;,
+    &quot;time&quot;: &quot;16:35:00&quot;
   },
-  &quot;discourse&quot;: &quot;Career Building&quot;,
-  &quot;status&quot;: &quot;PENDING&quot;
+  &quot;discourse&quot;: &quot;Career Coaching&quot;,
+  &quot;amount&quot;: &quot;1500NGN&quot;,
+  &quot;rating&quot;: 0,
+  &quot;status&quot;: &quot;PENDING&quot;,
+  &quot;is_paid&quot;: false
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/mentor/sessions/book/','POST')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Retrieve Mentorship Sessions<a name='retrieve_mentorship_sessions'></a></h1>
 <p>This API retrieves mentorship session information. N.B:This API is strictly dependent on query parameter status. (?status=requested:If this API is called by a learner, it retrieves all the sessions that has been requested by the user which are yet to be accepted by the mentor. However, if this API is called by a mentor, it retrieves all the mentorship booking requests made by other users towards himself. ?status=accepted:This retrieves all the mentorship sessions that was requested by the user and has been accepted by the mentor. ?status=scheduled:This query parameter is only available if the user is a mentor. It retrieves all the mentorship sessions that are still pending and those that have been accepted by the user who must be a mentor. ?status=completed:This retrieves all the completed sessions that the user (mentor or learner) participated in.</p>
 <p><strong>Endpoint:</strong><code>/mentor/sessions/?status=completed</code></p>
@@ -4302,8 +4309,55 @@ job:*****
 <h2>Response body</h2>
 <p><strong>status code:204</strong></p>
 <p><button onclick="openApiTester('/user/organization-members/?member_id=1','DELETE')">Run Test</button><a href="#toc">Table of contents</a></p>
+<h1>Retrieve Invited Sessions<a name='retrieve_invited_sessions'></a></h1>
+<p>This API retrieves all sessions a user has been invited to.</p>
+<p><strong>Endpoint:</strong><code>/mentor/sessions/invited/</code></p>
+<p><strong>Method:</strong> <code>GET</code></p>
+<h2>Payload</h2>
+<pre><code class="language-json">
 
+</code></pre>
+<h2>Response body</h2>
+<p><strong>status code:200</strong></p>
+<pre><code class="language-json">[
+  {
+    &quot;id&quot;: 1,
+    &quot;session&quot;: {
+      &quot;id&quot;: 26,
+      &quot;mentor&quot;: {
+        &quot;id&quot;: 11,
+        &quot;first_name&quot;: &quot;Abdul Azeez&quot;,
+        &quot;last_name&quot;: &quot;Balogun&quot;,
+        &quot;middle_name&quot;: &quot;Abiola&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering&quot;
+      },
+      &quot;mentee&quot;: {
+        &quot;id&quot;: 1,
+        &quot;first_name&quot;: &quot;Opeyemi&quot;,
+        &quot;last_name&quot;: &quot;Saliu&quot;,
+        &quot;middle_name&quot;: &quot;Abdul-Azeez&quot;,
+        &quot;profile_photo&quot;: &quot;https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg&quot;,
+        &quot;qualification&quot;: &quot;Bachelor of Engineering (Civil Engineering)&quot;
+      },
+      &quot;join&quot;: false,
+      &quot;session_type&quot;: &quot;group&quot;,
+      &quot;session_at&quot;: {
+        &quot;date&quot;: &quot;2025-11-11&quot;,
+        &quot;time&quot;: &quot;16:35:00&quot;
+      },
+      &quot;discourse&quot;: &quot;Career Coaching&quot;,
+      &quot;amount&quot;: &quot;1USD&quot;,
+      &quot;rating&quot;: 0,
+      &quot;status&quot;: &quot;PENDING&quot;,
+      &quot;is_paid&quot;: false
+    }
+  }
+]
+</code></pre>
+<p><button onclick="openApiTester('/mentor/sessions/invited/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 
+        
 <div id="apiTester" style="position:fixed; bottom:20px; right:20px; width:300px; height:400px; 
             background:#fff; border:1px solid #ccc; border-radius:8px; 
             box-shadow:0px 4px 12px rgba(0,0,0,0.2); padding:10px; 
@@ -4337,5 +4391,6 @@ job:*****
     </div>
 
 
-</body>
-</html>
+        </body>
+        </html>
+        

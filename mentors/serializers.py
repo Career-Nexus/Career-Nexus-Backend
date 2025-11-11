@@ -1,3 +1,4 @@
+from django.forms import fields
 from rest_framework import serializers, status
 
 from django.db import transaction
@@ -116,9 +117,26 @@ class MentorSearchAndFilterSerializer(serializers.Serializer):
 class CreateMentorshipSessionSerializer(serializers.Serializer):
     mentor = serializers.PrimaryKeyRelatedField(queryset=Users.objects.all())
     session_type = serializers.ChoiceField(choices=session_categories)
+    invitees = serializers.JSONField(required=False)
     date = serializers.DateField()
     time = serializers.TimeField()
     discourse = serializers.CharField()
+
+    def validate_invitees(self,value):
+        user = self.context["user"]
+        if not isinstance(value,list):
+            raise serializers.ValidationError("invitees must be a list of valid user ids.")
+        #Exclude oneself from the list to avoid inviting self for a session
+        valid_users = Users.objects.filter(id__in=value).exclude(id=user.id)
+        valid_users_ids = valid_users.values_list("id",flat=True)
+
+        outliers = list(set(value) - set(valid_users_ids))
+
+        if len(outliers) != 0:
+            raise serializers.ValidationError(f"No user(s) with ids {outliers}")
+        #Ensuring not more than 10 users can be invited for a session
+        return valid_users[0:10]
+
 
     def validate_mentor(self,value):
         if Users.objects.filter(id=value.id).first().user_type != "mentor":
@@ -129,6 +147,15 @@ class CreateMentorshipSessionSerializer(serializers.Serializer):
         user = self.context["user"]
         if user == data["mentor"]:
             raise serializers.ValidationError("Cannot schedule a mentorship session with yourself.")
+        session_type = data.get("session_type")
+
+        #Ensuring invitees are provided are provided in group sessions.
+        if (session_type == "group") and not (data.get("invitees")):
+            raise serializers.ValidationError("Invitees must be provided in group sessions.")
+
+        #Remove all invitees if session_type == "Individual"
+        if (session_type == "individual"):
+            data["invitees"] = []
 
         user_timezone = user.profile.timezone
         date = data.get("date")
@@ -160,12 +187,19 @@ class CreateMentorshipSessionSerializer(serializers.Serializer):
     def create(self,validated_data):
         mentee = validated_data.get("mentee")
         mentor = validated_data.get("mentor")
+        invitees = validated_data.pop("invitees")
         validated_data["room_name"] = f"Room_{mentee.id}_{mentor.id}_{uuid.uuid4()}"
 
         if mentor.profile.session_rate == 0:
             validated_data["is_paid"] = True
 
         session_instance = models.Sessions.objects.create(**validated_data)
+
+        if invitees:
+            container = []
+            for invitee in invitees:
+                container.append(models.InvitedSessions(session=session_instance,invitee=invitee))
+            models.InvitedSessions.objects.bulk_create(container,batch_size=100)
 
         send_notification(session_instance.mentor, f"{session_instance.mentee.profile.first_name} {session_instance.mentee.profile.last_name} requested a mentorship session from you.")
 
@@ -264,6 +298,19 @@ class SessionRetrieveSerializer(serializers.Serializer):
             "time":period[1]
         }
         return output
+
+
+class RetrieveInvitedSessionsSerializer(serializers.ModelSerializer):
+    session = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.InvitedSessions
+        fields = ["id","session"]
+
+    def get_session(self,obj):
+        output =  SessionRetrieveSerializer(obj.session,many=False,context={"user":self.context["user"],"rate_instance":None}).data
+        return output
+
 
 
 class RetrieveMentorSearchAndRetrieveSerializer(serializers.ModelSerializer):
@@ -391,6 +438,9 @@ class AnnotateMentorshipSessionSerializer(serializers.Serializer):
             #Mark session as completed
             session.status = "COMPLETED"
             session.save()
+
+            #Cleanup invited sessions
+            session.invitedsessions_set.all().delete()
             
             #Update the amount earned by mentor
             transaction_instance = session.sessiontransactions_set.filter(status="successful").first()
@@ -433,12 +483,13 @@ class CancelSessionSerializer(serializers.Serializer):
         session.delete()
         return True
 
+
 class JoinSessionSerializer(serializers.Serializer):
     session = serializers.PrimaryKeyRelatedField(queryset=models.Sessions.objects.all())
 
     def validate_session(self,session):
         user = self.context["user"]
-        if (user != session.mentor) and (user != session.mentee):
+        if (user != session.mentor) and (user != session.mentee) and not (user.invited_sessions.filter(session=session).exists()):
             raise serializers.ValidationError("You are not a participant in this session.")
         if not session.is_paid:
             raise serializers.ValidationError("This session has not yet been paid for.")

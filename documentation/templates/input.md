@@ -2867,7 +2867,7 @@ This API searches for mentors based on query parameters. The query parameters al
 
 # Book Mentorship Session
 
-This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual.
+This API enables mentees to book a mentorship session with a mentor. N.B: session_type can either be group/individual. If the sesion_type selected is group, an invitees payload containing a list of all user invitees ids. Also, Invitees cannot be more than 10. Any extras would not be invited.
 
 **Endpoint:**`/mentor/sessions/book/`
 
@@ -2878,15 +2878,17 @@ This API enables mentees to book a mentorship session with a mentor. N.B: sessio
 ``` json
 {
 
-mentor:*****
+"mentor":"*****"
 
-session_type:*****
+"session_type":"*****"
 
-date:*****
+"invitees (**optional)":"*****"
 
-time:*****
+"date":"*****"
 
-discourse:*****
+"time":"*****"
+
+"discourse":"*****"
 
 }
 
@@ -2897,11 +2899,12 @@ discourse:*****
 
 ``` json
 {
+  "id": 26,
   "mentor": {
     "id": 11,
-    "first_name": "Opeyemi",
-    "last_name": "Saliu",
-    "middle_name": "Abdul-Azeez",
+    "first_name": "Abdul Azeez",
+    "last_name": "Balogun",
+    "middle_name": "Abiola",
     "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
     "qualification": "Bachelor of Engineering"
   },
@@ -2913,17 +2916,21 @@ discourse:*****
     "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
     "qualification": "Bachelor of Engineering (Civil Engineering)"
   },
-  "session_type": "individual",
+  "join": false,
+  "session_type": "group",
   "session_at": {
-    "date": "2025-07-21",
-    "time": "00:00:00"
+    "date": "2025-11-11",
+    "time": "16:35:00"
   },
-  "discourse": "Career Building",
-  "status": "PENDING"
+  "discourse": "Career Coaching",
+  "amount": "1500NGN",
+  "rating": 0,
+  "status": "PENDING",
+  "is_paid": false
 }
 ```
 
-[Table of contents](#toc)
+[["/mentor/sessions/book/","POST"]][Table of contents](#toc)
 
 
 # Retrieve Mentorship Sessions
@@ -5530,3 +5537,62 @@ This API removes a member from a corporate account (organization). N.B:The membe
 **status code:204**
 
 [["/user/organization-members/?member_id=1","DELETE"]][Table of contents](#toc)
+
+
+# Retrieve Invited Sessions
+
+This API retrieves all sessions a user has been invited to.
+
+**Endpoint:**`/mentor/sessions/invited/`
+
+**Method:** `GET`
+
+## Payload
+
+``` json
+
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+[
+  {
+    "id": 1,
+    "session": {
+      "id": 26,
+      "mentor": {
+        "id": 11,
+        "first_name": "Abdul Azeez",
+        "last_name": "Balogun",
+        "middle_name": "Abiola",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering"
+      },
+      "mentee": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)"
+      },
+      "join": false,
+      "session_type": "group",
+      "session_at": {
+        "date": "2025-11-11",
+        "time": "16:35:00"
+      },
+      "discourse": "Career Coaching",
+      "amount": "1USD",
+      "rating": 0,
+      "status": "PENDING",
+      "is_paid": false
+    }
+  }
+]
+```
+
+[["/mentor/sessions/invited/","GET"]][Table of contents](#toc)
