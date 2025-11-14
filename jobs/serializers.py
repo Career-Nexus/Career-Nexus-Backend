@@ -77,6 +77,7 @@ class JobsSerializer(serializers.ModelSerializer):
         for attr in all_attr:
             value = validated_data.get(attr)
             setattr(instance,attr,value)
+        instance.save()
         return instance
 
 
