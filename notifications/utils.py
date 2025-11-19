@@ -23,6 +23,6 @@ def jobnotify(suffix,text):
         }
     )
 
-def send_notification(user,text,page=None,route=None):
+def send_notification(user,text,page=None,route=None,obj_id=None):
     notify(user.id,text)
-    models.Notification.objects.create(user=user,text=text,page=page,route=route)
+    models.Notification.objects.create(user=user,text=text,page=page,route=route,obj_id=obj_id)

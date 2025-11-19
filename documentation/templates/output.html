@@ -3411,19 +3411,54 @@ job:*****
 <h2>Response body</h2>
 <p><strong>status code:200</strong></p>
 <pre><code class="language-json">{
-  &quot;count&quot;: 1,
-  &quot;next&quot;: null,
+  &quot;count&quot;: 22,
+  &quot;next&quot;: &quot;http://127.0.0.1:8000/notification-chat/notifications/?page=2&quot;,
   &quot;previous&quot;: null,
   &quot;results&quot;: [
     {
-      &quot;id&quot;: 1,
+      &quot;id&quot;: 43,
       &quot;text&quot;: &quot;Someone just liked your post.&quot;,
-      &quot;timestamp&quot;: &quot;2025-08-24T08:53:48.487902Z&quot;
+      &quot;page&quot;: &quot;Post&quot;,
+      &quot;route&quot;: &quot;post/?post_id=15&quot;,
+      &quot;obj_id&quot;: &quot;15&quot;,
+      &quot;timestamp&quot;: &quot;2025-11-19T08:21:47.314149Z&quot;
+    },
+    {
+      &quot;id&quot;: 42,
+      &quot;text&quot;: &quot;N/A N/A just replied to your comment.&quot;,
+      &quot;page&quot;: &quot;Post&quot;,
+      &quot;route&quot;: &quot;post/?post_id=13&quot;,
+      &quot;obj_id&quot;: null,
+      &quot;timestamp&quot;: &quot;2025-11-18T14:40:57.985623Z&quot;
+    },
+    {
+      &quot;id&quot;: 41,
+      &quot;text&quot;: &quot;Mentor Abdul Azeez Balogun accepted your mentorship request.&quot;,
+      &quot;page&quot;: null,
+      &quot;route&quot;: null,
+      &quot;obj_id&quot;: null,
+      &quot;timestamp&quot;: &quot;2025-11-11T16:21:06.756745Z&quot;
+    },
+    {
+      &quot;id&quot;: 39,
+      &quot;text&quot;: &quot;Mentor Abdul Azeez Balogun accepted your mentorship request.&quot;,
+      &quot;page&quot;: null,
+      &quot;route&quot;: null,
+      &quot;obj_id&quot;: null,
+      &quot;timestamp&quot;: &quot;2025-11-11T16:16:40.721125Z&quot;
+    },
+    {
+      &quot;id&quot;: 38,
+      &quot;text&quot;: &quot;Mentor Abdul Azeez Balogun rejected your mentorship request.&quot;,
+      &quot;page&quot;: null,
+      &quot;route&quot;: null,
+      &quot;obj_id&quot;: null,
+      &quot;timestamp&quot;: &quot;2025-11-11T16:16:16.247567Z&quot;
     }
   ]
 }
 </code></pre>
-<p><a href="#toc">Table of contents</a></p>
+<p><button onclick="openApiTester('/notification-chat/notifications/','GET')">Run Test</button><a href="#toc">Table of contents</a></p>
 <h1>Clear Notifications<a name='clear_notifications'></a></h1>
 <p>This API clears all the notifications for a user.</p>
 <p><strong>Endpoint:</strong><code>/notification-chat/notifications/</code></p>

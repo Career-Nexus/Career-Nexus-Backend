@@ -96,6 +96,7 @@ class ConnectionRecommendationView(APIView):
         else:  
             if criteria.lower() == "industry":
                 industry_recommendations = Users.objects.filter(industry=user_industry).exclude(id=user.id)
+                #Remove users already connected/has pending connections with.
                 recommendations = industry_recommendations.exclude(Q(connection_user__connection=user) | Q(connect__user=user)).order_by("id")
 
 

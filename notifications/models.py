@@ -17,4 +17,5 @@ class Notification(models.Model):
     text = models.CharField(max_length=1500)
     page = models.CharField(max_length=100,null=True)
     route = models.CharField(max_length=200,null=True)
+    obj_id = models.CharField(null=True)
     timestamp = models.DateTimeField(auto_now=True)

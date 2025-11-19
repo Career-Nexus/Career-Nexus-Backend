@@ -34,7 +34,7 @@ class FollowSerializer(serializers.ModelSerializer):
         #validated_data["user_follower"] = self.context["user"]
         following = models.UserFollow.objects.create(**validated_data)
 
-        send_notification(following.user_following,f"{following.user_follower.profile.first_name} {following.user_follower.profile.last_name} just followed you.",page="Profile",route=f"/user/retrieve-profile/?user_id={following.user_follower.id}")
+        send_notification(following.user_following,f"{following.user_follower.profile.first_name} {following.user_follower.profile.last_name} just followed you.",page="Profile",route=f"/user/retrieve-profile/?user_id={following.user_follower.id}",obj_id=following.user_follower.id)
 
         output = {
                     "follower":following.user_follower.id,

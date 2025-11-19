@@ -4378,20 +4378,55 @@ This API retrieves all the notifications that have been recieved.
 
 ``` json
 {
-  "count": 1,
-  "next": null,
+  "count": 22,
+  "next": "http://127.0.0.1:8000/notification-chat/notifications/?page=2",
   "previous": null,
   "results": [
     {
-      "id": 1,
+      "id": 43,
       "text": "Someone just liked your post.",
-      "timestamp": "2025-08-24T08:53:48.487902Z"
+      "page": "Post",
+      "route": "post/?post_id=15",
+      "obj_id": "15",
+      "timestamp": "2025-11-19T08:21:47.314149Z"
+    },
+    {
+      "id": 42,
+      "text": "N/A N/A just replied to your comment.",
+      "page": "Post",
+      "route": "post/?post_id=13",
+      "obj_id": null,
+      "timestamp": "2025-11-18T14:40:57.985623Z"
+    },
+    {
+      "id": 41,
+      "text": "Mentor Abdul Azeez Balogun accepted your mentorship request.",
+      "page": null,
+      "route": null,
+      "obj_id": null,
+      "timestamp": "2025-11-11T16:21:06.756745Z"
+    },
+    {
+      "id": 39,
+      "text": "Mentor Abdul Azeez Balogun accepted your mentorship request.",
+      "page": null,
+      "route": null,
+      "obj_id": null,
+      "timestamp": "2025-11-11T16:16:40.721125Z"
+    },
+    {
+      "id": 38,
+      "text": "Mentor Abdul Azeez Balogun rejected your mentorship request.",
+      "page": null,
+      "route": null,
+      "obj_id": null,
+      "timestamp": "2025-11-11T16:16:16.247567Z"
     }
   ]
 }
 ```
 
-[Table of contents](#toc)
+[["/notification-chat/notifications/","GET"]][Table of contents](#toc)
 
 
 # Clear Notifications<a name='clear_notifications'></a>
