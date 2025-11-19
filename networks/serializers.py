@@ -39,7 +39,7 @@ class ConnectionSerializer(serializers.ModelSerializer):
         validated_data["status"] = "PENDING"
         connection_instance = models.Connection.objects.create(**validated_data)
 
-        send_notification(connection_instance.connection,f"{connection_instance.user.profile.first_name} {connection_instance.user.profile.last_name} just sent you a connection request.")
+        send_notification(connection_instance.connection,f"{connection_instance.user.profile.first_name} {connection_instance.user.profile.last_name} just sent you a connection request.",page="Network")
 
         output = {
             "user":connection_instance.user.id,
@@ -84,7 +84,7 @@ class ConnectionStatusSerializer(serializers.Serializer):
         connection_instance = validated_data.get("connection_id")
         status = validated_data.get("status")
         if status == "Reject":
-            send_notification(connection_instance.user,f"{connection_instance.connection.profile.first_name} {connection_instance.connection.profile.last_name} rejected your connection request.")
+            send_notification(connection_instance.user,f"{connection_instance.connection.profile.first_name} {connection_instance.connection.profile.last_name} rejected your connection request.",page="Network")
             connection_instance.delete()
             return {
                 "status":"Rejected"
@@ -92,7 +92,7 @@ class ConnectionStatusSerializer(serializers.Serializer):
         else:
             connection_instance.status = "CONFIRMED"
             connection_instance.save()
-            send_notification(connection_instance.user,f"{connection_instance.connection.profile.first_name} {connection_instance.connection.profile.last_name} accepted your connection request.")
+            send_notification(connection_instance.user,f"{connection_instance.connection.profile.first_name} {connection_instance.connection.profile.last_name} accepted your connection request.",page="Network")
             return {
                 "status":"Accepted"
             }

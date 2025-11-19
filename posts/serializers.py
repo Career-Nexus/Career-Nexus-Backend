@@ -339,7 +339,7 @@ class CreateReplySerializer(serializers.Serializer):
 
         comment_owner = validated_data["parent"].user
         if user != comment_owner:
-            send_notification(comment_owner,f"{user.profile.first_name} {user.profile.last_name} just replied to your comment.")
+            send_notification(comment_owner,f"{user.profile.first_name} {user.profile.last_name} just replied to your comment.",page="Post",route=f"post/?post_id={validated_data['post'].id}")
 
         comment = models.Comment.objects.create(**validated_data)
         output = {
@@ -366,7 +366,8 @@ class CreateLikeSerializer(serializers.Serializer):
             if not models.Like.objects.filter(post=post).first():
                 container = {"{NAME}":post_owner.profile.first_name,"{PHRASE}":post.body[0:30]}
                 send_email.delay(template=new_like_template,subject="Your Post Got a Like!!",container=container,recipient=post_owner.email)
-                send_notification(post_owner,text="Someone just liked your post.")
+        #Push notification
+        send_notification(post_owner,text="Someone just liked your post.",page="Post",route=f"post/?post_id={post.id}")
 
         like = models.Like.objects.create(**validated_data)
         output = {
@@ -414,7 +415,7 @@ class CommentLikeSerializer(serializers.Serializer):
         user = validated_data["user"]
         comment_owner = validated_data.get("comment").user
         #if user != comment_owner:
-        send_notification(comment_owner,f"{user.profile.first_name} {user.profile.last_name} just liked your comment.")
+        send_notification(comment_owner,f"{user.profile.first_name} {user.profile.last_name} just liked your comment.",page="Post",route=f"post/?post_id={instance.comment.post.id}")
 
         return instance
 

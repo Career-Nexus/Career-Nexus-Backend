@@ -48,7 +48,7 @@ class NotificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Notification
-        fields = ["id","text","timestamp"]
+        fields = ["id","text","page","route","timestamp"]
 
 
 class InitiateChatSessionSerializer(serializers.Serializer):

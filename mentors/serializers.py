@@ -201,7 +201,7 @@ class CreateMentorshipSessionSerializer(serializers.Serializer):
                 container.append(models.InvitedSessions(session=session_instance,invitee=invitee))
             models.InvitedSessions.objects.bulk_create(container,batch_size=100)
 
-        send_notification(session_instance.mentor, f"{session_instance.mentee.profile.first_name} {session_instance.mentee.profile.last_name} requested a mentorship session from you.")
+        send_notification(session_instance.mentor, f"{session_instance.mentee.profile.first_name} {session_instance.mentee.profile.last_name} requested a mentorship session from you.",page="Mentorship Sessions")
 
         return session_instance
 
@@ -226,10 +226,10 @@ class AcceptRejectMentorshipSessionSerializer(serializers.Serializer):
         session = validated_data.get("session")
         session_id = session.id
         if action == "Reject":
-            send_notification(session.mentee,f"Mentor {session.mentor.profile.first_name} {session.mentor.profile.last_name} rejected your mentorship request.")
+            send_notification(session.mentee,f"Mentor {session.mentor.profile.first_name} {session.mentor.profile.last_name} rejected your mentorship request.",page="Mentorship Sessions")
             session.delete()
         else:
-            send_notification(session.mentee,f"Mentor {session.mentor.profile.first_name} {session.mentor.profile.last_name} accepted your mentorship request.")
+            send_notification(session.mentee,f"Mentor {session.mentor.profile.first_name} {session.mentor.profile.last_name} accepted your mentorship request.",page="Mentorship Sessions")
             session.status = "ACCEPTED"
             session.save()
         return {
