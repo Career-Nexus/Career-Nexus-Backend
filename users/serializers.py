@@ -913,10 +913,14 @@ class RetrieveMentorProfileSerializer(serializers.ModelSerializer):
 
 class RetrieveCorporateUserSerializer(serializers.ModelSerializer):
     members = serializers.SerializerMethodField()
+    user_type = serializers.SerializerMethodField()
 
     class Meta:
         model = models.PersonalProfile
-        fields = ["id","company_name","company_type","company_size","country_code","phone_number","location","website","tagline","logo","cover_photo","members"]
+        fields = ["id","company_name","company_type","company_size","country_code","phone_number","location","website","tagline","logo","cover_photo","members","user_type"]
+
+    def get_user_type(self,obj):
+        return obj.user.user_type
 
     def get_members(self,obj):
         all_members = obj.user.member.all()
