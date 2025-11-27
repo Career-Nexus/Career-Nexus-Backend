@@ -1227,6 +1227,35 @@ class AnnotateDisputeTicketSerializer(serializers.Serializer):
         return dispute
 
 
+class UserSearchSerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    qualification = serializers.SerializerMethodField()
+    profile_photo = serializers.SerializerMethodField()
+    user_type = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Users
+        fields = ["id","name","qualification","profile_photo","user_type"]
+
+    def get_user_type(self,obj):
+        return obj.user_type
+
+    def get_profile_photo(self,obj):
+        if obj.user_type != "employer":
+            return obj.profile.profile_photo
+        return obj.profile.logo
+
+    def get_name(self,obj):
+        if obj.user_type != "employer":
+            return f"{obj.profile.first_name} {obj.profile.last_name}"
+        return f"{obj.profile.company_name}"
+
+    def get_qualification(self,obj):
+        if obj.user_type != "employer":
+            qualification = obj.profile.qualification
+        else:
+            qualification = obj.profile.tagline
+        return qualification
 
 
 

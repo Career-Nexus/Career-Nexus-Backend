@@ -3846,13 +3846,13 @@ This API searches for users based on a keyword query.
       "name": "Opeyemi Saliu",
       "qualification": "Bachelor of Engineering (Civil Engineering)",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "followers": 1
+      "user_type": "learner"
     }
   ]
 }
 ```
 
-[Table of contents](#toc)
+[["/user/search/?keyword=backend developer","GET"]][Table of contents](#toc)
 
 
 # Create Project Catalogue<a name='create_project_catalogue'></a>

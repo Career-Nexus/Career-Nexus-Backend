@@ -957,7 +957,7 @@ class UserSearchView(APIView):
         )
         paginator = UserPaginator()
         paginated_items = paginator.paginate_queryset(user_result_instances,request)
-        serialized_items = RetrieveRecommendationDetailSerializer(paginated_items,many=True).data
+        serialized_items = serializers.UserSearchSerializer(paginated_items,many=True).data
         output = paginator.get_paginated_response(serialized_items).data
         return Response(output,status=status.HTTP_200_OK)
 
