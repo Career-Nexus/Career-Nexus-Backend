@@ -70,7 +70,7 @@ class PostView(APIView):
             cache_key = f"{user_type}_post_{page_request}"
             cached_data = cache.get(cache_key)
             if not cached_data:
-                posts = models.Posts.objects.filter(Q(industries__icontains=user_type.lower()) | Q(profile__user__user_type="mentor")).order_by("-time_stamp")
+                posts = models.Posts.objects.select_related("profile","profile__user").filter(Q(industries__icontains=user_type.lower()) | Q(profile__user__user_type="mentor")).order_by("-time_stamp")
                 paginator = PostPagination()
                 paginated_items = paginator.paginate_queryset(posts,request)
 

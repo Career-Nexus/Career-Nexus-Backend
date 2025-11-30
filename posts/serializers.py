@@ -139,10 +139,14 @@ class PersonalProfileSerializer(serializers.ModelSerializer):
     middle_name = serializers.SerializerMethodField()
     profile_photo = serializers.SerializerMethodField()
     qualification = serializers.SerializerMethodField()
+    user_type = serializers.SerializerMethodField()
 
     class Meta:
         model = PersonalProfile
-        fields = ["id","first_name","last_name","middle_name","profile_photo","qualification"]
+        fields = ["id","first_name","last_name","middle_name","profile_photo","qualification","user_type"]
+
+    def get_user_type(self,obj):
+        return obj.user.user_type
 
     def get_first_name(self,obj):
         if obj.user.user_type == "employer":

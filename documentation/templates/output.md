@@ -59,46 +59,46 @@
 52. [get job preference](#get_job_preference)  
 53. [get newsletter](#get_newsletter)  
 54. [get other user post](#get_other_user_post)  
-55. [get own posts](#get_own_posts)  
-56. [get posts](#get_posts)  
-57. [get saved post](#get_saved_post)  
-58. [google signin](#google_signin)  
-59. [initiate chat session](#initiate_chat_session)  
-60. [job create](#job_create)  
-61. [job notifications](#job_notifications)  
-62. [job preference](#job_preference)  
-63. [join mentorship session](#join_mentorship_session)  
-64. [lead register](#lead_register)  
-65. [like comment/reply](#like_comment/reply)  
-66. [login api](#login_api)  
-67. [logout](#logout)  
-68. [mentor search/filter](#mentor_search/filter)  
-69. [mentors recommendation](#mentors_recommendation)  
-70. [mentorship session annotation.](#mentorship_session_annotation.)  
-71. [post create](#post_create)  
-72. [post like](#post_like)  
-73. [post retrieve](#post_retrieve)  
-74. [post save](#post_save)  
-75. [post share](#post_share)  
-76. [profile completion](#profile_completion)  
-77. [profile retrieve](#profile_retrieve)  
-78. [profile update](#profile_update)  
-79. [recommended job posts.](#recommended_job_posts.)  
-80. [remove organization member](#remove_organization_member)  
-81. [reply comment](#reply_comment)  
-82. [reposting](#reposting)  
-83. [retrieve applied jobs](#retrieve_applied_jobs)  
-84. [retrieve corporate leads](#retrieve_corporate_leads)  
-85. [retrieve education api](#retrieve_education_api)  
-86. [retrieve invited sessions](#retrieve_invited_sessions)  
-87. [retrieve job applications](#retrieve_job_applications)  
-88. [retrieve job posts](#retrieve_job_posts)  
-89. [retrieve library contents](#retrieve_library_contents)  
-90. [retrieve linked accounts](#retrieve_linked_accounts)  
-91. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
-92. [retrieve mentors posts](#retrieve_mentors_posts)  
-93. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
-94. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+55. [get saved post](#get_saved_post)  
+56. [google signin](#google_signin)  
+57. [initiate chat session](#initiate_chat_session)  
+58. [job create](#job_create)  
+59. [job notifications](#job_notifications)  
+60. [job preference](#job_preference)  
+61. [join mentorship session](#join_mentorship_session)  
+62. [lead register](#lead_register)  
+63. [like comment/reply](#like_comment/reply)  
+64. [login api](#login_api)  
+65. [logout](#logout)  
+66. [mentor search/filter](#mentor_search/filter)  
+67. [mentors recommendation](#mentors_recommendation)  
+68. [mentorship session annotation.](#mentorship_session_annotation.)  
+69. [post create](#post_create)  
+70. [post like](#post_like)  
+71. [post retrieve](#post_retrieve)  
+72. [post save](#post_save)  
+73. [post share](#post_share)  
+74. [profile completion](#profile_completion)  
+75. [profile retrieve](#profile_retrieve)  
+76. [profile update](#profile_update)  
+77. [recommended job posts.](#recommended_job_posts.)  
+78. [remove organization member](#remove_organization_member)  
+79. [reply comment](#reply_comment)  
+80. [reposting](#reposting)  
+81. [retrieve applied jobs](#retrieve_applied_jobs)  
+82. [retrieve corporate leads](#retrieve_corporate_leads)  
+83. [retrieve education api](#retrieve_education_api)  
+84. [retrieve invited sessions](#retrieve_invited_sessions)  
+85. [retrieve job applications](#retrieve_job_applications)  
+86. [retrieve job posts](#retrieve_job_posts)  
+87. [retrieve library contents](#retrieve_library_contents)  
+88. [retrieve linked accounts](#retrieve_linked_accounts)  
+89. [retrieve mentor vault data](#retrieve_mentor_vault_data)  
+90. [retrieve mentors posts](#retrieve_mentors_posts)  
+91. [retrieve mentorship sessions](#retrieve_mentorship_sessions)  
+92. [retrieve own posts](#retrieve_own_posts)  
+93. [retrieve portfolio projects](#retrieve_portfolio_projects)  
+94. [retrieve posts](#retrieve_posts)  
 95. [retrieve recent applicants](#retrieve_recent_applicants)  
 96. [retrieve saved jobs](#retrieve_saved_jobs)  
 97. [retrieve saved mentors](#retrieve_saved_mentors)  
@@ -1015,7 +1015,7 @@ This endpoint retrieves the percentage completion of a user's profile along with
 
 [Table of contents](#toc) 
 
-# Get Posts<a name='get_posts'></a>
+# Retrieve Posts<a name='retrieve_posts'></a>
 
 This endpoints retrieves posts associated with the user's selected industry and also posts by mentors on the platform.
 
@@ -1041,45 +1041,61 @@ This endpoints retrieves posts associated with the user's selected industry and 
   "results": [
     {
       "profile": {
-        "id": 1,
-        "first_name": "Opeyemi",
-        "last_name": "Saliu",
-        "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "id": 21,
+        "first_name": "Bojvent LTD",
+        "last_name": "",
+        "middle_name": "",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+        "qualification": "Dealers in recycled wastes and compositions.",
+        "user_type": "employer"
       },
-      "body": "From a friend.",
+      "body": "Technology isn’t just about gadgets and apps — it’s the invisible force shaping how we live, work, and connect. From cloud systems powering businesses to AI assisting in everyday tasks, it keeps pushing boundaries of speed, scale, and creativity.
+
+But here’s the thing: technology is only as impactful as the minds behind it. The real breakthrough happens when curiosity meets code, when ideas turn into solutions.
+
+In a world moving faster than ever, the question is no longer “What can technology do?” but “What will we choose to build with it?” 🚀",
       "pic1": "N/A",
       "pic2": "N/A",
       "pic3": "N/A",
       "video": "N/A",
       "article": "N/A",
-      "time_stamp": "2025-07-11T11:44:28.647331Z",
-      "comment_count": 1,
+      "time_stamp": "2025-09-18T03:44:39.929867Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 2,
+      "parent": null,
+      "can_like": true,
+      "can_follow": true,
+      "is_self": false,
+      "is_saved": false,
+      "post_id": 25
+    },
+    {
+      "profile": {
+        "id": 11,
+        "first_name": "Abdul Azeez",
+        "last_name": "Balogun",
+        "middle_name": "Abiola",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
+        "qualification": "Bachelor of Engineering",
+        "user_type": "mentor"
+      },
+      "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-08-09T10:18:07.879587Z",
+      "comment_count": 0,
       "like_count": 0,
       "share_count": 0,
-      "parent": {
-        "profile": {
-          "id": 2,
-          "first_name": "N/A",
-          "last_name": "N/A",
-          "middle_name": "N/A",
-          "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-          "qualification": "Bachelor of Science"
-        },
-        "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
-        "pic1": "N/A",
-        "pic2": "N/A",
-        "pic3": "N/A",
-        "video": "N/A",
-        "article": "N/A",
-        "time_stamp": "2025-04-17T14:31:33.731704Z"
-      },
+      "parent": null,
       "can_like": true,
-      "can_follow": false,
-      "is_self": true,
+      "can_follow": true,
+      "is_self": false,
       "is_saved": false,
-      "post_id": 18
+      "post_id": 21
     },
     {
       "profile": {
@@ -1088,7 +1104,8 @@ This endpoints retrieves posts associated with the user's selected industry and 
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
         "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
       },
       "body": "Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
 
@@ -1103,7 +1120,7 @@ Anyone else feeling that urge to slow down while everything else speeds up?",
       "video": "N/A",
       "article": "N/A",
       "time_stamp": "2025-06-18T21:46:34.030565Z",
-      "comment_count": 3,
+      "comment_count": 2,
       "like_count": 0,
       "share_count": 0,
       "parent": null,
@@ -1120,7 +1137,8 @@ Anyone else feeling that urge to slow down while everything else speeds up?",
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
         "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
       },
       "body": "🌾 Tech in the Fields 📲🌍
 
@@ -1134,7 +1152,7 @@ Agriculture isn’t just about soil and sun anymore — it’s about sensors, sa
       "article": "#AgriTech #AgriInnovation",
       "time_stamp": "2025-05-15T13:44:08.197325Z",
       "comment_count": 0,
-      "like_count": 1,
+      "like_count": 0,
       "share_count": 0,
       "parent": null,
       "can_like": true,
@@ -1142,13 +1160,44 @@ Agriculture isn’t just about soil and sun anymore — it’s about sensors, sa
       "is_self": true,
       "is_saved": false,
       "post_id": 11
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
+      },
+      "body": "Farming Meets the Future 🚜💡
+
+From drones mapping crop health to AI-driven irrigation systems, agriculture is being transformed by technology. Precision farming is reducing waste, boosting yields, and helping farmers make smarter, faster decisions. As the world faces growing food demands and climate challenges, agri-tech is planting the seeds of a sustainable future.
+
+#AgriTech #SmartFarming #SustainableAgriculture #InnovationInFarming",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/37653a4e-4370-40c5-8f8a-c5c296e27108branch.jpeg",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-05-15T13:42:20.543966Z",
+      "comment_count": 1,
+      "like_count": 1,
+      "share_count": 0,
+      "parent": null,
+      "can_like": false,
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": false,
+      "post_id": 10
     }
   ],
-  "last_page": "http://127.0.0.1:8000/post/?page=3"
+  "last_page": "http://127.0.0.1:8000/post/?page=2"
 }
 ```
 
-[Table of contents](#toc) 
+[["/post/","GET"]][Table of contents](#toc) 
 
 # Post Retrieve<a name='post_retrieve'></a>
 
@@ -2693,7 +2742,7 @@ This endpoint retrieves the sum total of the number of Users the current logged 
 [Table of contents](#toc)
 
 
-# Get Own Posts<a name='get_own_posts'></a>
+# Retrieve Own Posts<a name='retrieve_own_posts'></a>
 
 This endpoint retrieves a paginated result of all the posts made by the logged in user.
 
@@ -2713,7 +2762,7 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
 
 ``` json
 {
-  "count": 13,
+  "count": 11,
   "next": "http://127.0.0.1:8000/post/posted/?page=2",
   "previous": null,
   "results": [
@@ -2724,49 +2773,8 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
         "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
-      },
-      "body": "From a friend.",
-      "pic1": "N/A",
-      "pic2": "N/A",
-      "pic3": "N/A",
-      "video": "N/A",
-      "article": "N/A",
-      "time_stamp": "2025-07-11T11:44:28.647331Z",
-      "comment_count": 1,
-      "like_count": 0,
-      "share_count": 0,
-      "parent": {
-        "profile": {
-          "id": 2,
-          "first_name": "N/A",
-          "last_name": "N/A",
-          "middle_name": "N/A",
-          "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/7c565a1b-bbdf-4140-831f-8b3086eaafd0default_avatar.png",
-          "qualification": "Bachelor of Science"
-        },
-        "body": "Precision agriculture is transforming farming through data, GPS, and automation. The future of agri-tech is smart, efficient, and sustainable. #AgriTech #SmartFarming",
-        "pic1": "N/A",
-        "pic2": "N/A",
-        "pic3": "N/A",
-        "video": "N/A",
-        "article": "N/A",
-        "time_stamp": "2025-04-17T14:31:33.731704Z"
-      },
-      "can_like": true,
-      "can_follow": false,
-      "is_self": true,
-      "is_saved": false,
-      "post_id": 18
-    },
-    {
-      "profile": {
-        "id": 1,
-        "first_name": "Opeyemi",
-        "last_name": "Saliu",
-        "middle_name": "Abdul-Azeez",
-        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
       },
       "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
       "pic1": "N/A",
@@ -2776,10 +2784,10 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
       "article": "N/A",
       "time_stamp": "2025-06-18T22:36:11.257113Z",
       "comment_count": 0,
-      "like_count": 0,
+      "like_count": 1,
       "share_count": 0,
       "parent": null,
-      "can_like": true,
+      "can_like": false,
       "can_follow": false,
       "is_self": true,
       "is_saved": false,
@@ -2792,7 +2800,8 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
         "last_name": "Saliu",
         "middle_name": "Abdul-Azeez",
         "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-        "qualification": "Bachelor of Engineering (Civil Engineering)"
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
       },
       "body": "Success rarely comes from doing one big thing right — it comes from doing the small things right, over and over again. Whether you're writing code, learning a language, or building a business, consistency beats intensity. Show up every day. Improve a little. The results will follow.",
       "pic1": "N/A",
@@ -2810,13 +2819,104 @@ This endpoint retrieves a paginated result of all the posts made by the logged i
       "is_self": true,
       "is_saved": false,
       "post_id": 14
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
+      },
+      "body": "Lately, I’ve been trying to spend less time glued to my screen and more time outside. There’s something incredibly calming about early morning walks — the way the air feels cooler and the birds sound louder when your phone’s on silent.
+
+At the same time, I’ve been exploring some new AI tools for work, and I’m both amazed and slightly overwhelmed at how fast things are changing in tech. Balancing curiosity with intentional living is becoming its own kind of discipline.
+
+Also started journaling again — not every day, but whenever something weighs on my mind. I find that writing, even just a few lines, helps me reset.
+
+Anyone else feeling that urge to slow down while everything else speeds up?",
+      "pic1": "N/A",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-06-18T21:46:34.030565Z",
+      "comment_count": 2,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": false,
+      "post_id": 13
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
+      },
+      "body": "Fadman Montessori. School building leaders and table shakers.",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/pic/d0642e69-2ff3-4179-9b6b-b745ec637088fadman_thumbnail.png",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "N/A",
+      "time_stamp": "2025-06-18T19:25:29.242254Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": false,
+      "post_id": 12
+    },
+    {
+      "profile": {
+        "id": 1,
+        "first_name": "Opeyemi",
+        "last_name": "Saliu",
+        "middle_name": "Abdul-Azeez",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "qualification": "Bachelor of Engineering (Civil Engineering)",
+        "user_type": "learner"
+      },
+      "body": "🌾 Tech in the Fields 📲🌍
+
+Agriculture isn’t just about soil and sun anymore — it’s about sensors, satellites, and software. Farmers today use data analytics, autonomous tractors, and climate-smart tools to grow more with less. With technology in their hands, they’re not just feeding communities — they’re feeding the future.
+
+#AgriInnovation #FarmTech #DigitalFarming #FutureOfFood",
+      "pic1": "https://careernexus-storage1.s3.amazonaws.com/posts/media/0149c8fd-1055-4d23-9a2c-ac78ee61abc2branch.jpeg",
+      "pic2": "N/A",
+      "pic3": "N/A",
+      "video": "N/A",
+      "article": "#AgriTech #AgriInnovation",
+      "time_stamp": "2025-05-15T13:44:08.197325Z",
+      "comment_count": 0,
+      "like_count": 0,
+      "share_count": 0,
+      "parent": null,
+      "can_like": true,
+      "can_follow": false,
+      "is_self": true,
+      "is_saved": false,
+      "post_id": 11
     }
   ],
-  "last_page": "http://127.0.0.1:8000/post/posted/?page=5"
+  "last_page": "http://127.0.0.1:8000/post/posted/?page=3"
 }
 ```
 
-[Table of contents](#toc)
+[["/post/posted/","GET"]][Table of contents](#toc)
 
 
 # Unlike Post<a name='unlike_post'></a>
