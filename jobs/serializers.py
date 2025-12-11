@@ -1,4 +1,4 @@
-from django.forms import fields
+from django.utils import timezone
 from rest_framework import serializers
 from django.conf import settings
 
@@ -50,7 +50,7 @@ class JobsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Jobs
-        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level","status"]
+        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level","application_deadline","status"]
 
     def create(self,validated_data):
         validated_data["poster"] = self.context["user"]
@@ -69,6 +69,7 @@ class JobsSerializer(serializers.ModelSerializer):
             "description":job.description,
             "industry":job.industry,
             "experience_level":job.experience_level,
+            "application_deadline":job.application_deadline
         }
         return output
 
@@ -88,7 +89,7 @@ class RetrieveJobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Jobs
-        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level","time_stamp","is_saved"]
+        fields = ["id","title","organization","employment_type","work_type","country","salary","overview","description","experience_level","time_stamp","application_deadline","is_saved"]
 
     def get_is_saved(self,obj):
         user = self.context["user"]
@@ -145,6 +146,8 @@ class JobApplicationSerializer(serializers.Serializer):
         user = self.context["user"]
         if user.user_type == "employer":
             raise serializers.ValidationError("Employers are not allowed to apply for a job.")
+        if timezone.now().date() > value.application_deadline:
+            raise serializers.ValidationError("No more applications are allowed for this job.")
         if value.status == "closed":
             raise serializers.ValidationError("This job has been closed")
         if models.JobApplication.objects.filter(job=value,applicant=user).exists():

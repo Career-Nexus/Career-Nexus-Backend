@@ -21,6 +21,7 @@ class Jobs(models.Model):
     description = models.TextField()
     industry = models.TextField()
     experience_level = models.CharField(max_length=20)
+    application_deadline = models.DateField()
     time_stamp = models.DateField(auto_now_add=True)
     status = models.CharField(choices=JOB_STATUS,max_length=15,default="active")
 

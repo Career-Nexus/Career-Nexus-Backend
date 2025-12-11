@@ -63,8 +63,6 @@ class RetrieveMentorsSerializer(serializers.ModelSerializer):
 
 
 
-
-
 class MentorRecommendationSerializer(serializers.ModelSerializer):
     id = serializers.SerializerMethodField()
     is_saved = serializers.SerializerMethodField()
@@ -243,6 +241,7 @@ class SessionRetrieveSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     mentor = serializers.SerializerMethodField()
     mentee = serializers.SerializerMethodField()
+    invitees = serializers.SerializerMethodField()
     join = serializers.SerializerMethodField()
     session_type = serializers.CharField()
     session_at = serializers.SerializerMethodField()
@@ -251,6 +250,12 @@ class SessionRetrieveSerializer(serializers.Serializer):
     rating = serializers.IntegerField()
     status = serializers.CharField()
     is_paid = serializers.BooleanField()
+
+    def get_invitees(self,obj):
+        invitees = obj.invitedsessions_set.all().select_related("invitee")
+        output = RetrieveInviteesSerializer(invitees,many=True).data
+        return output
+
 
     def get_amount(self,obj):
         mentor_rate = obj.mentor.profile.session_rate
@@ -297,6 +302,18 @@ class SessionRetrieveSerializer(serializers.Serializer):
             "date":period[0],
             "time":period[1]
         }
+        return output
+
+
+class RetrieveInviteesSerializer(serializers.ModelSerializer):
+    invitee = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.InvitedSessions
+        fields = ["invitee"]
+
+    def get_invitee(self,obj):
+        output = PersonalProfileSerializer(obj.invitee.profile,many=False).data
         return output
 
 

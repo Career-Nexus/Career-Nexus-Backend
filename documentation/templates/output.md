@@ -416,6 +416,35 @@ LEARNERS
   "can_message": false,
   "can_follow": true
 }
+
+CORPORATE
+{
+  "id": 21,
+  "company_name": "Bojvent LTD",
+  "company_type": "private",
+  "industry": "technology",
+  "company_size": "1-10",
+  "country_code": "+000",
+  "phone_number": "00000000000",
+  "location": "Lagos",
+  "website": "www.bojventltd.com",
+  "tagline": "Dealers in recycled wastes and compositions.",
+  "logo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/b86858f7-c77e-4c5f-9796-14f27c855f7cDefault_company_image.png",
+  "cover_photo": "https://careernexus-storage1.s3.amazonaws.com/cover_photos/70114098-5014-4eda-a725-5421792972dadefault_cp.jpeg",
+  "members": [
+    {
+      "member": {
+        "id": 1,
+        "name": "Opeyemi Abdul-Azeez Saliu",
+        "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
+        "extras": "Bachelor of Engineering (Civil Engineering)"
+      }
+    }
+  ],
+  "user_type": "employer",
+  "can_message": false,
+  "can_follow": false
+}
 ```
 
 [["/user/retrieve-profile/","GET"]][Table of contents](#toc) 
@@ -2047,25 +2076,27 @@ This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_ty
 ``` json
 {
 
-"title":"*****"
+'title':'*****',
 
-"organization":"*****"
+'organization':'*****',
 
-"employment_type":"*****"
+'employment_type':'*****',
 
-"work_type":"*****"
+'work_type':'*****',
 
-"country":"*****"
+'country':'*****',
 
-"salary":"*****"
+'salary':'*****',
 
-"overview":"*****"
+'overview':'*****',
 
-"description":"*****"
+'description':'*****',
 
-"experience_level":"*****"
+'experience_level':'*****',
 
-"status (**optional)":"*****"
+'status (**optional)':'*****',
+
+'application_deadline':'*****',
 
 }
 
@@ -2077,15 +2108,17 @@ This endpoint creates a new job post. N.B: PAYLOAD OPTIONS include employment_ty
 ``` json
 {
   "title": "Backend Developer",
-  "organization": "Mitiget Assurance Limited",
+  "organization": "Sterling Technologies",
   "employment_type": "full_time",
-  "work_type": "hybrid",
+  "work_type": "remote",
   "country": "Nigeria",
-  "salary": "350,000NGN",
-  "overview": "We are seeking a skilled and motivated Backend Developer to join our development team. You will be responsible for building and maintaining the server-side logic, database interactions, and API integrations that power our applications. The ideal candidate is experienced in backend technologies, database design, and scalable system architecture.",
+  "salary": "200,000NGN",
+  "overview": "A skilled backend developer aith at least 
+5 years of experience",
   "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
   "industry": "technology",
-  "experience_level": "senior"
+  "experience_level": "senior",
+  "application_deadline": "2025-12-31"
 }
 ```
 
@@ -2112,10 +2145,26 @@ This API retrieves all the job posts of the logged in user. N.B:Also, a query pa
 
 ``` json
 {
-  "count": 1,
+  "count": 3,
   "next": null,
   "previous": null,
   "results": [
+    {
+      "id": 12,
+      "title": "Backend Developer",
+      "organization": "Sterling Technologies",
+      "employment_type": "full_time",
+      "work_type": "remote",
+      "country": "Nigeria",
+      "salary": "200,000NGN",
+      "overview": "A skilled backend developer aith at least 
+5 years of experience",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-12-11",
+      "application_deadline": "2025-12-31",
+      "is_saved": false
+    },
     {
       "id": 10,
       "title": "Frontend Developer",
@@ -2129,6 +2178,23 @@ This API retrieves all the job posts of the logged in user. N.B:Also, a query pa
       "description": "As a Frontend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
       "experience_level": "senior",
       "time_stamp": "2025-10-30",
+      "application_deadline": "2025-12-11",
+      "is_saved": false
+    },
+    {
+      "id": 11,
+      "title": "Backend Developer",
+      "organization": "Sterling Technologies",
+      "employment_type": "full_time",
+      "work_type": "hybrid",
+      "country": "Nigeria",
+      "salary": "350,000NGN",
+      "overview": "A skilled backend developer aith at least 
+5 years of experience",
+      "description": "As a Backend Developer, you will play a crucial role in designing, implementing, and optimizing the backbone of our digital services. You'll work closely with frontend developers, DevOps engineers, and product teams to deliver robust and high-performance applications. Responsibilities include developing RESTful APIs, ensuring data integrity and security, managing database schemas, and optimizing application performance. A strong understanding of backend frameworks, data structures, and software engineering principles is essential.",
+      "experience_level": "senior",
+      "time_stamp": "2025-10-30",
+      "application_deadline": "2025-12-11",
       "is_saved": false
     }
   ]
@@ -3180,14 +3246,15 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
 ``` json
 [
   {
-    "id": 11,
+    "id": 23,
     "mentor": {
       "id": 11,
       "first_name": "Abdul Azeez",
       "last_name": "Balogun",
       "middle_name": "Abiola",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
+      "qualification": "Bachelor of Engineering",
+      "user_type": "mentor"
     },
     "mentee": {
       "id": 1,
@@ -3195,119 +3262,32 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
+      "qualification": "Bachelor of Engineering (Civil Engineering)",
+      "user_type": "learner"
     },
+    "invitees": [],
     "join": true,
     "session_type": "individual",
     "session_at": {
-      "date": "2025-07-21",
-      "time": "00:00:00"
-    },
-    "discourse": "Career Building",
-    "amount": "1500NGN",
-    "rating": 0,
-    "status": "COMPLETED",
-    "is_paid": true
-  },
-  {
-    "id": 13,
-    "mentor": {
-      "id": 11,
-      "first_name": "Abdul Azeez",
-      "last_name": "Balogun",
-      "middle_name": "Abiola",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
-    },
-    "mentee": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
-    "join": true,
-    "session_type": "individual",
-    "session_at": {
-      "date": "2025-07-31",
-      "time": "07:36:00"
-    },
-    "discourse": "Career Building",
-    "amount": "1500NGN",
-    "rating": 0,
-    "status": "COMPLETED",
-    "is_paid": true
-  },
-  {
-    "id": 21,
-    "mentor": {
-      "id": 11,
-      "first_name": "Abdul Azeez",
-      "last_name": "Balogun",
-      "middle_name": "Abiola",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
-    },
-    "mentee": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
-    "join": true,
-    "session_type": "individual",
-    "session_at": {
-      "date": "2025-09-30",
-      "time": "09:50:00"
+      "date": "2025-10-15",
+      "time": "08:35:00"
     },
     "discourse": "Career Coaching",
-    "amount": "1500NGN",
-    "rating": 4,
-    "status": "COMPLETED",
-    "is_paid": true
-  },
-  {
-    "id": 19,
-    "mentor": {
-      "id": 11,
-      "first_name": "Abdul Azeez",
-      "last_name": "Balogun",
-      "middle_name": "Abiola",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
-    },
-    "mentee": {
-      "id": 1,
-      "first_name": "Opeyemi",
-      "last_name": "Saliu",
-      "middle_name": "Abdul-Azeez",
-      "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
-    },
-    "join": true,
-    "session_type": "individual",
-    "session_at": {
-      "date": "2025-09-18",
-      "time": "10:00:00"
-    },
-    "discourse": "Career Advice and Education",
-    "amount": "1500NGN",
+    "amount": "0NGN",
     "rating": 0,
-    "status": "COMPLETED",
+    "status": "ACCEPTED",
     "is_paid": true
   },
   {
-    "id": 20,
+    "id": 29,
     "mentor": {
       "id": 11,
       "first_name": "Abdul Azeez",
       "last_name": "Balogun",
       "middle_name": "Abiola",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/4aaed37c-eb8b-400d-a73a-82574dccfb88default_pp.jpeg",
-      "qualification": "Bachelor of Engineering"
+      "qualification": "Bachelor of Engineering",
+      "user_type": "mentor"
     },
     "mentee": {
       "id": 1,
@@ -3315,18 +3295,32 @@ This API retrieves mentorship session information. N.B:This API is strictly depe
       "last_name": "Saliu",
       "middle_name": "Abdul-Azeez",
       "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/828bfe4c-48dc-47d7-82f9-46eabb70197dLaptop1.jpg",
-      "qualification": "Bachelor of Engineering (Civil Engineering)"
+      "qualification": "Bachelor of Engineering (Civil Engineering)",
+      "user_type": "learner"
     },
+    "invitees": [
+      {
+        "invitee": {
+          "id": 3,
+          "first_name": "N/A",
+          "last_name": "N/A",
+          "middle_name": "N/A",
+          "profile_photo": "https://careernexus-storage1.s3.amazonaws.com/profile_pictures/ad7b2bc0-98b2-4d29-bc90-3d784ce22cc9career_nexus_default_dp.png",
+          "qualification": "Bachelor of Education (English)",
+          "user_type": "learner"
+        }
+      }
+    ],
     "join": true,
-    "session_type": "individual",
+    "session_type": "group",
     "session_at": {
-      "date": "2025-09-27",
-      "time": "09:50:00"
+      "date": "2025-11-11",
+      "time": "16:21:00"
     },
     "discourse": "Career Coaching",
-    "amount": "1500NGN",
+    "amount": "0NGN",
     "rating": 0,
-    "status": "COMPLETED",
+    "status": "ACCEPTED",
     "is_paid": true
   }
 ]
