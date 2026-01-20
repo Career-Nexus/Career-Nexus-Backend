@@ -115,22 +115,23 @@
 108. [unfollow user](#unfollow_user)  
 109. [unlike comment/reply](#unlike_comment/reply)  
 110. [unlike post](#unlike_post)  
-111. [unsave job](#unsave_job)  
-112. [unsave mentor](#unsave_mentor)  
-113. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
-114. [update job status](#update_job_status)  
-115. [update user account settings](#update_user_account_settings)  
-116. [updating user eperience](#updating_user_eperience)  
-117. [user analytics](#user_analytics)  
-118. [user followers](#user_followers)  
-119. [user registeration](#user_registeration)  
-120. [user retrieve dispute](#user_retrieve_dispute)  
-121. [user search](#user_search)  
-122. [user-industry update](#user-industry_update)  
-123. [valid choice](#valid_choice)  
-124. [verify otp hash](#verify_otp_hash)  
-125. [view certification](#view_certification)  
-126. [view experience](#view_experience)  
+111. [unregistered users subscribe to newsletter](#unregistered_users_subscribe_to_newsletter)  
+112. [unsave job](#unsave_job)  
+113. [unsave mentor](#unsave_mentor)  
+114. [unsubscribe from newsletter](#unsubscribe_from_newsletter)  
+115. [update job status](#update_job_status)  
+116. [update user account settings](#update_user_account_settings)  
+117. [updating user eperience](#updating_user_eperience)  
+118. [user analytics](#user_analytics)  
+119. [user followers](#user_followers)  
+120. [user registeration](#user_registeration)  
+121. [user retrieve dispute](#user_retrieve_dispute)  
+122. [user search](#user_search)  
+123. [user-industry update](#user-industry_update)  
+124. [valid choice](#valid_choice)  
+125. [verify otp hash](#verify_otp_hash)  
+126. [view certification](#view_certification)  
+127. [view experience](#view_experience)  
 
 # User Registeration<a name='user_registeration'></a>
 
@@ -5851,3 +5852,34 @@ This API retrieves all sessions a user has been invited to.
 ```
 
 [["/mentor/sessions/invited/","GET"]][Table of contents](#toc)
+
+
+# Unregistered Users Subscribe To Newsletter<a name='unregistered_users_subscribe_to_newsletter'></a>
+
+This API allows unregistered users on the platform subscribe to Newsletter.
+
+**Endpoint:**`/user/newsletter-subscribe/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"email":"*****",
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Subscribed Successfully"
+}
+```
+
+[["/user/newsletter-subscribe/","POST"]][Table of contents](#toc)

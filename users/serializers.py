@@ -6,6 +6,7 @@ from django.core.files.base import ContentFile
 from django.db.models import Q
 
 from django.db import transaction
+from drf_yasg.utils import APIView
 
 
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -1262,6 +1263,19 @@ class UserSearchSerializer(serializers.ModelSerializer):
         return qualification
 
 
+
+
+class UnregisteredUsersNewsletterSubscribersSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self,email):
+        if models.NewsletterSubscribers.objects.filter(email=email).exists():
+            raise serializers.ValidationError("Already subscribed to Newsletter")
+        return email
+
+    def create(self,validated_data):
+        subscriber = models.NewsletterSubscribers.objects.create(**validated_data)
+        return subscriber
 
 
 

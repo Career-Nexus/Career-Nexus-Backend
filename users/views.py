@@ -1088,3 +1088,14 @@ class DisputeRetrieveSummaryView(APIView):
         return Response(output_dict,status=status.HTTP_200_OK)
 
 
+
+class UnregisteredUsersNewsletterSubscribersView(APIView):
+    permission_classes = [
+        AllowAny,
+    ]
+
+    def post(self,request):
+        serializer = serializers.UnregisteredUsersNewsletterSubscribersSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response({"status":"Subscribed Successfully"},status=status.HTTP_200_OK)

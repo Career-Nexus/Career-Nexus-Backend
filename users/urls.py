@@ -56,6 +56,9 @@ urlpatterns = [
     path("admin/disputes/summary/",views.DisputeRetrieveSummaryView.as_view(),name="Dispute-Summary"),
 
 
+    path("newsletter-subscribe/",views.UnregisteredUsersNewsletterSubscribersView.as_view(),name="Unregistered-Users-Newsletter-Subscribe"),
+
+
 
 
 

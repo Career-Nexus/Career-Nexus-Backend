@@ -5725,3 +5725,34 @@ This API retrieves all sessions a user has been invited to.
 ```
 
 [["/mentor/sessions/invited/","GET"]][Table of contents](#toc)
+
+
+# Unregistered Users Subscribe To Newsletter
+
+This API allows unregistered users on the platform subscribe to Newsletter.
+
+**Endpoint:**`/user/newsletter-subscribe/`
+
+**Method:** `POST`
+
+## Payload
+
+``` json
+{
+
+"email":"*****",
+
+}
+
+```
+## Response body
+
+**status code:200**
+
+``` json
+{
+  "status": "Subscribed Successfully"
+}
+```
+
+[["/user/newsletter-subscribe/","POST"]][Table of contents](#toc)

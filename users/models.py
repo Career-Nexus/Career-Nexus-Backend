@@ -223,6 +223,10 @@ class DisputeTickets(models.Model):
 
 
 
+class NewsletterSubscribers(models.Model):
+    email = models.EmailField()
+    subscribed_at = models.DateTimeField(auto_now_add=True)
+
 
 
 
