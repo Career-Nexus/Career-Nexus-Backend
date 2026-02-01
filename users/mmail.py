@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Agent():
-    def __init__(self,client="smtp.mail.us-east-1.awsapps.com",email="no-reply@career-nexus.com",password=os.getenv("GENERAL_PASSWORD")):
+    def __init__(self,client="smtp.zoho.com",email="info@career-nexus.com",password=os.getenv("GENERAL_PASSWORD")):
         self.client = client
         self.email = email
         self.password = password
